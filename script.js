@@ -1,61 +1,73 @@
-// ================================
-// UFX CAPITAL PREMIUM WEBSITE
-// ================================
+document.addEventListener('DOMContentLoaded', () => {
 
-// Navbar shadow on scroll
-window.addEventListener("scroll", () => {
-    const header = document.querySelector(".header");
+    // 1. FAQ Accordion Click Handler
+    const faqItems = document.querySelectorAll('.faq-item');
 
-    if (window.scrollY > 50) {
-        header.style.background = "rgba(0,0,0,0.95)";
-        header.style.boxShadow = "0 10px 30px rgba(255,44,168,.20)";
-    } else {
-        header.style.background = "rgba(0,0,0,.75)";
-        header.style.boxShadow = "none";
-    }
-});
+    faqItems.forEach((item) => {
+        item.addEventListener('click', () => {
+            const nextAnswer = item.nextElementSibling;
+            const icon = item.querySelector('.faq-icon');
 
-// Smooth fade animation
-const observer = new IntersectionObserver((entries) => {
+            if (nextAnswer && nextAnswer.classList.contains('faq-answer')) {
+                // Toggle active state for current answer
+                const isActive = nextAnswer.classList.contains('active');
+                
+                // Close all other open answers
+                document.querySelectorAll('.faq-answer').forEach(ans => ans.classList.remove('active'));
+                document.querySelectorAll('.faq-icon').forEach(ic => {
+                    ic.classList.remove('fa-minus');
+                    ic.classList.add('fa-plus');
+                });
 
-    entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-        }
-
+                // If not active, open clicked answer
+                if (!isActive) {
+                    nextAnswer.classList.add('active');
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                }
+            }
+        });
     });
 
-}, {
-    threshold: 0.2
-});
+    // 2. Redirect "CHOOSE PLAN" & "JOIN PREMIUM" Buttons to Telegram
+    const joinButtons = document.querySelectorAll('.btn-card, .btn-primary, .btn-join-nav');
+    const telegramLink = "https://t.me/IM_ARCHIT"; // Replace with your Telegram link
 
-document.querySelectorAll(".plan-card,.feature-box,.faq-box").forEach((el) => {
+    joinButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open(telegramLink, '_blank');
+        });
+    });
 
-    el.style.opacity = "0";
-    el.style.transform = "translateY(50px)";
-    el.style.transition = ".8s";
+    // 3. Smooth Scrolling for Navigation Links
+    const navLinks = document.querySelectorAll('nav ul li a');
 
-    observer.observe(el);
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetText = this.innerText.toLowerCase();
+            let targetSection = null;
 
-});
+            if (targetText === 'plans') {
+                targetSection = document.querySelector('.pricing-grid');
+            } else if (targetText === 'features') {
+                targetSection = document.querySelector('.why-choose');
+            } else if (targetText === 'faq') {
+                targetSection = document.querySelector('.faq-grid');
+            } else if (targetText === 'about') {
+                targetSection = document.querySelector('.stats-grid');
+            } else if (targetText === 'contact') {
+                targetSection = document.querySelector('footer');
+            }
 
-// Button click animation
-document.querySelectorAll(".btn,.plan-btn").forEach(btn => {
-
-    btn.addEventListener("click", () => {
-
-        btn.style.transform = "scale(.95)";
-
-        setTimeout(() => {
-
-            btn.style.transform = "";
-
-        },150);
-
+            if (targetSection) {
+                e.preventDefault();
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        });
     });
 
 });
-
-console.log("UFX CAPITAL Premium Loaded Successfully");
