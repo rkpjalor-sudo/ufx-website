@@ -418,27 +418,27 @@
         </div>
     </footer>
 
-    <!-- PAYMENT MODAL FORM -->
+  <!-- PAYMENT MODAL FORM -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-card">
             <span class="modal-close" onclick="closePaymentModal()">&times;</span>
             <h3>JOIN PREMIUM MEMBERSHIP</h3>
-            <form action="payment.php" method="POST">
+            <form id="directPaymentForm" onsubmit="handleDirectPayment(event)">
                 <div class="modal-field">
                     <label>Full Name</label>
-                    <input type="text" name="name" required placeholder="Enter Full Name">
+                    <input type="text" id="cust_name" required placeholder="Enter Full Name">
                 </div>
                 <div class="modal-field">
                     <label>Email Address</label>
-                    <input type="email" name="email" required placeholder="Enter Email Address">
+                    <input type="email" id="cust_email" required placeholder="Enter Email Address">
                 </div>
                 <div class="modal-field">
                     <label>Mobile Number</label>
-                    <input type="tel" name="phone" required placeholder="Enter Mobile Number">
+                    <input type="tel" id="cust_phone" required placeholder="Enter Mobile Number">
                 </div>
                 <div class="modal-field">
                     <label>Select Plan</label>
-                    <select name="plan" id="modalPlanSelect" required>
+                    <select id="modalPlanSelect" required>
                         <option value="3500">Starter Plan - ₹3,500 (1 Month)</option>
                         <option value="5900">Pro Plan - ₹5,900 (3 Months)</option>
                         <option value="7900">Advanced Plan - ₹7,900 (6 Months)</option>
@@ -472,6 +472,25 @@
                 modal.style.display = 'none';
             }
         }
+
+        function handleDirectPayment(e) {
+            e.preventDefault();
+            
+            var name  = encodeURIComponent(document.getElementById('cust_name').value.trim());
+            var email = encodeURIComponent(document.getElementById('cust_email').value.trim());
+            var phone = encodeURIComponent(document.getElementById('cust_phone').value.trim());
+            var plan  = document.getElementById('modalPlanSelect').value;
+
+            var links = {
+                "3500":  "https://rzp.io/rzp/7fvTMz0",
+                "5900":  "https://rzp.io/rzp/gTDKyKYx",
+                "7900":  "https://rzp.io/rzp/mXzHhVTS",
+                "19900": "https://rzp.io/rzp/ZtFoBzi"
+            };
+
+            if (links[plan]) {
+                var targetUrl = links[plan] + "?email=" + email + "&phone=" + phone + "&name=" + name;
+                window.location.href = targetUrl;
+            }
+        }
     </script>
-</body>
-</html>
