@@ -27,7 +27,9 @@
         .hero-btn, 
         .badge-best-value, 
         .section-title,
-        .pm-title {
+        .pm-title,
+        .stat-number,
+        .faq-title {
             font-family: 'Orbitron', sans-serif !important;
         }
 
@@ -181,9 +183,7 @@
             flex: 1;
             min-width: 120px;
         }
-        .pm-item:hover {
-            transform: translateY(-5px);
-        }
+        .pm-item:hover { transform: translateY(-5px); }
         .pm-icon-wrap {
             width: 65px;
             height: 65px;
@@ -195,33 +195,108 @@
             font-size: 32px;
             color: #ffffff;
         }
-        /* Crypto & PhonePe Icons Styling */
         .bg-trc20 { background-color: #26a17b; }
         .bg-erc20 { background-color: #627eea; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); border-radius: 0; width: 55px; height: 65px; }
         .bg-bep20 { background-color: #f3ba2f; border-radius: 12px; }
         .bg-btc { background-color: #f7931a; }
         .bg-phonepe { background-color: #5f259f; }
 
-        .pm-title {
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 2px;
+        .pm-title { color: #ffffff; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+        .pm-sub { color: #a0aec0; font-size: 13px; font-family: 'Rajdhani', sans-serif; font-weight: 600; }
+        .pm-divider { width: 1px; height: 80px; background: rgba(255, 0, 85, 0.3); }
+
+        /* STATS BOX STYLING */
+        .stats-wrapper {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid rgba(255, 0, 85, 0.4);
+            border-radius: 12px;
+            background: rgba(13, 17, 23, 0.6);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.15);
         }
-        .pm-sub {
-            color: #a0aec0;
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+            min-width: 200px;
+            justify-content: center;
+        }
+        .stat-icon {
+            font-size: 32px;
+            color: #ff0055;
+        }
+        .stat-info { text-align: left; }
+        .stat-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ff0055;
+            line-height: 1.1;
+        }
+        .stat-label {
             font-size: 13px;
-            font-family: 'Rajdhani', sans-serif;
+            color: #d1d5db;
             font-weight: 600;
         }
-        .pm-divider {
+        .stat-divider {
             width: 1px;
-            height: 80px;
-            background: rgba(255, 0, 85, 0.3);
+            height: 50px;
+            background: rgba(255, 0, 85, 0.2);
         }
+
+        /* FAQ SECTION STYLING */
+        .faq-section {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .faq-title {
+            text-align: center;
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .faq-item {
+            background: rgba(22, 27, 34, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .faq-item:hover {
+            border-color: #ff0055;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
+        }
+        .faq-question {
+            font-size: 14px;
+            color: #e5e7eb;
+            font-weight: 600;
+        }
+        .faq-plus {
+            color: #ff0055;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
         @media (max-width: 768px) {
-            .pm-divider { display: none; }
-            .form-grid { grid-template-columns: 1fr; }
+            .pm-divider, .stat-divider { display: none; }
+            .form-grid, .faq-grid { grid-template-columns: 1fr; }
             .form-full { grid-column: span 1; }
         }
     </style>
@@ -264,7 +339,7 @@
         <button onclick="openRazorpayModal()" class="hero-btn" style="border:none; cursor:pointer;">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
     </section>
 
-    <!-- PREMIUM PLANS SECTION (USES PURANA RAZORPAY MODAL) -->
+    <!-- PREMIUM PLANS SECTION -->
     <section class="plans-section" id="plans">
         <div class="section-header">
             <div class="section-title">
@@ -355,7 +430,6 @@
         <div class="payment-box-title">OTHER PAYMENT METHODS</div>
         <div class="payment-methods-flex">
             
-            <!-- Crypto Icons Open the New Details Modal -->
             <div class="pm-item" onclick="openCryptoModal()">
                 <div class="pm-icon-wrap bg-trc20"><i class="fa-solid fa-t"></i></div>
                 <div class="pm-title">TRC20</div>
@@ -388,7 +462,6 @@
 
             <div class="pm-divider"></div>
 
-            <!-- PhonePe Opens UPI Direct App Link -->
             <a href="upi://pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&cu=INR" class="pm-item" style="text-decoration: none;">
                 <div class="pm-icon-wrap bg-phonepe"><span style="font-weight:bold; font-size: 28px;">पे</span></div>
                 <div class="pm-title">PHONE PAY</div>
@@ -397,6 +470,86 @@
 
         </div>
     </div>
+
+    <!-- STATS COUNTER BOX (RESTORED) -->
+    <div class="stats-wrapper">
+        <div class="stat-item">
+            <i class="fa-solid fa-users stat-icon"></i>
+            <div class="stat-info">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Active Members</div>
+            </div>
+        </div>
+
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+            <i class="fa-solid fa-bullseye stat-icon"></i>
+            <div class="stat-info">
+                <div class="stat-number">80%+</div>
+                <div class="stat-label">Win Rate Signals</div>
+            </div>
+        </div>
+
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+            <i class="fa-solid fa-chart-line stat-icon"></i>
+            <div class="stat-info">
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">Signals Delivered</div>
+            </div>
+        </div>
+
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+            <i class="fa-solid fa-trophy stat-icon"></i>
+            <div class="stat-info">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ SECTION (RESTORED) -->
+    <section class="faq-section" id="faq">
+        <div class="faq-title">
+            <i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i> FREQUENTLY ASKED QUESTIONS <i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-item">
+                <span class="faq-question">What type of signals do you provide?</span>
+                <span class="faq-plus">+</span>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-question">What is the risk-reward ratio?</span>
+                <span class="faq-plus">+</span>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-question">How will I receive the signals?</span>
+                <span class="faq-plus">+</span>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-question">Can I cancel my subscription anytime?</span>
+                <span class="faq-plus">+</span>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-question">Is this suitable for beginners?</span>
+                <span class="faq-plus">+</span>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-question">Do you provide refund?</span>
+                <span class="faq-plus">+</span>
+            </div>
+        </div>
+    </section>
 
     <!-- WHY CHOOSE UFX CAPITAL -->
     <section class="features-section" id="features">
@@ -462,7 +615,7 @@
         </div>
     </footer>
 
-    <!-- ==================== MODAL 1: PURANA RAZORPAY MODAL ==================== -->
+    <!-- MODAL 1: PURANA RAZORPAY MODAL -->
     <div class="modal-overlay" id="razorpayModal">
         <div class="razorpay-modal-card">
             <span class="modal-close" onclick="closeRazorpayModal()">&times;</span>
@@ -494,7 +647,7 @@
         </div>
     </div>
 
-    <!-- ==================== MODAL 2: NAYA CRYPTO ADDRESS FORM MODAL ==================== -->
+    <!-- MODAL 2: NAYA CRYPTO ADDRESS FORM MODAL -->
     <div class="modal-overlay" id="cryptoModal">
         <div class="crypto-modal-card">
             <span class="modal-close" onclick="closeCryptoModal()">&times;</span>
@@ -570,13 +723,10 @@
     <!-- SCRIPTS -->
     <script src="script.js"></script>
     <script>
-        // 1. Purana Razorpay Modal Functions
         function openRazorpayModal(planValue) {
             var modal = document.getElementById('razorpayModal');
             var select = document.getElementById('rzpPlanSelect');
-            if (planValue) {
-                select.value = planValue;
-            }
+            if (planValue) select.value = planValue;
             modal.style.display = 'flex';
         }
 
@@ -591,7 +741,6 @@
             var phone = encodeURIComponent(document.getElementById('cust_phone').value.trim());
             var plan  = document.getElementById('rzpPlanSelect').value;
 
-            // Purane Original Razorpay Links
             var links = {
                 "35":  "https://rzp.io/rzp/Qcrc9Ul",
                 "59":  "https://rzp.io/rzp/bABu5nP",
@@ -605,7 +754,6 @@
             }
         }
 
-        // 2. Naya Crypto Details Modal Functions
         function openCryptoModal() {
             document.getElementById('cryptoModal').style.display = 'flex';
         }
@@ -614,7 +762,6 @@
             document.getElementById('cryptoModal').style.display = 'none';
         }
 
-        // Outside Click Close Handler
         window.onclick = function(event) {
             var rzpModal = document.getElementById('razorpayModal');
             var cryptoModal = document.getElementById('cryptoModal');
