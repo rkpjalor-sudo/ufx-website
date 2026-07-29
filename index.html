@@ -1,497 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UFX CAPITAL - Crypto & Forex Option Trader</title>
-    <!-- CSS Link -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Google Fonts (Orbitron & Rajdhani) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        /* Orbitron Font Overrides */
-        h1, h2, h3, h4, 
-        .logo-title, 
-        .plan-price, 
-        .plan-duration, 
-        .price-sub, 
-        .btn-choose-plan, 
-        .btn-join, 
-        .hero-btn, 
-        .badge-best-value, 
-        .section-title {
-            font-family: 'Orbitron', sans-serif !important;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Payment Checkout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        .plan-price {
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-shadow: 0 0 12px rgba(255, 0, 85, 0.6);
-        }
+    body {
+      background-color: #0b0b0e;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-        .best-value .plan-price {
-            text-shadow: 0 0 12px rgba(255, 187, 0, 0.6);
-        }
+    /* Crypto Container Box */
+    .crypto-box {
+      border: 1.5px solid #ff0055;
+      border-radius: 12px;
+      padding: 25px 20px 20px;
+      position: relative;
+      background: #0d0d12;
+      box-shadow: 0 0 15px rgba(255, 0, 85, 0.2);
+      max-width: 900px;
+      width: 100%;
+    }
 
-        /* Modal Overlay & Form Styling */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            box-sizing: border-box;
-        }
-        .modal-card {
-            background: #111827;
-            border: 1px solid #2563eb;
-            border-radius: 12px;
-            padding: 25px;
-            width: 100%;
-            max-width: 420px;
-            color: #ffffff;
-            box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
-            position: relative;
-            font-family: 'Rajdhani', sans-serif;
-        }
-        .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 15px;
-            font-size: 22px;
-            color: #9ca3af;
-            cursor: pointer;
-        }
-        .modal-close:hover { color: #ffffff; }
-        .modal-card h3 {
-            font-family: 'Orbitron', sans-serif !important;
-            text-align: center;
-            margin-bottom: 18px;
-            color: #60a5fa;
-            font-size: 20px;
-        }
-        .modal-field { margin-bottom: 15px; }
-        .modal-field label { display: block; margin-bottom: 5px; font-weight: 600; color: #d1d5db; }
-        .modal-field input, .modal-field select {
-            width: 100%;
-            padding: 10px 12px;
-            background: #1f2937;
-            border: 1px solid #374151;
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 15px;
-            box-sizing: border-box;
-            outline: none;
-            font-family: 'Rajdhani', sans-serif;
-        }
-        .modal-field input:focus, .modal-field select:focus {
-            border-color: #2563eb;
-        }
-        .modal-btn {
-            width: 100%;
-            padding: 12px;
-            background: #2563eb;
-            color: #ffffff;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-family: 'Orbitron', sans-serif !important;
-            transition: 0.3s;
-        }
-        .modal-btn:hover { background: #1d4ed8; }
-    </style>
+    .crypto-header {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0d0d12;
+      padding: 0 15px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1.5px;
+      white-space: nowrap;
+    }
+
+    .crypto-header::before, .crypto-header::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 15px;
+      height: 2px;
+      background: #ff0055;
+    }
+    .crypto-header::before { left: -10px; }
+    .crypto-header::after { right: -10px; }
+
+    .crypto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .crypto-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      padding: 15px 10px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .crypto-item:last-child {
+      border-right: none;
+    }
+
+    .crypto-item:hover {
+      transform: translateY(-6px);
+    }
+
+    .icon-wrapper {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      transition: transform 0.4s ease;
+    }
+
+    .crypto-item:hover .icon-wrapper {
+      transform: scale(1.12) rotate(5deg);
+    }
+
+    .crypto-name {
+      font-weight: bold;
+      font-size: 15px;
+      color: #ffffff;
+    }
+
+    .crypto-sub {
+      font-size: 12px;
+      color: #a0a0a0;
+      margin-top: 2px;
+    }
+
+    /* Modal / Form Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #14141c;
+      border: 1px solid #ff0055;
+      border-radius: 12px;
+      width: 92%;
+      max-width: 480px;
+      padding: 25px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: popup 0.3s ease-out forwards;
+    }
+
+    @keyframes popup {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px; right: 15px;
+      color: #aaa;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      margin-bottom: 15px;
+      text-align: center;
+      color: #ff0055;
+      font-weight: bold;
+    }
+
+    .address-box {
+      background: #09090d;
+      border: 1px dashed #444;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      word-break: break-all;
+      color: #00ffcc;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .copy-btn {
+      background: #ff0055;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+      margin-left: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: #ccc;
+      margin-bottom: 4px;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 9px;
+      background: #09090d;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: #ff0055;
+      border: none;
+      color: white;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: #e0004c;
+    }
+
+    .step-2 {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <header>
-        <div class="logo-container">
-            <div class="logo-text-group">
-                <div class="logo-title">UFX CAPITAL</div>
-                <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
-            </div>
+  <!-- CRYPTO PAYMENT SECTION -->
+  <div class="crypto-box">
+    <div class="crypto-header">CRYPTO PAYMENT</div>
+    
+    <div class="crypto-grid">
+      
+      <!-- TRC20 -->
+      <div class="crypto-item" onclick="openModal('USDT (TRC20)', 'TP1hUt5spzMv5LoHjAU2yEQus-Egj8NDwb')">
+        <div class="icon-wrapper">
+          <svg width="60" height="60" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="95" fill="#26A17B"/>
+            <path d="M60 65h80v15H108.5v18h28v15h-28v32H91.5V113h-28V98h28V80H60V65z" fill="#FFF"/>
+            <ellipse cx="100" cy="88" rx="35" ry="10" fill="none" stroke="#FFF" stroke-width="5"/>
+          </svg>
         </div>
-        <nav>
-            <a href="#home" class="active">HOME</a>
-            <a href="#plans">PLANS</a>
-            <a href="#features">FEATURES</a>
-            <a href="#about">ABOUT</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">CONTACT</a>
-        </nav>
-        <button onclick="openPaymentModal()" class="btn-join" style="border:none; cursor:pointer;"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
-    </header>
+        <div class="crypto-name">TRC20</div>
+        <div class="crypto-sub">(USDT)</div>
+      </div>
 
-    <!-- HERO SECTION -->
-    <section class="hero" id="home">
-        <div class="welcome-tag">
-            <span class="line"></span>
-            <span>WELCOME TO</span>
-            <span class="line"></span>
+      <!-- ERC20 -->
+      <div class="crypto-item" onclick="openModal('USDT (ERC20)', '0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab')">
+        <div class="icon-wrapper">
+          <svg width="60" height="60" viewBox="0 0 200 200">
+            <polygon points="100,15 160,110 100,85 40,110" fill="#627EEA"/>
+            <polygon points="100,15 100,85 160,110" fill="#454A75"/>
+            <polygon points="100,95 160,120 100,185 40,120" fill="#627EEA"/>
+            <polygon points="100,95 100,185 160,120" fill="#454A75"/>
+          </svg>
         </div>
-        
-        <h1>UFX CAPITAL</h1>
-        
-        <div class="hero-subtext">CRYPTO & FOREX OPTION TRADER</div>
-        
-        <p class="hero-bullets">High Probability Trading Signals • Smart Money Concepts<br>Discipline • Strategy • Consistency</p>
-        
-        <button onclick="openPaymentModal()" class="hero-btn" style="border:none; cursor:pointer;">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
-    </section>
+        <div class="crypto-name">ERC20</div>
+        <div class="crypto-sub">(USDT)</div>
+      </div>
 
-    <!-- PREMIUM PLANS SECTION -->
-    <section class="plans-section" id="plans">
-        <div class="section-header">
-            <div class="section-title">
-                <i class="fa-solid fa-gem"></i> PREMIUM PLANS <i class="fa-solid fa-gem"></i>
-            </div>
+      <!-- BEP20 -->
+      <div class="crypto-item" onclick="openModal('USDT (BEP20)', '0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab')">
+        <div class="icon-wrapper">
+          <svg width="60" height="60" viewBox="0 0 200 200">
+            <rect width="200" height="200" rx="40" fill="#F3BA2F"/>
+            <path d="M100 40l22 22-38 38 16 16 22-22 22 22-38 38 22 22 60-60L100 40zm-38 38L40 100l22 22 22-22-22-22zm76 0l22 22-22 22-22-22 22-22z" fill="#FFF"/>
+          </svg>
         </div>
+        <div class="crypto-name">BEP20</div>
+        <div class="crypto-sub">(USDT)</div>
+      </div>
 
-        <div class="plans-grid">
-            
-            <!-- PLAN 1: 1 MONTH -->
-            <div class="plan-card">
-                <div>
-                    <div class="plan-duration">1 MONTH</div>
-                    <div class="plan-price">$35</div>
-                    <div class="price-sub">PER MONTH</div>
-                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
-                    
-                    <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                    </ul>
-                </div>
-                <button onclick="openPaymentModal('35')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
-            </div>
-
-            <!-- PLAN 2: 3 MONTHS -->
-            <div class="plan-card">
-                <div>
-                    <div class="plan-duration">3 MONTHS</div>
-                    <div class="plan-price">$59</div>
-                    <div class="price-sub">EVERY 3 MONTHS</div>
-                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
-                    
-                    <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                    </ul>
-                </div>
-                <button onclick="openPaymentModal('59')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
-            </div>
-
-            <!-- PLAN 3: 6 MONTHS -->
-            <div class="plan-card">
-                <div>
-                    <div class="plan-duration">6 MONTHS</div>
-                    <div class="plan-price">$79</div>
-                    <div class="price-sub">EVERY 6 MONTHS</div>
-                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
-                    
-                    <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                    </ul>
-                </div>
-                <button onclick="openPaymentModal('79')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
-            </div>
-
-            <!-- PLAN 4: LIFETIME -->
-            <div class="plan-card best-value">
-                <div class="badge-best-value">BEST VALUE</div>
-                <div>
-                    <div class="plan-duration">LIFETIME</div>
-                    <div class="plan-price">$199</div>
-                    <div class="price-sub">ONE TIME PAYMENT</div>
-                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
-                    
-                    <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                        <li class="highlight-feature"><i class="fa-solid fa-star"></i> ONE-ON-ONE MENTORSHIP</li>
-                        <li class="highlight-feature"><i class="fa-solid fa-crown"></i> LIFETIME MEMBERSHIP</li>
-                    </ul>
-                </div>
-                <button onclick="openPaymentModal('199')" class="btn-choose-plan btn-gold" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
-            </div>
-
+      <!-- BITCOIN -->
+      <div class="crypto-item" onclick="openModal('Bitcoin (BTC)', '143odbY9gkjo8de7NizwFuz-WD11Muw9QW4')">
+        <div class="icon-wrapper">
+          <svg width="60" height="60" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="95" fill="#F7931A"/>
+            <path d="M128 82c2-12-7-18-20-22l4-16-10-2.5-4 15c-2.5-.6-5-.12-8-1.7l4-15.5L84 37l-4 16s-6-1.4-6-1.5l-8-2-3 12s8 2 8 2c4.5 1 5.3 4 5 6.5l-5 21c.3.1.7.3 1.2.5-.4-.1-.8-.3-1.2-.5l-7 29c-.6 1.4-2 3.5-5 2.7 0 0-8-2-8-2l-5 13 8 2c2.5.6 5 1.3 7.5 2l-4 17 10 2.5 4-16c2.7.7 5.3 1.4 8 2l-4 16 10 2.5 4-16c17 3.2 30 2 35-14 4-12.5-0.2-20-9-24.5 6.5-1.5 11.5-6 12.8-15.5z" fill="#FFF"/>
+          </svg>
         </div>
-    </section>
+        <div class="crypto-name">BITCOIN</div>
+        <div class="crypto-sub">(BTC)</div>
+      </div>
 
-    <!-- WHY CHOOSE UFX CAPITAL -->
-    <section class="features-section" id="features">
-        <div class="section-header">
-            <div class="section-title"><i class="fa-solid fa-gem"></i> WHY CHOOSE UFX CAPITAL? <i class="fa-solid fa-gem"></i></div>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-box">
-                <i class="fa-solid fa-crosshairs"></i>
-                <h4>High Probability SMC-Based Signals</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-chart-line"></i>
-                <h4>Live Entry, SL & TP Updates</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-chart-pie"></i>
-                <h4>Trade Breakdown (Chart + Logic)</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-coins"></i>
-                <h4>Weekly Gold (XAUUSD) Outlook</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-brain"></i>
-                <h4>Mindset & Risk Management</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-users"></i>
-                <h4>Premium Community Access</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-headset"></i>
-                <h4>24/7 Priority Support</h4>
-            </div>
-        </div>
-    </section>
-
-    <!-- STATS SECTION -->
-    <div class="stats-section" id="about">
-        <div class="stat-item">
-            <i class="fa-solid fa-users"></i>
-            <div>
-                <div class="stat-number">1000+</div>
-                <div class="stat-label">Active Members</div>
-            </div>
-        </div>
-        <div class="stat-item">
-            <i class="fa-solid fa-bullseye"></i>
-            <div>
-                <div class="stat-number">80%+</div>
-                <div class="stat-label">Win Rate Signals</div>
-            </div>
-        </div>
-        <div class="stat-item">
-            <i class="fa-solid fa-chart-simple"></i>
-            <div>
-                <div class="stat-number">5000+</div>
-                <div class="stat-label">Signals Delivered</div>
-            </div>
-        </div>
-        <div class="stat-item">
-            <i class="fa-solid fa-trophy"></i>
-            <div>
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Support</div>
-            </div>
-        </div>
     </div>
+  </div>
 
-    <!-- FAQ SECTION -->
-    <section class="faq-section" id="faq">
-        <div class="section-header">
-            <div class="section-title"><i class="fa-solid fa-gem"></i> FREQUENTLY ASKED QUESTIONS <i class="fa-solid fa-gem"></i></div>
+  <!-- POPUP FORM WITH EMAIL TRIGGER -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div class="modal-title" id="modalTitle">Crypto Checkout</div>
+      
+      <!-- FORM SUBMISSION TO YOUR EMAIL -->
+      <form action="https://formsubmit.co/rkpjalor@gmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="Selected Crypto Network" id="cryptoNetworkInput">
+
+        <!-- STEP 1: USER DETAILS & PLAN -->
+        <div id="step1">
+          <div class="form-group">
+            <label>Select Plan</label>
+            <select name="Selected Plan" required>
+              <option value="" disabled selected>Choose a Plan</option>
+              <option value="Basic Plan - $100">Basic Plan ($100)</option>
+              <option value="Standard Plan - $240">Standard Plan ($240)</option>
+              <option value="Premium Plan - $500">Premium Plan ($500)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>1. Full Name</label>
+            <input type="text" name="Full Name" placeholder="John Doe" required>
+          </div>
+
+          <div class="form-group">
+            <label>2. PAN / National ID Number</label>
+            <input type="text" name="PAN or National ID" placeholder="ID Number" required>
+          </div>
+
+          <div class="form-group">
+            <label>3. Country of Residence</label>
+            <input type="text" name="Country" placeholder="e.g. United States" required>
+          </div>
+
+          <div class="form-group">
+            <label>4. State / Province</label>
+            <input type="text" name="State" placeholder="e.g. California" required>
+          </div>
+
+          <div class="form-group">
+            <label>5. City / Village / Town</label>
+            <input type="text" name="City" placeholder="e.g. Los Angeles" required>
+          </div>
+
+          <div class="form-group">
+            <label>6. Pin / Zip Code</label>
+            <input type="text" name="Pin Code" placeholder="90001" required>
+          </div>
+
+          <div class="form-group">
+            <label>7. Full Address</label>
+            <textarea name="Full Address" rows="2" placeholder="Street Address, House No..." required></textarea>
+          </div>
+
+          <button type="button" class="submit-btn" onclick="goToStep2()">Proceed to Payment →</button>
         </div>
 
-        <div class="faq-grid">
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>What type of signals do you provide?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    We provide high-probability Crypto & Forex Option signals based on Smart Money Concepts (SMC) with complete Entry, Take Profit, and Stop Loss levels.
-                </div>
-            </div>
+        <!-- STEP 2: WALLET ADDRESS & TXID -->
+        <div id="step2" class="step-2">
+          <p style="font-size: 12px; color: #aaa; margin-bottom: 5px;">Transfer exact amount to this Wallet Address:</p>
+          <div class="address-box">
+            <span id="walletAddress">Loading...</span>
+            <button type="button" class="copy-btn" onclick="copyAddress()">Copy</button>
+          </div>
 
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>What is the risk-reward ratio?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    All our signals feature a minimum Risk to Reward (RR) ratio of 1:4 for optimal capital growth and risk protection.
-                </div>
-            </div>
+          <div class="form-group">
+            <label>Transaction Hash / ID (TxID)</label>
+            <input type="text" name="Transaction TxID" placeholder="Paste TxID after sending payment" required>
+          </div>
 
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>How will I receive the signals?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    You will receive instant alerts via our VIP Telegram channel directly on your mobile device or desktop upon payment completion.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>Can I cancel my subscription anytime?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    Yes, you can manage or cancel your subscription plan whenever you choose with no hidden fees.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>Is this suitable for beginners?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    Yes! We provide complete strategy PDFs, risk management guidance, and 24/7 support to help beginners start smoothly.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>Do you provide refund?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    Please refer to our terms or reach out to our 24/7 Telegram support for plan adjustment inquiries.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="logo-title">UFX CAPITAL</div>
-                <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
-                <div class="footer-gem"><i class="fa-solid fa-gem"></i></div>
-            </div>
-
-            <div class="footer-mission">
-                <p>Our mission is to empower traders with quality setups, strong risk management and a winning mindset.</p>
-                <p class="slogan">Stay disciplined. Stick to plan.<br>Trade smart. Grow consistently.</p>
-            </div>
-
-            <div class="footer-contact">
-                <h5>GET IN TOUCH</h5>
-                <p><i class="fa-brands fa-telegram"></i> Telegram: @IM_ARCHIT</p>
-                <p><i class="fa-solid fa-phone"></i> 9649638812</p>
-            </div>
+          <button type="submit" class="submit-btn">Complete & Submit Order</button>
+          <button type="button" style="background:transparent; border:none; color:#aaa; font-size:11px; margin-top:8px; cursor:pointer; width:100%;" onclick="goToStep1()">← Back to Details</button>
         </div>
 
-        <div class="footer-bottom">
-            &copy; 2026 UFX CAPITAL. All Rights Reserved.
-        </div>
-    </footer>
-
-    <!-- PAYMENT MODAL FORM -->
-    <div class="modal-overlay" id="paymentModal">
-        <div class="modal-card">
-            <span class="modal-close" onclick="closePaymentModal()">&times;</span>
-            <h3>JOIN PREMIUM MEMBERSHIP</h3>
-            <form id="directPaymentForm" onsubmit="handleDirectPayment(event)">
-                <div class="modal-field">
-                    <label>Full Name</label>
-                    <input type="text" id="cust_name" required placeholder="Enter Full Name">
-                </div>
-                <div class="modal-field">
-                    <label>Email Address</label>
-                    <input type="email" id="cust_email" required placeholder="Enter Email Address">
-                </div>
-                <div class="modal-field">
-                    <label>Mobile Number</label>
-                    <input type="tel" id="cust_phone" required placeholder="Enter Mobile Number">
-                </div>
-                <div class="modal-field">
-                    <label>Select Plan</label>
-                    <select id="modalPlanSelect" required>
-                        <option value="35">Starter Plan - $35 (1 Month)</option>
-                        <option value="59">Pro Plan - $59 (3 Months)</option>
-                        <option value="79">Advanced Plan - $79 (6 Months)</option>
-                        <option value="199">VIP Lifetime - $199 (Lifetime)</option>
-                    </select>
-                </div>
-                <button type="submit" class="modal-btn">PROCEED TO PAY</button>
-            </form>
-        </div>
+      </form>
     </div>
+  </div>
 
-    <!-- JS Link & Payment Script -->
-    <script src="script.js"></script>
-    <script>
-        function openPaymentModal(planValue) {
-            var modal = document.getElementById('paymentModal');
-            var select = document.getElementById('modalPlanSelect');
-            if (planValue) {
-                select.value = planValue;
-            }
-            modal.style.display = 'flex';
+  <script>
+    let currentAddress = "";
+
+    function openModal(network, address) {
+      currentAddress = address;
+      document.getElementById('modalTitle').innerText = network + ' Payment';
+      document.getElementById('cryptoNetworkInput').value = network;
+      document.getElementById('walletAddress').innerText = address;
+      document.getElementById('paymentModal').style.display = 'flex';
+      goToStep1();
+    }
+
+    function closeModal() {
+      document.getElementById('paymentModal').style.display = 'none';
+    }
+
+    function goToStep2() {
+      // Validate Step 1 Inputs
+      const inputs = document.getElementById('step1').querySelectorAll('input, select, textarea');
+      for (let input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          return;
         }
+      }
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step2').style.display = 'block';
+    }
 
-        function closePaymentModal() {
-            document.getElementById('paymentModal').style.display = 'none';
-        }
+    function goToStep1() {
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+    }
 
-        window.onclick = function(event) {
-            var modal = document.getElementById('paymentModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        function handleDirectPayment(e) {
-            e.preventDefault();
-            
-            var name  = encodeURIComponent(document.getElementById('cust_name').value.trim());
-            var email = encodeURIComponent(document.getElementById('cust_email').value.trim());
-            var phone = encodeURIComponent(document.getElementById('cust_phone').value.trim());
-            var plan  = document.getElementById('modalPlanSelect').value;
-
-            // Mapping $ Plan Values to Updated Razorpay Links with Telegram Redirection
-            var links = {
-                "35":  "https://rzp.io/rzp/Qcrc9Ul",    // ₹3,500
-                "59":  "https://rzp.io/rzp/bABu5nP",    // ₹5,900
-                "79":  "https://rzp.io/rzp/5G4nnHe",    // ₹7,900
-                "199": "https://rzp.io/rzp/vV5guyt"     // ₹19,900
-            };
-
-            if (links[plan]) {
-                var targetUrl = links[plan] + "?email=" + email + "&phone=" + phone + "&name=" + name;
-                window.location.href = targetUrl;
-            }
-        }
-    </script>
+    function copyAddress() {
+      navigator.clipboard.writeText(currentAddress);
+      alert('Wallet address copied to clipboard!');
+    }
+  </script>
 </body>
 </html>
