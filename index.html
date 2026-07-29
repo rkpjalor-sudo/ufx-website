@@ -15,9 +15,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Razorpay Checkout SDK -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
     <style>
         /* Orbitron Font Overrides */
         h1, h2, h3, h4, 
@@ -60,13 +57,13 @@
         }
         .modal-card {
             background: #111827;
-            border: 1px solid #2563eb;
+            border: 1px solid #ff0055;
             border-radius: 12px;
             padding: 25px;
             width: 100%;
             max-width: 420px;
             color: #ffffff;
-            box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 0 25px rgba(255, 0, 85, 0.4);
             position: relative;
             font-family: 'Rajdhani', sans-serif;
         }
@@ -83,7 +80,7 @@
             font-family: 'Orbitron', sans-serif !important;
             text-align: center;
             margin-bottom: 18px;
-            color: #60a5fa;
+            color: #ff0055;
             font-size: 20px;
         }
         .modal-field { margin-bottom: 15px; }
@@ -101,12 +98,12 @@
             font-family: 'Rajdhani', sans-serif;
         }
         .modal-field input:focus, .modal-field select:focus {
-            border-color: #2563eb;
+            border-color: #ff0055;
         }
         .modal-btn {
             width: 100%;
             padding: 12px;
-            background: #2563eb;
+            background: #ff0055;
             color: #ffffff;
             border: none;
             border-radius: 6px;
@@ -117,7 +114,65 @@
             font-family: 'Orbitron', sans-serif !important;
             transition: 0.3s;
         }
-        .modal-btn:hover { background: #1d4ed8; }
+        .modal-btn:hover { background: #d00045; }
+
+        /* PAYMENT METHODS SECTION */
+        .payment-methods-section {
+            padding: 40px 20px;
+            text-align: center;
+            background: rgba(17, 24, 39, 0.6);
+            margin: 30px 0;
+            border-top: 1px solid rgba(255, 0, 85, 0.2);
+            border-bottom: 1px solid rgba(255, 0, 85, 0.2);
+        }
+        .payment-methods-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        .payment-card {
+            background: #111827;
+            border: 1px solid #262f40;
+            border-radius: 12px;
+            padding: 18px 15px;
+            width: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .payment-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff0055;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+        }
+        .payment-card i {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .payment-card .pay-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .payment-card .pay-sub {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+        /* Custom Colors for Crypto/UPI Icons */
+        .ic-usdt-trc { color: #26a17b; }
+        .ic-usdt-erc { color: #627eea; }
+        .ic-usdt-bep { color: #f3ba2f; }
+        .ic-btc { color: #f7931a; }
+        .ic-phonepe { color: #5f259f; }
     </style>
 </head>
 <body>
@@ -251,6 +306,38 @@
                 <button onclick="openPaymentModal('199')" class="btn-choose-plan btn-gold" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
+        </div>
+    </section>
+
+    <!-- NEW PAYMENT METHODS SECTION -->
+    <section class="payment-methods-section">
+        <div class="section-title"><i class="fa-solid fa-wallet"></i> PAYMENT METHODS <i class="fa-solid fa-wallet"></i></div>
+        <div class="payment-methods-grid">
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-solid fa-coins ic-usdt-trc"></i>
+                <span class="pay-title">TRC20</span>
+                <span class="pay-sub">(USDT)</span>
+            </div>
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-brands fa-ethereum ic-usdt-erc"></i>
+                <span class="pay-title">ERC20</span>
+                <span class="pay-sub">(USDT)</span>
+            </div>
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-solid fa-cube ic-usdt-bep"></i>
+                <span class="pay-title">BEP20</span>
+                <span class="pay-sub">(USDT)</span>
+            </div>
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-brands fa-bitcoin ic-btc"></i>
+                <span class="pay-title">BITCOIN</span>
+                <span class="pay-sub">(BTC)</span>
+            </div>
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-solid fa-mobile-screen-button ic-phonepe"></i>
+                <span class="pay-title">PHONE PE</span>
+                <span class="pay-sub">(INR / UPI)</span>
+            </div>
         </div>
     </section>
 
@@ -424,7 +511,7 @@
         <div class="modal-card">
             <span class="modal-close" onclick="closePaymentModal()">&times;</span>
             <h3>JOIN PREMIUM MEMBERSHIP</h3>
-            <form id="directPaymentForm" onsubmit="handlePaymentSubmit(event)">
+            <form id="directPaymentForm" onsubmit="handleDirectPayment(event)">
                 <div class="modal-field">
                     <label>Full Name</label>
                     <input type="text" id="cust_name" required placeholder="Enter Full Name">
@@ -440,21 +527,12 @@
                 <div class="modal-field">
                     <label>Select Plan</label>
                     <select id="modalPlanSelect" required>
-                        <option value="35">Starter Plan - $35 / ₹3,500 (1 Month)</option>
-                        <option value="59">Pro Plan - $59 / ₹5,900 (3 Months)</option>
-                        <option value="79">Advanced Plan - $79 / ₹7,900 (6 Months)</option>
-                        <option value="199">VIP Lifetime - $199 / ₹19,900 (Lifetime)</option>
+                        <option value="35">Starter Plan - $35 (1 Month)</option>
+                        <option value="59">Pro Plan - $59 (3 Months)</option>
+                        <option value="79">Advanced Plan - $79 (6 Months)</option>
+                        <option value="199">VIP Lifetime - $199 (Lifetime)</option>
                     </select>
                 </div>
-
-                <div class="modal-field">
-                    <label>Payment Method</label>
-                    <select id="paymentMethodSelect">
-                        <option value="razorpay_popup">Razorpay Checkout (UPI / Cards / Banking)</option>
-                        <option value="direct_link">Direct Payment Page Link</option>
-                    </select>
-                </div>
-
                 <button type="submit" class="modal-btn">PROCEED TO PAY</button>
             </form>
         </div>
@@ -483,53 +561,24 @@
             }
         }
 
-        // Plan Price Configuration
-        var planConfig = {
-            "35":  { inrAmount: 350000, link: "https://rzp.io/rzp/Qcrc9Ul", name: "1 Month VIP Signals" },
-            "59":  { inrAmount: 590000, link: "https://rzp.io/rzp/bABu5nP", name: "3 Months VIP Signals" },
-            "79":  { inrAmount: 790000, link: "https://rzp.io/rzp/5G4nnHe", name: "6 Months VIP Signals" },
-            "199": { inrAmount: 1990000, link: "https://rzp.io/rzp/vV5guyt", name: "Lifetime VIP Mentorship" }
-        };
-
-        function handlePaymentSubmit(e) {
+        function handleDirectPayment(e) {
             e.preventDefault();
             
-            var name  = document.getElementById('cust_name').value.trim();
-            var email = document.getElementById('cust_email').value.trim();
-            var phone = document.getElementById('cust_phone').value.trim();
+            var name  = encodeURIComponent(document.getElementById('cust_name').value.trim());
+            var email = encodeURIComponent(document.getElementById('cust_email').value.trim());
+            var phone = encodeURIComponent(document.getElementById('cust_phone').value.trim());
             var plan  = document.getElementById('modalPlanSelect').value;
-            var method = document.getElementById('paymentMethodSelect').value;
 
-            var selectedPlan = planConfig[plan];
+            // Mapping $ Plan Values to Updated Razorpay Links with Telegram Redirection
+            var links = {
+                "35":  "https://rzp.io/rzp/Qcrc9Ul",    // ₹3,500
+                "59":  "https://rzp.io/rzp/bABu5nP",    // ₹5,900
+                "79":  "https://rzp.io/rzp/5G4nnHe",    // ₹7,900
+                "199": "https://rzp.io/rzp/vV5guyt"     // ₹19,900
+            };
 
-            if (!selectedPlan) return;
-
-            if (method === "razorpay_popup") {
-                // Razorpay standard checkout overlay modal
-                var options = {
-                    "key": "YOUR_RAZORPAY_KEY_ID", // Yahan apna Razorpay Key ID lagaye (e.g. rzp_live_xxx)
-                    "amount": selectedPlan.inrAmount, // Amount in paise
-                    "currency": "INR",
-                    "name": "UFX CAPITAL",
-                    "description": selectedPlan.name,
-                    "handler": function (response) {
-                        alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-                        window.location.href = "https://t.me/IM_ARCHIT"; // Success redirection
-                    },
-                    "prefill": {
-                        "name": name,
-                        "email": email,
-                        "contact": phone
-                    },
-                    "theme": {
-                        "color": "#2563eb"
-                    }
-                };
-                var rzp1 = new Razorpay(options);
-                rzp1.open();
-            } else {
-                // Direct Link Redirection (Purana system)
-                var targetUrl = selectedPlan.link + "?email=" + encodeURIComponent(email) + "&phone=" + encodeURIComponent(phone) + "&name=" + encodeURIComponent(name);
+            if (links[plan]) {
+                var targetUrl = links[plan] + "?email=" + email + "&phone=" + phone + "&name=" + name;
                 window.location.href = targetUrl;
             }
         }
