@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UFX CAPITAL - Crypto & Forex Option Trader</title>
-    <!-- CSS Link -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- Google Fonts (Orbitron & Rajdhani) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
@@ -16,199 +15,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* Orbitron Font Overrides */
         h1, h2, h3, h4, 
-        .logo-title, 
-        .plan-price, 
-        .plan-duration, 
-        .price-sub, 
-        .btn-choose-plan, 
-        .btn-join, 
-        .hero-btn, 
-        .badge-best-value, 
-        .section-title,
-        .pm-title,
-        .stat-number,
-        .faq-title {
+        .logo-title, .plan-price, .plan-duration, .price-sub, 
+        .btn-choose-plan, .btn-join, .hero-btn, .badge-best-value, 
+        .section-title, .pm-title, .stat-number, .faq-title, .wc-title {
             font-family: 'Orbitron', sans-serif !important;
         }
 
-        /* Common Modal Overlay */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            box-sizing: border-box;
-            overflow-y: auto;
-        }
-
-        /* 1. PURANA RAZORPAY MODAL CARD */
-        .razorpay-modal-card {
-            background: #111827;
-            border: 1px solid #ff0055;
-            border-radius: 12px;
-            padding: 25px;
-            width: 100%;
-            max-width: 420px;
-            color: #ffffff;
-            box-shadow: 0 0 25px rgba(255, 0, 85, 0.4);
-            position: relative;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        /* 2. NAYA CRYPTO FORM MODAL CARD */
-        .crypto-modal-card {
-            background: #0d1117;
-            border: 2px solid #ff0055;
-            border-radius: 12px;
-            padding: 25px;
-            width: 100%;
-            max-width: 520px;
-            color: #ffffff;
-            box-shadow: 0 0 25px rgba(255, 0, 85, 0.5);
-            position: relative;
-            font-family: 'Rajdhani', sans-serif;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 15px;
-            font-size: 24px;
-            color: #ff0055;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .modal-close:hover { color: #ffffff; }
-
-        .modal-card-title {
-            font-family: 'Orbitron', sans-serif !important;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #ff0055;
-            font-size: 20px;
-            letter-spacing: 1px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        .form-full { grid-column: span 2; }
-        
-        .modal-field { margin-bottom: 12px; }
-        .modal-field label { display: block; margin-bottom: 4px; font-weight: 600; color: #d1d5db; font-size: 14px; }
-        .modal-field input, .modal-field select, .modal-field textarea {
-            width: 100%;
-            padding: 10px 12px;
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 14px;
-            box-sizing: border-box;
-            outline: none;
-            font-family: 'Rajdhani', sans-serif;
-        }
-        .modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus {
-            border-color: #ff0055;
-            box-shadow: 0 0 8px rgba(255, 0, 85, 0.3);
-        }
-
-        .modal-btn {
-            width: 100%;
-            padding: 12px;
-            background: #ff0055;
-            color: #ffffff;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-family: 'Orbitron', sans-serif !important;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-        .modal-btn:hover { background: #d00045; box-shadow: 0 0 15px rgba(255, 0, 85, 0.6); }
-
-        /* OTHER PAYMENT METHODS SECTION */
-        .payment-box-wrapper {
+        /* 1. WHY CHOOSE UFX CAPITAL (SINGLE CONTAINER LIKE PHOTO 1) */
+        .why-choose-wrapper {
             max-width: 1100px;
             margin: 40px auto;
-            padding: 25px 20px 20px;
-            border: 2px solid #ff0055;
+            padding: 25px 20px;
+            border: 1px solid rgba(255, 0, 85, 0.4);
             border-radius: 12px;
-            position: relative;
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.2);
             background: rgba(13, 17, 23, 0.6);
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.15);
+            text-align: center;
         }
-        .payment-box-title {
-            position: absolute;
-            top: -18px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #000000;
-            padding: 0 20px;
+        .wc-title {
             color: #ffffff;
             font-size: 20px;
-            font-weight: 800;
             letter-spacing: 1px;
-            white-space: nowrap;
+            margin-bottom: 25px;
         }
-        .payment-methods-flex {
+        .wc-grid {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
+            justify-content: space-between;
+            align-items: flex-start;
             flex-wrap: wrap;
             gap: 15px;
-            margin-top: 10px;
         }
-        .pm-item {
-            text-align: center;
-            cursor: pointer;
-            padding: 10px 15px;
-            transition: transform 0.3s ease;
+        .wc-item {
             flex: 1;
             min-width: 120px;
+            text-align: center;
         }
-        .pm-item:hover { transform: translateY(-5px); }
-        .pm-icon-wrap {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
+        .wc-item i {
+            font-size: 28px;
+            color: #ff0055;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .wc-item p {
+            font-size: 13px;
             color: #ffffff;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.3;
         }
-        .bg-trc20 { background-color: #26a17b; }
-        .bg-erc20 { background-color: #627eea; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); border-radius: 0; width: 55px; height: 65px; }
-        .bg-bep20 { background-color: #f3ba2f; border-radius: 12px; }
-        .bg-btc { background-color: #f7931a; }
-        .bg-phonepe { background-color: #5f259f; }
 
-        .pm-title { color: #ffffff; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
-        .pm-sub { color: #a0aec0; font-size: 13px; font-family: 'Rajdhani', sans-serif; font-weight: 600; }
-        .pm-divider { width: 1px; height: 80px; background: rgba(255, 0, 85, 0.3); }
-
-        /* STATS BOX STYLING */
+        /* 2. STATS BOX (PHOTO 1 SETUP) */
         .stats-wrapper {
             max-width: 1100px;
-            margin: 40px auto;
+            margin: 30px auto;
             padding: 20px;
             border: 1px solid rgba(255, 0, 85, 0.4);
             border-radius: 12px;
@@ -228,39 +88,23 @@
             min-width: 200px;
             justify-content: center;
         }
-        .stat-icon {
-            font-size: 32px;
-            color: #ff0055;
-        }
+        .stat-icon { font-size: 32px; color: #ff0055; }
         .stat-info { text-align: left; }
-        .stat-number {
-            font-size: 24px;
-            font-weight: 800;
-            color: #ff0055;
-            line-height: 1.1;
-        }
-        .stat-label {
-            font-size: 13px;
-            color: #d1d5db;
-            font-weight: 600;
-        }
-        .stat-divider {
-            width: 1px;
-            height: 50px;
-            background: rgba(255, 0, 85, 0.2);
-        }
+        .stat-number { font-size: 24px; font-weight: 800; color: #ff0055; line-height: 1.1; }
+        .stat-label { font-size: 13px; color: #d1d5db; font-weight: 600; }
+        .stat-divider { width: 1px; height: 50px; background: rgba(255, 0, 85, 0.2); }
 
-        /* FAQ SECTION STYLING */
+        /* 3. FAQ SECTION (PHOTO 1 SETUP) */
         .faq-section {
             max-width: 1100px;
-            margin: 50px auto;
+            margin: 40px auto 60px;
             padding: 0 20px;
         }
         .faq-title {
             text-align: center;
-            font-size: 22px;
+            font-size: 20px;
             color: #ffffff;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             letter-spacing: 1px;
         }
         .faq-grid {
@@ -283,21 +127,71 @@
             border-color: #ff0055;
             box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
         }
-        .faq-question {
-            font-size: 14px;
-            color: #e5e7eb;
-            font-weight: 600;
+        .faq-question { font-size: 14px; color: #e5e7eb; font-weight: 600; }
+        .faq-plus { color: #ff0055; font-size: 16px; font-weight: bold; }
+
+        /* MODALS */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); z-index: 10000; justify-content: center;
+            align-items: center; padding: 15px; box-sizing: border-box; overflow-y: auto;
         }
-        .faq-plus {
-            color: #ff0055;
-            font-size: 16px;
-            font-weight: bold;
+        .razorpay-modal-card {
+            background: #111827; border: 1px solid #ff0055; border-radius: 12px;
+            padding: 25px; width: 100%; max-width: 420px; color: #ffffff;
+            box-shadow: 0 0 25px rgba(255, 0, 85, 0.4); position: relative; font-family: 'Rajdhani', sans-serif;
         }
+        .crypto-modal-card {
+            background: #0d1117; border: 2px solid #ff0055; border-radius: 12px;
+            padding: 25px; width: 100%; max-width: 520px; color: #ffffff;
+            box-shadow: 0 0 25px rgba(255, 0, 85, 0.5); position: relative; font-family: 'Rajdhani', sans-serif; max-height: 90vh; overflow-y: auto;
+        }
+        .modal-close { position: absolute; top: 12px; right: 15px; font-size: 24px; color: #ff0055; cursor: pointer; font-weight: bold; }
+        .modal-close:hover { color: #ffffff; }
+        .modal-card-title { font-family: 'Orbitron', sans-serif !important; text-align: center; margin-bottom: 20px; color: #ff0055; font-size: 20px; letter-spacing: 1px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-full { grid-column: span 2; }
+        .modal-field { margin-bottom: 12px; }
+        .modal-field label { display: block; margin-bottom: 4px; font-weight: 600; color: #d1d5db; font-size: 14px; }
+        .modal-field input, .modal-field select, .modal-field textarea {
+            width: 100%; padding: 10px 12px; background: #161b22; border: 1px solid #30363d;
+            border-radius: 6px; color: #ffffff; font-size: 14px; box-sizing: border-box; outline: none; font-family: 'Rajdhani', sans-serif;
+        }
+        .modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus { border-color: #ff0055; box-shadow: 0 0 8px rgba(255, 0, 85, 0.3); }
+        .modal-btn {
+            width: 100%; padding: 12px; background: #ff0055; color: #ffffff; border: none;
+            border-radius: 6px; font-weight: 700; font-size: 16px; cursor: pointer; text-transform: uppercase; font-family: 'Orbitron', sans-serif !important; transition: 0.3s; margin-top: 10px;
+        }
+        .modal-btn:hover { background: #d00045; box-shadow: 0 0 15px rgba(255, 0, 85, 0.6); }
+
+        /* OTHER PAYMENT METHODS SECTION */
+        .payment-box-wrapper {
+            max-width: 1100px; margin: 40px auto; padding: 25px 20px 20px;
+            border: 2px solid #ff0055; border-radius: 12px; position: relative;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.2); background: rgba(13, 17, 23, 0.6);
+        }
+        .payment-box-title {
+            position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+            background: #000000; padding: 0 20px; color: #ffffff; font-size: 20px; font-weight: 800; letter-spacing: 1px; white-space: nowrap;
+        }
+        .payment-methods-flex { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 15px; margin-top: 10px; }
+        .pm-item { text-align: center; cursor: pointer; padding: 10px 15px; transition: transform 0.3s ease; flex: 1; min-width: 120px; }
+        .pm-item:hover { transform: translateY(-5px); }
+        .pm-icon-wrap { width: 65px; height: 65px; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #ffffff; }
+        .bg-trc20 { background-color: #26a17b; }
+        .bg-erc20 { background-color: #627eea; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); border-radius: 0; width: 55px; height: 65px; }
+        .bg-bep20 { background-color: #f3ba2f; border-radius: 12px; }
+        .bg-btc { background-color: #f7931a; }
+        .bg-phonepe { background-color: #5f259f; }
+        .pm-title { color: #ffffff; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+        .pm-sub { color: #a0aec0; font-size: 13px; font-family: 'Rajdhani', sans-serif; font-weight: 600; }
+        .pm-divider { width: 1px; height: 80px; background: rgba(255, 0, 85, 0.3); }
 
         @media (max-width: 768px) {
             .pm-divider, .stat-divider { display: none; }
             .form-grid, .faq-grid { grid-template-columns: 1fr; }
             .form-full { grid-column: span 1; }
+            .wc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         }
     </style>
 </head>
@@ -331,9 +225,7 @@
         </div>
         
         <h1>UFX CAPITAL</h1>
-        
         <div class="hero-subtext">CRYPTO & FOREX OPTION TRADER</div>
-        
         <p class="hero-bullets">High Probability Trading Signals • Smart Money Concepts<br>Discipline • Strategy • Consistency</p>
         
         <button onclick="openRazorpayModal()" class="hero-btn" style="border:none; cursor:pointer;">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
@@ -429,49 +321,74 @@
     <div class="payment-box-wrapper">
         <div class="payment-box-title">OTHER PAYMENT METHODS</div>
         <div class="payment-methods-flex">
-            
             <div class="pm-item" onclick="openCryptoModal()">
                 <div class="pm-icon-wrap bg-trc20"><i class="fa-solid fa-t"></i></div>
                 <div class="pm-title">TRC20</div>
                 <div class="pm-sub">(USDT)</div>
             </div>
-
             <div class="pm-divider"></div>
-
             <div class="pm-item" onclick="openCryptoModal()">
                 <div class="pm-icon-wrap bg-erc20"><i class="fa-brands fa-ethereum"></i></div>
                 <div class="pm-title">ERC20</div>
                 <div class="pm-sub">(USDT)</div>
             </div>
-
             <div class="pm-divider"></div>
-
             <div class="pm-item" onclick="openCryptoModal()">
                 <div class="pm-icon-wrap bg-bep20"><i class="fa-solid fa-cube"></i></div>
                 <div class="pm-title">BEP20</div>
                 <div class="pm-sub">(USDT)</div>
             </div>
-
             <div class="pm-divider"></div>
-
             <div class="pm-item" onclick="openCryptoModal()">
                 <div class="pm-icon-wrap bg-btc"><i class="fa-brands fa-bitcoin"></i></div>
                 <div class="pm-title">BITCOIN</div>
                 <div class="pm-sub">(BTC)</div>
             </div>
-
             <div class="pm-divider"></div>
-
             <a href="upi://pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&cu=INR" class="pm-item" style="text-decoration: none;">
                 <div class="pm-icon-wrap bg-phonepe"><span style="font-weight:bold; font-size: 28px;">पे</span></div>
                 <div class="pm-title">PHONE PAY</div>
                 <div class="pm-sub">(INR)</div>
             </a>
-
         </div>
     </div>
 
-    <!-- STATS COUNTER BOX (RESTORED) -->
+    <!-- 1. WHY CHOOSE UFX CAPITAL (FIRST POSITION - PHOTO 1) -->
+    <div class="why-choose-wrapper" id="features">
+        <div class="wc-title"><i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i> WHY CHOOSE UFX CAPITAL? <i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i></div>
+        <div class="wc-grid">
+            <div class="wc-item">
+                <i class="fa-solid fa-crosshairs"></i>
+                <p>High Probability<br>SMC-Based Signals</p>
+            </div>
+            <div class="wc-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Live Entry, SL &<br>TP Updates</p>
+            </div>
+            <div class="wc-item">
+                <i class="fa-solid fa-chart-pie"></i>
+                <p>Trade Breakdown<br>(Chart + Logic)</p>
+            </div>
+            <div class="wc-item">
+                <i class="fa-solid fa-coins"></i>
+                <p>Weekly Gold<br>(XAUUSD) Outlook</p>
+            </div>
+            <div class="wc-item">
+                <i class="fa-solid fa-brain"></i>
+                <p>Mindset &<br>Risk Management</p>
+            </div>
+            <div class="wc-item">
+                <i class="fa-solid fa-users"></i>
+                <p>Premium Community<br>Access</p>
+            </div>
+            <div class="wc-item">
+                <i class="fa-solid fa-headset"></i>
+                <p>24/7 Priority<br>Support</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. STATS COUNTER BOX (SECOND POSITION - PHOTO 1) -->
     <div class="stats-wrapper">
         <div class="stat-item">
             <i class="fa-solid fa-users stat-icon"></i>
@@ -480,9 +397,7 @@
                 <div class="stat-label">Active Members</div>
             </div>
         </div>
-
         <div class="stat-divider"></div>
-
         <div class="stat-item">
             <i class="fa-solid fa-bullseye stat-icon"></i>
             <div class="stat-info">
@@ -490,9 +405,7 @@
                 <div class="stat-label">Win Rate Signals</div>
             </div>
         </div>
-
         <div class="stat-divider"></div>
-
         <div class="stat-item">
             <i class="fa-solid fa-chart-line stat-icon"></i>
             <div class="stat-info">
@@ -500,9 +413,7 @@
                 <div class="stat-label">Signals Delivered</div>
             </div>
         </div>
-
         <div class="stat-divider"></div>
-
         <div class="stat-item">
             <i class="fa-solid fa-trophy stat-icon"></i>
             <div class="stat-info">
@@ -512,79 +423,35 @@
         </div>
     </div>
 
-    <!-- FAQ SECTION (RESTORED) -->
+    <!-- 3. FAQ SECTION (THIRD POSITION - PHOTO 1) -->
     <section class="faq-section" id="faq">
         <div class="faq-title">
             <i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i> FREQUENTLY ASKED QUESTIONS <i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i>
         </div>
-
         <div class="faq-grid">
             <div class="faq-item">
                 <span class="faq-question">What type of signals do you provide?</span>
                 <span class="faq-plus">+</span>
             </div>
-
             <div class="faq-item">
                 <span class="faq-question">What is the risk-reward ratio?</span>
                 <span class="faq-plus">+</span>
             </div>
-
             <div class="faq-item">
                 <span class="faq-question">How will I receive the signals?</span>
                 <span class="faq-plus">+</span>
             </div>
-
             <div class="faq-item">
                 <span class="faq-question">Can I cancel my subscription anytime?</span>
                 <span class="faq-plus">+</span>
             </div>
-
             <div class="faq-item">
                 <span class="faq-question">Is this suitable for beginners?</span>
                 <span class="faq-plus">+</span>
             </div>
-
             <div class="faq-item">
                 <span class="faq-question">Do you provide refund?</span>
                 <span class="faq-plus">+</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- WHY CHOOSE UFX CAPITAL -->
-    <section class="features-section" id="features">
-        <div class="section-header">
-            <div class="section-title"><i class="fa-solid fa-gem"></i> WHY CHOOSE UFX CAPITAL? <i class="fa-solid fa-gem"></i></div>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-box">
-                <i class="fa-solid fa-crosshairs"></i>
-                <h4>High Probability SMC-Based Signals</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-chart-line"></i>
-                <h4>Live Entry, SL & TP Updates</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-chart-pie"></i>
-                <h4>Trade Breakdown (Chart + Logic)</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-coins"></i>
-                <h4>Weekly Gold (XAUUSD) Outlook</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-brain"></i>
-                <h4>Mindset & Risk Management</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-users"></i>
-                <h4>Premium Community Access</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-headset"></i>
-                <h4>24/7 Priority Support</h4>
             </div>
         </div>
     </section>
@@ -597,25 +464,22 @@
                 <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
                 <div class="footer-gem"><i class="fa-solid fa-gem"></i></div>
             </div>
-
             <div class="footer-mission">
                 <p>Our mission is to empower traders with quality setups, strong risk management and a winning mindset.</p>
                 <p class="slogan">Stay disciplined. Stick to plan.<br>Trade smart. Grow consistently.</p>
             </div>
-
             <div class="footer-contact">
                 <h5>GET IN TOUCH</h5>
                 <p><i class="fa-brands fa-telegram"></i> Telegram: @IM_ARCHIT</p>
                 <p><i class="fa-solid fa-phone"></i> 9649638812</p>
             </div>
         </div>
-
         <div class="footer-bottom">
             &copy; 2026 UFX CAPITAL. All Rights Reserved.
         </div>
     </footer>
 
-    <!-- MODAL 1: PURANA RAZORPAY MODAL -->
+    <!-- MODAL 1: RAZORPAY MODAL -->
     <div class="modal-overlay" id="razorpayModal">
         <div class="razorpay-modal-card">
             <span class="modal-close" onclick="closeRazorpayModal()">&times;</span>
@@ -647,12 +511,11 @@
         </div>
     </div>
 
-    <!-- MODAL 2: NAYA CRYPTO ADDRESS FORM MODAL -->
+    <!-- MODAL 2: CRYPTO FORM MODAL -->
     <div class="modal-overlay" id="cryptoModal">
         <div class="crypto-modal-card">
             <span class="modal-close" onclick="closeCryptoModal()">&times;</span>
             <div class="modal-card-title">CRYPTO PAYMENT DETAILS</div>
-            
             <form action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
                 <input type="hidden" name="subject" value="New Crypto Membership Order - UFX Capital">
@@ -668,53 +531,43 @@
                             <option value="Lifetime Plan - $199">Lifetime VIP Plan - $199</option>
                         </select>
                     </div>
-
                     <div class="modal-field form-full">
                         <label>Full Name</label>
                         <input type="text" name="Full_Name" required placeholder="Enter Full Name">
                     </div>
-
                     <div class="modal-field">
                         <label>Email Address</label>
                         <input type="email" name="Email" required placeholder="Enter Email">
                     </div>
-
                     <div class="modal-field">
                         <label>Mobile Number</label>
                         <input type="tel" name="Mobile" required placeholder="Enter Phone Number">
                     </div>
-
                     <div class="modal-field form-full">
                         <label>PAN / National ID Number</label>
                         <input type="text" name="PAN_National_ID" required placeholder="Enter PAN or National ID">
                     </div>
-
                     <div class="modal-field">
                         <label>Country of Residence</label>
                         <input type="text" name="Country" required placeholder="e.g. India">
                     </div>
-
                     <div class="modal-field">
                         <label>State / Province</label>
                         <input type="text" name="State" required placeholder="State">
                     </div>
-
                     <div class="modal-field">
                         <label>City / Village / Town</label>
                         <input type="text" name="City" required placeholder="City">
                     </div>
-
                     <div class="modal-field">
                         <label>Pin Code</label>
                         <input type="text" name="Pin_Code" required placeholder="Pincode">
                     </div>
-
                     <div class="modal-field form-full">
                         <label>Full Address</label>
                         <textarea name="Full_Address" rows="2" required placeholder="Enter Complete Address"></textarea>
                     </div>
                 </div>
-
                 <button type="submit" class="modal-btn">SUBMIT & GET PAYMENT ADDRESS</button>
             </form>
         </div>
