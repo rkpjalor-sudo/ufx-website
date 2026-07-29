@@ -26,18 +26,9 @@
         .btn-join, 
         .hero-btn, 
         .badge-best-value, 
-        .section-title {
+        .section-title,
+        .pm-title {
             font-family: 'Orbitron', sans-serif !important;
-        }
-
-        .plan-price {
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-shadow: 0 0 12px rgba(255, 0, 85, 0.6);
-        }
-
-        .best-value .plan-price {
-            text-shadow: 0 0 12px rgba(255, 187, 0, 0.6);
         }
 
         /* Modal Overlay & Form Styling */
@@ -48,57 +39,69 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 10000;
             justify-content: center;
             align-items: center;
             padding: 15px;
             box-sizing: border-box;
+            overflow-y: auto;
         }
         .modal-card {
-            background: #111827;
-            border: 1px solid #ff0055;
+            background: #0d1117;
+            border: 2px solid #ff0055;
             border-radius: 12px;
             padding: 25px;
             width: 100%;
-            max-width: 420px;
+            max-width: 520px;
             color: #ffffff;
-            box-shadow: 0 0 25px rgba(255, 0, 85, 0.4);
+            box-shadow: 0 0 25px rgba(255, 0, 85, 0.5);
             position: relative;
             font-family: 'Rajdhani', sans-serif;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         .modal-close {
             position: absolute;
             top: 12px;
             right: 15px;
-            font-size: 22px;
-            color: #9ca3af;
+            font-size: 24px;
+            color: #ff0055;
             cursor: pointer;
+            font-weight: bold;
         }
         .modal-close:hover { color: #ffffff; }
         .modal-card h3 {
             font-family: 'Orbitron', sans-serif !important;
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             color: #ff0055;
             font-size: 20px;
+            letter-spacing: 1px;
         }
-        .modal-field { margin-bottom: 15px; }
-        .modal-field label { display: block; margin-bottom: 5px; font-weight: 600; color: #d1d5db; }
-        .modal-field input, .modal-field select {
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .form-full { grid-column: span 2; }
+        .modal-field { margin-bottom: 12px; }
+        .modal-field label { display: block; margin-bottom: 4px; font-weight: 600; color: #d1d5db; font-size: 14px; }
+        .modal-field input, .modal-field select, .modal-field textarea {
             width: 100%;
             padding: 10px 12px;
-            background: #1f2937;
-            border: 1px solid #374151;
+            background: #161b22;
+            border: 1px solid #30363d;
             border-radius: 6px;
             color: #ffffff;
-            font-size: 15px;
+            font-size: 14px;
             box-sizing: border-box;
             outline: none;
             font-family: 'Rajdhani', sans-serif;
         }
-        .modal-field input:focus, .modal-field select:focus {
+        .modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus {
             border-color: #ff0055;
+            box-shadow: 0 0 8px rgba(255, 0, 85, 0.3);
         }
         .modal-btn {
             width: 100%;
@@ -113,66 +116,93 @@
             text-transform: uppercase;
             font-family: 'Orbitron', sans-serif !important;
             transition: 0.3s;
+            margin-top: 10px;
         }
-        .modal-btn:hover { background: #d00045; }
+        .modal-btn:hover { background: #d00045; box-shadow: 0 0 15px rgba(255, 0, 85, 0.6); }
 
-        /* PAYMENT METHODS SECTION */
-        .payment-methods-section {
-            padding: 40px 20px;
-            text-align: center;
-            background: rgba(17, 24, 39, 0.6);
-            margin: 30px 0;
-            border-top: 1px solid rgba(255, 0, 85, 0.2);
-            border-bottom: 1px solid rgba(255, 0, 85, 0.2);
-        }
-        .payment-methods-grid {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-        .payment-card {
-            background: #111827;
-            border: 1px solid #262f40;
+        /* EXACT PAYMENT METHODS CONTAINER DESIGN FROM SCREENSHOT */
+        .payment-box-wrapper {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 25px 20px 20px;
+            border: 2px solid #ff0055;
             border-radius: 12px;
-            padding: 18px 15px;
-            width: 140px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.2);
+            background: rgba(13, 17, 23, 0.6);
+        }
+        .payment-box-title {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000000;
+            padding: 0 20px;
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        .payment-methods-flex {
             display: flex;
-            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .pm-item {
+            text-align: center;
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: transform 0.3s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+        .pm-item:hover {
+            transform: translateY(-5px);
+        }
+        .pm-icon-wrap {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .payment-card:hover {
-            transform: translateY(-5px);
-            border-color: #ff0055;
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
-        }
-        .payment-card i {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-        .payment-card .pay-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 32px;
             color: #ffffff;
         }
-        .payment-card .pay-sub {
-            font-size: 12px;
-            color: #9ca3af;
-            margin-top: 2px;
+        /* Colors & Styles for Crypto/PhonePe Icons */
+        .bg-trc20 { background-color: #26a17b; }
+        .bg-erc20 { background-color: #627eea; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); border-radius: 0; width: 55px; height: 65px; }
+        .bg-bep20 { background-color: #f3ba2f; border-radius: 12px; }
+        .bg-btc { background-color: #f7931a; }
+        .bg-phonepe { background-color: #5f259f; }
+
+        .pm-title {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 2px;
         }
-        /* Custom Colors for Crypto/UPI Icons */
-        .ic-usdt-trc { color: #26a17b; }
-        .ic-usdt-erc { color: #627eea; }
-        .ic-usdt-bep { color: #f3ba2f; }
-        .ic-btc { color: #f7931a; }
-        .ic-phonepe { color: #5f259f; }
+        .pm-sub {
+            color: #a0aec0;
+            font-size: 13px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+        }
+        .pm-divider {
+            width: 1px;
+            height: 80px;
+            background: rgba(255, 0, 85, 0.3);
+        }
+        @media (max-width: 768px) {
+            .pm-divider { display: none; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-full { grid-column: span 1; }
+        }
     </style>
 </head>
 <body>
@@ -222,15 +252,12 @@
         </div>
 
         <div class="plans-grid">
-            
-            <!-- PLAN 1: 1 MONTH -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">1 MONTH</div>
                     <div class="plan-price">$35</div>
                     <div class="price-sub">PER MONTH</div>
                     <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
-                    
                     <ul class="plan-features">
                         <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
@@ -243,14 +270,12 @@
                 <button onclick="openPaymentModal('35')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
-            <!-- PLAN 2: 3 MONTHS -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">3 MONTHS</div>
                     <div class="plan-price">$59</div>
                     <div class="price-sub">EVERY 3 MONTHS</div>
                     <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
-                    
                     <ul class="plan-features">
                         <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
@@ -263,14 +288,12 @@
                 <button onclick="openPaymentModal('59')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
-            <!-- PLAN 3: 6 MONTHS -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">6 MONTHS</div>
                     <div class="plan-price">$79</div>
                     <div class="price-sub">EVERY 6 MONTHS</div>
                     <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
-                    
                     <ul class="plan-features">
                         <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
@@ -283,7 +306,6 @@
                 <button onclick="openPaymentModal('79')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
-            <!-- PLAN 4: LIFETIME -->
             <div class="plan-card best-value">
                 <div class="badge-best-value">BEST VALUE</div>
                 <div>
@@ -291,7 +313,6 @@
                     <div class="plan-price">$199</div>
                     <div class="price-sub">ONE TIME PAYMENT</div>
                     <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
-                    
                     <ul class="plan-features">
                         <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
@@ -305,41 +326,55 @@
                 </div>
                 <button onclick="openPaymentModal('199')" class="btn-choose-plan btn-gold" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
             </div>
-
         </div>
     </section>
 
-    <!-- NEW PAYMENT METHODS SECTION -->
-    <section class="payment-methods-section">
-        <div class="section-title"><i class="fa-solid fa-wallet"></i> PAYMENT METHODS <i class="fa-solid fa-wallet"></i></div>
-        <div class="payment-methods-grid">
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-solid fa-coins ic-usdt-trc"></i>
-                <span class="pay-title">TRC20</span>
-                <span class="pay-sub">(USDT)</span>
+    <!-- PAYMENT METHODS SECTION -->
+    <div class="payment-box-wrapper">
+        <div class="payment-box-title">PAYMENT METHODS</div>
+        <div class="payment-methods-flex">
+            
+            <div class="pm-item" onclick="openPaymentModal()">
+                <div class="pm-icon-wrap bg-trc20"><i class="fa-solid fa-t"></i></div>
+                <div class="pm-title">TRC20</div>
+                <div class="pm-sub">(USDT)</div>
             </div>
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-brands fa-ethereum ic-usdt-erc"></i>
-                <span class="pay-title">ERC20</span>
-                <span class="pay-sub">(USDT)</span>
+
+            <div class="pm-divider"></div>
+
+            <div class="pm-item" onclick="openPaymentModal()">
+                <div class="pm-icon-wrap bg-erc20"><i class="fa-brands fa-ethereum"></i></div>
+                <div class="pm-title">ERC20</div>
+                <div class="pm-sub">(USDT)</div>
             </div>
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-solid fa-cube ic-usdt-bep"></i>
-                <span class="pay-title">BEP20</span>
-                <span class="pay-sub">(USDT)</span>
+
+            <div class="pm-divider"></div>
+
+            <div class="pm-item" onclick="openPaymentModal()">
+                <div class="pm-icon-wrap bg-bep20"><i class="fa-solid fa-cube"></i></div>
+                <div class="pm-title">BEP20</div>
+                <div class="pm-sub">(USDT)</div>
             </div>
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-brands fa-bitcoin ic-btc"></i>
-                <span class="pay-title">BITCOIN</span>
-                <span class="pay-sub">(BTC)</span>
+
+            <div class="pm-divider"></div>
+
+            <div class="pm-item" onclick="openPaymentModal()">
+                <div class="pm-icon-wrap bg-btc"><i class="fa-brands fa-bitcoin"></i></div>
+                <div class="pm-title">BITCOIN</div>
+                <div class="pm-sub">(BTC)</div>
             </div>
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-solid fa-mobile-screen-button ic-phonepe"></i>
-                <span class="pay-title">PHONE PE</span>
-                <span class="pay-sub">(INR / UPI)</span>
-            </div>
+
+            <div class="pm-divider"></div>
+
+            <!-- Direct PhonePe / UPI deep link with 9649638812@ybl -->
+            <a href="upi://pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&cu=INR" class="pm-item" style="text-decoration: none;">
+                <div class="pm-icon-wrap bg-phonepe"><span style="font-weight:bold; font-size: 28px;">पे</span></div>
+                <div class="pm-title">PHONE PAY</div>
+                <div class="pm-sub">(INR)</div>
+            </a>
+
         </div>
-    </section>
+    </div>
 
     <!-- WHY CHOOSE UFX CAPITAL -->
     <section class="features-section" id="features">
@@ -379,107 +414,6 @@
         </div>
     </section>
 
-    <!-- STATS SECTION -->
-    <div class="stats-section" id="about">
-        <div class="stat-item">
-            <i class="fa-solid fa-users"></i>
-            <div>
-                <div class="stat-number">1000+</div>
-                <div class="stat-label">Active Members</div>
-            </div>
-        </div>
-        <div class="stat-item">
-            <i class="fa-solid fa-bullseye"></i>
-            <div>
-                <div class="stat-number">80%+</div>
-                <div class="stat-label">Win Rate Signals</div>
-            </div>
-        </div>
-        <div class="stat-item">
-            <i class="fa-solid fa-chart-simple"></i>
-            <div>
-                <div class="stat-number">5000+</div>
-                <div class="stat-label">Signals Delivered</div>
-            </div>
-        </div>
-        <div class="stat-item">
-            <i class="fa-solid fa-trophy"></i>
-            <div>
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Support</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FAQ SECTION -->
-    <section class="faq-section" id="faq">
-        <div class="section-header">
-            <div class="section-title"><i class="fa-solid fa-gem"></i> FREQUENTLY ASKED QUESTIONS <i class="fa-solid fa-gem"></i></div>
-        </div>
-
-        <div class="faq-grid">
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>What type of signals do you provide?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    We provide high-probability Crypto & Forex Option signals based on Smart Money Concepts (SMC) with complete Entry, Take Profit, and Stop Loss levels.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>What is the risk-reward ratio?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    All our signals feature a minimum Risk to Reward (RR) ratio of 1:4 for optimal capital growth and risk protection.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>How will I receive the signals?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    You will receive instant alerts via our VIP Telegram channel directly on your mobile device or desktop upon payment completion.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>Can I cancel my subscription anytime?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    Yes, you can manage or cancel your subscription plan whenever you choose with no hidden fees.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>Is this suitable for beginners?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    Yes! We provide complete strategy PDFs, risk management guidance, and 24/7 support to help beginners start smoothly.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span>Do you provide refund?</span>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-answer">
-                    Please refer to our terms or reach out to our 24/7 Telegram support for plan adjustment inquiries.
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- FOOTER -->
     <footer id="contact">
         <div class="footer-content">
@@ -506,46 +440,91 @@
         </div>
     </footer>
 
-    <!-- PAYMENT MODAL FORM -->
+    <!-- PAYMENT & CLIENT DETAILS MODAL FORM -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-card">
             <span class="modal-close" onclick="closePaymentModal()">&times;</span>
-            <h3>JOIN PREMIUM MEMBERSHIP</h3>
-            <form id="directPaymentForm" onsubmit="handleDirectPayment(event)">
-                <div class="modal-field">
-                    <label>Full Name</label>
-                    <input type="text" id="cust_name" required placeholder="Enter Full Name">
+            <h3>CLIENT REGISTRATION & PAYMENT</h3>
+            
+            <!-- Direct form submit endpoint targeting rkpjalor@gmail.com -->
+            <form action="https://api.web3forms.com/submit" method="POST">
+                
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                <input type="hidden" name="subject" value="New Membership Registration Details - UFX Capital">
+                <input type="hidden" name="send_to" value="rkpjalor@gmail.com">
+
+                <div class="form-grid">
+                    <div class="modal-field form-full">
+                        <label>Select Plan</label>
+                        <select id="modalPlanSelect" name="Selected_Plan" required>
+                            <option value="1 Month Plan - $35">1 Month Plan - $35</option>
+                            <option value="3 Months Plan - $59">3 Months Plan - $59</option>
+                            <option value="6 Months Plan - $79">6 Months Plan - $79</option>
+                            <option value="Lifetime Plan - $199">Lifetime VIP Plan - $199</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-field form-full">
+                        <label>Full Name</label>
+                        <input type="text" name="Full_Name" required placeholder="Enter Full Name">
+                    </div>
+
+                    <div class="modal-field">
+                        <label>Email Address</label>
+                        <input type="email" name="Email" required placeholder="Enter Email">
+                    </div>
+
+                    <div class="modal-field">
+                        <label>Mobile Number</label>
+                        <input type="tel" name="Mobile" required placeholder="Enter Phone Number">
+                    </div>
+
+                    <div class="modal-field form-full">
+                        <label>PAN / National ID Number</label>
+                        <input type="text" name="PAN_National_ID" required placeholder="Enter PAN or National ID">
+                    </div>
+
+                    <div class="modal-field">
+                        <label>Country of Residence</label>
+                        <input type="text" name="Country" required placeholder="e.g. India">
+                    </div>
+
+                    <div class="modal-field">
+                        <label>State / Province</label>
+                        <input type="text" name="State" required placeholder="State">
+                    </div>
+
+                    <div class="modal-field">
+                        <label>City / Village / Town</label>
+                        <input type="text" name="City" required placeholder="City">
+                    </div>
+
+                    <div class="modal-field">
+                        <label>Pin Code</label>
+                        <input type="text" name="Pin_Code" required placeholder="Pincode">
+                    </div>
+
+                    <div class="modal-field form-full">
+                        <label>Full Address</label>
+                        <textarea name="Full_Address" rows="2" required placeholder="Enter Complete Address"></textarea>
+                    </div>
                 </div>
-                <div class="modal-field">
-                    <label>Email Address</label>
-                    <input type="email" id="cust_email" required placeholder="Enter Email Address">
-                </div>
-                <div class="modal-field">
-                    <label>Mobile Number</label>
-                    <input type="tel" id="cust_phone" required placeholder="Enter Mobile Number">
-                </div>
-                <div class="modal-field">
-                    <label>Select Plan</label>
-                    <select id="modalPlanSelect" required>
-                        <option value="35">Starter Plan - $35 (1 Month)</option>
-                        <option value="59">Pro Plan - $59 (3 Months)</option>
-                        <option value="79">Advanced Plan - $79 (6 Months)</option>
-                        <option value="199">VIP Lifetime - $199 (Lifetime)</option>
-                    </select>
-                </div>
-                <button type="submit" class="modal-btn">PROCEED TO PAY</button>
+
+                <button type="submit" class="modal-btn">SUBMIT & PROCEED TO PAYMENT</button>
             </form>
         </div>
     </div>
 
-    <!-- JS Link & Payment Script -->
     <script src="script.js"></script>
     <script>
         function openPaymentModal(planValue) {
             var modal = document.getElementById('paymentModal');
             var select = document.getElementById('modalPlanSelect');
             if (planValue) {
-                select.value = planValue;
+                if(planValue === '35') select.value = "1 Month Plan - $35";
+                if(planValue === '59') select.value = "3 Months Plan - $59";
+                if(planValue === '79') select.value = "6 Months Plan - $79";
+                if(planValue === '199') select.value = "Lifetime Plan - $199";
             }
             modal.style.display = 'flex';
         }
@@ -558,28 +537,6 @@
             var modal = document.getElementById('paymentModal');
             if (event.target == modal) {
                 modal.style.display = 'none';
-            }
-        }
-
-        function handleDirectPayment(e) {
-            e.preventDefault();
-            
-            var name  = encodeURIComponent(document.getElementById('cust_name').value.trim());
-            var email = encodeURIComponent(document.getElementById('cust_email').value.trim());
-            var phone = encodeURIComponent(document.getElementById('cust_phone').value.trim());
-            var plan  = document.getElementById('modalPlanSelect').value;
-
-            // Mapping $ Plan Values to Updated Razorpay Links with Telegram Redirection
-            var links = {
-                "35":  "https://rzp.io/rzp/Qcrc9Ul",    // ₹3,500
-                "59":  "https://rzp.io/rzp/bABu5nP",    // ₹5,900
-                "79":  "https://rzp.io/rzp/5G4nnHe",    // ₹7,900
-                "199": "https://rzp.io/rzp/vV5guyt"     // ₹19,900
-            };
-
-            if (links[plan]) {
-                var targetUrl = links[plan] + "?email=" + email + "&phone=" + phone + "&name=" + name;
-                window.location.href = targetUrl;
             }
         }
     </script>
