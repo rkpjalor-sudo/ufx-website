@@ -22,7 +22,7 @@
             font-family: 'Orbitron', sans-serif !important;
         }
 
-        /* 1. WHY CHOOSE UFX CAPITAL (SINGLE CONTAINER LIKE PHOTO 1) */
+        /* 1. WHY CHOOSE UFX CAPITAL */
         .why-choose-wrapper {
             max-width: 1100px;
             margin: 40px auto;
@@ -65,7 +65,7 @@
             line-height: 1.3;
         }
 
-        /* 2. STATS BOX (PHOTO 1 SETUP) */
+        /* 2. STATS BOX */
         .stats-wrapper {
             max-width: 1100px;
             margin: 30px auto;
@@ -94,7 +94,7 @@
         .stat-label { font-size: 13px; color: #d1d5db; font-weight: 600; }
         .stat-divider { width: 1px; height: 50px; background: rgba(255, 0, 85, 0.2); }
 
-        /* 3. FAQ SECTION (PHOTO 1 SETUP) */
+        /* 3. FAQ SECTION WITH TOGGLE ANIMATION */
         .faq-section {
             max-width: 1100px;
             margin: 40px auto 60px;
@@ -111,24 +111,52 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
+            align-items: start;
         }
-        .faq-item {
+        .faq-card {
             background: rgba(22, 27, 34, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s ease;
+        }
+        .faq-card:hover {
+            border-color: #ff0055;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
+        }
+        .faq-header {
             padding: 14px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: 0.3s ease;
-        }
-        .faq-item:hover {
-            border-color: #ff0055;
-            box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
+            user-select: none;
         }
         .faq-question { font-size: 14px; color: #e5e7eb; font-weight: 600; }
-        .faq-plus { color: #ff0055; font-size: 16px; font-weight: bold; }
+        .faq-plus { color: #ff0055; font-size: 18px; font-weight: bold; transition: transform 0.3s ease; }
+        
+        .faq-card.active .faq-plus {
+            transform: rotate(45deg); /* Converts '+' to 'x' / '-' */
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 18px;
+            color: #a0aec0;
+            font-size: 13px;
+            line-height: 1.5;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: rgba(13, 17, 23, 0.4);
+            border-top: 1px solid rgba(255, 0, 85, 0.1);
+        }
+
+        .faq-card.active .faq-answer {
+            max-height: 200px;
+            padding: 12px 18px 16px;
+        }
 
         /* MODALS */
         .modal-overlay {
@@ -353,7 +381,7 @@
         </div>
     </div>
 
-    <!-- 1. WHY CHOOSE UFX CAPITAL (FIRST POSITION - PHOTO 1) -->
+    <!-- 1. WHY CHOOSE UFX CAPITAL -->
     <div class="why-choose-wrapper" id="features">
         <div class="wc-title"><i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i> WHY CHOOSE UFX CAPITAL? <i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i></div>
         <div class="wc-grid">
@@ -388,7 +416,7 @@
         </div>
     </div>
 
-    <!-- 2. STATS COUNTER BOX (SECOND POSITION - PHOTO 1) -->
+    <!-- 2. STATS COUNTER BOX -->
     <div class="stats-wrapper">
         <div class="stat-item">
             <i class="fa-solid fa-users stat-icon"></i>
@@ -423,35 +451,71 @@
         </div>
     </div>
 
-    <!-- 3. FAQ SECTION (THIRD POSITION - PHOTO 1) -->
+    <!-- 3. FAQ SECTION WITH WORKING CLICK OPEN/CLOSE -->
     <section class="faq-section" id="faq">
         <div class="faq-title">
             <i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i> FREQUENTLY ASKED QUESTIONS <i class="fa-solid fa-gem" style="color: #ff0055; font-size: 16px;"></i>
         </div>
+        
         <div class="faq-grid">
-            <div class="faq-item">
-                <span class="faq-question">What type of signals do you provide?</span>
-                <span class="faq-plus">+</span>
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <span class="faq-question">What type of signals do you provide?</span>
+                    <span class="faq-plus">+</span>
+                </div>
+                <div class="faq-answer">
+                    We provide High-Probability Forex & Crypto trading signals based on Smart Money Concepts (SMC) and Price Action analysis with complete Entry, SL, and TP.
+                </div>
             </div>
-            <div class="faq-item">
-                <span class="faq-question">What is the risk-reward ratio?</span>
-                <span class="faq-plus">+</span>
+
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <span class="faq-question">What is the risk-reward ratio?</span>
+                    <span class="faq-plus">+</span>
+                </div>
+                <div class="faq-answer">
+                    Our trading setups strictly maintain a minimum Risk-to-Reward ratio of 1:4 to ensure long-term profitability even with a moderate win rate.
+                </div>
             </div>
-            <div class="faq-item">
-                <span class="faq-question">How will I receive the signals?</span>
-                <span class="faq-plus">+</span>
+
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <span class="faq-question">How will I receive the signals?</span>
+                    <span class="faq-plus">+</span>
+                </div>
+                <div class="faq-answer">
+                    All signals, market analysis, and live updates are delivered instantly through our private Telegram VIP Channel.
+                </div>
             </div>
-            <div class="faq-item">
-                <span class="faq-question">Can I cancel my subscription anytime?</span>
-                <span class="faq-plus">+</span>
+
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <span class="faq-question">Can I cancel my subscription anytime?</span>
+                    <span class="faq-plus">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, you are under no long-term obligation. You can choose not to renew your plan after your active subscription period ends.
+                </div>
             </div>
-            <div class="faq-item">
-                <span class="faq-question">Is this suitable for beginners?</span>
-                <span class="faq-plus">+</span>
+
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <span class="faq-question">Is this suitable for beginners?</span>
+                    <span class="faq-plus">+</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely! We provide complete chart breakdowns, logic, and beginner-friendly guides along with 24/7 chat support to guide you at every step.
+                </div>
             </div>
-            <div class="faq-item">
-                <span class="faq-question">Do you provide refund?</span>
-                <span class="faq-plus">+</span>
+
+            <div class="faq-card" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <span class="faq-question">Do you provide refund?</span>
+                    <span class="faq-plus">+</span>
+                </div>
+                <div class="faq-answer">
+                    Due to the immediate digital nature of our proprietary trading signals and strategy PDFs, all sales and subscriptions are non-refundable.
+                </div>
             </div>
         </div>
     </section>
@@ -576,6 +640,18 @@
     <!-- SCRIPTS -->
     <script src="script.js"></script>
     <script>
+        // FAQ Accordion Open/Close Logic
+        function toggleFaq(element) {
+            var allCards = document.querySelectorAll('.faq-card');
+            allCards.forEach(function(card) {
+                if (card !== element) {
+                    card.classList.remove('active');
+                }
+            });
+            element.classList.toggle('active');
+        }
+
+        // Razorpay Modal Logic
         function openRazorpayModal(planValue) {
             var modal = document.getElementById('razorpayModal');
             var select = document.getElementById('rzpPlanSelect');
@@ -607,6 +683,7 @@
             }
         }
 
+        // Crypto Modal Logic
         function openCryptoModal() {
             document.getElementById('cryptoModal').style.display = 'flex';
         }
