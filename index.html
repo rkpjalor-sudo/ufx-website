@@ -11,6 +11,83 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Modal Inline Styling -->
+    <style>
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .modal-card {
+            background: #111827;
+            border: 1px solid #2563eb;
+            border-radius: 12px;
+            padding: 25px;
+            width: 100%;
+            max-width: 420px;
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+            position: relative;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 22px;
+            color: #9ca3af;
+            cursor: pointer;
+        }
+        .modal-close:hover { color: #ffffff; }
+        .modal-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 18px;
+            color: #60a5fa;
+            font-size: 20px;
+        }
+        .modal-field { margin-bottom: 15px; }
+        .modal-field label { display: block; margin-bottom: 5px; font-weight: 600; color: #d1d5db; }
+        .modal-field input, .modal-field select {
+            width: 100%;
+            padding: 10px 12px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 15px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        .modal-field input:focus, .modal-field select:focus {
+            border-color: #2563eb;
+        }
+        .modal-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            transition: 0.3s;
+        }
+        .modal-btn:hover { background: #1d4ed8; }
+    </style>
 </head>
 <body>
 
@@ -30,7 +107,7 @@
             <a href="#faq">FAQ</a>
             <a href="#contact">CONTACT</a>
         </nav>
-        <a href="https://t.me/IM_ARCHIT" target="_blank" class="btn-join"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</a>
+        <button onclick="openPaymentModal()" class="btn-join" style="border:none; cursor:pointer;"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
     </header>
 
     <!-- HERO SECTION -->
@@ -47,7 +124,7 @@
         
         <p class="hero-bullets">High Probability Trading Signals • Smart Money Concepts<br>Discipline • Strategy • Consistency</p>
         
-        <a href="https://t.me/IM_ARCHIT" target="_blank" class="hero-btn">JOIN PREMIUM <i class="fa-solid fa-play"></i></a>
+        <button onclick="openPaymentModal()" class="hero-btn" style="border:none; cursor:pointer;">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
     </section>
 
     <!-- PREMIUM PLANS SECTION -->
@@ -64,7 +141,7 @@
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">1 MONTH</div>
-                    <div class="plan-price">$35</div>
+                    <div class="plan-price">₹3,500</div>
                     <div class="price-sub">PER MONTH</div>
                     <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
                     
@@ -77,14 +154,14 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <a href="https://t.me/IM_ARCHIT" target="_blank" class="btn-choose-plan">CHOOSE PLAN</a>
+                <button onclick="openPaymentModal('3500')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
             <!-- PLAN 2: 3 MONTHS -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">3 MONTHS</div>
-                    <div class="plan-price">$59</div>
+                    <div class="plan-price">₹5,900</div>
                     <div class="price-sub">EVERY 3 MONTHS</div>
                     <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
                     
@@ -97,14 +174,14 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <a href="https://t.me/IM_ARCHIT" target="_blank" class="btn-choose-plan">CHOOSE PLAN</a>
+                <button onclick="openPaymentModal('5900')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
             <!-- PLAN 3: 6 MONTHS -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">6 MONTHS</div>
-                    <div class="plan-price">$79</div>
+                    <div class="plan-price">₹7,900</div>
                     <div class="price-sub">EVERY 6 MONTHS</div>
                     <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
                     
@@ -117,7 +194,7 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <a href="https://t.me/IM_ARCHIT" target="_blank" class="btn-choose-plan">CHOOSE PLAN</a>
+                <button onclick="openPaymentModal('7900')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
             <!-- PLAN 4: LIFETIME -->
@@ -125,7 +202,7 @@
                 <div class="badge-best-value">BEST VALUE</div>
                 <div>
                     <div class="plan-duration">LIFETIME</div>
-                    <div class="plan-price">$199</div>
+                    <div class="plan-price">₹19,900</div>
                     <div class="price-sub">ONE TIME PAYMENT</div>
                     <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
                     
@@ -140,7 +217,7 @@
                         <li class="highlight-feature"><i class="fa-solid fa-crown"></i> LIFETIME MEMBERSHIP</li>
                     </ul>
                 </div>
-                <a href="https://t.me/IM_ARCHIT" target="_blank" class="btn-choose-plan btn-gold">CHOOSE PLAN</a>
+                <button onclick="openPaymentModal('19900')" class="btn-choose-plan btn-gold" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
         </div>
@@ -249,7 +326,7 @@
                     <i class="fa-solid fa-plus"></i>
                 </div>
                 <div class="faq-answer">
-                    You will receive instant alerts via our VIP Telegram channel directly on your mobile device or desktop.
+                    You will receive instant alerts via our VIP Telegram channel directly on your mobile device or desktop upon payment completion.
                 </div>
             </div>
 
@@ -311,7 +388,60 @@
         </div>
     </footer>
 
+    <!-- PAYMENT MODAL FORM -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-card">
+            <span class="modal-close" onclick="closePaymentModal()">&times;</span>
+            <h3>JOIN PREMIUM MEMBERSHIP</h3>
+            <form action="payment.php" method="POST">
+                <div class="modal-field">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required placeholder="Enter Full Name">
+                </div>
+                <div class="modal-field">
+                    <label>Email Address</label>
+                    <input type="email" name="email" required placeholder="Enter Email Address">
+                </div>
+                <div class="modal-field">
+                    <label>Mobile Number</label>
+                    <input type="tel" name="phone" required placeholder="Enter Mobile Number">
+                </div>
+                <div class="modal-field">
+                    <label>Select Plan</label>
+                    <select name="plan" id="modalPlanSelect" required>
+                        <option value="3500">Starter Plan - ₹3,500 (1 Month)</option>
+                        <option value="5900">Pro Plan - ₹5,900 (3 Months)</option>
+                        <option value="7900">Advanced Plan - ₹7,900 (6 Months)</option>
+                        <option value="19900">VIP Lifetime - ₹19,900 (Lifetime)</option>
+                    </select>
+                </div>
+                <button type="submit" class="modal-btn">PROCEED TO PAY</button>
+            </form>
+        </div>
+    </div>
+
     <!-- JS Link -->
     <script src="script.js"></script>
+    <script>
+        function openPaymentModal(planValue) {
+            var modal = document.getElementById('paymentModal');
+            var select = document.getElementById('modalPlanSelect');
+            if (planValue) {
+                select.value = planValue;
+            }
+            modal.style.display = 'flex';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('paymentModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
