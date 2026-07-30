@@ -115,31 +115,6 @@
             transition: 0.3s;
         }
         .modal-btn:hover { background: #1d4ed8; }
-
-        .direct-upi-btns {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-        .upi-app-btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 6px;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            text-align: center;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: 0.2s;
-        }
-        .upi-app-btn:hover {
-            opacity: 0.9;
-        }
     </style>
 </head>
 <body>
@@ -446,17 +421,6 @@
         <div class="modal-card">
             <span class="modal-close" onclick="closePaymentModal()">&times;</span>
             <h3>JOIN PREMIUM MEMBERSHIP</h3>
-
-            <!-- DIRECT PHONEPE & GPAY BUTTONS -->
-            <div class="direct-upi-btns">
-                <a href="phonepe://pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&cu=INR" class="upi-app-btn" style="background: #5f259f;">
-                    <i class="fa-solid fa-mobile-screen"></i> PhonePe
-                </a>
-                <a href="tez://upi/pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&cu=INR" class="upi-app-btn" style="background: #4285f4;">
-                    <i class="fa-brands fa-google-pay" style="font-size:18px;"></i> Google Pay
-                </a>
-            </div>
-
             <form id="directPaymentForm" onsubmit="handleDirectPayment(event)">
                 <div class="modal-field">
                     <label>Full Name</label>
@@ -479,7 +443,7 @@
                         <option value="199">VIP Lifetime - $199 (Lifetime)</option>
                     </select>
                 </div>
-                <button type="submit" class="modal-btn">PROCEED TO PAY VIA RAZORPAY</button>
+                <button type="submit" class="modal-btn">PROCEED TO PAY</button>
             </form>
         </div>
     </div>
