@@ -3,236 +3,675 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UFX CAPITAL - Payment Gateway</title>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>UFX CAPITAL - Crypto & Forex Option Trader</title>
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts (Orbitron & Rajdhani) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        body {
-            background-color: #0d0f12;
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
-            display: flex;
+        /* Orbitron Font Overrides */
+        h1, h2, h3, h4, 
+        .logo-title, 
+        .plan-price, 
+        .plan-duration, 
+        .price-sub, 
+        .btn-choose-plan, 
+        .btn-join, 
+        .hero-btn, 
+        .badge-best-value, 
+        .section-title {
+            font-family: 'Orbitron', sans-serif !important;
+        }
+
+        .plan-price {
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 0 12px rgba(255, 0, 85, 0.6);
+        }
+
+        .best-value .plan-price {
+            text-shadow: 0 0 12px rgba(255, 187, 0, 0.6);
+        }
+
+        /* Modal Overlay & Form Styling */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+            padding: 15px;
+            box-sizing: border-box;
+            overflow-y: auto;
         }
-
-        .payment-card {
-            background: #161920;
-            border: 1px solid #232733;
+        .modal-card {
+            background: #111827;
+            border: 1px solid #2563eb;
             border-radius: 12px;
             padding: 25px;
-            max-width: 420px;
             width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 440px;
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+            position: relative;
+            font-family: 'Rajdhani', sans-serif;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 22px;
+            color: #9ca3af;
+            cursor: pointer;
+        }
+        .modal-close:hover { color: #ffffff; }
+        .modal-card h3 {
+            font-family: 'Orbitron', sans-serif !important;
             text-align: center;
+            margin-bottom: 18px;
+            color: #60a5fa;
+            font-size: 20px;
         }
-
-        .modal-field {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .modal-field label {
-            display: block;
-            font-size: 12px;
-            margin-bottom: 5px;
-            color: #a0aec0;
-        }
-
+        .modal-field { margin-bottom: 15px; }
+        .modal-field label { display: block; margin-bottom: 5px; font-weight: 600; color: #d1d5db; }
         .modal-field input, .modal-field select {
             width: 100%;
-            padding: 10px;
-            background: #0d0f12;
-            border: 1px solid #232733;
+            padding: 10px 12px;
+            background: #1f2937;
+            border: 1px solid #374151;
             border-radius: 6px;
-            color: #fff;
+            color: #ffffff;
+            font-size: 15px;
             box-sizing: border-box;
             outline: none;
+            font-family: 'Rajdhani', sans-serif;
         }
-
-        .modal-field input:focus {
-            border-color: #ff0055;
+        .modal-field input:focus, .modal-field select:focus {
+            border-color: #2563eb;
         }
-
         .modal-btn {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(45deg, #ff0055, #ff5500);
+            background: #2563eb;
+            color: #ffffff;
             border: none;
             border-radius: 6px;
-            color: white;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 16px;
             cursor: pointer;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif !important;
             transition: 0.3s;
             margin-top: 10px;
         }
+        .modal-btn:hover { background: #1d4ed8; }
 
-        .modal-btn:hover {
-            opacity: 0.9;
-        }
-
-        .wallet-display-container {
-            background: #11141a;
-            border: 1px solid #ff0055;
-            border-radius: 8px;
-            padding: 20px;
+        .payment-methods-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-top: 15px;
         }
-
-        .wallet-box {
-            background: #000;
-            padding: 10px;
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 16px;
-            color: #00ff55;
-            margin: 8px 0;
-            word-break: break-all;
-        }
-
-        .copy-btn {
-            padding: 8px 14px;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 600;
+        .pay-method-btn {
+            padding: 12px;
+            border-radius: 8px;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
             cursor: pointer;
-            transition: 0.2s;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+            background: #1f2937;
         }
-
-        .copy-btn:hover {
+        .pay-method-btn:hover {
             transform: translateY(-2px);
-            filter: brightness(1.1);
+            border-color: #2563eb;
+        }
+        .pay-phonepe { border-color: #5f259f; background: rgba(95, 37, 159, 0.2); }
+        .pay-gpay { border-color: #4285f4; background: rgba(66, 133, 244, 0.2); }
+        .pay-crypto { border-color: #f0b90b; background: rgba(240, 185, 11, 0.2); grid-column: span 2; }
+
+        /* UPI / Payment Details Box */
+        .upi-details-box {
+            background: #1f2937;
+            border: 1px dashed #60a5fa;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .upi-id-badge {
+            background: #111827;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #38bdf8;
+            font-size: 16px;
+            letter-spacing: 1px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #374151;
+        }
+        .copy-btn {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 5px;
         }
     </style>
 </head>
 <body>
 
-<div class="payment-card">
-
-    <!-- STEP 1: USER DETAILS FORM -->
-    <div id="userInfoStep">
-        <h3 style="font-family: 'Orbitron', sans-serif; color: #ff0055; margin-top:0;">UFX CAPITAL</h3>
-        <p style="font-size: 12px; color:#a0aec0; margin-bottom: 20px;">Enter your details to proceed with payment</p>
-        
-        <div class="modal-field">
-            <label>Full Name</label>
-            <input type="text" id="cust_name" placeholder="Enter Full Name">
-        </div>
-        <div class="modal-field">
-            <label>Email Address</label>
-            <input type="email" id="cust_email" placeholder="Enter Email Address">
-        </div>
-        <div class="modal-field">
-            <label>Phone Number</label>
-            <input type="text" id="cust_phone" placeholder="Enter Phone Number">
-        </div>
-        <div class="modal-field">
-            <label>Select Plan / Package</label>
-            <select id="cust_plan">
-                <option value="Basic Plan - ₹1000">Basic Plan - ₹1,000</option>
-                <option value="Pro Plan - ₹5000">Pro Plan - ₹5,000</option>
-                <option value="VIP Plan - ₹10000">VIP Plan - ₹10,000</option>
-            </select>
-        </div>
-        <button class="modal-btn" onclick="proceedToPayment()">PROCEED TO PAY</button>
-    </div>
-
-    <!-- STEP 2: DISPLAY DIRECT PHONEPE / GPAY & UTR FORM -->
-    <div id="upiDisplayBox" class="wallet-display-container" style="display: none;">
-        <i class="fa-solid fa-qrcode" style="font-size: 36px; color: #00ff55; margin-bottom: 8px;"></i>
-        <h4 style="color:#ffffff; margin: 0 0 10px 0; font-family:'Orbitron', sans-serif; font-size:16px;">Pay via PhonePe / GPay</h4>
-        <p style="color:#a0aec0; font-size:12px; margin-bottom:12px;">Select app to pay or copy UPI ID & enter 12-Digit UTR Number:</p>
-        
-        <div style="font-weight:bold; color:#ff0055; font-size:13px;">UFX Capital UPI ID:</div>
-        <div class="wallet-box" id="upiIdText">9649638812@ybl</div>
-        
-        <!-- DIRECT APP BUTTONS -->
-        <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-            <a href="phonepe://pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&cu=INR" class="copy-btn" style="background:#5f259f; text-decoration:none;">
-                <i class="fa-solid fa-mobile-screen"></i> PhonePe
-            </a>
-            <a href="tez://upi/pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&cu=INR" class="copy-btn" style="background:#4285f4; text-decoration:none;">
-                <i class="fa-brands fa-google-pay" style="font-size:16px;"></i> Google Pay
-            </a>
-            <button class="copy-btn" onclick="copyUpiId()" style="background:#333;"><i class="fa-solid fa-copy"></i> Copy UPI</button>
-        </div>
-        <div id="upiCopyMsg" style="color:#00ff55; font-size:11px; margin-top:-5px; margin-bottom:10px; display:none;">UPI ID Copied!</div>
-
-        <!-- SUBMIT UTR FORM -->
-        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="submitUtrForm(event)" style="border-top:1px dashed rgba(255,0,85,0.3); padding-top:15px; margin-top:10px;">
-            <input type="hidden" name="access_key" value="64e790b0-5df7-46e8-a8f4-29328ef00926">
-            <input type="hidden" name="subject" value="NEW UPI PAYMENT: UTR Verification Submitted">
-            <input type="hidden" name="from_name" value="UFX PhonePe/GPay Payment">
-            <input type="hidden" name="Payment_Method" value="PhonePe / GPay UPI">
-            
-            <input type="hidden" name="Customer_Name" id="final_upi_name">
-            <input type="hidden" name="Customer_Email" id="final_upi_email">
-            <input type="hidden" name="Customer_Phone" id="final_upi_phone">
-            <input type="hidden" name="Selected_Plan" id="final_upi_plan">
-            
-            <div class="modal-field">
-                <label style="color:#ff0055; text-align:left; font-weight:bold;">Enter 12-Digit UTR / Transaction Ref No:</label>
-                <input type="text" name="UTR_Ref_Number" id="utr_input" required placeholder="e.g. 402819284910">
+    <!-- NAVBAR -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-text-group">
+                <div class="logo-title">UFX CAPITAL</div>
+                <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
             </div>
-            <button type="submit" id="utrBtn" class="modal-btn">SUBMIT UTR FOR VERIFICATION</button>
-        </form>
+        </div>
+        <nav>
+            <a href="#home" class="active">HOME</a>
+            <a href="#plans">PLANS</a>
+            <a href="#features">FEATURES</a>
+            <a href="#about">ABOUT</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">CONTACT</a>
+        </nav>
+        <button onclick="openPaymentModal()" class="btn-join" style="border:none; cursor:pointer;"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="welcome-tag">
+            <span class="line"></span>
+            <span>WELCOME TO</span>
+            <span class="line"></span>
+        </div>
+        
+        <h1>UFX CAPITAL</h1>
+        
+        <div class="hero-subtext">CRYPTO & FOREX OPTION TRADER</div>
+        
+        <p class="hero-bullets">High Probability Trading Signals • Smart Money Concepts<br>Discipline • Strategy • Consistency</p>
+        
+        <button onclick="openPaymentModal()" class="hero-btn" style="border:none; cursor:pointer;">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
+    </section>
+
+    <!-- PREMIUM PLANS SECTION -->
+    <section class="plans-section" id="plans">
+        <div class="section-header">
+            <div class="section-title">
+                <i class="fa-solid fa-gem"></i> PREMIUM PLANS <i class="fa-solid fa-gem"></i>
+            </div>
+        </div>
+
+        <div class="plans-grid">
+            
+            <!-- PLAN 1: 1 MONTH -->
+            <div class="plan-card">
+                <div>
+                    <div class="plan-duration">1 MONTH</div>
+                    <div class="plan-price">$35</div>
+                    <div class="price-sub">PER MONTH</div>
+                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
+                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
+                    </ul>
+                </div>
+                <button onclick="openPaymentModal('35')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
+            </div>
+
+            <!-- PLAN 2: 3 MONTHS -->
+            <div class="plan-card">
+                <div>
+                    <div class="plan-duration">3 MONTHS</div>
+                    <div class="plan-price">$59</div>
+                    <div class="price-sub">EVERY 3 MONTHS</div>
+                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
+                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
+                    </ul>
+                </div>
+                <button onclick="openPaymentModal('59')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
+            </div>
+
+            <!-- PLAN 3: 6 MONTHS -->
+            <div class="plan-card">
+                <div>
+                    <div class="plan-duration">6 MONTHS</div>
+                    <div class="plan-price">$79</div>
+                    <div class="price-sub">EVERY 6 MONTHS</div>
+                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
+                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
+                    </ul>
+                </div>
+                <button onclick="openPaymentModal('79')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
+            </div>
+
+            <!-- PLAN 4: LIFETIME -->
+            <div class="plan-card best-value">
+                <div class="badge-best-value">BEST VALUE</div>
+                <div>
+                    <div class="plan-duration">LIFETIME</div>
+                    <div class="plan-price">$199</div>
+                    <div class="price-sub">ONE TIME PAYMENT</div>
+                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
+                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
+                        <li class="highlight-feature"><i class="fa-solid fa-star"></i> ONE-ON-ONE MENTORSHIP</li>
+                        <li class="highlight-feature"><i class="fa-solid fa-crown"></i> LIFETIME MEMBERSHIP</li>
+                    </ul>
+                </div>
+                <button onclick="openPaymentModal('199')" class="btn-choose-plan btn-gold" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE UFX CAPITAL -->
+    <section class="features-section" id="features">
+        <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-gem"></i> WHY CHOOSE UFX CAPITAL? <i class="fa-solid fa-gem"></i></div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-box">
+                <i class="fa-solid fa-crosshairs"></i>
+                <h4>High Probability SMC-Based Signals</h4>
+            </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-chart-line"></i>
+                <h4>Live Entry, SL & TP Updates</h4>
+            </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-chart-pie"></i>
+                <h4>Trade Breakdown (Chart + Logic)</h4>
+            </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-coins"></i>
+                <h4>Weekly Gold (XAUUSD) Outlook</h4>
+            </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-brain"></i>
+                <h4>Mindset & Risk Management</h4>
+            </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-users"></i>
+                <h4>Premium Community Access</h4>
+            </div>
+            <div class="feature-box">
+                <i class="fa-solid fa-headset"></i>
+                <h4>24/7 Priority Support</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <div class="stats-section" id="about">
+        <div class="stat-item">
+            <i class="fa-solid fa-users"></i>
+            <div>
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Active Members</div>
+            </div>
+        </div>
+        <div class="stat-item">
+            <i class="fa-solid fa-bullseye"></i>
+            <div>
+                <div class="stat-number">80%+</div>
+                <div class="stat-label">Win Rate Signals</div>
+            </div>
+        </div>
+        <div class="stat-item">
+            <i class="fa-solid fa-chart-simple"></i>
+            <div>
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">Signals Delivered</div>
+            </div>
+        </div>
+        <div class="stat-item">
+            <i class="fa-solid fa-trophy"></i>
+            <div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+        </div>
     </div>
 
-</div>
+    <!-- FAQ SECTION -->
+    <section class="faq-section" id="faq">
+        <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-gem"></i> FREQUENTLY ASKED QUESTIONS <i class="fa-solid fa-gem"></i></div>
+        </div>
 
-<script>
-    function proceedToPayment() {
-        const name = document.getElementById('cust_name').value.trim();
-        const email = document.getElementById('cust_email').value.trim();
-        const phone = document.getElementById('cust_phone').value.trim();
-        const plan = document.getElementById('cust_plan').value;
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>What type of signals do you provide?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    We provide high-probability Crypto & Forex Option signals based on Smart Money Concepts (SMC) with complete Entry, Take Profit, and Stop Loss levels.
+                </div>
+            </div>
 
-        if(!name || !email || !phone) {
-            alert('Please fill all the details before proceeding.');
-            return;
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>What is the risk-reward ratio?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    All our signals feature a minimum Risk to Reward (RR) ratio of 1:4 for optimal capital growth and risk protection.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>How will I receive the signals?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    You will receive instant alerts via our VIP Telegram channel directly on your mobile device or desktop upon payment completion.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>Can I cancel my subscription anytime?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, you can manage or cancel your subscription plan whenever you choose with no hidden fees.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>Is this suitable for beginners?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes! We provide complete strategy PDFs, risk management guidance, and 24/7 support to help beginners start smoothly.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span>Do you provide refund?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-answer">
+                    Please refer to our terms or reach out to our 24/7 Telegram support for plan adjustment inquiries.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo-title">UFX CAPITAL</div>
+                <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
+                <div class="footer-gem"><i class="fa-solid fa-gem"></i></div>
+            </div>
+
+            <div class="footer-mission">
+                <p>Our mission is to empower traders with quality setups, strong risk management and a winning mindset.</p>
+                <p class="slogan">Stay disciplined. Stick to plan.<br>Trade smart. Grow consistently.</p>
+            </div>
+
+            <div class="footer-contact">
+                <h5>GET IN TOUCH</h5>
+                <p><i class="fa-brands fa-telegram"></i> Telegram: @IM_ARCHIT</p>
+                <p><i class="fa-solid fa-phone"></i> 9649638812</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 UFX CAPITAL. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- DYNAMIC PAYMENT MODAL FORM -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-card">
+            <span class="modal-close" onclick="closePaymentModal()">&times;</span>
+            <h3 id="modalTitle">JOIN PREMIUM MEMBERSHIP</h3>
+
+            <!-- FORM SENDS DIRECT EMAIL TO YOU VIA FORMSPREE -->
+            <!-- AAPKO AAPNA FORMSPREE LINK YAHAN REPLACE KARNA HAI -->
+            <form id="paymentForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" onsubmit="handleFormSubmit(event)">
+                
+                <!-- STEP 1: USER DETAILS -->
+                <div id="step1">
+                    <div class="modal-field">
+                        <label>Full Name</label>
+                        <input type="text" name="Full Name" id="cust_name" required placeholder="Enter Full Name">
+                    </div>
+                    <div class="modal-field">
+                        <label>Email Address</label>
+                        <input type="email" name="Email" id="cust_email" required placeholder="Enter Email Address">
+                    </div>
+                    <div class="modal-field">
+                        <label>Mobile / WhatsApp Number</label>
+                        <input type="tel" name="Phone Number" id="cust_phone" required placeholder="Enter Mobile Number">
+                    </div>
+                    <div class="modal-field">
+                        <label>Select Plan</label>
+                        <select name="Selected Plan" id="modalPlanSelect" required onchange="updatePayAmount()">
+                            <option value="35">1 Month Plan - $35 (₹3,000)</option>
+                            <option value="59">3 Months Plan - $59 (₹5,000)</option>
+                            <option value="79">6 Months Plan - $79 (₹6,800)</option>
+                            <option value="199">VIP Lifetime Plan - $199 (₹17,000)</option>
+                        </select>
+                    </div>
+
+                    <label style="display:block; margin-bottom: 8px; font-weight: 600; color: #d1d5db;">Select Payment Method:</label>
+                    
+                    <div class="payment-methods-grid">
+                        <div class="pay-method-btn pay-phonepe" onclick="proceedToPayment('PhonePe')">
+                            <i class="fa-solid fa-mobile-screen"></i> PhonePe
+                        </div>
+                        <div class="pay-method-btn pay-gpay" onclick="proceedToPayment('Google Pay')">
+                            <i class="fa-brands fa-google-pay" style="font-size: 18px;"></i> Google Pay
+                        </div>
+                        <div class="pay-method-btn pay-crypto" onclick="proceedToPayment('Crypto USDT')">
+                            <i class="fa-brands fa-bitcoin"></i> Crypto (USDT TRC20 / BEP20)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: PAYMENT & UTR SUBMISSION -->
+                <div id="step2" style="display: none;">
+                    
+                    <!-- HIDDEN INPUTS FOR FORM EMAIL SUBMISSION -->
+                    <input type="hidden" name="Payment Method" id="pay_method_input">
+                    <input type="hidden" name="Amount Payable" id="pay_amount_input">
+
+                    <div class="upi-details-box" id="upiDetailsBox">
+                        <p style="margin: 0; color: #9ca3af; font-size: 14px;">Payable Amount: <b id="displayAmount" style="color:#10b981; font-size: 18px;">₹3,000</b></p>
+                        
+                        <p style="margin: 10px 0 2px 0; color: #d1d5db;">Send Payment to UPI ID:</p>
+                        <div class="upi-id-badge">
+                            <span id="upiIdText">9649638812@ybl</span>
+                            <button type="button" class="copy-btn" onclick="copyUPI()">Copy</button>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <a id="directAppBtn" href="#" class="btn-choose-plan" style="display:inline-block; text-decoration:none; padding: 8px 15px; font-size: 13px;">Open App Direct</a>
+                        </div>
+                    </div>
+
+                    <div class="upi-details-box" id="cryptoDetailsBox" style="display: none;">
+                        <p style="margin: 0; color: #9ca3af; font-size: 14px;">Payable USDT: <b id="displayCryptoAmount" style="color:#f0b90b; font-size: 18px;">35 USDT</b></p>
+                        
+                        <p style="margin: 10px 0 2px 0; color: #d1d5db;">USDT Address (TRC20):</p>
+                        <div class="upi-id-badge" style="font-size: 12px; word-break: break-all;">
+                            <span id="cryptoAddrText">TYourCryptoWalletAddressHere</span>
+                            <button type="button" class="copy-btn" onclick="copyCrypto()">Copy</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-field">
+                        <label id="utrLabel">Enter UTR / Transaction Reference ID</label>
+                        <input type="text" name="UTR / Transaction ID" id="utr_number" required placeholder="12 Digit UTR / TXID Number">
+                    </div>
+
+                    <button type="submit" class="modal-btn">SUBMIT PAYMENT PROOF</button>
+                    <button type="button" onclick="backToStep1()" style="background:none; border:none; color:#9ca3af; text-decoration:underline; width:100%; margin-top:10px; cursor:pointer;">&larr; Change Details / Plan</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- JS Link & Logic Script -->
+    <script src="script.js"></script>
+    <script>
+        var selectedMethod = "";
+
+        function openPaymentModal(planValue) {
+            var modal = document.getElementById('paymentModal');
+            var select = document.getElementById('modalPlanSelect');
+            if (planValue) {
+                select.value = planValue;
+            }
+            backToStep1();
+            modal.style.display = 'flex';
         }
 
-        // Fill data into hidden inputs
-        document.getElementById('final_upi_name').value = name;
-        document.getElementById('final_upi_email').value = email;
-        document.getElementById('final_upi_phone').value = phone;
-        document.getElementById('final_upi_plan').value = plan;
-
-        // Hide user info step and show payment options
-        document.getElementById('userInfoStep').style.display = 'none';
-        document.getElementById('upiDisplayBox').style.display = 'block';
-    }
-
-    function copyUpiId() {
-        const upiText = document.getElementById('upiIdText').innerText;
-        navigator.clipboard.writeText(upiText).then(() => {
-            const msg = document.getElementById('upiCopyMsg');
-            msg.style.display = 'block';
-            setTimeout(() => { msg.style.display = 'none'; }, 2500);
-        });
-    }
-
-    function submitUtrForm(event) {
-        const utr = document.getElementById('utr_input').value.trim();
-        if(!utr) {
-            event.preventDefault();
-            alert('Please enter a valid 12-Digit UTR number.');
-            return false;
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
         }
-        document.getElementById('utrBtn').innerText = "SUBMITTING...";
-    }
-</script>
 
+        window.onclick = function(event) {
+            var modal = document.getElementById('paymentModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function proceedToPayment(method) {
+            var name = document.getElementById('cust_name').value.trim();
+            var email = document.getElementById('cust_email').value.trim();
+            var phone = document.getElementById('cust_phone').value.trim();
+
+            if (!name || !email || !phone) {
+                alert('Kripya pehle saari personal details fill karein!');
+                return;
+            }
+
+            selectedMethod = method;
+            document.getElementById('pay_method_input').value = method;
+            
+            var plan = document.getElementById('modalPlanSelect').value;
+            var inrAmount = "3,000";
+            var usdAmount = plan;
+
+            if (plan == "35") inrAmount = "3,000";
+            if (plan == "59") inrAmount = "5,000";
+            if (plan == "79") inrAmount = "6,800";
+            if (plan == "199") inrAmount = "17,000";
+
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+
+            if (method === 'PhonePe' || method === 'Google Pay') {
+                document.getElementById('modalTitle').innerText = "PAY VIA " + method.toUpperCase();
+                document.getElementById('upiDetailsBox').style.display = 'block';
+                document.getElementById('cryptoDetailsBox').style.display = 'none';
+                document.getElementById('displayAmount').innerText = "₹" + inrAmount;
+                document.getElementById('pay_amount_input').value = "₹" + inrAmount + " (" + usdAmount + "$)";
+                document.getElementById('utrLabel').innerText = "Enter 12-Digit UTR / Transaction ID";
+
+                var upiUri = "upi://pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&am=" + inrAmount.replace(',', '') + "&cu=INR";
+                if(method === 'PhonePe') {
+                    document.getElementById('directAppBtn').href = "phonepe://pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&am=" + inrAmount.replace(',', '') + "&cu=INR";
+                } else {
+                    document.getElementById('directAppBtn').href = "tez://upi/pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&am=" + inrAmount.replace(',', '') + "&cu=INR";
+                }
+            } else if (method === 'Crypto USDT') {
+                document.getElementById('modalTitle').innerText = "PAY VIA CRYPTO (USDT)";
+                document.getElementById('upiDetailsBox').style.display = 'none';
+                document.getElementById('cryptoDetailsBox').style.display = 'block';
+                document.getElementById('displayCryptoAmount').innerText = usdAmount + " USDT";
+                document.getElementById('pay_amount_input').value = usdAmount + " USDT";
+                document.getElementById('utrLabel').innerText = "Enter Crypto TXID / Hash";
+            }
+        }
+
+        function backToStep1() {
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('modalTitle').innerText = "JOIN PREMIUM MEMBERSHIP";
+        }
+
+        function copyUPI() {
+            var text = document.getElementById('upiIdText').innerText;
+            navigator.clipboard.writeText(text);
+            alert("UPI ID Copied: " + text);
+        }
+
+        function copyCrypto() {
+            var text = document.getElementById('cryptoAddrText').innerText;
+            navigator.clipboard.writeText(text);
+            alert("Crypto Address Copied: " + text);
+        }
+
+        function handleFormSubmit(e) {
+            // Formspree automated submission handles sending emails
+            alert("Payment details submitted successfully! We will verify your UTR and activate your VIP membership shortly.");
+        }
+    </script>
 </body>
 </html>
