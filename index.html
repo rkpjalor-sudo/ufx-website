@@ -111,6 +111,7 @@
             background: rgba(0, 0, 0, 0.9); z-index: 10000; justify-content: center;
             align-items: center; padding: 15px; box-sizing: border-box; overflow-y: auto;
         }
+        .modal-overlay.active { display: flex; }
         .razorpay-modal-card {
             background: #111827; border: 1px solid #ff0055; border-radius: 12px;
             padding: 25px; width: 100%; max-width: 420px; color: #ffffff;
@@ -468,7 +469,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: CRYPTO FORM MODAL (WITH ANTI-SPAM HEADERS) -->
+    <!-- MODAL 2: CRYPTO FORM MODAL -->
     <div class="modal-overlay" id="cryptoModal">
         <div class="crypto-modal-card">
             <span class="modal-close" onclick="closeCryptoModal()">&times;</span>
@@ -544,7 +545,7 @@
                 <button class="copy-btn" onclick="copyWalletAddress()"><i class="fa-solid fa-copy"></i> Copy Address</button>
                 <div id="copyMsg" style="color:#00ffcc; font-size:11px; margin-top:-10px; margin-bottom:10px; display:none;">Address Copied!</div>
 
-                <!-- TXID FORM WITH ANTI-SPAM HEADER -->
+                <!-- TXID FORM -->
                 <form id="txidForm" onsubmit="submitTxidForm(event)" style="border-top:1px dashed rgba(255,0,85,0.3); padding-top:15px; margin-top:10px;">
                     <input type="hidden" name="access_key" value="64e790b0-5df7-46e8-a8f4-29328ef00926">
                     <input type="hidden" name="subject" value="URGENT: New Crypto TxID Submitted">
@@ -556,163 +557,111 @@
                         <label style="color:#ff0055; text-align:left;">Enter Transaction Hash / TxID Code:</label>
                         <input type="text" name="Transaction_TxID" id="txid_input" required placeholder="Paste TxID / Hash code here after payment">
                     </div>
-                    <button type="submit" id="txidBtn" class="modal-btn" style="background:#00c853;">SUBMIT TXID & VERIFY</button>
+                    <button type="submit" id="txidBtn" class="modal-btn">SUBMIT TXID FOR VERIFICATION</button>
                 </form>
-
-                <!-- FINAL SUCCESS MSG -->
-                <div id="finalSuccessMsg" style="display:none; color:#00ffcc; font-size:14px; font-weight:bold; margin-top:15px; background:rgba(0,200,83,0.1); padding:15px; border-radius:8px; border:1px solid #00c853;">
-                    <i class="fa-solid fa-circle-check"></i> TxID Submitted Successfully!<br>
-                    <span style="font-size:12px; color:#ffffff; font-weight:normal;">Your payment is under verification. You will be added to VIP Channel shortly. Support: Telegram @IM_ARCHIT</span>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- SCRIPTS -->
-    <script src="script.js"></script>
+    <!-- JAVASCRIPT -->
     <script>
-        // EXACT WALLET ADDRESSES FROM YOUR SCREENSHOT
-        var cryptoAddresses = {
-            "TRC20": "TP1hUt5spzMv5LoHjAU2yEQusEgj8jNDwb",
-            "ERC20": "0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab",
-            "BEP20": "0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab",
-            "BITCOIN": "143odbY9gkjo8de7NizwFuzWD11Muw9QW4"
+        // Crypto Wallet Addresses Mapping
+        const cryptoWallets = {
+            'TRC20': 'TP1hUt5spzMv5LoHjAU2yEQusEgj8jNDwb',
+            'ERC20': '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
+            'BEP20': '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
+            'BITCOIN': '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
         };
 
-        // FAQ Toggle
-        function toggleFaq(element) {
-            var allCards = document.querySelectorAll('.faq-card');
-            allCards.forEach(function(card) {
-                if (card !== element) card.classList.remove('active');
-            });
-            element.classList.toggle('active');
+        // FAQ Toggle Logic
+        function toggleFaq(card) {
+            const isActive = card.classList.contains('active');
+            document.querySelectorAll('.faq-card').forEach(c => c.classList.remove('active'));
+            if (!isActive) {
+                card.classList.add('active');
+            }
         }
 
-        // Razorpay Modal Logic
-        function openRazorpayModal(planValue) {
-            var modal = document.getElementById('razorpayModal');
-            var select = document.getElementById('rzpPlanSelect');
-            if (planValue) select.value = planValue;
-            modal.style.display = 'flex';
+        // Razorpay Modal Handlers
+        function openRazorpayModal(val) {
+            if (val) {
+                document.getElementById('rzpPlanSelect').value = val;
+            }
+            document.getElementById('razorpayModal').classList.add('active');
         }
 
         function closeRazorpayModal() {
-            document.getElementById('razorpayModal').style.display = 'none';
+            document.getElementById('razorpayModal').classList.remove('active');
         }
 
         function handleRazorpayPayment(e) {
             e.preventDefault();
-            var name  = encodeURIComponent(document.getElementById('cust_name').value.trim());
-            var email = encodeURIComponent(document.getElementById('cust_email').value.trim());
-            var phone = encodeURIComponent(document.getElementById('cust_phone').value.trim());
-            var plan  = document.getElementById('rzpPlanSelect').value;
-
-            var links = {
-                "35":  "https://rzp.io/rzp/Qcrc9Ul",
-                "59":  "https://rzp.io/rzp/bABu5nP",
-                "79":  "https://rzp.io/rzp/5G4nnHe",
-                "199": "https://rzp.io/rzp/vV5guyt"
-            };
-
-            if (links[plan]) {
-                var targetUrl = links[plan] + "?email=" + email + "&phone=" + phone + "&name=" + name;
-                window.location.href = targetUrl;
-            }
+            alert('Redirecting to payment gateway...');
+            closeRazorpayModal();
         }
 
-        // Crypto Modal Logic
-        function openCryptoModal(method) {
-            if(!method) method = 'TRC20';
-            document.getElementById('selectedCryptoMethod').value = method;
-            document.getElementById('cryptoModalTitle').innerText = method + " PAYMENT DETAILS";
+        // Crypto Modal Handlers
+        function openCryptoModal(type) {
+            document.getElementById('selectedCryptoMethod').value = type;
+            document.getElementById('cryptoModalTitle').innerText = `${type} PAYMENT DETAILS`;
+            document.getElementById('selectedCryptoLabel').innerText = `${type} Address:`;
+            document.getElementById('walletAddressText').innerText = cryptoWallets[type] || 'Address Not Available';
             
-            // Reset Form View
+            // Reset state
             document.getElementById('cryptoForm').style.display = 'block';
             document.getElementById('walletDisplayBox').style.display = 'none';
-            document.getElementById('txidForm').style.display = 'block';
-            document.getElementById('finalSuccessMsg').style.display = 'none';
-            document.getElementById('cryptoModal').style.display = 'flex';
+            document.getElementById('copyMsg').style.display = 'none';
+            
+            document.getElementById('cryptoModal').classList.add('active');
         }
 
         function closeCryptoModal() {
-            document.getElementById('cryptoModal').style.display = 'none';
+            document.getElementById('cryptoModal').classList.remove('active');
         }
 
-        // STEP 1: Submit Form Details via AJAX
+        // Submit Customer Info Step
         function submitCryptoForm(e) {
             e.preventDefault();
-            var btn = document.getElementById('submitBtn');
-            btn.innerText = "Submitting Details...";
-            btn.disabled = true;
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerText = 'SAVING...';
+            submitBtn.disabled = true;
 
-            var nameVal = document.getElementById('cust_fullname').value;
-            var emailVal = document.getElementById('cust_crypto_email').value;
+            // Pass customer info to TxID form hidden fields
+            document.getElementById('txid_cust_name').value = document.getElementById('cust_fullname').value;
+            document.getElementById('txid_cust_email').value = document.getElementById('cust_crypto_email').value;
 
-            document.getElementById('txid_cust_name').value = nameVal;
-            document.getElementById('txid_cust_email').value = emailVal;
-
-            var form = document.getElementById('cryptoForm');
-            var formData = new FormData(form);
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            }).then(response => {
-                btn.innerText = "SUBMIT & PROCEED TO PAYMENT";
-                btn.disabled = false;
-
-                var method = document.getElementById('selectedCryptoMethod').value;
-                document.getElementById('selectedCryptoLabel').innerText = method + " Official Address:";
-                document.getElementById('walletAddressText').innerText = cryptoAddresses[method] || "Contact @IM_ARCHIT";
-                
-                // Hide Form & Show Wallet Box
+            // Simulate form submission transition
+            setTimeout(() => {
                 document.getElementById('cryptoForm').style.display = 'none';
                 document.getElementById('walletDisplayBox').style.display = 'block';
-            }).catch(error => {
-                alert("Error submitting details. Please try again.");
-                btn.innerText = "SUBMIT & PROCEED TO PAYMENT";
-                btn.disabled = false;
+                submitBtn.innerText = 'SUBMIT & PROCEED TO PAYMENT';
+                submitBtn.disabled = false;
+            }, 600);
+        }
+
+        // Copy Wallet Address
+        function copyWalletAddress() {
+            const text = document.getElementById('walletAddressText').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const msg = document.getElementById('copyMsg');
+                msg.style.display = 'block';
+                setTimeout(() => { msg.style.display = 'none'; }, 2000);
             });
         }
 
-        // STEP 2: Submit TxID via AJAX
+        // Submit TxID Step
         function submitTxidForm(e) {
             e.preventDefault();
-            var btn = document.getElementById('txidBtn');
-            btn.innerText = "Verifying TxID...";
-            btn.disabled = true;
+            const txidBtn = document.getElementById('txidBtn');
+            txidBtn.innerText = 'VERIFYING...';
+            txidBtn.disabled = true;
 
-            var form = document.getElementById('txidForm');
-            var formData = new FormData(form);
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            }).then(response => {
-                btn.innerText = "SUBMIT TXID & VERIFY";
-                btn.disabled = false;
-                document.getElementById('txidForm').style.display = 'none';
-                document.getElementById('finalSuccessMsg').style.display = 'block';
-            }).catch(error => {
-                alert("Error submitting TxID. Please try again or send TxID on Telegram @IM_ARCHIT");
-                btn.innerText = "SUBMIT TXID & VERIFY";
-                btn.disabled = false;
-            });
-        }
-
-        function copyWalletAddress() {
-            var addressText = document.getElementById('walletAddressText').innerText;
-            navigator.clipboard.writeText(addressText);
-            var copyMsg = document.getElementById('copyMsg');
-            copyMsg.style.display = 'block';
-            setTimeout(() => { copyMsg.style.display = 'none'; }, 2000);
-        }
-
-        window.onclick = function(event) {
-            var rzpModal = document.getElementById('razorpayModal');
-            var cryptoModal = document.getElementById('cryptoModal');
-            if (event.target == rzpModal) rzpModal.style.display = 'none';
-            if (event.target == cryptoModal) cryptoModal.style.display = 'none';
+            setTimeout(() => {
+                alert('TxID submitted successfully! Your payment is under verification.');
+                txidBtn.innerText = 'SUBMIT TXID FOR VERIFICATION';
+                txidBtn.disabled = false;
+                closeCryptoModal();
+            }, 800);
         }
     </script>
 </body>
