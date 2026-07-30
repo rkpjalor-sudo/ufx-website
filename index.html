@@ -14,14 +14,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* Base Reset & Theme Variables */
         :root {
-            --primary-pink: #ff0055;
-            --primary-glow: rgba(255, 0, 85, 0.5);
+            --primary-red: #ff0033;
+            --primary-glow: rgba(255, 0, 51, 0.4);
             --gold: #fbbf24;
-            --bg-dark: #0a0508;
-            --card-bg: #120910;
-            --border-color: #2a1220;
+            --bg-dark: #050203;
+            --card-bg: #0c0507;
+            --border-color: #2b0b14;
         }
 
         * {
@@ -54,13 +53,13 @@
             font-family: 'Orbitron', sans-serif !important;
         }
 
-        /* Navbar */
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 18px 5%;
-            background: rgba(10, 5, 8, 0.95);
+            background: rgba(5, 2, 3, 0.95);
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
@@ -77,27 +76,27 @@
 
         .logo-subtitle {
             font-size: 10px;
-            color: var(--primary-pink);
+            color: var(--primary-red);
             letter-spacing: 1.5px;
             font-weight: 700;
         }
 
         nav {
             display: flex;
-            gap: 20px;
+            gap: 22px;
         }
 
         nav a {
             color: #d1d5db;
             text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
-            letter-spacing: 1px;
+            font-size: 13px;
+            letter-spacing: 1.5px;
             transition: 0.3s;
         }
 
         nav a:hover, nav a.active {
-            color: var(--primary-pink);
+            color: var(--primary-red);
         }
 
         .btn-join {
@@ -106,21 +105,23 @@
             padding: 8px 18px;
             border-radius: 6px;
             font-weight: 700;
-            border: 2px solid var(--primary-pink);
+            font-size: 12px;
+            border: 1.5px solid var(--primary-red);
             box-shadow: 0 0 10px var(--primary-glow);
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .btn-join:hover {
-            background: var(--primary-pink);
-            box-shadow: 0 0 20px var(--primary-pink);
+            background: var(--primary-red);
+            box-shadow: 0 0 20px var(--primary-red);
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             text-align: center;
-            padding: 90px 20px;
-            background: radial-gradient(circle at center, #250817 0%, var(--bg-dark) 70%);
+            padding: 80px 20px 60px 20px;
+            background: radial-gradient(circle at center, #20040a 0%, var(--bg-dark) 70%);
         }
 
         .welcome-tag {
@@ -132,81 +133,89 @@
             font-weight: 600;
             letter-spacing: 2px;
             margin-bottom: 15px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .welcome-tag .line {
             width: 30px;
             height: 2px;
-            background: var(--primary-pink);
+            background: var(--primary-red);
         }
 
         .hero h1 {
-            font-size: 56px;
+            font-size: 52px;
             font-weight: 900;
             margin-bottom: 5px;
             color: #ffffff;
-            text-shadow: 0 0 20px var(--primary-glow);
+            text-shadow: 0 0 15px var(--primary-glow);
         }
 
         .hero-subtext {
-            font-size: 18px;
-            color: var(--primary-pink);
+            font-size: 17px;
+            color: var(--primary-red);
             letter-spacing: 3px;
             margin-bottom: 25px;
             font-weight: 700;
+            background: rgba(255, 0, 51, 0.1);
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 0, 51, 0.3);
         }
 
         .hero-bullets {
-            font-size: 16px;
+            font-size: 15px;
             color: #9ca3af;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .hero-btn {
             background: transparent;
             color: #fff;
             padding: 12px 30px;
-            font-size: 15px;
+            font-size: 14px;
             border-radius: 6px;
-            border: 2px solid var(--primary-pink);
+            border: 1.5px solid var(--primary-red);
             font-weight: 700;
             transition: 0.3s;
             box-shadow: 0 0 15px var(--primary-glow);
+            cursor: pointer;
         }
 
         .hero-btn:hover {
-            background: var(--primary-pink);
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px var(--primary-pink);
+            background: var(--primary-red);
+            box-shadow: 0 0 25px var(--primary-red);
         }
 
-        /* Section Header */
+        /* Section Title */
         .section-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
 
         .section-title {
-            font-size: 24px;
+            font-size: 22px;
             color: #ffffff;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .section-title i {
-            color: var(--primary-pink);
-            margin: 0 8px;
+            color: var(--primary-red);
+            font-size: 16px;
         }
 
         /* Plans Section */
         .plans-section {
-            padding: 60px 5%;
+            padding: 50px 5%;
         }
 
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
@@ -214,20 +223,20 @@
 
         .plan-card {
             background: var(--card-bg);
-            border: 1px solid var(--primary-pink);
+            border: 1px solid var(--primary-red);
             border-radius: 10px;
             padding: 25px 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            box-shadow: 0 0 15px rgba(255, 0, 85, 0.15);
+            box-shadow: 0 0 15px rgba(255, 0, 51, 0.1);
             transition: 0.3s;
         }
 
         .plan-card:hover {
             box-shadow: 0 0 25px var(--primary-glow);
-            transform: translateY(-5px);
+            transform: translateY(-4px);
         }
 
         .plan-duration {
@@ -238,9 +247,9 @@
         }
 
         .plan-price {
-            font-size: 46px;
+            font-size: 48px;
             text-align: center;
-            color: var(--primary-pink);
+            color: var(--primary-red);
             font-weight: 900;
             text-shadow: 0 0 15px var(--primary-glow);
         }
@@ -267,7 +276,7 @@
         }
 
         .plan-features i {
-            color: var(--primary-pink);
+            color: var(--primary-red);
         }
 
         .plan-features li.highlight-feature {
@@ -280,7 +289,7 @@
         }
 
         .btn-choose-plan {
-            background: var(--primary-pink);
+            background: var(--primary-red);
             color: #ffffff;
             padding: 12px;
             border-radius: 6px;
@@ -288,14 +297,14 @@
             border: none;
             transition: 0.3s;
             box-shadow: 0 0 10px var(--primary-glow);
+            cursor: pointer;
         }
 
         .btn-choose-plan:hover {
-            background: #e0004c;
-            box-shadow: 0 0 20px var(--primary-pink);
+            background: #d6002b;
+            box-shadow: 0 0 20px var(--primary-red);
         }
 
-        /* Best Value Plan */
         .plan-card.best-value {
             border: 2px solid var(--gold);
             box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
@@ -329,63 +338,99 @@
             box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
         }
 
-        /* Other Payment Methods Section */
-        .payment-methods-section {
-            padding: 50px 5%;
+        /* OTHER PAYMENT METHODS - EXACT BOX CONTAINER DESIGN */
+        .payment-methods-wrapper {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .payment-box-container {
+            border: 2px solid var(--primary-red);
+            border-radius: 12px;
+            padding: 30px;
+            background: rgba(12, 5, 7, 0.6);
+            box-shadow: 0 0 20px rgba(255, 0, 51, 0.15);
+            position: relative;
+        }
+
+        .payment-box-header {
             text-align: center;
+            margin-bottom: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: #ffffff;
+            background: var(--bg-dark);
+            display: inline-block;
+            padding: 0 15px;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .payment-grid {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 20px;
+            margin-top: 10px;
         }
 
         .payment-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 140px;
+            cursor: pointer;
             transition: 0.3s;
         }
 
         .payment-card:hover {
-            border-color: var(--primary-pink);
-            box-shadow: 0 0 10px var(--primary-glow);
+            transform: translateY(-4px);
         }
 
-        .payment-card i {
-            font-size: 28px;
-            color: var(--primary-pink);
-            margin-bottom: 8px;
+        /* Custom Icon Circles matching exact original design */
+        .pay-icon-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 26px;
+            margin-bottom: 12px;
+            font-weight: bold;
         }
+
+        .trc20-icon { background: #26a17b; color: #fff; }
+        .erc20-icon { background: #627eea; color: #fff; }
+        .bep20-icon { background: #f3ba2f; color: #fff; border-radius: 12px; }
+        .btc-icon   { background: #f7931a; color: #fff; }
+        .phonepay-icon { background: #5f259f; color: #fff; font-size: 22px; font-family: sans-serif; }
 
         .payment-card span {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
-            color: #e5e7eb;
+            color: #ffffff;
+            letter-spacing: 1px;
         }
 
         .payment-card small {
-            font-size: 10px;
+            font-size: 11px;
             color: #6b7280;
         }
 
-        /* Features Section */
+        /* WHY CHOOSE SECTION */
         .features-section {
-            padding: 60px 5%;
+            padding: 50px 5%;
         }
 
         .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
             gap: 15px;
             max-width: 1200px;
             margin: 0 auto;
@@ -398,36 +443,48 @@
             border-radius: 8px;
             text-align: center;
             transition: 0.3s;
+            flex: 1 1 150px;
+            max-width: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .feature-box:hover {
-            border-color: var(--primary-pink);
-            box-shadow: 0 0 10px var(--primary-glow);
+            border-color: var(--primary-red);
+            box-shadow: 0 0 12px var(--primary-glow);
         }
 
         .feature-box i {
-            font-size: 24px;
-            color: var(--primary-pink);
+            font-size: 22px;
+            color: var(--primary-red);
             margin-bottom: 12px;
         }
 
         .feature-box h4 {
-            font-size: 13px;
-            color: #e5e7eb;
-            font-weight: 600;
+            font-size: 11px;
+            color: #d1d5db;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        /* Stats Section */
-        .stats-section {
+        /* STATS SECTION */
+        .stats-section-wrapper {
+            max-width: 1000px;
+            margin: 40px auto;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--card-bg);
+            padding: 25px;
+        }
+
+        .stats-grid {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 40px 5%;
-            background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            margin: 40px 0;
         }
 
         .stat-item {
@@ -437,12 +494,12 @@
         }
 
         .stat-item i {
-            font-size: 30px;
-            color: var(--primary-pink);
+            font-size: 26px;
+            color: var(--primary-red);
         }
 
         .stat-number {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             font-family: 'Orbitron', sans-serif;
             color: #ffffff;
@@ -450,20 +507,20 @@
 
         .stat-label {
             color: #9ca3af;
-            font-size: 13px;
+            font-size: 12px;
         }
 
-        /* FAQ Section */
+        /* FAQ SECTION (2 COLUMN LAYOUT LIKE ORIGINAL) */
         .faq-section {
-            padding: 60px 5%;
+            padding: 50px 5%;
         }
 
         .faq-grid {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 15px;
         }
 
         .faq-item {
@@ -476,7 +533,7 @@
         }
 
         .faq-item:hover {
-            border-color: var(--primary-pink);
+            border-color: var(--primary-red);
         }
 
         .faq-header {
@@ -485,7 +542,13 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
+            color: #e5e7eb;
+        }
+
+        .faq-header i {
+            color: var(--primary-red);
+            font-size: 12px;
         }
 
         .faq-answer {
@@ -494,21 +557,16 @@
             display: none;
             border-top: 1px solid var(--border-color);
             padding-top: 12px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .faq-item.active .faq-answer {
             display: block;
         }
 
-        .faq-item.active .faq-header i {
-            transform: rotate(45deg);
-            color: var(--primary-pink);
-        }
-
-        /* Footer */
+        /* FOOTER */
         footer {
-            background: #050204;
+            background: #020102;
             padding: 50px 5% 20px 5%;
             border-top: 1px solid var(--border-color);
         }
@@ -518,24 +576,24 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 30px;
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto 30px auto;
         }
 
         .footer-mission {
             max-width: 400px;
             color: #9ca3af;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .footer-mission .slogan {
             margin-top: 10px;
-            color: var(--primary-pink);
+            color: var(--primary-red);
             font-weight: 600;
         }
 
         .footer-contact h5 {
-            font-size: 15px;
+            font-size: 14px;
             margin-bottom: 12px;
             color: #ffffff;
             font-family: 'Orbitron', sans-serif;
@@ -544,11 +602,11 @@
         .footer-contact p {
             color: #9ca3af;
             margin-bottom: 8px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .footer-contact i {
-            color: var(--primary-pink);
+            color: var(--primary-red);
         }
 
         .footer-bottom {
@@ -559,7 +617,7 @@
             padding-top: 20px;
         }
 
-        /* Modal Overlay & Form */
+        /* MODAL */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -576,7 +634,7 @@
 
         .modal-card {
             background: var(--card-bg);
-            border: 1px solid var(--primary-pink);
+            border: 1px solid var(--primary-red);
             border-radius: 10px;
             padding: 25px;
             width: 100%;
@@ -595,12 +653,10 @@
             cursor: pointer;
         }
 
-        .modal-close:hover { color: #ffffff; }
-
         .modal-card h3 {
             text-align: center;
             margin-bottom: 18px;
-            color: var(--primary-pink);
+            color: var(--primary-red);
             font-size: 18px;
         }
 
@@ -617,7 +673,7 @@
         .modal-field input, .modal-field select {
             width: 100%;
             padding: 10px 12px;
-            background: #1a0c17;
+            background: #15060b;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             color: #ffffff;
@@ -627,13 +683,13 @@
         }
 
         .modal-field input:focus, .modal-field select:focus {
-            border-color: var(--primary-pink);
+            border-color: var(--primary-red);
         }
 
         .modal-btn {
             width: 100%;
             padding: 12px;
-            background: var(--primary-pink);
+            background: var(--primary-red);
             color: #ffffff;
             border: none;
             border-radius: 6px;
@@ -645,13 +701,11 @@
             box-shadow: 0 0 10px var(--primary-glow);
         }
 
-        .modal-btn:hover { background: #e0004c; }
-
-        /* Responsive */
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; }
             nav { flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 38px; }
+            .hero h1 { font-size: 36px; }
+            .faq-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -671,7 +725,7 @@
             <a href="#faq">FAQ</a>
             <a href="#contact">CONTACT</a>
         </nav>
-        <button onclick="openPaymentModal()" class="btn-join" style="cursor:pointer;"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
+        <button onclick="openPaymentModal()" class="btn-join"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
     </header>
 
     <!-- HERO SECTION -->
@@ -683,10 +737,10 @@
         </div>
         
         <h1>UFX CAPITAL</h1>
-        <div class="hero-subtext">CRYPTO & FOREX OPTION TRADER</div>
+        <div><span class="hero-subtext">CRYPTO & FOREX OPTION TRADER</span></div>
         <p class="hero-bullets">High Probability Trading Signals • Smart Money Concepts<br>Discipline • Strategy • Consistency</p>
         
-        <button onclick="openPaymentModal()" class="hero-btn" style="cursor:pointer;">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
+        <button onclick="openPaymentModal()" class="hero-btn">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
     </section>
 
     <!-- PREMIUM PLANS SECTION -->
@@ -698,14 +752,12 @@
         </div>
 
         <div class="plans-grid">
-            
-            <!-- PLAN 1 -->
+            <!-- 1 MONTH -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">1 MONTH</div>
                     <div class="plan-price">$35</div>
                     <div class="price-sub">PER MONTH</div>
-                    
                     <ul class="plan-features">
                         <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
@@ -715,16 +767,15 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('35')" class="btn-choose-plan" style="width:100%; cursor:pointer;">CHOOSE PLAN</button>
+                <button onclick="openPaymentModal('35')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
             </div>
 
-            <!-- PLAN 2 -->
+            <!-- 3 MONTHS -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">3 MONTHS</div>
                     <div class="plan-price">$59</div>
                     <div class="price-sub">EVERY 3 MONTHS</div>
-                    
                     <ul class="plan-features">
                         <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
@@ -734,16 +785,15 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('59')" class="btn-choose-plan" style="width:100%; cursor:pointer;">CHOOSE PLAN</button>
+                <button onclick="openPaymentModal('59')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
             </div>
 
-            <!-- PLAN 3 -->
+            <!-- 6 MONTHS -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">6 MONTHS</div>
                     <div class="plan-price">$79</div>
                     <div class="price-sub">EVERY 6 MONTHS</div>
-                    
                     <ul class="plan-features">
                         <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
@@ -753,17 +803,16 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('79')" class="btn-choose-plan" style="width:100%; cursor:pointer;">CHOOSE PLAN</button>
+                <button onclick="openPaymentModal('79')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
             </div>
 
-            <!-- PLAN 4: LIFETIME -->
+            <!-- LIFETIME -->
             <div class="plan-card best-value">
                 <div class="badge-best-value">BEST VALUE</div>
                 <div>
                     <div class="plan-duration">LIFETIME</div>
                     <div class="plan-price">$199</div>
                     <div class="price-sub">ONE TIME PAYMENT</div>
-                    
                     <ul class="plan-features">
                         <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
@@ -775,46 +824,44 @@
                         <li class="highlight-feature"><i class="fa-solid fa-crown"></i> LIFETIME MEMBERSHIP</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('199')" class="btn-choose-plan btn-gold" style="width:100%; cursor:pointer;">CHOOSE PLAN</button>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- OTHER PAYMENT METHODS -->
-    <section class="payment-methods-section">
-        <div class="section-header">
-            <div class="section-title"><i class="fa-solid fa-gem"></i> OTHER PAYMENT METHODS <i class="fa-solid fa-gem"></i></div>
-        </div>
-
-        <div class="payment-grid">
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-solid fa-wallet"></i>
-                <span>TRC20</span>
-                <small>(USDT)</small>
-            </div>
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-solid fa-wallet"></i>
-                <span>ERC20</span>
-                <small>(USDT)</small>
-            </div>
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-solid fa-wallet"></i>
-                <span>BEP20</span>
-                <small>(USDT)</small>
-            </div>
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-brands fa-bitcoin"></i>
-                <span>BITCOIN</span>
-                <small>(BTC)</small>
-            </div>
-            <div class="payment-card" onclick="openPaymentModal()">
-                <i class="fa-solid fa-mobile-screen-button"></i>
-                <span>PHONE PAY</span>
-                <small>(INR)</small>
+                <button onclick="openPaymentModal('199')" class="btn-choose-plan btn-gold" style="width:100%;">CHOOSE PLAN</button>
             </div>
         </div>
     </section>
+
+    <!-- OTHER PAYMENT METHODS (EXACT SCREENSHOT DESIGN) -->
+    <div class="payment-methods-wrapper">
+        <div class="payment-box-container">
+            <div class="payment-box-header">OTHER PAYMENT METHODS</div>
+            <div class="payment-grid">
+                <div class="payment-card" onclick="openPaymentModal()">
+                    <div class="pay-icon-circle trc20-icon">T</div>
+                    <span>TRC20</span>
+                    <small>(USDT)</small>
+                </div>
+                <div class="payment-card" onclick="openPaymentModal()">
+                    <div class="pay-icon-circle erc20-icon"><i class="fa-brands fa-ethereum"></i></div>
+                    <span>ERC20</span>
+                    <small>(USDT)</small>
+                </div>
+                <div class="payment-card" onclick="openPaymentModal()">
+                    <div class="pay-icon-circle bep20-icon"><i class="fa-solid fa-cube"></i></div>
+                    <span>BEP20</span>
+                    <small>(USDT)</small>
+                </div>
+                <div class="payment-card" onclick="openPaymentModal()">
+                    <div class="pay-icon-circle btc-icon"><i class="fa-brands fa-bitcoin"></i></div>
+                    <span>BITCOIN</span>
+                    <small>(BTC)</small>
+                </div>
+                <div class="payment-card" onclick="openPaymentModal()">
+                    <div class="pay-icon-circle phonepay-icon">पे</div>
+                    <span>PHONE PAY</span>
+                    <small>(INR)</small>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- WHY CHOOSE UFX CAPITAL -->
     <section class="features-section" id="features">
@@ -824,8 +871,8 @@
 
         <div class="features-grid">
             <div class="feature-box">
-                <i class="fa-solid fa-crosshairs"></i>
-                <h4>HIGH PROBABILITY SMC BASED SIGNALS</h4>
+                <i class="fa-solid fa-bullseye"></i>
+                <h4>HIGH PROBABILITY SMC-BASED SIGNALS</h4>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-chart-line"></i>
@@ -855,33 +902,35 @@
     </section>
 
     <!-- STATS SECTION -->
-    <div class="stats-section" id="about">
-        <div class="stat-item">
-            <i class="fa-solid fa-users"></i>
-            <div>
-                <div class="stat-number">1000+</div>
-                <div class="stat-label">Active Members</div>
+    <div class="stats-section-wrapper" id="about">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <i class="fa-solid fa-users"></i>
+                <div>
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Active Members</div>
+                </div>
             </div>
-        </div>
-        <div class="stat-item">
-            <i class="fa-solid fa-bullseye"></i>
-            <div>
-                <div class="stat-number">80%+</div>
-                <div class="stat-label">Win Rate Signals</div>
+            <div class="stat-item">
+                <i class="fa-solid fa-bullseye"></i>
+                <div>
+                    <div class="stat-number">80%+</div>
+                    <div class="stat-label">Win Rate Signals</div>
+                </div>
             </div>
-        </div>
-        <div class="stat-item">
-            <i class="fa-solid fa-chart-simple"></i>
-            <div>
-                <div class="stat-number">5000+</div>
-                <div class="stat-label">Signals Delivered</div>
+            <div class="stat-item">
+                <i class="fa-solid fa-chart-simple"></i>
+                <div>
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Signals Delivered</div>
+                </div>
             </div>
-        </div>
-        <div class="stat-item">
-            <i class="fa-solid fa-trophy"></i>
-            <div>
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Support</div>
+            <div class="stat-item">
+                <i class="fa-solid fa-trophy"></i>
+                <div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support</div>
+                </div>
             </div>
         </div>
     </div>
@@ -905,7 +954,7 @@
 
             <div class="faq-item">
                 <div class="faq-header">
-                    <span>What is the risk reward ratio?</span>
+                    <span>What is the risk-reward ratio?</span>
                     <i class="fa-solid fa-plus"></i>
                 </div>
                 <div class="faq-answer">
@@ -958,7 +1007,7 @@
     <!-- FOOTER -->
     <footer id="contact">
         <div class="footer-content">
-            <div class="footer-brand">
+            <div>
                 <div class="logo-title">UFX CAPITAL</div>
                 <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
             </div>
@@ -980,7 +1029,7 @@
         </div>
     </footer>
 
-    <!-- PAYMENT MODAL FORM -->
+    <!-- PAYMENT MODAL -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-card">
             <span class="modal-close" onclick="closePaymentModal()">&times;</span>
@@ -1012,7 +1061,7 @@
         </div>
     </div>
 
-    <!-- JS Scripts -->
+    <!-- JS -->
     <script>
         function openPaymentModal(planValue) {
             var modal = document.getElementById('paymentModal');
