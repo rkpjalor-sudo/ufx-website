@@ -4,19 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UFX CAPITAL - Crypto & Forex Option Trader</title>
-    <!-- CSS Link -->
-    <link rel="stylesheet" href="style.css">
     
-    <!-- Google Fonts (Orbitron & Rajdhani) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* Orbitron Font Overrides */
+        /* Base Reset & Theme Variables */
+        :root {
+            --primary-pink: #ff0055;
+            --primary-glow: rgba(255, 0, 85, 0.5);
+            --gold: #fbbf24;
+            --bg-dark: #0a0508;
+            --card-bg: #120910;
+            --border-color: #2a1220;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
         h1, h2, h3, h4, 
         .logo-title, 
         .plan-price, 
@@ -26,21 +49,517 @@
         .btn-join, 
         .hero-btn, 
         .badge-best-value, 
-        .section-title {
+        .section-title,
+        .payment-card span {
             font-family: 'Orbitron', sans-serif !important;
         }
 
-        .plan-price {
-            font-weight: 800;
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            background: rgba(10, 5, 8, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #ffffff;
             letter-spacing: 1px;
-            text-shadow: 0 0 12px rgba(255, 0, 85, 0.6);
+        }
+
+        .logo-subtitle {
+            font-size: 10px;
+            color: var(--primary-pink);
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-pink);
+        }
+
+        .btn-join {
+            background: transparent;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 700;
+            border: 2px solid var(--primary-pink);
+            box-shadow: 0 0 10px var(--primary-glow);
+            transition: 0.3s;
+        }
+
+        .btn-join:hover {
+            background: var(--primary-pink);
+            box-shadow: 0 0 20px var(--primary-pink);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 90px 20px;
+            background: radial-gradient(circle at center, #250817 0%, var(--bg-dark) 70%);
+        }
+
+        .welcome-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: #d1d5db;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .welcome-tag .line {
+            width: 30px;
+            height: 2px;
+            background: var(--primary-pink);
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 5px;
+            color: #ffffff;
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .hero-subtext {
+            font-size: 18px;
+            color: var(--primary-pink);
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .hero-bullets {
+            font-size: 16px;
+            color: #9ca3af;
+            margin-bottom: 35px;
+        }
+
+        .hero-btn {
+            background: transparent;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 2px solid var(--primary-pink);
+            font-weight: 700;
+            transition: 0.3s;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .hero-btn:hover {
+            background: var(--primary-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--primary-pink);
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-title i {
+            color: var(--primary-pink);
+            margin: 0 8px;
+        }
+
+        /* Plans Section */
+        .plans-section {
+            padding: 60px 5%;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .plan-card {
+            background: var(--card-bg);
+            border: 1px solid var(--primary-pink);
+            border-radius: 10px;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.15);
+            transition: 0.3s;
+        }
+
+        .plan-card:hover {
+            box-shadow: 0 0 25px var(--primary-glow);
+            transform: translateY(-5px);
+        }
+
+        .plan-duration {
+            font-size: 18px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .plan-price {
+            font-size: 46px;
+            text-align: center;
+            color: var(--primary-pink);
+            font-weight: 900;
+            text-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .price-sub {
+            font-size: 11px;
+            color: #9ca3af;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .plan-features li {
+            font-size: 14px;
+            color: #d1d5db;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plan-features i {
+            color: var(--primary-pink);
+        }
+
+        .plan-features li.highlight-feature {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .plan-features li.highlight-feature i {
+            color: var(--gold);
+        }
+
+        .btn-choose-plan {
+            background: var(--primary-pink);
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            border: none;
+            transition: 0.3s;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .btn-choose-plan:hover {
+            background: #e0004c;
+            box-shadow: 0 0 20px var(--primary-pink);
+        }
+
+        /* Best Value Plan */
+        .plan-card.best-value {
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
         }
 
         .best-value .plan-price {
-            text-shadow: 0 0 12px rgba(255, 187, 0, 0.6);
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+            color: var(--gold);
         }
 
-        /* Modal Overlay & Form Styling */
+        .badge-best-value {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: #000;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #000000;
+        }
+
+        .btn-gold:hover {
+            background: #f59e0b;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+        }
+
+        /* Other Payment Methods Section */
+        .payment-methods-section {
+            padding: 50px 5%;
+            text-align: center;
+        }
+
+        .payment-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .payment-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 140px;
+            transition: 0.3s;
+        }
+
+        .payment-card:hover {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .payment-card i {
+            font-size: 28px;
+            color: var(--primary-pink);
+            margin-bottom: 8px;
+        }
+
+        .payment-card span {
+            font-size: 13px;
+            font-weight: 700;
+            color: #e5e7eb;
+        }
+
+        .payment-card small {
+            font-size: 10px;
+            color: #6b7280;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 60px 5%;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .feature-box:hover {
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .feature-box i {
+            font-size: 24px;
+            color: var(--primary-pink);
+            margin-bottom: 12px;
+        }
+
+        .feature-box h4 {
+            font-size: 13px;
+            color: #e5e7eb;
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px 5%;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-item i {
+            font-size: 30px;
+            color: var(--primary-pink);
+        }
+
+        .stat-number {
+            font-size: 22px;
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            color: #ffffff;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 5%;
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-pink);
+        }
+
+        .faq-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .faq-answer {
+            padding: 0 20px 16px 20px;
+            color: #9ca3af;
+            display: none;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+            font-size: 14px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-header i {
+            transform: rotate(45deg);
+            color: var(--primary-pink);
+        }
+
+        /* Footer */
+        footer {
+            background: #050204;
+            padding: 50px 5% 20px 5%;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+        }
+
+        .footer-mission {
+            max-width: 400px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .footer-mission .slogan {
+            margin-top: 10px;
+            color: var(--primary-pink);
+            font-weight: 600;
+        }
+
+        .footer-contact h5 {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .footer-contact p {
+            color: #9ca3af;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .footer-contact i {
+            color: var(--primary-pink);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #4b5563;
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        /* Modal Overlay & Form */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -53,20 +572,20 @@
             justify-content: center;
             align-items: center;
             padding: 15px;
-            box-sizing: border-box;
         }
+
         .modal-card {
-            background: #111827;
-            border: 1px solid #2563eb;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--primary-pink);
+            border-radius: 10px;
             padding: 25px;
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             color: #ffffff;
-            box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 0 25px var(--primary-glow);
             position: relative;
-            font-family: 'Rajdhani', sans-serif;
         }
+
         .modal-close {
             position: absolute;
             top: 12px;
@@ -75,46 +594,65 @@
             color: #9ca3af;
             cursor: pointer;
         }
+
         .modal-close:hover { color: #ffffff; }
+
         .modal-card h3 {
-            font-family: 'Orbitron', sans-serif !important;
             text-align: center;
             margin-bottom: 18px;
-            color: #60a5fa;
-            font-size: 20px;
+            color: var(--primary-pink);
+            font-size: 18px;
         }
+
         .modal-field { margin-bottom: 15px; }
-        .modal-field label { display: block; margin-bottom: 5px; font-weight: 600; color: #d1d5db; }
+
+        .modal-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #d1d5db;
+            font-size: 13px;
+        }
+
         .modal-field input, .modal-field select {
             width: 100%;
             padding: 10px 12px;
-            background: #1f2937;
-            border: 1px solid #374151;
+            background: #1a0c17;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             color: #ffffff;
-            font-size: 15px;
-            box-sizing: border-box;
+            font-size: 14px;
             outline: none;
             font-family: 'Rajdhani', sans-serif;
         }
+
         .modal-field input:focus, .modal-field select:focus {
-            border-color: #2563eb;
+            border-color: var(--primary-pink);
         }
+
         .modal-btn {
             width: 100%;
             padding: 12px;
-            background: #2563eb;
+            background: var(--primary-pink);
             color: #ffffff;
             border: none;
             border-radius: 6px;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             text-transform: uppercase;
-            font-family: 'Orbitron', sans-serif !important;
             transition: 0.3s;
+            box-shadow: 0 0 10px var(--primary-glow);
         }
-        .modal-btn:hover { background: #1d4ed8; }
+
+        .modal-btn:hover { background: #e0004c; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            nav { flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 38px; }
+        }
     </style>
 </head>
 <body>
@@ -122,10 +660,8 @@
     <!-- NAVBAR -->
     <header>
         <div class="logo-container">
-            <div class="logo-text-group">
-                <div class="logo-title">UFX CAPITAL</div>
-                <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
-            </div>
+            <div class="logo-title">UFX CAPITAL</div>
+            <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
         </div>
         <nav>
             <a href="#home" class="active">HOME</a>
@@ -135,7 +671,7 @@
             <a href="#faq">FAQ</a>
             <a href="#contact">CONTACT</a>
         </nav>
-        <button onclick="openPaymentModal()" class="btn-join" style="border:none; cursor:pointer;"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
+        <button onclick="openPaymentModal()" class="btn-join" style="cursor:pointer;"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
     </header>
 
     <!-- HERO SECTION -->
@@ -147,12 +683,10 @@
         </div>
         
         <h1>UFX CAPITAL</h1>
-        
         <div class="hero-subtext">CRYPTO & FOREX OPTION TRADER</div>
-        
         <p class="hero-bullets">High Probability Trading Signals • Smart Money Concepts<br>Discipline • Strategy • Consistency</p>
         
-        <button onclick="openPaymentModal()" class="hero-btn" style="border:none; cursor:pointer;">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
+        <button onclick="openPaymentModal()" class="hero-btn" style="cursor:pointer;">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
     </section>
 
     <!-- PREMIUM PLANS SECTION -->
@@ -165,16 +699,15 @@
 
         <div class="plans-grid">
             
-            <!-- PLAN 1: 1 MONTH -->
+            <!-- PLAN 1 -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">1 MONTH</div>
                     <div class="plan-price">$35</div>
                     <div class="price-sub">PER MONTH</div>
-                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
                     
                     <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
                         <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
                         <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
@@ -182,19 +715,18 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('35')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
+                <button onclick="openPaymentModal('35')" class="btn-choose-plan" style="width:100%; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
-            <!-- PLAN 2: 3 MONTHS -->
+            <!-- PLAN 2 -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">3 MONTHS</div>
                     <div class="plan-price">$59</div>
                     <div class="price-sub">EVERY 3 MONTHS</div>
-                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
                     
                     <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
                         <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
                         <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
@@ -202,19 +734,18 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('59')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
+                <button onclick="openPaymentModal('59')" class="btn-choose-plan" style="width:100%; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
-            <!-- PLAN 3: 6 MONTHS -->
+            <!-- PLAN 3 -->
             <div class="plan-card">
                 <div>
                     <div class="plan-duration">6 MONTHS</div>
                     <div class="plan-price">$79</div>
                     <div class="price-sub">EVERY 6 MONTHS</div>
-                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
                     
                     <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
                         <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
                         <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
@@ -222,7 +753,7 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('79')" class="btn-choose-plan" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
+                <button onclick="openPaymentModal('79')" class="btn-choose-plan" style="width:100%; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
             <!-- PLAN 4: LIFETIME -->
@@ -232,10 +763,9 @@
                     <div class="plan-duration">LIFETIME</div>
                     <div class="plan-price">$199</div>
                     <div class="price-sub">ONE TIME PAYMENT</div>
-                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
                     
                     <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
                         <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
                         <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
                         <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
@@ -245,9 +775,44 @@
                         <li class="highlight-feature"><i class="fa-solid fa-crown"></i> LIFETIME MEMBERSHIP</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('199')" class="btn-choose-plan btn-gold" style="width:100%; border:none; cursor:pointer;">CHOOSE PLAN</button>
+                <button onclick="openPaymentModal('199')" class="btn-choose-plan btn-gold" style="width:100%; cursor:pointer;">CHOOSE PLAN</button>
             </div>
 
+        </div>
+    </section>
+
+    <!-- OTHER PAYMENT METHODS -->
+    <section class="payment-methods-section">
+        <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-gem"></i> OTHER PAYMENT METHODS <i class="fa-solid fa-gem"></i></div>
+        </div>
+
+        <div class="payment-grid">
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-solid fa-wallet"></i>
+                <span>TRC20</span>
+                <small>(USDT)</small>
+            </div>
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-solid fa-wallet"></i>
+                <span>ERC20</span>
+                <small>(USDT)</small>
+            </div>
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-solid fa-wallet"></i>
+                <span>BEP20</span>
+                <small>(USDT)</small>
+            </div>
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-brands fa-bitcoin"></i>
+                <span>BITCOIN</span>
+                <small>(BTC)</small>
+            </div>
+            <div class="payment-card" onclick="openPaymentModal()">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <span>PHONE PAY</span>
+                <small>(INR)</small>
+            </div>
         </div>
     </section>
 
@@ -260,31 +825,31 @@
         <div class="features-grid">
             <div class="feature-box">
                 <i class="fa-solid fa-crosshairs"></i>
-                <h4>High Probability SMC-Based Signals</h4>
+                <h4>HIGH PROBABILITY SMC BASED SIGNALS</h4>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-chart-line"></i>
-                <h4>Live Entry, SL & TP Updates</h4>
+                <h4>LIVE ENTRY, SL & TP UPDATES</h4>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-chart-pie"></i>
-                <h4>Trade Breakdown (Chart + Logic)</h4>
+                <h4>TRADE BREAKDOWN (CHART + LOGIC)</h4>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-coins"></i>
-                <h4>Weekly Gold (XAUUSD) Outlook</h4>
+                <h4>WEEKLY GOLD (XAUUSD) OUTLOOK</h4>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-brain"></i>
-                <h4>Mindset & Risk Management</h4>
+                <h4>MINDSET & RISK MANAGEMENT</h4>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-users"></i>
-                <h4>Premium Community Access</h4>
+                <h4>PREMIUM COMMUNITY ACCESS</h4>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-headset"></i>
-                <h4>24/7 Priority Support</h4>
+                <h4>24/7 PRIORITY SUPPORT</h4>
             </div>
         </div>
     </section>
@@ -340,7 +905,7 @@
 
             <div class="faq-item">
                 <div class="faq-header">
-                    <span>What is the risk-reward ratio?</span>
+                    <span>What is the risk reward ratio?</span>
                     <i class="fa-solid fa-plus"></i>
                 </div>
                 <div class="faq-answer">
@@ -396,7 +961,6 @@
             <div class="footer-brand">
                 <div class="logo-title">UFX CAPITAL</div>
                 <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
-                <div class="footer-gem"><i class="fa-solid fa-gem"></i></div>
             </div>
 
             <div class="footer-mission">
@@ -448,8 +1012,7 @@
         </div>
     </div>
 
-    <!-- JS Link & Payment Script -->
-    <script src="script.js"></script>
+    <!-- JS Scripts -->
     <script>
         function openPaymentModal(planValue) {
             var modal = document.getElementById('paymentModal');
@@ -479,12 +1042,11 @@
             var phone = encodeURIComponent(document.getElementById('cust_phone').value.trim());
             var plan  = document.getElementById('modalPlanSelect').value;
 
-            // Mapping $ Plan Values to Updated Razorpay Links with Telegram Redirection
             var links = {
-                "35":  "https://rzp.io/rzp/Qcrc9Ul",    // ₹3,500
-                "59":  "https://rzp.io/rzp/bABu5nP",    // ₹5,900
-                "79":  "https://rzp.io/rzp/5G4nnHe",    // ₹7,900
-                "199": "https://rzp.io/rzp/vV5guyt"     // ₹19,900
+                "35":  "https://rzp.io/rzp/Qcrc9Ul",
+                "59":  "https://rzp.io/rzp/bABu5nP",
+                "79":  "https://rzp.io/rzp/5G4nnHe",
+                "199": "https://rzp.io/rzp/vV5guyt"
             };
 
             if (links[plan]) {
@@ -492,6 +1054,12 @@
                 window.location.href = targetUrl;
             }
         }
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
     </script>
 </body>
 </html>
