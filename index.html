@@ -18,69 +18,29 @@
         h1, h2, h3, h4, 
         .logo-title, .plan-price, .plan-duration, .price-sub, 
         .btn-choose-plan, .btn-join, .hero-btn, .badge-best-value, 
-        .section-title, .pm-title, .stat-number, .faq-title, .wc-title {
+        .section-title, .pm-title, .stat-number, .faq-title, .wc-title, .legal-popup-title {
             font-family: 'Orbitron', sans-serif !important;
         }
 
         /* FEATURES SECTION STYLING */
-        .why-choose-wrapper {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .wc-title {
-            text-align: center;
-            font-size: 20px;
-            color: #ff0055;
-            margin-bottom: 25px;
-            letter-spacing: 1.5px;
-            font-weight: 800;
-        }
-        .wc-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-        }
+        .why-choose-wrapper { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .wc-title { text-align: center; font-size: 20px; color: #ff0055; margin-bottom: 25px; letter-spacing: 1.5px; font-weight: 800; }
+        .wc-row { display: flex; justify-content: space-between; align-items: stretch; gap: 10px; overflow-x: auto; padding-bottom: 5px; }
         .wc-card {
-            flex: 1;
-            min-width: 130px;
-            background: rgba(13, 17, 23, 0.7);
-            border: 1px solid rgba(255, 0, 85, 0.4);
-            border-radius: 10px;
-            padding: 15px 8px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s ease;
+            flex: 1; min-width: 130px; background: rgba(13, 17, 23, 0.7);
+            border: 1px solid rgba(255, 0, 85, 0.4); border-radius: 10px; padding: 15px 8px;
+            text-align: center; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; transition: 0.3s ease;
         }
-        .wc-card:hover {
-            border-color: #ff0055;
-            box-shadow: 0 0 12px rgba(255, 0, 85, 0.4);
-            transform: translateY(-2px);
-        }
+        .wc-card:hover { border-color: #ff0055; box-shadow: 0 0 12px rgba(255, 0, 85, 0.4); transform: translateY(-2px); }
         .wc-card i { font-size: 22px; color: #ff0055; margin-bottom: 10px; }
-        .wc-card p {
-            font-size: 11px; color: #ffffff; font-weight: 700; margin: 0;
-            line-height: 1.3; font-family: 'Rajdhani', sans-serif; text-transform: uppercase;
-        }
+        .wc-card p { font-size: 11px; color: #ffffff; font-weight: 700; margin: 0; line-height: 1.3; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; }
 
         .stats-single-box {
-            max-width: 1200px;
-            margin: 30px auto 50px;
-            padding: 20px 10px;
-            border: 1px solid rgba(255, 0, 85, 0.4);
-            border-radius: 12px;
-            background: rgba(13, 17, 23, 0.5);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            max-width: 1200px; margin: 30px auto 50px; padding: 20px 10px;
+            border: 1px solid rgba(255, 0, 85, 0.4); border-radius: 12px;
+            background: rgba(13, 17, 23, 0.5); display: flex; justify-content: space-around;
+            align-items: center; flex-wrap: wrap; gap: 15px;
         }
         .stat-item { display: flex; align-items: center; gap: 12px; }
         .stat-icon { font-size: 26px; color: #ff0055; }
@@ -105,7 +65,7 @@
         }
         .faq-card.active .faq-answer { max-height: 200px; padding: 12px 18px 16px; }
 
-        /* MODALS */
+        /* MODALS (GENERAL) */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9); z-index: 10000; justify-content: center;
@@ -177,6 +137,95 @@
         .pm-title { color: #ffffff; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
         .pm-sub { color: #a0aec0; font-size: 13px; font-family: 'Rajdhani', sans-serif; font-weight: 600; }
         .pm-divider { width: 1px; height: 80px; background: rgba(255, 0, 85, 0.3); }
+
+        /* FOOTER & SOCIALS */
+        .custom-footer {
+            background: #080b10;
+            padding: 40px 20px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 0, 85, 0.2);
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .footer-follow-title {
+            font-size: 24px;
+            color: #00ff66;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .footer-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .footer-social-icons a {
+            width: 40px;
+            height: 40px;
+            background: #00ff66;
+            color: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer-social-icons a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #00ff66;
+        }
+        .footer-email-link {
+            color: #00ff66;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .footer-legal-links {
+            margin-bottom: 20px;
+        }
+        .footer-legal-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .footer-legal-links a:hover {
+            color: #00ff66;
+            text-decoration: underline;
+        }
+        .footer-disclaimer-text {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #a0aec0;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .footer-disclaimer-text span {
+            color: #00ff66;
+            font-weight: bold;
+        }
+        .footer-copyright {
+            color: #00ff66;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* TERMS & PRIVACY POPUP MODALS */
+        .legal-modal-card {
+            background: #0d1117; border: 1px solid #00ff66; border-radius: 12px;
+            padding: 30px; width: 100%; max-width: 700px; color: #ffffff;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.3); position: relative;
+            font-family: 'Rajdhani', sans-serif; max-height: 80vh; overflow-y: auto; text-align: left;
+        }
+        .legal-popup-title { color: #00ff66; font-size: 22px; margin-bottom: 15px; text-align: center; }
+        .legal-popup-content p { color: #d1d5db; font-size: 14px; line-height: 1.6; margin-bottom: 15px; }
+        .legal-popup-content h4 { color: #ffffff; margin-top: 15px; margin-bottom: 5px; }
 
         @media (max-width: 768px) {
             .pm-divider { display: none; }
@@ -414,33 +463,40 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="logo-title">UFX CAPITAL</div>
-                <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
-                <div class="footer-gem"><i class="fa-solid fa-gem"></i></div>
-            </div>
-            <div class="footer-mission">
-                <p>Our mission is to empower traders with quality setups, strong risk management and a winning mindset.</p>
-                <p class="slogan">Stay disciplined. Stick to plan.<br>Trade smart. Grow consistently.</p>
-            </div>
-            <div class="footer-contact">
-                <h5>GET IN TOUCH</h5>
-                <p><i class="fa-brands fa-telegram"></i> Telegram: @IM_ARCHIT</p>
-                <p><i class="fa-solid fa-phone"></i> 9649638812</p>
-            </div>
+    <!-- FOOTER SECTION WITH UPDATED SOCIAL LINKS -->
+    <footer class="custom-footer" id="contact">
+        <div class="footer-follow-title">Follow Us</div>
+        
+        <!-- SOCIAL MEDIA LINKS UPDATED HERE -->
+        <div class="footer-social-icons">
+            <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzGNqcQ==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/rameshkuma78100?s=21" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://t.me/ufxcapital" target="_blank"><i class="fa-brands fa-telegram"></i></a>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 UFX CAPITAL. All Rights Reserved.
+
+        <div>
+            <a href="mailto:support@ufxcapital.com" class="footer-email-link"><i class="fa-regular fa-envelope"></i> support@ufxcapital.com</a>
+        </div>
+
+        <div class="footer-legal-links">
+            <a onclick="openModal('termsModal')">Terms & Conditions</a>
+            <a onclick="openModal('privacyModal')">Privacy Policy</a>
+        </div>
+
+        <div class="footer-disclaimer-text">
+            At <span>UFX Capital</span>, we empower committed traders with elite educational insights, tools, and mental frameworks. All content is strictly for educational purposes and not financial advice. Trading involves risk. By accessing our platform, you agree to our <a onclick="openModal('termsModal')" style="color:#00ff66; text-decoration:underline; cursor:pointer;">Terms & Conditions</a> and <a onclick="openModal('privacyModal')" style="color:#00ff66; text-decoration:underline; cursor:pointer;">Privacy Policy</a>.
+        </div>
+
+        <div class="footer-copyright">
+            &copy; 2026 UFX Capital - All Rights Reserved
         </div>
     </footer>
 
-    <!-- MODAL 1: RAZORPAY MODAL -->
+    <!-- MODAL: RAZORPAY -->
     <div class="modal-overlay" id="razorpayModal">
         <div class="razorpay-modal-card">
-            <span class="modal-close" onclick="closeRazorpayModal()">&times;</span>
+            <span class="modal-close" onclick="closeModal('razorpayModal')">&times;</span>
             <div class="modal-card-title">JOIN PREMIUM MEMBERSHIP</div>
             <form onsubmit="handleRazorpayPayment(event)">
                 <div class="modal-field">
@@ -469,13 +525,12 @@
         </div>
     </div>
 
-    <!-- MODAL 2: CRYPTO FORM MODAL -->
+    <!-- MODAL: CRYPTO -->
     <div class="modal-overlay" id="cryptoModal">
         <div class="crypto-modal-card">
-            <span class="modal-close" onclick="closeCryptoModal()">&times;</span>
+            <span class="modal-close" onclick="closeModal('cryptoModal')">&times;</span>
             <div class="modal-card-title" id="cryptoModalTitle">CRYPTO PAYMENT DETAILS</div>
             
-            <!-- STEP 1 FORM: CUSTOMER DETAILS -->
             <form id="cryptoForm" onsubmit="submitCryptoForm(event)">
                 <input type="hidden" name="access_key" value="64e790b0-5df7-46e8-a8f4-29328ef00926">
                 <input type="hidden" name="subject" value="New Crypto Order - UFX Capital">
@@ -532,20 +587,17 @@
                 <button type="submit" id="submitBtn" class="modal-btn">SUBMIT & PROCEED TO PAYMENT</button>
             </form>
 
-            <!-- STEP 2: WALLET ADDRESS & TXID SUBMISSION -->
             <div id="walletDisplayBox" class="wallet-display-container">
                 <i class="fa-solid fa-circle-check" style="font-size: 32px; color: #00ffcc; margin-bottom: 8px;"></i>
                 <h4 style="color:#ffffff; margin: 0 0 10px 0; font-family:'Orbitron', sans-serif; font-size:16px;">Details Saved! Make Payment</h4>
                 <p style="color:#a0aec0; font-size:12px; margin-bottom:12px;">Send exact crypto amount to the wallet address below:</p>
                 
                 <div style="font-weight:bold; color:#ff0055; font-size:13px;" id="selectedCryptoLabel">TRC20 (USDT) Address:</div>
-                
                 <div class="wallet-box" id="walletAddressText">TP1hUt5spzMv5LoHjAU2yEQusEgj8jNDwb</div>
                 
                 <button class="copy-btn" onclick="copyWalletAddress()"><i class="fa-solid fa-copy"></i> Copy Address</button>
                 <div id="copyMsg" style="color:#00ffcc; font-size:11px; margin-top:-10px; margin-bottom:10px; display:none;">Address Copied!</div>
 
-                <!-- TXID FORM -->
                 <form id="txidForm" onsubmit="submitTxidForm(event)" style="border-top:1px dashed rgba(255,0,85,0.3); padding-top:15px; margin-top:10px;">
                     <input type="hidden" name="access_key" value="64e790b0-5df7-46e8-a8f4-29328ef00926">
                     <input type="hidden" name="subject" value="URGENT: New Crypto TxID Submitted">
@@ -563,9 +615,46 @@
         </div>
     </div>
 
+    <!-- POPUP MODAL: TERMS & CONDITIONS -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="legal-modal-card">
+            <span class="modal-close" onclick="closeModal('termsModal')">&times;</span>
+            <div class="legal-popup-title">TERMS & CONDITIONS</div>
+            <div class="legal-popup-content">
+                <p>Welcome to UFX Capital. By subscribing to or using our signals, strategy guides, and educational services, you agree to comply with the following terms:</p>
+                <h4>1. Educational Purpose Only</h4>
+                <p>All signals, chart breakdowns, and market outlooks provided by UFX Capital are strictly for educational and informational purposes. We do not provide personalized financial, investment, or legal advice.</p>
+                <h4>2. Risk Acknowledgment</h4>
+                <p>Trading Forex, Crypto, and Financial Options involves significant capital risk and may not be suitable for all investors. You are solely responsible for your trading decisions and capital management.</p>
+                <h4>3. Refund & Cancellation Policy</h4>
+                <p>Due to the immediate digital availability of our proprietary trading signals, strategy PDFs, and private VIP channel access, all sales are final and strictly non-refundable.</p>
+                <h4>4. Intellectual Property</h4>
+                <p>All content provided inside our VIP groups or website remains the property of UFX Capital. Re-sharing, reselling, or redistributing our content without permission is strictly prohibited.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP MODAL: PRIVACY POLICY -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="legal-modal-card">
+            <span class="modal-close" onclick="closeModal('privacyModal')">&times;</span>
+            <div class="legal-popup-title">PRIVACY POLICY</div>
+            <div class="legal-popup-content">
+                <p>At UFX Capital, we respect your privacy and are committed to protecting the personal information you share with us.</p>
+                <h4>1. Information We Collect</h4>
+                <p>We collect basic details such as your Name, Email Address, Telegram Handle, and Payment Transaction IDs when you register or subscribe to our services.</p>
+                <h4>2. How We Use Your Information</h4>
+                <p>Your information is exclusively used to grant you access to our Telegram VIP Channel, send trade setup updates, verify payment receipts, and provide priority customer support.</p>
+                <h4>3. Data Protection</h4>
+                <p>We implement secure procedures to ensure your personal data is protected against unauthorized access, alteration, or disclosure. We never sell or lease your personal information to third parties.</p>
+                <h4>4. Third-Party Services</h4>
+                <p>We use encrypted and reliable payment gateways (like Razorpay and Crypto network nodes) to process payments securely. We do not store your private bank card details or crypto wallet private keys.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT -->
     <script>
-        // Crypto Wallet Addresses Mapping
         const cryptoWallets = {
             'TRC20': 'TP1hUt5spzMv5LoHjAU2yEQusEgj8jNDwb',
             'ERC20': '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
@@ -573,64 +662,52 @@
             'BITCOIN': '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
         };
 
-        // FAQ Toggle Logic
         function toggleFaq(card) {
             const isActive = card.classList.contains('active');
             document.querySelectorAll('.faq-card').forEach(c => c.classList.remove('active'));
-            if (!isActive) {
-                card.classList.add('active');
-            }
+            if (!isActive) card.classList.add('active');
         }
 
-        // Razorpay Modal Handlers
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
         function openRazorpayModal(val) {
-            if (val) {
-                document.getElementById('rzpPlanSelect').value = val;
-            }
-            document.getElementById('razorpayModal').classList.add('active');
-        }
-
-        function closeRazorpayModal() {
-            document.getElementById('razorpayModal').classList.remove('active');
+            if (val) document.getElementById('rzpPlanSelect').value = val;
+            openModal('razorpayModal');
         }
 
         function handleRazorpayPayment(e) {
             e.preventDefault();
             alert('Redirecting to payment gateway...');
-            closeRazorpayModal();
+            closeModal('razorpayModal');
         }
 
-        // Crypto Modal Handlers
         function openCryptoModal(type) {
             document.getElementById('selectedCryptoMethod').value = type;
             document.getElementById('cryptoModalTitle').innerText = `${type} PAYMENT DETAILS`;
             document.getElementById('selectedCryptoLabel').innerText = `${type} Address:`;
             document.getElementById('walletAddressText').innerText = cryptoWallets[type] || 'Address Not Available';
             
-            // Reset state
             document.getElementById('cryptoForm').style.display = 'block';
             document.getElementById('walletDisplayBox').style.display = 'none';
             document.getElementById('copyMsg').style.display = 'none';
             
-            document.getElementById('cryptoModal').classList.add('active');
+            openModal('cryptoModal');
         }
 
-        function closeCryptoModal() {
-            document.getElementById('cryptoModal').classList.remove('active');
-        }
-
-        // Submit Customer Info Step
         function submitCryptoForm(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.innerText = 'SAVING...';
             submitBtn.disabled = true;
 
-            // Pass customer info to TxID form hidden fields
             document.getElementById('txid_cust_name').value = document.getElementById('cust_fullname').value;
             document.getElementById('txid_cust_email').value = document.getElementById('cust_crypto_email').value;
 
-            // Simulate form submission transition
             setTimeout(() => {
                 document.getElementById('cryptoForm').style.display = 'none';
                 document.getElementById('walletDisplayBox').style.display = 'block';
@@ -639,7 +716,6 @@
             }, 600);
         }
 
-        // Copy Wallet Address
         function copyWalletAddress() {
             const text = document.getElementById('walletAddressText').innerText;
             navigator.clipboard.writeText(text).then(() => {
@@ -649,7 +725,6 @@
             });
         }
 
-        // Submit TxID Step
         function submitTxidForm(e) {
             e.preventDefault();
             const txidBtn = document.getElementById('txidBtn');
@@ -660,7 +735,7 @@
                 alert('TxID submitted successfully! Your payment is under verification.');
                 txidBtn.innerText = 'SUBMIT TXID FOR VERIFICATION';
                 txidBtn.disabled = false;
-                closeCryptoModal();
+                closeModal('cryptoModal');
             }, 800);
         }
     </script>
