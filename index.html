@@ -39,7 +39,7 @@
         }
 
         /* Typography */
-        h1, h2, h3, h4, 
+        h1, h2, h3, h4, h5, 
         .logo-title, 
         .plan-price, 
         .plan-duration, 
@@ -49,7 +49,8 @@
         .hero-btn, 
         .badge-best-value, 
         .section-title,
-        .payment-card span {
+        .payment-card span,
+        .legal-popup-card h3 {
             font-family: 'Orbitron', sans-serif !important;
         }
 
@@ -555,7 +556,7 @@
 
         .faq-item.active .faq-answer { display: block; }
 
-        /* FOOTER */
+        /* FOOTER & SOCIAL ICONS */
         footer {
             background: #020102;
             padding: 50px 5% 20px 5%;
@@ -572,7 +573,7 @@
         }
 
         .footer-mission {
-            max-width: 400px;
+            max-width: 380px;
             color: #9ca3af;
             font-size: 13px;
         }
@@ -598,12 +599,62 @@
 
         .footer-contact i { color: var(--primary-red); }
 
+        .social-icons-wrapper {
+            margin-top: 15px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #15060b;
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary-red);
+            background: var(--primary-red);
+            box-shadow: 0 0 12px var(--primary-glow);
+            transform: translateY(-3px);
+        }
+
         .footer-bottom {
             text-align: center;
-            color: #4b5563;
+            color: #6b7280;
             font-size: 12px;
             border-top: 1px solid var(--border-color);
             padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .legal-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .legal-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .legal-links a:hover {
+            color: var(--primary-red);
+            text-decoration: underline;
         }
 
         /* MODAL OVERLAYS */
@@ -634,6 +685,47 @@
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
+        }
+
+        /* LEGAL POPUP STYLING */
+        .legal-popup-card {
+            max-width: 750px !important;
+            padding: 30px !important;
+        }
+
+        .legal-content {
+            max-height: 65vh;
+            overflow-y: auto;
+            padding-right: 12px;
+            font-size: 13px;
+            color: #d1d5db;
+            line-height: 1.7;
+        }
+
+        .legal-content::-webkit-scrollbar {
+            width: 5px;
+        }
+        .legal-content::-webkit-scrollbar-thumb {
+            background: var(--primary-red);
+            border-radius: 4px;
+        }
+
+        .legal-content h4 {
+            color: var(--primary-red);
+            font-size: 14px;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .legal-content ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .legal-content p {
+            margin-bottom: 10px;
         }
 
         .modal-close {
@@ -740,6 +832,7 @@
             nav { flex-wrap: wrap; justify-content: center; }
             .hero h1 { font-size: 36px; }
             .faq-grid { grid-template-columns: 1fr; }
+            .legal-links { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -1032,13 +1125,13 @@
                     <i class="fa-solid fa-plus"></i>
                 </div>
                 <div class="faq-answer">
-                    Please refer to our terms or reach out to our 24/7 Telegram support for plan adjustment inquiries.
+                    All payments are strictly non-refundable. Please read our Terms & Conditions for more details.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER WITH SOCIAL MEDIA & LEGAL POPUPS -->
     <footer id="contact">
         <div class="footer-content">
             <div>
@@ -1054,12 +1147,26 @@
             <div class="footer-contact">
                 <h5>GET IN TOUCH</h5>
                 <p><i class="fa-brands fa-telegram"></i> Telegram: @IM_ARCHIT</p>
-                <p><i class="fa-solid fa-phone"></i> 9649638812</p>
+                <p><i class="fa-solid fa-envelope"></i> Support Email: rkpjalore@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 9649638812</p>
+
+                <!-- SOCIAL MEDIA ICONS -->
+                <div class="social-icons-wrapper">
+                    <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://x.com/rameshkuma78100?s=21" target="_blank" class="social-btn" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://t.me/ufxcapital" target="_blank" class="social-btn" title="Telegram Channel"><i class="fa-brands fa-telegram"></i></a>
+                </div>
             </div>
         </div>
 
         <div class="footer-bottom">
-            &copy; 2026 UFX CAPITAL. All Rights Reserved.
+            <div class="legal-links">
+                <a onclick="openTermsModal()">Terms & Conditions</a>
+                <span>|</span>
+                <a onclick="openPrivacyModal()">Privacy Policy</a>
+            </div>
+            <div>&copy; 2026 UFX CAPITAL. All Rights Reserved.</div>
         </div>
     </footer>
 
@@ -1101,15 +1208,10 @@
             <span class="modal-close" onclick="closeOtherPayModal()">&times;</span>
             <h3 id="otherModalTitle">PAYMENT DETAILS</h3>
 
-            <!-- WEB3FORMS ENDPOINT INTEGRATED -->
             <form action="https://api.web3forms.com/submit" method="POST" id="otherPayForm" onsubmit="handleOtherPaySubmit(event)">
-                
-                <!-- YOUR WEB3FORMS ACCESS KEY -->
                 <input type="hidden" name="access_key" value="64e790b0-5df7-46e8-a8f4-29328ef00926">
-                
                 <input type="hidden" name="Payment_Method" id="hiddenMethodName">
 
-                <!-- STEP 1: 7 DETAILS -->
                 <div id="step1_Details">
                     <div class="modal-field">
                         <label>1. Full Name *</label>
@@ -1143,7 +1245,6 @@
                     <button type="button" onclick="goToStep2()" class="modal-btn">CONTINUE TO PAYMENT</button>
                 </div>
 
-                <!-- STEP 2: ADDRESS DISPLAY + TXID/UTR SUBMIT -->
                 <div id="step2_Payment" style="display: none;">
                     <div class="address-box-display">
                         <div class="addr-title" id="addrTitleLabel">Send payment to:</div>
@@ -1161,6 +1262,126 @@
                 </div>
 
             </form>
+        </div>
+    </div>
+
+    <!-- TERMS & CONDITIONS POPUP MODAL -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal-card legal-popup-card">
+            <span class="modal-close" onclick="closeTermsModal()">&times;</span>
+            <h3>TERMS & CONDITIONS</h3>
+            <div class="legal-content">
+                <h4>INTRODUCTION</h4>
+                <p>Welcome to UFX Capital (“Platform”), which includes ufxcapital.in and all associated official communication channels, including our Telegram community (“Community”).</p>
+                <p>By using or accessing our Platform, purchasing any of our courses, mentorship programs, or subscribing to our educational analysis, you agree to comply with and be bound by the following Terms & Conditions. If you do not agree to these terms, please discontinue use of our Platform immediately.</p>
+
+                <h4>1. PURPOSE OF THE PLATFORM & EDUCATIONAL DISCLAIMER</h4>
+                <ul>
+                    <li><b>Educational & Informational Purpose Only:</b> UFX Capital provides forex market education, market technical analysis, charts, insights, and educational analysis/signals (including, but not limited to, Forex pairs, Gold, Commodities, and Bitcoin/Cryptocurrencies). All content shared on this Platform is strictly for educational, learning, and informational purposes only.</li>
+                    <li><b>No Financial Advice:</b> We are NOT financial advisors, SEBI-registered advisors, or licensed investment managers. Nothing on this Platform constitutes financial, investment, legal, or tax advice. Any analysis or trade setups shared are purely for educational illustration and personal learning.</li>
+                    <li><b>Sole Responsibility:</b> Trading in financial markets carries high risk. Any trade or investment decision you make is solely your own responsibility. You should perform your own research (DYOR) and consult a certified financial advisor before making any financial decisions.</li>
+                </ul>
+
+                <h4>2. NO FINANCIAL LIABILITY & RISK WARNING</h4>
+                <p>Trading Forex, Gold, Bitcoin, and other financial instruments involves substantial risk of loss and is not suitable for every individual. You may lose part or all of your invested capital.</p>
+                <p>UFX Capital, its owners, analysis providers, and team members are not liable for any direct, indirect, special, or consequential losses, damages, or profit losses arising out of the use of or reliance on any market analysis, content, signals, or education provided on this Platform.</p>
+
+                <h4>3. USER CONDUCT</h4>
+                <p>Users of our Platform and Telegram Community agree to adhere to the following rules:</p>
+                <ul>
+                    <li>No harassment, hate speech, misinformation, spamming, self-promotion, threats, or illegal activity.</li>
+                    <li>Any attempt to hack, scrape, harm, exploit, or disrupt our website or services is strictly prohibited.</li>
+                    <li>Violation of user conduct rules may result in immediate suspension or permanent removal from our Community without notice or refund.</li>
+                </ul>
+
+                <h4>4. PAYMENT, FEES & STRICT NO-REFUND POLICY</h4>
+                <p>By making any payment to UFX Capital (including course fees, community mentorship access fees, educational subscription charges, or digital product purchases), you explicitly agree to the following terms:</p>
+                <ul>
+                    <li><b>Non-Refundable:</b> All payments made to UFX Capital are final, binding, and 100% strictly non-refundable under all circumstances.</li>
+                    <li><b>No Exceptions:</b> We do not offer refunds, partial refunds, or cancellations for accidental purchases, change of mind, market losses, dissatisfaction with content/analysis, or non-usage of the services provided.</li>
+                    <li><b>Violation Disqualification:</b> If your access is revoked due to a violation of our community guidelines or terms, you will not be eligible for any refund.</li>
+                    <li><b>Chargebacks & Disputes:</b> Initiating unauthorized chargebacks or fraudulent disputes through bank payment processors will result in a permanent ban across all our platforms and potential legal action.</li>
+                </ul>
+
+                <h4>5. INTELLECTUAL PROPERTY</h4>
+                <p>All materials, website design, text, educational charts, strategy materials, and branding elements are the exclusive intellectual property of UFX Capital. Unauthorized copying, redistribution, resale, or public sharing of our private educational content or signals is strictly prohibited and protected by law.</p>
+
+                <h4>6. THIRD-PARTY LINKS & SERVICES</h4>
+                <p>Our Platform may contain links or recommendations to third-party services, tools, brokers, or platforms (such as Telegram, Discord, or charting tools). UFX Capital does not endorse and is not responsible for the privacy practices, reliability, or content of any third-party services.</p>
+
+                <h4>7. COMMUNITY & TELEGRAM RULES</h4>
+                <p>By joining our Telegram group or channel, you agree to comply with Telegram’s Official Terms of Service as well as UFX Capital moderation guidelines. Moderators retain full rights to restrict access or remove content at their discretion.</p>
+
+                <h4>8. LIMITATION OF LIABILITY</h4>
+                <p>UFX Capital is provided on an "as is" and "as available" basis without any warranties of any kind. We do not guarantee uninterrupted website uptime, complete accuracy of market charts, or trading outcomes.</p>
+
+                <h4>9. AMENDMENTS</h4>
+                <p>We reserve the right to modify or update these Terms & Conditions at any time. Continued use of the UFX Capital Platform following any changes signifies your acceptance of the updated terms.</p>
+            </div>
+            <button class="modal-btn" onclick="closeTermsModal()" style="margin-top:15px;">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- PRIVACY POLICY POPUP MODAL -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal-card legal-popup-card">
+            <span class="modal-close" onclick="closePrivacyModal()">&times;</span>
+            <h3>PRIVACY POLICY</h3>
+            <div class="legal-content">
+                <p>Welcome to UFX Capital (“Platform”, “we”, “our”, or “us”), operating via ufxcapital.in and associated community platforms. We value your privacy and are committed to protecting any information collected through your use of our Platform.</p>
+                <p>This Privacy Policy explains how we collect, use, and protect information when you visit our website, enroll in our educational mentorship programs, or join our community.</p>
+
+                <h4>1. INFORMATION WE COLLECT</h4>
+                <p>We do not require users to create complex personal user accounts on our website. However, information collected may include:</p>
+                <ul>
+                    <li><b>Voluntary Information:</b> Email address, phone number, name, or contact details provided voluntarily via contact forms, course checkout forms, or payment forms.</li>
+                    <li><b>Technical & Analytics Data:</b> Standard technical information such as IP address, device type, browser type, operating system, and geographic region.</li>
+                    <li><b>Usage Data & Cookies:</b> Information collected via cookies regarding your browsing activities on our website.</li>
+                    <li><b>Community Interactions:</b> Messages, text, or content shared voluntarily in our official Telegram educational community.</li>
+                </ul>
+
+                <h4>2. HOW WE USE YOUR INFORMATION</h4>
+                <p>We use the collected information solely for business and operational purposes, including:</p>
+                <ul>
+                    <li>Processing payments and verifying access to our educational programs via third-party payment gateways (e.g., Razorpay).</li>
+                    <li>Maintaining and improving website performance, user experience, and platform security.</li>
+                    <li>Moderating and maintaining safety within our official Telegram educational channels.</li>
+                    <li>Communicating important updates, mentorship details, or legal notices.</li>
+                    <li>Complying with applicable laws and regulatory obligations.</li>
+                </ul>
+                <p>We do NOT sell, rent, or trade your personal data to third parties.</p>
+
+                <h4>3. DATA SHARING & THIRD-PARTY SERVICES</h4>
+                <p>We may share limited data only under the following circumstances:</p>
+                <ul>
+                    <li><b>Service Providers & Payment Gateways:</b> Trusted third-party vendors (such as web hosting providers, analytics tools, and payment gateways like Razorpay) to process transactions and operate our services.</li>
+                    <li><b>Moderation & Safety:</b> Internal team members or community moderators to enforce community rules and ensure user safety.</li>
+                    <li><b>Legal Requirements:</b> Legal authorities or law enforcement agencies if required by law, court order, or governmental regulations.</li>
+                </ul>
+
+                <h4>4. DATA SECURITY</h4>
+                <p>We employ industry-standard technical and organizational security measures to protect your information against unauthorized access, loss, or misuse. However, please note that no transmission over the internet is 100% secure, and users are responsible for keeping their own devices and accounts secure.</p>
+
+                <h4>5. TELEGRAM & THIRD-PARTY PLATFORM DATA</h4>
+                <p>Messages, media, and activities performed within our official Telegram channels are governed by both Telegram’s Official Privacy Policy and UFX Capital community rules. We reserve the right to review and moderate community activity to ensure compliance with our terms.</p>
+
+                <h4>6. COOKIES & TRACKING TECHNOLOGIES</h4>
+                <p>Our website uses standard cookies and analytics tools to enhance performance and analyze website traffic. You can disable cookies at any time through your individual browser settings.</p>
+
+                <h4>7. CHILDREN'S PRIVACY</h4>
+                <p>UFX Capital and its financial education services are intended exclusively for individuals who are 18 years of age or older. We do not knowingly collect personal information from minors.</p>
+
+                <h4>8. CHANGES TO THIS PRIVACY POLICY</h4>
+                <p>We reserve the right to update or modify this Privacy Policy at any time. Any changes will become effective immediately upon posting to ufxcapital.in.</p>
+
+                <h4>CONTACT INFORMATION</h4>
+                <p>If you have any questions, legal inquiries, or concerns regarding this Privacy Policy, please contact us at:</p>
+                <ul>
+                    <li><b>Website:</b> https://ufxcapital.in/</li>
+                    <li><b>Support Email:</b> rkpjalore@gmail.com</li>
+                </ul>
+            </div>
+            <button class="modal-btn" onclick="closePrivacyModal()" style="margin-top:15px;">CLOSE</button>
         </div>
     </div>
 
@@ -1255,12 +1476,33 @@
             document.getElementById('paymentModal').style.display = 'none';
         }
 
+        // Terms & Privacy Modals
+        function openTermsModal() {
+            document.getElementById('termsModal').style.display = 'flex';
+        }
+        function closeTermsModal() {
+            document.getElementById('termsModal').style.display = 'none';
+        }
+
+        function openPrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'flex';
+        }
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'none';
+        }
+
         window.onclick = function(event) {
             if (event.target == document.getElementById('paymentModal')) {
                 closePaymentModal();
             }
             if (event.target == document.getElementById('otherPayModal')) {
                 closeOtherPayModal();
+            }
+            if (event.target == document.getElementById('termsModal')) {
+                closeTermsModal();
+            }
+            if (event.target == document.getElementById('privacyModal')) {
+                closePrivacyModal();
             }
         }
 
