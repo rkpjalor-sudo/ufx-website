@@ -40,7 +40,7 @@
         .stats-single-box {
             max-width: 1200px; margin: 30px auto 50px; padding: 20px 10px;
             border: 1px solid rgba(255, 0, 85, 0.4); border-radius: 12px;
-            background: rgba(13, 17, 23, 0.5); display: flex; justify-around;
+            background: rgba(13, 17, 23, 0.5); display: flex; justify-content: space-around;
             align-items: center; flex-wrap: wrap; gap: 15px;
         }
         .stat-item { display: flex; align-items: center; gap: 12px; }
@@ -484,10 +484,10 @@
         <div class="footer-follow-title">FOLLOW US</div>
         
         <div class="footer-social-icons">
-            <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-            <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzGNqcQ==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://x.com/rameshkuma78100?s=21" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://t.me/ufxcapital" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzGNqcQ==" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/rameshkuma78100?s=21" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://t.me/ufxcapital" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i></a>
         </div>
 
         <div>
@@ -515,19 +515,19 @@
             <div class="modal-card-title">JOIN PREMIUM MEMBERSHIP</div>
             <form onsubmit="handleRazorpayPayment(event)">
                 <div class="modal-field">
-                    <label>Full Name</label>
+                    <label for="cust_name">Full Name</label>
                     <input type="text" id="cust_name" required placeholder="Enter Full Name">
                 </div>
                 <div class="modal-field">
-                    <label>Email Address</label>
+                    <label for="cust_email">Email Address</label>
                     <input type="email" id="cust_email" required placeholder="Enter Email Address">
                 </div>
                 <div class="modal-field">
-                    <label>Mobile Number</label>
+                    <label for="cust_phone">Mobile Number</label>
                     <input type="tel" id="cust_phone" required placeholder="Enter Mobile Number">
                 </div>
                 <div class="modal-field">
-                    <label>Select Plan</label>
+                    <label for="rzpPlanSelect">Select Plan</label>
                     <select id="rzpPlanSelect" required>
                         <option value="35">Starter Plan - $35 (1 Month)</option>
                         <option value="59">Pro Plan - $59 (3 Months)</option>
@@ -554,8 +554,8 @@
 
                 <div class="form-grid">
                     <div class="modal-field form-full">
-                        <label>Select Plan</label>
-                        <select name="Selected_Plan" required>
+                        <label for="cryptoPlanSelect">Select Plan</label>
+                        <select id="cryptoPlanSelect" name="Selected_Plan" required>
                             <option value="1 Month Plan - $35">1 Month Plan - $35</option>
                             <option value="3 Months Plan - $59">3 Months Plan - $59</option>
                             <option value="6 Months Plan - $79">6 Months Plan - $79</option>
@@ -563,304 +563,106 @@
                         </select>
                     </div>
                     <div class="modal-field form-full">
-                        <label>Full Name</label>
+                        <label for="cust_fullname">Full Name</label>
                         <input type="text" id="cust_fullname" name="Full_Name" required placeholder="Enter Full Name">
                     </div>
-                    <div class="modal-field">
-                        <label>Email Address</label>
-                        <input type="email" id="cust_crypto_email" name="Email" required placeholder="Enter Email">
-                    </div>
-                    <div class="modal-field">
-                        <label>Mobile Number</label>
-                        <input type="tel" name="Mobile" required placeholder="Enter Phone Number">
+                    <div class="modal-field form-full">
+                        <label for="cust_crypto_email">Email Address</label>
+                        <input type="email" id="cust_crypto_email" name="Email" required placeholder="Enter Email Address">
                     </div>
                     <div class="modal-field form-full">
-                        <label>PAN / National ID Number</label>
-                        <input type="text" name="PAN_National_ID" required placeholder="Enter PAN or National ID">
-                    </div>
-                    <div class="modal-field">
-                        <label>Country of Residence</label>
-                        <input type="text" name="Country" required placeholder="e.g. India">
-                    </div>
-                    <div class="modal-field">
-                        <label>State / Province</label>
-                        <input type="text" name="State" required placeholder="State">
-                    </div>
-                    <div class="modal-field">
-                        <label>City / Village / Town</label>
-                        <input type="text" name="City" required placeholder="City">
-                    </div>
-                    <div class="modal-field">
-                        <label>Pin Code</label>
-                        <input type="text" name="Pin_Code" required placeholder="Pincode">
-                    </div>
-                    <div class="modal-field form-full">
-                        <label>Full Address</label>
-                        <textarea name="Full_Address" rows="2" required placeholder="Enter Complete Address"></textarea>
+                        <label for="cust_txid">Transaction Hash / TXID</label>
+                        <input type="text" id="cust_txid" name="Transaction_Hash" required placeholder="Paste TXID / Hash after transfer">
                     </div>
                 </div>
-                <button type="submit" id="submitBtn" class="modal-btn">SUBMIT & PROCEED TO PAYMENT</button>
+
+                <div class="wallet-display-container" id="walletDisplayArea" style="display: block;">
+                    <p style="font-size: 13px; color: #d1d5db; margin-bottom: 5px;">Send exact amount to address below:</p>
+                    <div class="wallet-box" id="walletAddressBox">0x0000000000000000000000000000000000000000</div>
+                    <button type="button" class="copy-btn" onclick="copyWalletAddress()">COPY ADDRESS</button>
+                </div>
+
+                <button type="submit" class="modal-btn">SUBMIT ORDER</button>
             </form>
-
-            <div id="walletDisplayBox" class="wallet-display-container">
-                <i class="fa-solid fa-circle-check" style="font-size: 32px; color: #00ff55; margin-bottom: 8px;"></i>
-                <h4 style="color:#ffffff; margin: 0 0 10px 0; font-family:'Orbitron', sans-serif; font-size:16px;">Details Saved! Make Payment</h4>
-                <p style="color:#a0aec0; font-size:12px; margin-bottom:12px;">Send exact crypto amount to the wallet address below:</p>
-                
-                <div style="font-weight:bold; color:#ff0055; font-size:13px;" id="selectedCryptoLabel">TRC20 (USDT) Address:</div>
-                <div class="wallet-box" id="walletAddressText">TP1hUt5spzMv5LoHjAU2yEQusEgj8jNDwb</div>
-                
-                <button class="copy-btn" onclick="copyWalletAddress()"><i class="fa-solid fa-copy"></i> Copy Address</button>
-                <div id="copyMsg" style="color:#00ff55; font-size:11px; margin-top:-10px; margin-bottom:10px; display:none;">Address Copied!</div>
-
-                <form id="txidForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="submitTxidForm(event)" style="border-top:1px dashed rgba(255,0,85,0.3); padding-top:15px; margin-top:10px;">
-                    <input type="hidden" name="access_key" value="64e790b0-5df7-46e8-a8f4-29328ef00926">
-                    <input type="hidden" name="subject" value="URGENT: New Crypto TxID Submitted">
-                    <input type="hidden" name="from_name" value="UFX TxID Verification">
-                    <input type="hidden" name="Customer_Name" id="txid_cust_name">
-                    <input type="hidden" name="Customer_Email" id="txid_cust_email">
-                    
-                    <div class="modal-field">
-                        <label style="color:#ff0055; text-align:left;">Enter Transaction Hash / TxID Code:</label>
-                        <input type="text" name="Transaction_TxID" id="txid_input" required placeholder="Paste TxID / Hash code here after payment">
-                    </div>
-                    <button type="submit" id="txidBtn" class="modal-btn">SUBMIT TXID FOR VERIFICATION</button>
-                </form>
-            </div>
         </div>
     </div>
 
-    <!-- MODAL: PHONEPE / UPI PAYMENT -->
-    <div class="modal-overlay" id="phonepeModal">
-        <div class="crypto-modal-card">
-            <span class="modal-close" onclick="closeModal('phonepeModal')">&times;</span>
-            <div class="modal-card-title">PHONEPE / UPI PAYMENT</div>
-            
-            <!-- STEP 1: CLIENT DETAILS FORM -->
-            <form id="phonepeForm" onsubmit="submitPhonePeForm(event)">
-                <div class="form-grid">
-                    <div class="modal-field form-full">
-                        <label>Select Plan</label>
-                        <select id="upi_plan" name="Selected_Plan" required>
-                            <option value="1 Month Plan - $35 (₹2,999)">1 Month Plan - $35 (₹2,999)</option>
-                            <option value="3 Months Plan - $59 (₹4,999)">3 Months Plan - $59 (₹4,999)</option>
-                            <option value="6 Months Plan - $79 (₹6,999)">6 Months Plan - $79 (₹6,999)</option>
-                            <option value="Lifetime Plan - $199 (₹16,999)">Lifetime VIP Plan - $199 (₹16,999)</option>
-                        </select>
-                    </div>
-                    <div class="modal-field form-full">
-                        <label>Full Name</label>
-                        <input type="text" id="upi_cust_name" required placeholder="Enter Full Name">
-                    </div>
-                    <div class="modal-field">
-                        <label>Email Address</label>
-                        <input type="email" id="upi_cust_email" required placeholder="Enter Email">
-                    </div>
-                    <div class="modal-field">
-                        <label>Mobile Number</label>
-                        <input type="tel" id="upi_cust_phone" required placeholder="Enter Mobile Number">
-                    </div>
-                </div>
-                <button type="submit" class="modal-btn">PROCEED TO UPI PAYMENT</button>
-            </form>
-
-            <!-- STEP 2: DISPLAY UPI & UTR FIELD -->
-            <div id="upiDisplayBox" class="wallet-display-container">
-                <i class="fa-solid fa-qrcode" style="font-size: 36px; color: #00ff55; margin-bottom: 8px;"></i>
-                <h4 style="color:#ffffff; margin: 0 0 10px 0; font-family:'Orbitron', sans-serif; font-size:16px;">Pay via PhonePe / GPay / Paytm</h4>
-                <p style="color:#a0aec0; font-size:12px; margin-bottom:12px;">Send payment to the UPI ID below & enter 12-Digit UTR Number:</p>
-                
-                <div style="font-weight:bold; color:#ff0055; font-size:13px;">UFX Capital UPI ID:</div>
-                <div class="wallet-box" id="upiIdText">9649638812@ybl</div>
-                
-                <a href="upi://pay?pa=9649638812@ybl&pn=UFX%20CAPITAL&cu=INR" class="copy-btn" style="display:inline-block; text-decoration:none; margin-bottom:10px;"><i class="fa-solid fa-paper-plane"></i> Open UPI App</a>
-                <button class="copy-btn" onclick="copyUpiId()" style="background:#333; margin-left:5px;"><i class="fa-solid fa-copy"></i> Copy UPI</button>
-                <div id="upiCopyMsg" style="color:#00ff55; font-size:11px; margin-top:-5px; margin-bottom:10px; display:none;">UPI ID Copied!</div>
-
-                <!-- SUBMIT UTR FORM -->
-                <form action="https://api.web3forms.com/submit" method="POST" onsubmit="submitUtrForm(event)" style="border-top:1px dashed rgba(255,0,85,0.3); padding-top:15px; margin-top:10px;">
-                    <input type="hidden" name="access_key" value="64e790b0-5df7-46e8-a8f4-29328ef00926">
-                    <input type="hidden" name="subject" value="NEW UPI PAYMENT: UTR Verification Submitted">
-                    <input type="hidden" name="from_name" value="UFX PhonePe Payment">
-                    <input type="hidden" name="Payment_Method" value="PhonePe / UPI">
-                    <input type="hidden" name="Customer_Name" id="final_upi_name">
-                    <input type="hidden" name="Customer_Email" id="final_upi_email">
-                    <input type="hidden" name="Customer_Phone" id="final_upi_phone">
-                    <input type="hidden" name="Selected_Plan" id="final_upi_plan">
-                    
-                    <div class="modal-field">
-                        <label style="color:#ff0055; text-align:left; font-weight:bold;">Enter 12-Digit UTR / Transaction Ref No:</label>
-                        <input type="text" name="UTR_Ref_Number" id="utr_input" required placeholder="e.g. 402819284910">
-                    </div>
-                    <button type="submit" id="utrBtn" class="modal-btn">SUBMIT UTR FOR VERIFICATION</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- POPUP MODAL: TERMS & CONDITIONS -->
+    <!-- MODAL: TERMS & CONDITIONS -->
     <div class="modal-overlay" id="termsModal">
         <div class="legal-modal-card">
             <span class="modal-close" onclick="closeModal('termsModal')">&times;</span>
             <div class="legal-popup-title">TERMS & CONDITIONS</div>
             <div class="legal-popup-content">
-                <p>Welcome to UFX Capital. By accessing, subscribing to, or using our website, signal services, proprietary strategy guides, or VIP Telegram group access, you acknowledge that you have read, understood, and strictly agree to be bound by the following Terms and Conditions:</p>
-                
-                <h4>1. Educational & Informational Purpose Only</h4>
-                <p>All content, market analysis, chart breakdowns, live entry/exit signals, and risk management guidelines provided by UFX Capital are strictly intended for educational and informational purposes. UFX Capital is not a registered financial advisor or broker. Nothing on this website constitutes personalized financial, investment, legal, or tax advice.</p>
-                
-                <h4>2. Risk Acknowledgment & Market Volatility</h4>
-                <p>Trading Forex, Cryptocurrency, Options, and Commodities carries high risk and may not be suitable for all investors. Market volatility can work against you as well as for you. You are solely responsible for your capital, leverage choices, and trading decisions. UFX Capital shall not be held liable for any financial loss or damage incurred directly or indirectly from following our signals or strategies.</p>
-                
-                <h4>3. Strict No-Refund & Subscription Policy</h4>
-                <p><strong>ALL PAYMENTS AND SUBSCRIPTION SALES ARE 100% FINAL AND NON-REFUNDABLE.</strong> Due to the immediate digital delivery and proprietary nature of our intellectual property—including real-time trade signals, strategy PDFs, and private VIP channel entry—we do not issue refunds under any circumstances once access is granted or payment is processed. You may cancel your subscription renewal at any time before your next billing cycle.</p>
-                
-                <h4>4. Intellectual Property Rights</h4>
-                <p>All materials, including strategy documents, trade logic graphics, logo marks, and proprietary signal indicators, belong exclusively to UFX Capital. Unauthorized copying, leaking, reselling, or forwarding of content from our VIP channels to third parties will result in immediate lifetime termination without refund and potential legal action.</p>
-
-                <h4>5. Modification of Service</h4>
-                <p>UFX Capital reserves the right to modify, pause, or update trading strategies, schedules, or pricing structures at any time to adapt to evolving market conditions without prior individual notice.</p>
+                <h4>1. Introduction</h4>
+                <p>Welcome to UFX Capital. By using our website or subscribing to our services, you agree to comply with these terms.</p>
+                <h4>2. Educational Disclaimer</h4>
+                <p>All information and signals provided are strictly for educational purposes and do not constitute financial advice. Trading Forex and Crypto carries risk.</p>
+                <h4>3. Refund Policy</h4>
+                <p>Due to the digital nature of our services, all payments are final and non-refundable once access is granted.</p>
             </div>
         </div>
     </div>
 
-    <!-- POPUP MODAL: PRIVACY POLICY -->
+    <!-- MODAL: PRIVACY POLICY -->
     <div class="modal-overlay" id="privacyModal">
         <div class="legal-modal-card">
             <span class="modal-close" onclick="closeModal('privacyModal')">&times;</span>
             <div class="legal-popup-title">PRIVACY POLICY</div>
             <div class="legal-popup-content">
-                <p>At UFX Capital, we respect your right to privacy and are committed to maintaining the confidentiality and security of your personal data. This Privacy Policy details how we collect, handle, and safeguard your information.</p>
-                
-                <h4>1. Information We Collect</h4>
-                <p>We only collect essential information required to verify subscription payments and grant access to our services. This includes your Full Name, Email Address, Phone Number, Telegram Handle, Transaction Hashes (TxID / UTR Numbers), and Country/State of residence during checkout.</p>
-                
-                <h4>2. Purpose of Data Collection</h4>
-                <p>Your information is used exclusively to:
-                <br>• Process payment verifications and grant VIP Telegram channel links.
-                <br>• Send crucial trading alerts, strategy PDF updates, or customer support responses.
-                <br>• Maintain internal recordkeeping and legal/tax compliance.</p>
-                
-                <h4>3. Zero Data Sharing Policy</h4>
-                <p>We respect your confidentiality. UFX Capital does not sell, rent, lease, or distribute your personal data to third-party marketing companies, advertisers, or spammers. Your data is strictly kept internal.</p>
-                
-                <h4>4. Payment Security</h4>
-                <p>We process payments through encrypted channels, decentralized blockchain networks (Crypto TRC20/BEP20/BTC), and standard secure UPI interfaces. We never store credit card security codes, banking passwords, or crypto wallet private keys on our servers.</p>
-
-                <h4>5. Contact Us</h4>
-                <p>If you have any questions or data verification queries regarding our Privacy Policy, please reach out to our official support team at: <strong>rkpjalore@gmail.com</strong>.</p>
+                <h4>1. Information Collection</h4>
+                <p>We collect essential personal information such as name, email, and payment confirmation details to provide membership access.</p>
+                <h4>2. Data Security</h4>
+                <p>Your information is stored securely and will never be shared or sold to third parties.</p>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
     <script>
-        const cryptoWallets = {
-            'TRC20': 'TP1hUt5spzMv5LoHjAU2yEQusEgj8jNDwb',
-            'ERC20': '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
-            'BEP20': '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
-            'BITCOIN': '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
-        };
-
         function toggleFaq(card) {
-            const isActive = card.classList.contains('active');
-            document.querySelectorAll('.faq-card').forEach(c => c.classList.remove('active'));
-            if (!isActive) card.classList.add('active');
+            card.classList.toggle('active');
         }
 
-        function openModal(id) {
-            document.getElementById(id).classList.add('active');
-        }
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
         }
 
-        function openRazorpayModal(val) {
-            if (val) document.getElementById('rzpPlanSelect').value = val;
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function openRazorpayModal(planPrice) {
+            if (planPrice) {
+                document.getElementById('rzpPlanSelect').value = planPrice;
+            }
             openModal('razorpayModal');
-        }
-
-        function handleRazorpayPayment(e) {
-            e.preventDefault();
-            alert('Redirecting to payment gateway...');
-            closeModal('razorpayModal');
         }
 
         function openCryptoModal(type) {
             document.getElementById('selectedCryptoMethod').value = type;
-            document.getElementById('cryptoModalTitle').innerText = `${type} PAYMENT DETAILS`;
-            document.getElementById('selectedCryptoLabel').innerText = `${type} Address:`;
-            document.getElementById('walletAddressText').innerText = cryptoWallets[type] || 'Address Not Available';
-            
-            document.getElementById('cryptoForm').style.display = 'block';
-            document.getElementById('walletDisplayBox').style.display = 'none';
-            document.getElementById('copyMsg').style.display = 'none';
-            
+            document.getElementById('cryptoModalTitle').innerText = type + ' PAYMENT DETAILS';
             openModal('cryptoModal');
         }
 
-        function submitCryptoForm(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerText = 'SAVING...';
-            submitBtn.disabled = true;
+        function openPhonePeModal() {
+            alert('PhonePe / UPI payment selected.');
+        }
 
-            document.getElementById('txid_cust_name').value = document.getElementById('cust_fullname').value;
-            document.getElementById('txid_cust_email').value = document.getElementById('cust_crypto_email').value;
+        function handleRazorpayPayment(event) {
+            event.preventDefault();
+            alert('Processing Razorpay payment...');
+            closeModal('razorpayModal');
+        }
 
-            setTimeout(() => {
-                document.getElementById('cryptoForm').style.display = 'none';
-                document.getElementById('walletDisplayBox').style.display = 'block';
-                submitBtn.innerText = 'SUBMIT & PROCEED TO PAYMENT';
-                submitBtn.disabled = false;
-            }, 600);
+        function submitCryptoForm(event) {
+            event.preventDefault();
+            alert('Crypto transaction submitted for verification.');
+            closeModal('cryptoModal');
         }
 
         function copyWalletAddress() {
-            const text = document.getElementById('walletAddressText').innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const msg = document.getElementById('copyMsg');
-                msg.style.display = 'block';
-                setTimeout(() => { msg.style.display = 'none'; }, 2000);
-            });
-        }
-
-        function submitTxidForm(e) {
-            const txidBtn = document.getElementById('txidBtn');
-            txidBtn.innerText = 'SENDING...';
-        }
-
-        /* PHONEPE / UPI MODAL FUNCTIONS */
-        function openPhonePeModal() {
-            document.getElementById('phonepeForm').style.display = 'block';
-            document.getElementById('upiDisplayBox').style.display = 'none';
-            document.getElementById('upiCopyMsg').style.display = 'none';
-            openModal('phonepeModal');
-        }
-
-        function submitPhonePeForm(e) {
-            e.preventDefault();
-            document.getElementById('final_upi_name').value = document.getElementById('upi_cust_name').value;
-            document.getElementById('final_upi_email').value = document.getElementById('upi_cust_email').value;
-            document.getElementById('final_upi_phone').value = document.getElementById('upi_cust_phone').value;
-            document.getElementById('final_upi_plan').value = document.getElementById('upi_plan').value;
-
-            document.getElementById('phonepeForm').style.display = 'none';
-            document.getElementById('upiDisplayBox').style.display = 'block';
-        }
-
-        function copyUpiId() {
-            const upi = document.getElementById('upiIdText').innerText;
-            navigator.clipboard.writeText(upi).then(() => {
-                const msg = document.getElementById('upiCopyMsg');
-                msg.style.display = 'block';
-                setTimeout(() => { msg.style.display = 'none'; }, 2000);
-            });
-        }
-
-        function submitUtrForm(e) {
-            const utrBtn = document.getElementById('utrBtn');
-            utrBtn.innerText = 'SUBMITTING UTR...';
+            const address = document.getElementById('walletAddressBox').innerText;
+            navigator.clipboard.writeText(address);
+            alert('Wallet address copied to clipboard!');
         }
     </script>
 </body>
