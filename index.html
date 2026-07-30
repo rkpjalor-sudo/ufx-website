@@ -1095,14 +1095,17 @@
         </div>
     </div>
 
-    <!-- OTHER PAYMENT MODAL (STEP 1: 7 DETAILS & STEP 2: ADDRESS + TXID/UTR) -->
+    <!-- OTHER PAYMENT MODAL (WITH WEB3FORMS INTEGRATION) -->
     <div class="modal-overlay" id="otherPayModal">
         <div class="modal-card">
             <span class="modal-close" onclick="closeOtherPayModal()">&times;</span>
             <h3 id="otherModalTitle">PAYMENT DETAILS</h3>
 
-            <!-- FORM SUBMISSION VIA FORMSPREE DIRECT TO RKPJALORE@GMAIL.COM -->
-            <form action="https://formspree.io/f/rkpjalore@gmail.com" method="POST" id="otherPayForm" onsubmit="handleOtherPaySubmit(event)">
+            <!-- WEB3FORMS ENDPOINT INTEGRATED -->
+            <form action="https://api.web3forms.com/submit" method="POST" id="otherPayForm" onsubmit="handleOtherPaySubmit(event)">
+                
+                <!-- YOUR WEB3FORMS ACCESS KEY -->
+                <input type="hidden" name="access_key" value="64e790b0-5df7-46e8-a8f4-29328ef00926">
                 
                 <input type="hidden" name="Payment_Method" id="hiddenMethodName">
 
