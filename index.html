@@ -3,67 +3,541 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UFX CAPITAL - Smart Trading Solutions</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>UFX CAPITAL - Premium Financial & Trading Education</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+        /* CSS RESET & VARIABLES */
+        :root {
+            --bg-color: #050505;
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --gold-primary: #D4AF37;
+            --gold-light: #F3E5AB;
+            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            --text-color: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-gold: rgba(212, 175, 55, 0.25);
+            --border-glow: rgba(212, 175, 55, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* CURSOR GLOW EFFECT */
+        .cursor-glow {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(0,0,0,0) 70%);
+            position: fixed;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        /* LOADER */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: #000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 60px; height: 60px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--gold-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* GLASSMORPHISM UI */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 24px; font-weight: 800;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 15px; font-weight: 500;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold-primary); }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 120px 20px 60px;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.08) 0%, rgba(5,5,5,1) 80%);
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 56px; margin-bottom: 20px; line-height: 1.2;
+        }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 18px; color: var(--text-muted);
+            max-width: 650px; margin: 0 auto 30px;
+        }
+
+        /* BUTTONS */
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: #000; font-weight: 700;
+            padding: 14px 36px; border-radius: 30px;
+            border: none; cursor: pointer; text-decoration: none;
+            display: inline-block; transition: 0.3s;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* SECTIONS */
+        .section { padding: 80px 8%; }
+        .section-title {
+            font-family: 'Cinzel', serif; font-size: 38px;
+            text-align: center; margin-bottom: 50px;
+        }
+
+        /* PRICING GRID */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .price-card {
+            padding: 40px 25px; text-align: center;
+            transition: 0.3s; position: relative;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold-primary);
+        }
+
+        .price-title { font-family: 'Cinzel', serif; font-size: 22px; margin-bottom: 15px; }
+        .price-btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 25px; }
+
+        .btn-manual {
+            background: transparent; color: var(--gold-primary);
+            border: 1px solid var(--gold-primary);
+            padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600;
+        }
+
+        /* MODAL STYLES */
+        .modal {
+            display: none; position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.85); z-index: 2000;
+            justify-content: center; align-items: center; overflow-y: auto; padding: 20px;
+        }
+
+        .modal-content {
+            width: 100%; max-width: 550px; padding: 30px; position: relative;
+        }
+
+        .close-modal {
+            position: absolute; top: 15px; right: 20px; color: var(--text-muted);
+            font-size: 24px; cursor: pointer;
+        }
+
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 5px; }
+        .form-control {
+            width: 100%; padding: 12px; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-gold); border-radius: 8px; color: #fff;
+        }
+
+        .pay-options {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 15px 0;
+        }
+
+        .pay-opt-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border-gold);
+            color: #fff; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 12px;
+        }
+
+        .pay-opt-btn.active {
+            background: var(--gold-primary); color: #000; font-weight: bold;
+        }
+
+        .address-box {
+            background: #000; padding: 12px; border-radius: 8px;
+            word-break: break-all; font-size: 13px; margin: 10px 0; border: 1px dashed var(--gold-primary);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #000; border-top: 1px solid var(--border-gold);
+            padding: 40px 8% 20px; text-align: center;
+        }
+
+        .social-icons { display: flex; justify-content: center; gap: 20px; margin-bottom: 25px; }
+        .social-icons a {
+            color: var(--gold-primary); font-size: 20px; transition: 0.3s;
+        }
+        .social-icons a:hover { transform: scale(1.2); }
+
+        .footer-links { display: flex; justify-content: center; gap: 20px; list-style: none; margin-bottom: 20px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 36px; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
-    <header class="navbar">
-        <div class="container nav-container">
-            <a href="#" class="logo">UFX <span>CAPITAL</span></a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#courses">Courses</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#contact" class="btn-nav">Contact Us</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Cursor Glow Effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Page Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <p style="margin-top: 15px; color: var(--gold-primary); font-family: 'Cinzel'; letter-spacing: 2px;">UFX CAPITAL</p>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">UFX CAPITAL</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="container hero-content">
-            <h1>Master the Art of <span>Trading & Investment</span></h1>
-            <p>Elevate your financial future with UFX Capital. Learn proven strategies, advanced analysis, and risk management from industry experts.</p>
-            <div class="hero-btns">
-                <a href="#courses" class="btn primary-btn">Explore Courses</a>
-                <a href="#contact" class="btn secondary-btn">Get Started</a>
+        <div>
+            <h1 class="hero-title">Institutional Trading <br><span class="gold-text">Mastery Course</span></h1>
+            <p class="hero-subtitle">Learn Smart Money Concepts, Price Action, & Risk Management directly from industry professionals.</p>
+            <a href="#pricing" class="btn-gold">Explore Membership</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">Why Choose <span class="gold-text">UFX Capital</span></h2>
+        <div class="pricing-grid">
+            <div class="glass-card price-card">
+                <i class="fa-solid fa-chart-line" style="font-size:30px; color:var(--gold-primary); margin-bottom:15px;"></i>
+                <h3 class="price-title">Smart Money Concepts</h3>
+                <p style="color:var(--text-muted); font-size:14px;">Master Order Blocks, Liquidity Sweeps, and Bank Level Trading Strategies.</p>
+            </div>
+            <div class="glass-card price-card">
+                <i class="fa-solid fa-shield-halved" style="font-size:30px; color:var(--gold-primary); margin-bottom:15px;"></i>
+                <h3 class="price-title">Risk Management</h3>
+                <p style="color:var(--text-muted); font-size:14px;">Capital Protection Blueprint used by top proprietary trading firms worldwide.</p>
+            </div>
+            <div class="glass-card price-card">
+                <i class="fa-solid fa-users" style="font-size:30px; color:var(--gold-primary); margin-bottom:15px;"></i>
+                <h3 class="price-title">Live Trading Mentorship</h3>
+                <p style="color:var(--text-muted); font-size:14px;">Real-time analysis, weekly live sessions, and active community chat access.</p>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="about" class="features">
-        <div class="container">
-            <h2 class="section-title">Why Choose <span>UFX Capital?</span></h2>
-            <div class="grid-3">
-                <div class="card">
-                    <h3>Expert Mentorship</h3>
-                    <p>Learn directly from profitable traders with years of real market experience.</p>
-                </div>
-                <div class="card">
-                    <h3>Live Trading Sessions</h3>
-                    <p>Watch live market analysis and understand real-time execution tactics.</p>
-                </div>
-                <div class="card">
-                    <h3>Risk Management</h3>
-                    <p>Protect your capital with institutional-grade risk management strategies.</p>
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <h2 class="section-title">Membership <span class="gold-text">Plans</span></h2>
+        <div class="pricing-grid">
+            
+            <!-- 1 Month Plan -->
+            <div class="glass-card price-card">
+                <h3 class="price-title">1 Month</h3>
+                <p style="color:var(--text-muted); margin-bottom: 20px;">Basic Mentorship</p>
+                <a href="https://rzp.io/rzp/7fvTMz0" target="_blank" class="btn-gold" style="width:100%;">Razorpay Pay</a>
+                <div class="price-btn-group">
+                    <button class="btn-manual" onclick="openManualModal('1 Month Plan')">Crypto / UPI Pay</button>
                 </div>
             </div>
+
+            <!-- 3 Months Plan -->
+            <div class="glass-card price-card">
+                <h3 class="price-title">3 Months</h3>
+                <p style="color:var(--text-muted); margin-bottom: 20px;">Advanced Trader</p>
+                <a href="https://rzp.io/rzp/gTDKyKYx" target="_blank" class="btn-gold" style="width:100%;">Razorpay Pay</a>
+                <div class="price-btn-group">
+                    <button class="btn-manual" onclick="openManualModal('3 Months Plan')">Crypto / UPI Pay</button>
+                </div>
+            </div>
+
+            <!-- 6 Months Plan -->
+            <div class="glass-card price-card">
+                <h3 class="price-title">6 Months</h3>
+                <p style="color:var(--text-muted); margin-bottom: 20px;">PRO Mastery</p>
+                <a href="https://rzp.io/rzp/mXzHhVTS" target="_blank" class="btn-gold" style="width:100%;">Razorpay Pay</a>
+                <div class="price-btn-group">
+                    <button class="btn-manual" onclick="openManualModal('6 Months Plan')">Crypto / UPI Pay</button>
+                </div>
+            </div>
+
+            <!-- Lifetime Plan -->
+            <div class="glass-card price-card" style="border-color: var(--gold-primary);">
+                <h3 class="price-title gold-text">Lifetime Access</h3>
+                <p style="color:var(--text-muted); margin-bottom: 20px;">VIP Full Package</p>
+                <a href="https://rzp.io/rzp/ZtFoBzi" target="_blank" class="btn-gold" style="width:100%;">Razorpay Pay</a>
+                <div class="price-btn-group">
+                    <button class="btn-manual" onclick="openManualModal('Lifetime Access Plan')">Crypto / UPI Pay</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Manual Payment Modal (UPI & Crypto Flow) -->
+    <div id="manualModal" class="modal">
+        <div class="glass-card modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 class="gold-text" style="font-family:'Cinzel'; margin-bottom: 15px;">Manual Payment Flow</h3>
+            
+            <form id="checkoutForm">
+                <input type="hidden" id="selectedPlan">
+                
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="custName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="custEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="custPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>PAN / National ID Number *</label>
+                    <input type="text" id="custPan" class="form-control" required>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <div class="form-group">
+                        <label>Country *</label>
+                        <input type="text" id="custCountry" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>State *</label>
+                        <input type="text" id="custState" class="form-control" required>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <div class="form-group">
+                        <label>City *</label>
+                        <input type="text" id="custCity" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Pin Code *</label>
+                        <input type="text" id="custPin" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Full Address *</label>
+                    <textarea id="custAddress" class="form-control" rows="2" required></textarea>
+                </div>
+
+                <label style="font-size:13px; color:var(--text-muted);">Select Payment Method:</label>
+                <div class="pay-options">
+                    <button type="button" class="pay-opt-btn active" onclick="selectPayMethod('UPI', '9649638812@ybl')">UPI</button>
+                    <button type="button" class="pay-opt-btn" onclick="selectPayMethod('TRC20', 'TP1hUt5spzMv5LoHjAU2yEQus-Egj8jNDwb')">TRC20</button>
+                    <button type="button" class="pay-opt-btn" onclick="selectPayMethod('ERC20', '0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab')">ERC20</button>
+                    <button type="button" class="pay-opt-btn" onclick="selectPayMethod('BEP20', '0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab')">BEP20</button>
+                    <button type="button" class="pay-opt-btn" onclick="selectPayMethod('Bitcoin', '143odbY9gkjo8de7NizwFuz-WD11Muw9QW4')">Bitcoin</button>
+                </div>
+
+                <div class="address-box">
+                    <p style="font-size: 11px; color:var(--text-muted);" id="methodNameLabel">UPI ID:</p>
+                    <span id="paymentAddressText">9649638812@ybl</span>
+                    <button type="button" onclick="copyAddress()" style="margin-left: 10px; background:var(--gold-primary); border:none; padding: 2px 8px; border-radius: 4px; cursor:pointer; font-weight:bold;">Copy</button>
+                </div>
+
+                <div class="form-group">
+                    <label id="txLabel">Enter UTR ID / Transaction Hash *</label>
+                    <input type="text" id="txIdInput" class="form-control" placeholder="Required for verification" required>
+                </div>
+
+                <button type="submit" class="btn-gold" style="width: 100%; margin-top: 10px;">Submit Order Confirmation</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Get in <span class="gold-text">Touch</span></h2>
+        <div style="max-width: 600px; margin:0 auto; text-align:center;">
+            <p style="color:var(--text-muted); margin-bottom: 20px;">Have questions? Reach out directly via email or our official social channels.</p>
+            <p><i class="fa-solid fa-envelope gold-text"></i> rkpjalore@gmail.com</p>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container footer-content">
-            <p>&copy; 2026 UFX CAPITAL. All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="https://t.me/ufxcapital" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/rameshkuma78100?s=21" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
         </div>
+        <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+        </ul>
+        <p style="color: var(--text-muted); font-size: 12px;">&copy; 2026 UFX CAPITAL. All Rights Reserved.</p>
     </footer>
 
+    <!-- JavaScript Core -->
+    <script>
+        // Init EmailJS (Replace 'YOUR_PUBLIC_KEY' with your EmailJS Public Key)
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+
+        // Hide Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        });
+
+        // Cursor Glow Follower
+        const glow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // Modal Handlers
+        let selectedPayMethodName = 'UPI';
+        let currentAddress = '9649638812@ybl';
+
+        function openManualModal(planName) {
+            document.getElementById('selectedPlan').value = planName;
+            document.getElementById('manualModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('manualModal').style.display = 'none';
+        }
+
+        function selectPayMethod(method, addr) {
+            selectedPayMethodName = method;
+            currentAddress = addr;
+
+            document.querySelectorAll('.pay-opt-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('methodNameLabel').innerText = method + " Address / ID:";
+            document.getElementById('paymentAddressText').innerText = addr;
+
+            if(method === 'UPI') {
+                document.getElementById('txLabel').innerText = "Enter UTR ID (12 Digits) *";
+            } else {
+                document.getElementById('txLabel').innerText = "Enter TXID / Transaction Hash *";
+            }
+        }
+
+        function copyAddress() {
+            navigator.clipboard.writeText(currentAddress);
+            alert("Address copied: " + currentAddress);
+        }
+
+        // Handle Manual Payment Form Submit & Send Email
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                plan: document.getElementById('selectedPlan').value,
+                name: document.getElementById('custName').value,
+                email: document.getElementById('custEmail').value,
+                phone: document.getElementById('custPhone').value,
+                pan: document.getElementById('custPan').value,
+                country: document.getElementById('custCountry').value,
+                state: document.getElementById('custState').value,
+                city: document.getElementById('custCity').value,
+                pin: document.getElementById('custPin').value,
+                address: document.getElementById('custAddress').value,
+                method: selectedPayMethodName,
+                tx_id: document.getElementById('txIdInput').value,
+                date: new Date().toLocaleString()
+            };
+
+            // Send via EmailJS
+            // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with actual values from EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
+                .then(function() {
+                    alert('Payment Details Submitted Successfully! We will send a confirmation to ' + formData.email);
+                    closeModal();
+                    document.getElementById('checkoutForm').reset();
+                }, function(error) {
+                    alert('Submission Error. Please contact support at rkpjalore@gmail.com');
+                    console.log('FAILED...', error);
+                });
+        });
+    </script>
 </body>
 </html>
