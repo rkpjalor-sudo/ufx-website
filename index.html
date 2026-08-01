@@ -1,5 +1,4 @@
-```python
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1192,21 +1191,21 @@ html_content = """<!DOCTYPE html>
 
             const subject = encodeURIComponent(`UFX VIP Order Confirmation - ${fullName}`);
             const bodyText = encodeURIComponent(
-                `UFX CAPITAL MANUAL PAYMENT ORDER\\n` +
-                `------------------------------------\\n` +
-                `Selected Plan Price: $${planPrice}\\n` +
-                `Payment Method Selected: ${currentSelectedMethod}\\n` +
-                `Transaction ID / Hash: ${txid}\\n\\n` +
-                `CLIENT DETAILS:\\n` +
-                `Full Name: ${fullName}\\n` +
-                `Email: ${email}\\n` +
-                `Phone: ${phone}\\n` +
-                `PAN / National ID: ${pan}\\n` +
-                `Country: ${country}\\n` +
-                `State: ${state}\\n` +
-                `City / Village: ${city}\\n` +
-                `Pin Code: ${pincode}\\n` +
-                `Full Address: ${address}\\n`
+                `UFX CAPITAL MANUAL PAYMENT ORDER\n` +
+                `------------------------------------\n` +
+                `Selected Plan Price: $${planPrice}\n` +
+                `Payment Method Selected: ${currentSelectedMethod}\n` +
+                `Transaction ID / Hash: ${txid}\n\n` +
+                `CLIENT DETAILS:\n` +
+                `Full Name: ${fullName}\n` +
+                `Email: ${email}\n` +
+                `Phone: ${phone}\n` +
+                `PAN / National ID: ${pan}\n` +
+                `Country: ${country}\n` +
+                `State: ${state}\n` +
+                `City / Village: ${city}\n` +
+                `Pin Code: ${pincode}\n` +
+                `Full Address: ${address}\n`
             );
 
             window.location.href = `mailto:rkpjalore@gmail.com?subject=${subject}&body=${bodyText}`;
@@ -1223,36 +1222,3 @@ html_content = """<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("Updated HTML file saved successfully as index.html")
-
-
-```
-
-```text
-Updated HTML file saved successfully as index.html
-
-
-```
-
-Aapke bank details me **District Jalore**, **State Rajasthan**, aur **Country India** successfully add kar diye gaye hain.
-
-### Updated Bank Details:
-
-* **Account Number:** 61294543865
-* **Bank Name:** SBI (State Bank of India)
-* **IFS Code:** SBIN0032056
-* **Account Name:** Ramesh Kumar
-* **Mobile:** 9649638812
-* **Residence:** NANDIYA BAGOD JALORE
-* **District:** JALORE
-* **State:** RAJASTHAN
-* **Country:** INDIA
-* **PIN Code:** 343032
-* **SWIFT/BIC Code:** SBININBBJ27
-
-Updated file generated:
