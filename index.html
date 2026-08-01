@@ -1,1224 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UFX CAPITAL - Crypto & Forex Option Trader</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary-accent: #ffffff;
-            --primary-glow: rgba(255, 255, 255, 0.25);
-            --bg-dark: #000000;
-            --card-bg: #0d0d0d;
-            --border-color: #262626;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
-            font-family: 'Rajdhani', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, 
-        .logo-title, 
-        .plan-price, 
-        .plan-duration, 
-        .price-sub, 
-        .btn-choose-plan, 
-        .btn-join, 
-        .hero-btn, 
-        .badge-best-value, 
-        .section-title,
-        .modal-title,
-        .pay-method-btn {
-            font-family: 'Orbitron', sans-serif !important;
-        }
-
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 5%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .logo-title {
-            font-size: 22px;
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: 1px;
-        }
-
-        .logo-subtitle {
-            font-size: 10px;
-            color: #888888;
-            letter-spacing: 1.5px;
-            font-weight: 700;
-        }
-
-        nav {
-            display: flex;
-            gap: 22px;
-        }
-
-        nav a {
-            color: #888888;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 13px;
-            letter-spacing: 1.5px;
-            transition: 0.3s;
-        }
-
-        nav a:hover, nav a.active {
-            color: #ffffff;
-        }
-
-        .btn-join {
-            background: transparent;
-            color: #fff;
-            padding: 8px 18px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 12px;
-            border: 1.5px solid #ffffff;
-            box-shadow: 0 0 10px var(--primary-glow);
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .btn-join:hover {
-            background: #ffffff;
-            color: #000000;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Hero */
-        .hero {
-            text-align: center;
-            padding: 80px 20px 60px 20px;
-            background: radial-gradient(circle at center, #181818 0%, var(--bg-dark) 70%);
-        }
-
-        .welcome-tag {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            color: #a3a3a3;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
-
-        .welcome-tag .line {
-            width: 30px;
-            height: 2px;
-            background: #ffffff;
-        }
-
-        .hero h1 {
-            font-size: 52px;
-            font-weight: 900;
-            margin-bottom: 5px;
-            color: #ffffff;
-            text-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        .hero-subtext {
-            font-size: 17px;
-            color: #ffffff;
-            letter-spacing: 3px;
-            margin-bottom: 25px;
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.05);
-            display: inline-block;
-            padding: 4px 16px;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-        }
-
-        .hero-bullets {
-            font-size: 15px;
-            color: #a3a3a3;
-            margin-bottom: 30px;
-        }
-
-        .hero-btn {
-            background: transparent;
-            color: #fff;
-            padding: 12px 30px;
-            font-size: 14px;
-            border-radius: 6px;
-            border: 1.5px solid #ffffff;
-            font-weight: 700;
-            transition: 0.3s;
-            box-shadow: 0 0 15px var(--primary-glow);
-            cursor: pointer;
-        }
-
-        .hero-btn:hover {
-            background: #ffffff;
-            color: #000000;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
-        }
-
-        /* Section Title */
-        .section-header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .section-title {
-            font-size: 22px;
-            color: #ffffff;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Plans Section */
-        .plans-section {
-            padding: 50px 5%;
-        }
-
-        .plans-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .plan-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 25px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            transition: 0.3s;
-        }
-
-        .plan-card:hover {
-            border-color: #ffffff;
-            box-shadow: 0 0 20px var(--primary-glow);
-            transform: translateY(-4px);
-        }
-
-        .plan-duration {
-            font-size: 18px;
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .plan-price {
-            font-size: 48px;
-            text-align: center;
-            color: #ffffff;
-            font-weight: 900;
-        }
-
-        .price-sub {
-            font-size: 11px;
-            color: #888888;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .plan-features {
-            list-style: none;
-            margin-bottom: 25px;
-        }
-
-        .plan-features li {
-            font-size: 14px;
-            color: #d1d5db;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .plan-features li.highlight-feature {
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        .btn-choose-plan {
-            background: #ffffff;
-            color: #000000;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: 700;
-            border: none;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .btn-choose-plan:hover {
-            background: #cccccc;
-        }
-
-        .plan-card.best-value {
-            border: 2px solid #ffffff;
-        }
-
-        .badge-best-value {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ffffff;
-            color: #000000;
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 900;
-        }
-
-        /* WHY CHOOSE SECTION */
-        .features-section { padding: 50px 5%; }
-
-        .features-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 20px 15px;
-            border-radius: 8px;
-            text-align: center;
-            transition: 0.3s;
-            flex: 1 1 150px;
-            max-width: 180px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .feature-box:hover {
-            border-color: #ffffff;
-            box-shadow: 0 0 12px var(--primary-glow);
-        }
-
-        .feature-box i {
-            font-size: 22px;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
-
-        .feature-box h4 {
-            font-size: 11px;
-            color: #d1d5db;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        /* STATS SECTION */
-        .stats-section-wrapper {
-            max-width: 1000px;
-            margin: 40px auto;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            background: var(--card-bg);
-            padding: 25px;
-        }
-
-        .stats-grid {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .stat-item i {
-            font-size: 26px;
-            color: #ffffff;
-        }
-
-        .stat-number {
-            font-size: 20px;
-            font-weight: 800;
-            font-family: 'Orbitron', sans-serif;
-            color: #ffffff;
-        }
-
-        .stat-label {
-            color: #888888;
-            font-size: 12px;
-        }
-
-        /* FAQ SECTION */
-        .faq-section { padding: 50px 5%; }
-
-        .faq-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 15px;
-        }
-
-        .faq-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .faq-item:hover { border-color: #ffffff; }
-
-        .faq-header {
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            font-size: 14px;
-            color: #e5e7eb;
-        }
-
-        .faq-answer {
-            padding: 0 20px 16px 20px;
-            color: #888888;
-            display: none;
-            border-top: 1px solid var(--border-color);
-            padding-top: 12px;
-            font-size: 13px;
-        }
-
-        .faq-item.active .faq-answer { display: block; }
-
-        /* FOOTER & SOCIAL ICONS */
-        footer {
-            background: #050505;
-            padding: 50px 5% 20px 5%;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            max-width: 1100px;
-            margin: 0 auto 30px auto;
-        }
-
-        .footer-mission {
-            max-width: 380px;
-            color: #888888;
-            font-size: 13px;
-        }
-
-        .footer-mission .slogan {
-            margin-top: 10px;
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        .footer-contact h5 {
-            font-size: 14px;
-            margin-bottom: 12px;
-            color: #ffffff;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .footer-contact p {
-            color: #888888;
-            margin-bottom: 8px;
-            font-size: 13px;
-        }
-
-        .social-icons-wrapper {
-            margin-top: 15px;
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #121212;
-            border: 1px solid var(--border-color);
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
-        .social-btn:hover {
-            border-color: #ffffff;
-            background: #ffffff;
-            color: #000000;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            color: #666666;
-            font-size: 12px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .legal-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .legal-links a {
-            color: #888888;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .legal-links a:hover {
-            color: #ffffff;
-        }
-
-        /* MANUAL PAYMENT FLOW MODAL */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            overflow-y: auto;
-        }
-
-        .modal-card {
-            background: #0d0d0d;
-            border: 1px solid #333333;
-            border-radius: 12px;
-            padding: 30px;
-            width: 100%;
-            max-width: 520px;
-            color: #ffffff;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-title {
-            text-align: center;
-            font-size: 18px;
-            letter-spacing: 2px;
-            color: #ffffff;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
-        .form-group {
-            margin-bottom: 14px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            color: #aaaaaa;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            background: #141414;
-            border: 1px solid #2a2a2a;
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 13px;
-            outline: none;
-            font-family: 'Rajdhani', sans-serif;
-            transition: 0.3s;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: #ffffff;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 12px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        /* Payment Buttons Selector Grid */
-        .payment-methods-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
-
-        .pay-method-btn {
-            background: #141414;
-            border: 1px solid #2a2a2a;
-            color: #ffffff;
-            padding: 10px 5px;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-        }
-
-        .pay-method-btn:hover, .pay-method-btn.active {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-            font-weight: 700;
-        }
-
-        /* Payment Detail Box */
-        .payment-address-box {
-            background: #111111;
-            border: 1px dashed #444444;
-            border-radius: 8px;
-            padding: 18px;
-            margin-bottom: 20px;
-        }
-
-        .address-title {
-            color: #888888;
-            font-size: 12px;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .address-value-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            word-break: break-all;
-            font-size: 13px;
-            color: #ffffff;
-            font-family: monospace;
-            gap: 10px;
-        }
-
-        .btn-copy {
-            background: #ffffff;
-            color: #000000;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            cursor: pointer;
-            white-space: nowrap;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .btn-copy:hover {
-            background: #cccccc;
-        }
-
-        /* Full Bank Details Box Styling */
-        .bank-details-list {
-            font-size: 13px;
-            line-height: 1.8;
-            color: #dddddd;
-        }
-
-        .bank-details-list div {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #222222;
-            padding: 4px 0;
-        }
-
-        .bank-details-list div span:first-child {
-            color: #888888;
-        }
-
-        .btn-submit-order {
-            width: 100%;
-            padding: 14px;
-            background: #ffffff;
-            color: #000000;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        .btn-submit-order:hover {
-            background: #d4d4d4;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 22px;
-            color: #888888;
-            cursor: pointer;
-        }
-
-        .modal-close:hover { color: #ffffff; }
-
-        @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; }
-            nav { flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 36px; }
-            .faq-grid { grid-template-columns: 1fr; }
-            .form-row { flex-direction: column; gap: 0; }
-            .payment-methods-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      padding: 20px;
+    }
+
+    .faq-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .faq-title {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e0e0e0;
+      padding: 15px 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      color: #555;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      margin-top: 10px;
+    }
+
+    .icon {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .icon {
+      transform: rotate(45deg);
+    }
+  </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <header>
-        <div class="logo-container">
-            <div class="logo-title">UFX CAPITAL</div>
-            <div class="logo-subtitle">CRYPTO & FOREX OPTION TRADER</div>
-        </div>
-        <nav>
-            <a href="#home" class="active">HOME</a>
-            <a href="#plans">PLANS</a>
-            <a href="#features">FEATURES</a>
-            <a href="#about">ABOUT</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">CONTACT</a>
-        </nav>
-        <button onclick="openManualModal('35')" class="btn-join"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
-    </header>
+<div class="faq-container">
+  <h2 class="faq-title">Frequently Asked Questions</h2>
 
-    <!-- HERO SECTION -->
-    <section class="hero" id="home">
-        <div class="welcome-tag">
-            <span class="line"></span>
-            <span>WELCOME TO</span>
-            <span class="line"></span>
-        </div>
-        
-        <h1>UFX CAPITAL</h1>
-        <div><span class="hero-subtext">CRYPTO & FOREX OPTION TRADER</span></div>
-        <p class="hero-bullets">High Probability Trading Signals • Smart Money Concepts<br>Discipline • Consistency • Patience</p>
-        
-        <button onclick="openManualModal('35')" class="hero-btn">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
-    </section>
-
-    <!-- PREMIUM PLANS SECTION -->
-    <section class="plans-section" id="plans">
-        <div class="section-header">
-            <div class="section-title"><i class="fa-solid fa-gem"></i> PREMIUM PLANS <i class="fa-solid fa-gem"></i></div>
-        </div>
-
-        <div class="plans-grid">
-            <!-- 1 MONTH -->
-            <div class="plan-card">
-                <div>
-                    <div class="plan-duration">1 MONTH</div>
-                    <div class="plan-price">$35</div>
-                    <div class="price-sub">PER MONTH</div>
-                    <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                    </ul>
-                </div>
-                <button onclick="openManualModal('35')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
-            </div>
-
-            <!-- 3 MONTHS -->
-            <div class="plan-card">
-                <div>
-                    <div class="plan-duration">3 MONTHS</div>
-                    <div class="plan-price">$59</div>
-                    <div class="price-sub">EVERY 3 MONTHS</div>
-                    <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                    </ul>
-                </div>
-                <button onclick="openManualModal('59')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
-            </div>
-
-            <!-- 6 MONTHS -->
-            <div class="plan-card">
-                <div>
-                    <div class="plan-duration">6 MONTHS</div>
-                    <div class="plan-price">$79</div>
-                    <div class="price-sub">EVERY 6 MONTHS</div>
-                    <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                    </ul>
-                </div>
-                <button onclick="openManualModal('79')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
-            </div>
-
-            <!-- LIFETIME -->
-            <div class="plan-card best-value">
-                <div class="badge-best-value">BEST VALUE</div>
-                <div>
-                    <div class="plan-duration">LIFETIME</div>
-                    <div class="plan-price">$199</div>
-                    <div class="price-sub">ONE TIME PAYMENT</div>
-                    <ul class="plan-features">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5-20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                        <li class="highlight-feature"><i class="fa-solid fa-star"></i> ONE-ON-ONE MENTORSHIP</li>
-                        <li class="highlight-feature"><i class="fa-solid fa-crown"></i> LIFETIME MEMBERSHIP</li>
-                    </ul>
-                </div>
-                <button onclick="openManualModal('199')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- WHY CHOOSE UFX CAPITAL -->
-    <section class="features-section" id="features">
-        <div class="section-header">
-            <div class="section-title"><i class="fa-solid fa-gem"></i> WHY CHOOSE UFX CAPITAL? <i class="fa-solid fa-gem"></i></div>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-box">
-                <i class="fa-solid fa-bullseye"></i>
-                <h4>HIGH PROBABILITY SMC-BASED SIGNALS</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-chart-line"></i>
-                <h4>LIVE ENTRY, SL & TP UPDATES</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-chart-pie"></i>
-                <h4>TRADE BREAKDOWN (CHART + LOGIC)</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-coins"></i>
-                <h4>WEEKLY GOLD (XAUUSD) OUTLOOK</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-brain"></i>
-                <h4>MINDSET & RISK MANAGEMENT</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-users"></i>
-                <h4>PREMIUM COMMUNITY ACCESS</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-headset"></i>
-                <h4>24/7 PRIORITY SUPPORT</h4>
-            </div>
-        </div>
-    </section>
-
-    <!-- STATS SECTION -->
-    <div class="stats-section-wrapper" id="about">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <i class="fa-solid fa-users"></i>
-                <div>
-                    <div class="stat-number">1000+</div>
-                    <div class="stat-label">Active Members</div>
-                </div>
-            </div>
-            <div class="stat-item">
-                <i class="fa-solid fa-bullseye"></i>
-                <div>
-                    <div class="stat-number">80%+</div>
-                    <div class="stat-label">Win Rate Ratio</div>
-                </div>
-            </div>
-            <div class="stat-item">
-                <i class="fa-solid fa-trophy"></i>
-                <div>
-                    <div class="stat-number">1:4+</div>
-                    <div class="stat-label">Avg Risk-Reward</div>
-                </div>
-            </div>
-            <div class="stat-item">
-                <i class="fa-solid fa-headset"></i>
-                <div>
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Dedicated Support</div>
-                </div>
-            </div>
-        </div>
+  <!-- FAQ 1 -->
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>1. Aapki services kya-kya hain?</span>
+      <span class="icon">+</span>
     </div>
-
-    <!-- FAQ SECTION -->
-    <section class="faq-section" id="faq">
-        <div class="section-header">
-            <div class="section-title"><i class="fa-solid fa-circle-question"></i> FREQUENTLY ASKED QUESTIONS</div>
-        </div>
-        <div class="faq-grid">
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-header"><span>1. How do I receive trading signals?</span><i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">All signals are posted instantly in our private Telegram VIP channel with full trade details, entry points, stop-loss, take-profit targets, and chart analysis.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-header"><span>2. What financial markets do you trade?</span><i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">We specialize in Forex pairs, Gold (XAUUSD), and major Cryptocurrencies using institutional Smart Money Concepts (SMC) and Price Action.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-header"><span>3. Is this VIP group suitable for beginners?</span><i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">Yes! We provide complete setup guides, risk management instructions, educational PDFs, and 24/7 support alongside every trade signal to help beginners learn.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-header"><span>4. What is the average Risk-to-Reward ratio?</span><i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">Our signals maintain a minimum Risk-to-Reward (RR) ratio of 1:4, ensuring consistent long-term profitability even with realistic market fluctuations.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-mission">
-                <div class="logo-title">UFX CAPITAL</div>
-                <p style="margin-top: 10px;">Empowering traders worldwide with high-probability signals, disciplined risk management strategies, and institutional trading concepts.</p>
-                <div class="slogan">Discipline • Consistency • Patience</div>
-            </div>
-
-            <div class="footer-contact">
-                <h5>GET IN TOUCH</h5>
-                <p><i class="fa-solid fa-envelope"></i> rkpjalore@gmail.com</p>
-                <p><i class="fa-solid fa-phone"></i> +91 9649638812</p>
-                
-                <div class="social-icons-wrapper">
-                    <a href="https://t.me/ufxcapital" target="_blank" class="social-btn"><i class="fa-brands fa-telegram"></i></a>
-                    <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="https://x.com/rameshkuma78100?s=21" target="_blank" class="social-btn"><i class="fa-brands fa-x-twitter"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div>&copy; 2026 UFX CAPITAL. All Rights Reserved.</div>
-        </div>
-    </footer>
-
-    <!-- MANUAL PAYMENT FLOW MODAL -->
-    <div id="manualPaymentModal" class="modal-overlay">
-        <div class="modal-card">
-            <span class="modal-close" onclick="closeModal('manualPaymentModal')">&times;</span>
-            <div class="modal-title">MANUAL PAYMENT FLOW</div>
-            
-            <form onsubmit="submitOrderConfirmation(event)">
-                <input type="hidden" id="selectedPlanPrice" value="35">
-                
-                <div class="form-group">
-                    <label>Full Name *</label>
-                    <input type="text" id="m_fullName" required placeholder="Enter full name">
-                </div>
-
-                <div class="form-group">
-                    <label>Email Address *</label>
-                    <input type="email" id="m_email" required placeholder="Enter email address">
-                </div>
-
-                <div class="form-group">
-                    <label>Phone Number *</label>
-                    <input type="tel" id="m_phone" required placeholder="Enter phone number">
-                </div>
-
-                <div class="form-group">
-                    <label>PAN / National ID Number *</label>
-                    <input type="text" id="m_pan" required placeholder="Enter PAN or National ID">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Country *</label>
-                        <input type="text" id="m_country" required placeholder="Country">
-                    </div>
-                    <div class="form-group">
-                        <label>State *</label>
-                        <input type="text" id="m_state" required placeholder="State">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>City *</label>
-                        <input type="text" id="m_city" required placeholder="City / Village">
-                    </div>
-                    <div class="form-group">
-                        <label>Pin Code *</label>
-                        <input type="text" id="m_pincode" required placeholder="Pin Code">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Full Address *</label>
-                    <textarea id="m_address" rows="2" required placeholder="Enter complete address"></textarea>
-                </div>
-
-                <!-- PAYMENT METHOD BUTTONS SELECTOR -->
-                <div class="form-group" style="margin-top: 18px;">
-                    <label>Select Payment Method:</label>
-                    <div class="payment-methods-grid">
-                        <button type="button" class="pay-method-btn" onclick="selectPaymentMethod('UPI', this)">UPI</button>
-                        <button type="button" class="pay-method-btn active" onclick="selectPaymentMethod('TRC20', this)">TRC20</button>
-                        <button type="button" class="pay-method-btn" onclick="selectPaymentMethod('ERC20', this)">ERC20</button>
-                        <button type="button" class="pay-method-btn" onclick="selectPaymentMethod('BEP20', this)">BEP20</button>
-                        <button type="button" class="pay-method-btn" onclick="selectPaymentMethod('Bitcoin', this)">Bitcoin</button>
-                        <button type="button" class="pay-method-btn" onclick="selectPaymentMethod('BankTransfer', this)">Bank Transfer</button>
-                    </div>
-                </div>
-
-                <!-- DYNAMIC ADDRESS / BANK DETAIL DISPLAY BOX -->
-                <div class="payment-address-box">
-                    <div id="paymentBoxContent">
-                        <!-- Default: TRC20 -->
-                        <div class="address-title">USDT TRC20 Address:</div>
-                        <div class="address-value-row">
-                            <span id="cryptoAddrText">TP1hUt5spzMv5LoHjAU2yEQusEgj8NDwb</span>
-                            <button type="button" class="btn-copy" onclick="copyText('TP1hUt5spzMv5LoHjAU2yEQusEgj8NDwb')">Copy</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Enter TXID / Transaction Hash *</label>
-                    <input type="text" id="m_txid" required placeholder="Required for verification">
-                </div>
-
-                <button type="submit" class="btn-submit-order">Submit Order Confirmation</button>
-            </form>
-        </div>
+    <div class="faq-answer">
+      <p>Hum web development, SEO, digital marketing aur custom software solutions pradan karte hain.</p>
     </div>
+  </div>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        let currentSelectedMethod = 'TRC20';
+  <!-- FAQ 2 -->
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>2. Main service ya order kaise book kar sakta hoon?</span>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>Aap hamari website ke 'Contact Us' page par jaakar form bhar sakte hain ya seedhe hamen call/WhatsApp kar sakte hain.</p>
+    </div>
+  </div>
 
-        function toggleFaq(element) {
-            element.classList.toggle('active');
-        }
+  <!-- FAQ 3 -->
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>3. Project complete hone mein kitna samay lagta hai?</span>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>Samay project ke requirement par depend karta hai. Normal website 7-15 din mein ready ho jaati hai.</p>
+    </div>
+  </div>
 
-        function openManualModal(price = '35') {
-            document.getElementById('selectedPlanPrice').value = price;
-            document.getElementById('manualPaymentModal').style.display = 'flex';
-        }
+  <!-- FAQ 4 -->
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>4. Kya payment refund policy available hai?</span>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>Haan, agar kaam shuru nahi hua hai toh aap 100% refund claim kar sakte hain. Adhik jankari ke liye hamari Refund Policy padhein.</p>
+    </div>
+  </div>
 
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
+  <!-- FAQ 5 -->
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>5. Kya aap project ke baad support aur maintenance dete hain?</span>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>Ji haan, hum sabhi projects ke saath 30 din ka free maintenance aur continuous customer support dete hain.</p>
+    </div>
+  </div>
 
-        // Handle Payment Selection & Display Formats
-        function selectPaymentMethod(method, btnElement) {
-            currentSelectedMethod = method;
-            
-            // Highlight active button
-            const buttons = document.querySelectorAll('.pay-method-btn');
-            buttons.forEach(b => b.classList.remove('active'));
-            btnElement.classList.add('active');
+  <!-- FAQ 6 -->
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>6. Main aapki team se kaise sampark kar sakta hoon?</span>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>Aap hume email, phone call ya live chat ke jariye kisi bhi working day par sampark kar sakte hain.</p>
+    </div>
+  </div>
 
-            const container = document.getElementById('paymentBoxContent');
+</div>
 
-            if (method === 'UPI') {
-                container.innerHTML = `
-                    <div class="address-title">UPI ID:</div>
-                    <div class="address-value-row">
-                        <span>9649638812@ybl</span>
-                        <button type="button" class="btn-copy" onclick="copyText('9649638812@ybl')">Copy</button>
-                    </div>
-                `;
-            } 
-            else if (method === 'TRC20') {
-                container.innerHTML = `
-                    <div class="address-title">USDT TRC20 Address:</div>
-                    <div class="address-value-row">
-                        <span>TP1hUt5spzMv5LoHjAU2yEQusEgj8NDwb</span>
-                        <button type="button" class="btn-copy" onclick="copyText('TP1hUt5spzMv5LoHjAU2yEQusEgj8NDwb')">Copy</button>
-                    </div>
-                `;
-            } 
-            else if (method === 'ERC20') {
-                container.innerHTML = `
-                    <div class="address-title">USDT ERC20 Address:</div>
-                    <div class="address-value-row">
-                        <span>0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab</span>
-                        <button type="button" class="btn-copy" onclick="copyText('0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab')">Copy</button>
-                    </div>
-                `;
-            } 
-            else if (method === 'BEP20') {
-                container.innerHTML = `
-                    <div class="address-title">USDT BEP20 Address:</div>
-                    <div class="address-value-row">
-                        <span>0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab</span>
-                        <button type="button" class="btn-copy" onclick="copyText('0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab')">Copy</button>
-                    </div>
-                `;
-            } 
-            else if (method === 'Bitcoin') {
-                container.innerHTML = `
-                    <div class="address-title">Bitcoin Address / ID:</div>
-                    <div class="address-value-row">
-                        <span>143odbY9gkjo8de7NizwFuzWD11Muw9QW4</span>
-                        <button type="button" class="btn-copy" onclick="copyText('143odbY9gkjo8de7NizwFuzWD11Muw9QW4')">Copy</button>
-                    </div>
-                `;
-            } 
-            else if (method === 'BankTransfer') {
-                container.innerHTML = `
-                    <div class="address-title" style="margin-bottom:10px; text-transform:uppercase;">Bank Account Details:</div>
-                    <div class="bank-details-list">
-                        <div><span>Account Number:</span> <strong>61294543865 <button type="button" class="btn-copy" style="padding:2px 6px; font-size:9px;" onclick="copyText('61294543865')">Copy</button></strong></div>
-                        <div><span>BANK NAME:</span> <strong>SBI { STATE BANK OF INDIA }</strong></div>
-                        <div><span>IFS Code:</span> <strong>SBIN0032056</strong></div>
-                        <div><span>Account Name:</span> <strong>Ramesh Kumar</strong></div>
-                        <div><span>Mobile:</span> <strong>9649638812</strong></div>
-                        <div><span>Residence:</span> <strong>NANDIYA BAGOD JALORE</strong></div>
-                        <div><span>District:</span> <strong>JALORE</strong></div>
-                        <div><span>State:</span> <strong>RAJASTHAN</strong></div>
-                        <div><span>Country:</span> <strong>INDIA</strong></div>
-                        <div><span>PIN CODE:</span> <strong>343032</strong></div>
-                        <div><span>SWIFT/BIC CODE:</span> <strong>SBININBBJ27</strong></div>
-                    </div>
-                `;
-            }
-        }
+<script>
+  const faqItems = document.querySelectorAll('.faq-item');
 
-        function copyText(text) {
-            navigator.clipboard.writeText(text);
-            alert('Copied to clipboard: ' + text);
-        }
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
 
-        // Automatic Mailto Redirect
-        function submitOrderConfirmation(e) {
-            e.preventDefault();
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('active');
 
-            const planPrice = document.getElementById('selectedPlanPrice').value;
-            const fullName = document.getElementById('m_fullName').value;
-            const email = document.getElementById('m_email').value;
-            const phone = document.getElementById('m_phone').value;
-            const pan = document.getElementById('m_pan').value;
-            const country = document.getElementById('m_country').value;
-            const state = document.getElementById('m_state').value;
-            const city = document.getElementById('m_city').value;
-            const pincode = document.getElementById('m_pincode').value;
-            const address = document.getElementById('m_address').value;
-            const txid = document.getElementById('m_txid').value;
+      // Dusre sabhi FAQs ko close karne ke liye
+      faqItems.forEach(i => {
+        i.classList.remove('active');
+        i.querySelector('.faq-answer').style.maxHeight = null;
+      });
 
-            const subject = encodeURIComponent(`UFX VIP Order Confirmation - ${fullName}`);
-            const bodyText = encodeURIComponent(
-                `UFX CAPITAL MANUAL PAYMENT ORDER\n` +
-                `------------------------------------\n` +
-                `Selected Plan Price: $${planPrice}\n` +
-                `Payment Method Selected: ${currentSelectedMethod}\n` +
-                `Transaction ID / Hash: ${txid}\n\n` +
-                `CLIENT DETAILS:\n` +
-                `Full Name: ${fullName}\n` +
-                `Email: ${email}\n` +
-                `Phone: ${phone}\n` +
-                `PAN / National ID: ${pan}\n` +
-                `Country: ${country}\n` +
-                `State: ${state}\n` +
-                `City / Village: ${city}\n` +
-                `Pin Code: ${pincode}\n` +
-                `Full Address: ${address}\n`
-            );
+      // Click kiye gaye FAQ ko toggle karne ke liye
+      if (!isOpen) {
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    });
+  });
+</script>
 
-            window.location.href = `mailto:rkpjalore@gmail.com?subject=${subject}&body=${bodyText}`;
-
-            alert('Order verification triggered! Please send the auto-generated email.');
-            closeModal('manualPaymentModal');
-        }
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal-overlay')) {
-                event.target.style.display = 'none';
-            }
-        }
-    </script>
 </body>
 </html>
