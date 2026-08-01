@@ -10,50 +10,59 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
     
     body {
-      background-color: #030305;
+      background-color: #030205;
       color: #e2e8f0;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
     }
 
-    /* Neon Pink & Gold Accents */
+    /* Glow Elements & Text */
+    .glow-title {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 18, 102, 0.3);
+    }
+
     .pink-glow-text {
       color: #ff1266;
-      text-shadow: 0 0 15px rgba(255, 18, 102, 0.6);
+      text-shadow: 0 0 18px rgba(255, 18, 102, 0.7);
     }
 
-    .pink-border-box {
-      background: rgba(12, 10, 16, 0.9);
-      border: 1px solid rgba(255, 18, 102, 0.35);
-      box-shadow: 0 0 25px rgba(255, 18, 102, 0.1);
-      transition: all 0.3s ease;
+    .pink-card {
+      background: rgba(12, 8, 15, 0.95);
+      border: 1px solid rgba(255, 18, 102, 0.4);
+      box-shadow: 0 0 25px rgba(255, 18, 102, 0.12), inset 0 0 15px rgba(255, 18, 102, 0.05);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .pink-border-box:hover {
-      border-color: rgba(255, 18, 102, 0.7);
-      box-shadow: 0 0 35px rgba(255, 18, 102, 0.25);
-      transform: translateY(-3px);
+    .pink-card:hover {
+      border-color: rgba(255, 18, 102, 0.8);
+      box-shadow: 0 0 35px rgba(255, 18, 102, 0.3);
+      transform: translateY(-4px);
     }
 
-    /* Pink Gradient Button */
     .pink-btn {
-      background: linear-gradient(135deg, #e6005c 0%, #ff1266 50%, #99003d 100%);
+      background: linear-gradient(135deg, #ff1266 0%, #d6004c 100%);
       color: #ffffff;
       font-weight: 700;
-      box-shadow: 0 0 15px rgba(255, 18, 102, 0.4);
+      box-shadow: 0 0 18px rgba(255, 18, 102, 0.5);
       transition: all 0.3s ease;
     }
 
     .pink-btn:hover {
-      box-shadow: 0 0 25px rgba(255, 18, 102, 0.8);
+      box-shadow: 0 0 28px rgba(255, 18, 102, 0.9);
       transform: scale(1.02);
     }
 
-    /* Gold Glowing Card for Lifetime Plan */
-    .gold-glow-card {
-      background: rgba(16, 12, 8, 0.9);
-      border: 1px solid rgba(245, 158, 11, 0.6);
-      box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+    /* Gold Lifetime Card */
+    .gold-card {
+      background: rgba(18, 13, 8, 0.95);
+      border: 1px solid rgba(245, 158, 11, 0.7);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.25), inset 0 0 15px rgba(245, 158, 11, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .gold-card:hover {
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.4);
+      transform: translateY(-4px);
     }
 
     .gold-btn {
@@ -61,14 +70,16 @@
       color: #ffffff;
       font-weight: 800;
       box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+      transition: all 0.3s ease;
     }
 
     .gold-btn:hover {
-      box-shadow: 0 0 30px rgba(245, 158, 11, 0.8);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.9);
+      transform: scale(1.02);
     }
 
     .dark-input {
-      background-color: #0f0d14;
+      background-color: #0d0a12;
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #ffffff;
     }
@@ -78,23 +89,24 @@
       outline: none;
     }
 
-    /* Dotted Box */
     .gold-dotted-box {
       border: 1.5px dashed #f59e0b;
-      background: rgba(20, 15, 10, 0.9);
+      background: rgba(22, 16, 10, 0.9);
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
   <!-- NAVBAR -->
-  <header class="max-w-7xl mx-auto w-full px-6 py-6 flex items-center justify-between border-b border-white/5">
-    <div>
-      <h1 class="text-xl md:text-2xl font-black tracking-widest text-white">UFX CAPITAL</h1>
-      <p class="text-[9px] tracking-widest text-slate-400 font-semibold uppercase">CRYPTO & FOREX OPTION TRADER</p>
+  <header class="max-w-7xl mx-auto w-full px-6 py-5 flex items-center justify-between border-b border-white/10 relative z-20">
+    <div class="flex items-center gap-3">
+      <div>
+        <h1 class="text-xl md:text-2xl font-black tracking-widest text-white">UFX CAPITAL</h1>
+        <p class="text-[8px] md:text-[9px] tracking-widest text-slate-400 font-semibold uppercase">CRYPTO & FOREX OPTION TRADER</p>
+      </div>
     </div>
 
-    <nav class="hidden md:flex items-center gap-8 text-xs font-semibold text-slate-300">
+    <nav class="hidden md:flex items-center gap-8 text-xs font-semibold text-slate-300 uppercase tracking-wider">
       <a href="#home" class="text-pink-500">HOME</a>
       <a href="#plans" class="hover:text-pink-500 transition-colors">PLANS</a>
       <a href="#features" class="hover:text-pink-500 transition-colors">FEATURES</a>
@@ -103,22 +115,28 @@
       <a href="#contact" class="hover:text-pink-500 transition-colors">CONTACT</a>
     </nav>
 
-    <button onclick="scrollToPlans()" class="pink-btn text-xs px-5 py-2.5 rounded-full flex items-center gap-2">
-      <i class="fa-solid fa-diamond text-[10px]"></i> JOIN PREMIUM
+    <button onclick="scrollToPlans()" class="pink-btn text-xs px-5 py-2.5 rounded-full flex items-center gap-2 border border-pink-400/40">
+      <i class="fa-solid fa-gem text-[10px]"></i> JOIN PREMIUM
     </button>
   </header>
 
   <!-- HERO SECTION -->
-  <section id="home" class="text-center py-16 px-4 relative max-w-5xl mx-auto">
-    <div class="inline-block border border-pink-500/30 bg-pink-950/20 px-4 py-1.5 rounded-full text-[11px] font-semibold text-pink-400 mb-6 uppercase tracking-wider">
+  <section id="home" class="text-center pt-12 pb-16 px-4 relative max-w-5xl mx-auto">
+    <div class="inline-block border border-pink-500/40 bg-pink-950/30 px-5 py-1.5 rounded-full text-[10px] font-bold text-pink-400 mb-6 uppercase tracking-widest shadow-[0_0_15px_rgba(255,18,102,0.2)]">
       WELCOME TO
     </div>
     
-    <h1 class="text-5xl md:text-7xl font-black text-white tracking-wide uppercase mb-2">UFX CAPITAL</h1>
-    <p class="text-xs md:text-sm tracking-widest text-slate-300 uppercase font-semibold mb-6">CRYPTO & FOREX OPTION TRADER</p>
-    
-    <p class="text-xs md:text-sm text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed">
-      High Probability Trading Signals • Smart Money Concepts<br>Discipline • Strategy • Consistency
+    <h1 class="text-5xl md:text-7xl font-black text-white tracking-wider uppercase mb-2 glow-title">UFX CAPITAL</h1>
+    <p class="text-xs md:text-sm tracking-[0.25em] text-slate-300 uppercase font-semibold mb-6">CRYPTO & FOREX OPTION TRADER</p>
+
+    <!-- Glowing Bull Graphics Placeholder Accent -->
+    <div class="my-6 relative flex justify-center">
+      <div class="w-64 h-32 bg-gradient-to-t from-pink-600/20 via-pink-500/5 to-transparent blur-2xl absolute -top-4 rounded-full pointer-events-none"></div>
+    </div>
+
+    <p class="text-xs md:text-sm text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed font-medium">
+      High Probability Trading Signals • Smart Money Concepts<br>
+      Discipline • Strategy • Consistency
     </p>
 
     <button onclick="scrollToPlans()" class="pink-btn px-8 py-3.5 rounded-full text-xs uppercase tracking-wider font-bold inline-flex items-center gap-2">
@@ -130,19 +148,19 @@
   <section id="plans" class="max-w-7xl mx-auto px-4 py-12">
     <div class="text-center mb-12">
       <h2 class="text-2xl md:text-3xl font-black text-white tracking-widest uppercase flex items-center justify-center gap-3">
-        <i class="fa-solid fa-diamond text-pink-500 text-sm"></i> PREMIUM PLANS <i class="fa-solid fa-diamond text-pink-500 text-sm"></i>
+        <i class="fa-solid fa-diamond text-pink-500 text-xs"></i> PREMIUM PLANS <i class="fa-solid fa-diamond text-pink-500 text-xs"></i>
       </h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       
       <!-- 1 MONTH PLAN -->
-      <div class="pink-border-box rounded-2xl p-6 flex flex-col justify-between text-center">
+      <div class="pink-card rounded-2xl p-6 flex flex-col justify-between text-center">
         <div>
           <h3 class="text-base font-bold tracking-wider mb-2 text-white">1 MONTH</h3>
           <div class="text-4xl font-black pink-glow-text mb-1">$35</div>
           <p class="text-[10px] text-pink-400 uppercase tracking-widest mb-6 font-semibold">PER MONTH</p>
-          <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-diamond"></i></div>
+          <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-gem"></i></div>
 
           <ul class="text-left text-xs space-y-3 mb-8 text-slate-300">
             <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Weekly 5–20 Signals</li>
@@ -157,12 +175,12 @@
       </div>
 
       <!-- 3 MONTHS PLAN -->
-      <div class="pink-border-box rounded-2xl p-6 flex flex-col justify-between text-center">
+      <div class="pink-card rounded-2xl p-6 flex flex-col justify-between text-center">
         <div>
           <h3 class="text-base font-bold tracking-wider mb-2 text-white">3 MONTHS</h3>
           <div class="text-4xl font-black pink-glow-text mb-1">$59</div>
           <p class="text-[10px] text-pink-400 uppercase tracking-widest mb-6 font-semibold">EVERY 3 MONTHS</p>
-          <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-diamond"></i></div>
+          <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-gem"></i></div>
 
           <ul class="text-left text-xs space-y-3 mb-8 text-slate-300">
             <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Weekly 5–20 Signals</li>
@@ -177,12 +195,12 @@
       </div>
 
       <!-- 6 MONTHS PLAN -->
-      <div class="pink-border-box rounded-2xl p-6 flex flex-col justify-between text-center">
+      <div class="pink-card rounded-2xl p-6 flex flex-col justify-between text-center">
         <div>
           <h3 class="text-base font-bold tracking-wider mb-2 text-white">6 MONTHS</h3>
           <div class="text-4xl font-black pink-glow-text mb-1">$79</div>
           <p class="text-[10px] text-pink-400 uppercase tracking-widest mb-6 font-semibold">EVERY 6 MONTHS</p>
-          <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-diamond"></i></div>
+          <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-gem"></i></div>
 
           <ul class="text-left text-xs space-y-3 mb-8 text-slate-300">
             <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Weekly 5–20 Signals</li>
@@ -197,7 +215,7 @@
       </div>
 
       <!-- LIFETIME PLAN (BEST VALUE) -->
-      <div class="gold-glow-card rounded-2xl p-6 flex flex-col justify-between text-center relative overflow-hidden">
+      <div class="gold-card rounded-2xl p-6 flex flex-col justify-between text-center relative overflow-hidden">
         <div class="absolute top-0 right-0 left-0 bg-amber-500 text-black text-[10px] py-1 uppercase tracking-widest font-black">
           BEST VALUE
         </div>
@@ -205,7 +223,7 @@
           <h3 class="text-base font-bold tracking-wider mb-2 text-amber-200">LIFETIME</h3>
           <div class="text-4xl font-black text-amber-400 mb-1">$199</div>
           <p class="text-[10px] text-amber-300 uppercase tracking-widest mb-6 font-semibold">ONE TIME PAYMENT</p>
-          <div class="text-amber-400 text-3xl mb-6"><i class="fa-solid fa-diamond"></i></div>
+          <div class="text-amber-400 text-3xl mb-6"><i class="fa-solid fa-gem"></i></div>
 
           <ul class="text-left text-xs space-y-2.5 mb-8 text-amber-100">
             <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-amber-400"></i> Weekly 5–20 Signals</li>
@@ -226,34 +244,34 @@
 
   <!-- WHY CHOOSE UFX CAPITAL? -->
   <section id="features" class="max-w-7xl mx-auto px-4 py-12">
-    <h2 class="text-xl md:text-2xl font-bold text-center text-white mb-10 tracking-wider">WHY CHOOSE UFX CAPITAL?</h2>
+    <h2 class="text-xl md:text-2xl font-black text-center text-white mb-10 tracking-widest uppercase">WHY CHOOSE UFX CAPITAL?</h2>
     
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 text-center">
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2 hover:border-pink-500/50 transition-all">
         <i class="fa-solid fa-bullseye text-pink-500 text-2xl"></i>
         <p class="text-[11px] text-slate-300 font-medium">High Probability SMC-Based Signals</p>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
-        <i class="fa-solid fa-[#c5a059] fa-chart-line text-pink-500 text-2xl"></i>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2 hover:border-pink-500/50 transition-all">
+        <i class="fa-solid fa-chart-line text-pink-500 text-2xl"></i>
         <p class="text-[11px] text-slate-300 font-medium">Live Entry, SL & TP Updates</p>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2 hover:border-pink-500/50 transition-all">
         <i class="fa-solid fa-desktop text-pink-500 text-2xl"></i>
         <p class="text-[11px] text-slate-300 font-medium">Trade Breakdown (Chart + Logic)</p>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2 hover:border-pink-500/50 transition-all">
         <i class="fa-solid fa-scale-balanced text-pink-500 text-2xl"></i>
         <p class="text-[11px] text-slate-300 font-medium">Weekly Gold (XAUUSD) Outlook</p>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2 hover:border-pink-500/50 transition-all">
         <i class="fa-solid fa-brain text-pink-500 text-2xl"></i>
         <p class="text-[11px] text-slate-300 font-medium">Mindset & Risk Management</p>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2 hover:border-pink-500/50 transition-all">
         <i class="fa-solid fa-users text-pink-500 text-2xl"></i>
         <p class="text-[11px] text-slate-300 font-medium">Premium Community Access</p>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2 hover:border-pink-500/50 transition-all">
         <i class="fa-solid fa-headset text-pink-500 text-2xl"></i>
         <p class="text-[11px] text-slate-300 font-medium">24/7 Priority Support</p>
       </div>
@@ -265,45 +283,49 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
       <div>
         <div class="text-3xl font-black text-pink-500">1000+</div>
-        <p class="text-xs text-slate-400 mt-1">Active Members</p>
+        <p class="text-xs text-slate-400 mt-1 font-medium">Active Members</p>
       </div>
       <div>
         <div class="text-3xl font-black text-pink-500">80%+</div>
-        <p class="text-xs text-slate-400 mt-1">Win Rate Signals</p>
+        <p class="text-xs text-slate-400 mt-1 font-medium">Win Rate Signals</p>
       </div>
       <div>
         <div class="text-3xl font-black text-pink-500">5000+</div>
-        <p class="text-xs text-slate-400 mt-1">Signals Delivered</p>
+        <p class="text-xs text-slate-400 mt-1 font-medium">Signals Delivered</p>
       </div>
       <div>
         <div class="text-3xl font-black text-pink-500">24/7</div>
-        <p class="text-xs text-slate-400 mt-1">Support</p>
+        <p class="text-xs text-slate-400 mt-1 font-medium">Support</p>
       </div>
     </div>
   </section>
 
   <!-- FAQ SECTION -->
   <section id="faq" class="max-w-4xl mx-auto px-4 py-12">
-    <h2 class="text-xl font-bold text-center text-white mb-8">FREQUENTLY ASKED QUESTIONS</h2>
+    <h2 class="text-xl md:text-2xl font-black text-center text-white mb-8 uppercase tracking-widest">FREQUENTLY ASKED QUESTIONS</h2>
     <div class="space-y-3 text-xs">
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
-        <span>What type of signals do you provide?</span>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer hover:border-pink-500/40">
+        <span class="font-medium text-slate-200">What type of signals do you provide?</span>
         <i class="fa-solid fa-plus text-pink-500"></i>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
-        <span>What is the risk-reward ratio?</span>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer hover:border-pink-500/40">
+        <span class="font-medium text-slate-200">What is the risk-reward ratio?</span>
         <i class="fa-solid fa-plus text-pink-500"></i>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
-        <span>How will I receive the signals?</span>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer hover:border-pink-500/40">
+        <span class="font-medium text-slate-200">How will I receive the signals?</span>
         <i class="fa-solid fa-plus text-pink-500"></i>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
-        <span>Can I cancel my subscription anytime?</span>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer hover:border-pink-500/40">
+        <span class="font-medium text-slate-200">Can I cancel my subscription anytime?</span>
         <i class="fa-solid fa-plus text-pink-500"></i>
       </div>
-      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
-        <span>Is this suitable for beginners?</span>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer hover:border-pink-500/40">
+        <span class="font-medium text-slate-200">Is this suitable for beginners?</span>
+        <i class="fa-solid fa-plus text-pink-500"></i>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer hover:border-pink-500/40">
+        <span class="font-medium text-slate-200">Do you provide refund?</span>
         <i class="fa-solid fa-plus text-pink-500"></i>
       </div>
     </div>
@@ -311,7 +333,7 @@
 
   <!-- POPUP MANUAL PAYMENT FLOW MODAL -->
   <div id="paymentModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-[#0b090e] rounded-2xl pink-border-box max-w-lg w-full p-6 relative my-8 text-left max-h-[90vh] overflow-y-auto">
+    <div class="bg-[#0b090e] rounded-2xl pink-card max-w-lg w-full p-6 relative my-8 text-left max-h-[90vh] overflow-y-auto">
       
       <button onclick="closePaymentModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl">
         <i class="fa-solid fa-xmark"></i>
@@ -380,7 +402,7 @@
           </div>
 
           <div id="method-details-box" class="gold-dotted-box p-3 rounded-xl mb-3 space-y-2">
-            <!-- Dynamic Data Inserted Here -->
+            <!-- Dynamic Details -->
           </div>
         </div>
 
