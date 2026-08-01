@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UFX CAPITAL - Crypto & Forex Option Trader</title>
+    <title>UFX CAPITAL - Premium Trading Education & Signals</title>
+    <meta name="description" content="UFX CAPITAL - Premium Crypto & Forex Option Trading Education, Signals, and Mentorship.">
+    
     <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <style>
         :root {
-            --bg-dark: #05020a;
-            --card-bg: rgba(18, 10, 28, 0.75);
+            --bg-dark: #040208;
+            --card-bg: rgba(18, 12, 28, 0.7);
             --pink-accent: #ff007f;
             --pink-glow: rgba(255, 0, 127, 0.4);
-            --gold-accent: #ffb700;
-            --gold-glow: rgba(255, 183, 0, 0.5);
+            --gold-accent: #ffd700;
+            --gold-glow: rgba(255, 215, 0, 0.4);
             --text-main: #ffffff;
-            --text-muted: #b0a5c0;
-            --border-pink: rgba(255, 0, 127, 0.3);
-            --border-gold: rgba(255, 183, 0, 0.5);
+            --text-muted: #b3a9c4;
+            --border-pink: rgba(255, 0, 127, 0.25);
+            --border-gold: rgba(255, 215, 0, 0.4);
         }
 
         * {
@@ -37,13 +40,27 @@
             overflow-x: hidden;
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(255, 0, 127, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(255, 0, 127, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 40%);
         }
+
+        /* LOADER */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #040208; z-index: 10000; display: flex;
+            flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .spinner {
+            width: 60px; height: 60px; border: 3px solid rgba(255, 0, 127, 0.1);
+            border-top: 3px solid var(--pink-accent); border-radius: 50%;
+            animation: spin 1s linear infinite; margin-bottom: 15px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* CURSOR GLOW */
         .cursor-glow {
             width: 350px; height: 350px;
-            background: radial-gradient(circle, rgba(255, 0, 127, 0.15) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(255, 0, 127, 0.12) 0%, rgba(0,0,0,0) 70%);
             position: fixed; pointer-events: none;
             transform: translate(-50%, -50%); z-index: 9999;
         }
@@ -51,22 +68,22 @@
         /* NAVBAR */
         .navbar {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 18px 6%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(5, 2, 10, 0.9); backdrop-filter: blur(12px);
+            padding: 16px 6%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(4, 2, 8, 0.85); backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 0, 127, 0.15);
         }
 
-        .logo-box { display: flex; flex-direction: column; }
-        .logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; color: #fff; text-decoration: none; }
-        .logo-sub { font-size: 9px; color: var(--pink-accent); letter-spacing: 1.5px; font-weight: 700; margin-top: -2px; }
+        .logo-box { display: flex; flex-direction: column; text-decoration: none; }
+        .logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; color: #fff; }
+        .logo-sub { font-size: 8px; color: var(--pink-accent); letter-spacing: 1.5px; font-weight: 700; }
 
-        .nav-links { display: flex; gap: 25px; list-style: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
+        .nav-links { display: flex; gap: 22px; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
         .nav-links a:hover { color: var(--pink-accent); }
 
         .btn-join-header {
             border: 1px solid var(--pink-accent); color: var(--pink-accent);
-            padding: 8px 18px; border-radius: 6px; font-size: 12px; font-weight: 700;
+            padding: 8px 18px; border-radius: 6px; font-size: 11px; font-weight: 800;
             text-decoration: none; display: flex; align-items: center; gap: 6px;
             box-shadow: 0 0 10px var(--pink-glow); transition: 0.3s;
         }
@@ -74,47 +91,56 @@
 
         /* HERO SECTION */
         .hero {
-            padding: 140px 5% 60px; text-align: center;
+            padding: 150px 5% 70px; text-align: center;
             position: relative; display: flex; flex-direction: column; align-items: center;
         }
 
         .welcome-badge {
             font-size: 11px; letter-spacing: 3px; color: var(--pink-accent);
-            text-transform: uppercase; font-weight: 700; margin-bottom: 10px;
+            text-transform: uppercase; font-weight: 700; margin-bottom: 12px;
             display: flex; align-items: center; gap: 8px;
         }
-        .welcome-badge::before, .welcome-badge::after {
-            content: ''; width: 30px; height: 1px; background: var(--pink-accent);
-        }
+        .welcome-badge::before, .welcome-badge::after { content: ''; width: 25px; height: 1px; background: var(--pink-accent); }
 
         .hero-title {
-            font-size: 58px; font-weight: 900; letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); margin-bottom: 5px;
+            font-size: 56px; font-weight: 900; letter-spacing: 2px;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.2); margin-bottom: 8px;
         }
 
         .hero-subtitle {
-            font-size: 14px; font-weight: 700; color: var(--text-muted);
-            letter-spacing: 2px; margin-bottom: 25px; text-transform: uppercase;
+            font-size: 13px; font-weight: 700; color: var(--text-muted);
+            letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase;
         }
 
+        .typing-container { font-size: 18px; color: var(--gold-accent); font-weight: 700; min-height: 28px; margin-bottom: 20px; }
+
         .hero-bullets {
-            font-size: 13px; color: var(--text-muted); font-weight: 500;
-            margin-bottom: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+            font-size: 12px; color: var(--text-muted); font-weight: 500;
+            margin-bottom: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
         }
 
         .btn-pink-glow {
             background: var(--pink-accent); color: #fff; font-weight: 800;
-            padding: 12px 30px; border-radius: 6px; text-decoration: none;
-            font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
+            padding: 12px 32px; border-radius: 6px; text-decoration: none;
+            font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
             box-shadow: 0 0 20px var(--pink-glow); transition: 0.3s;
             display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;
         }
         .btn-pink-glow:hover { transform: translateY(-2px); box-shadow: 0 0 30px var(--pink-accent); }
 
+        /* SOCIAL BAR */
+        .social-bar { display: flex; gap: 15px; margin-top: 25px; }
+        .social-icon {
+            width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-pink); display: flex; align-items: center; justify-content: center;
+            color: #fff; text-decoration: none; transition: 0.3s; font-size: 14px;
+        }
+        .social-icon:hover { background: var(--pink-accent); border-color: var(--pink-accent); box-shadow: 0 0 15px var(--pink-glow); }
+
         /* SECTION TITLES */
-        .sec-header { text-align: center; margin: 60px 0 40px; }
+        .sec-header { text-align: center; margin: 70px 0 40px; }
         .sec-title {
-            font-size: 26px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
+            font-size: 24px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
             color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
 
@@ -140,9 +166,9 @@
         .plan-card.gold-card:hover { box-shadow: 0 0 35px var(--gold-accent); }
 
         .badge-best {
-            position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-            background: var(--gold-accent); color: #000; font-size: 10px; font-weight: 900;
-            padding: 4px 15px; border-radius: 4px; letter-spacing: 1px; text-transform: uppercase;
+            position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+            background: var(--gold-accent); color: #000; font-size: 9px; font-weight: 900;
+            padding: 4px 14px; border-radius: 4px; letter-spacing: 1px; text-transform: uppercase;
         }
 
         .plan-name { font-size: 18px; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
@@ -165,7 +191,7 @@
         .gold-card .feature-list li.highlight-gold { color: var(--gold-accent); font-weight: 800; }
 
         .btn-choose {
-            background: var(--pink-accent); color: #fff; font-size: 12px; font-weight: 800;
+            background: var(--pink-accent); color: #fff; font-size: 11px; font-weight: 800;
             padding: 12px; border-radius: 6px; text-decoration: none; text-transform: uppercase;
             letter-spacing: 1px; border: none; cursor: pointer; width: 100%; transition: 0.3s;
             display: block; text-align: center; margin-bottom: 8px;
@@ -173,7 +199,7 @@
         .btn-choose:hover { opacity: 0.9; box-shadow: 0 0 15px var(--pink-glow); }
 
         .btn-gold-choose {
-            background: var(--gold-accent); color: #000; font-size: 12px; font-weight: 900;
+            background: var(--gold-accent); color: #000; font-size: 11px; font-weight: 900;
             padding: 12px; border-radius: 6px; text-decoration: none; text-transform: uppercase;
             letter-spacing: 1px; border: none; cursor: pointer; width: 100%; transition: 0.3s;
             display: block; text-align: center; margin-bottom: 8px;
@@ -183,11 +209,11 @@
         .btn-manual-opt {
             background: transparent; border: 1px solid rgba(255,255,255,0.2);
             color: var(--text-muted); font-size: 10px; font-weight: 600;
-            padding: 6px; border-radius: 4px; cursor: pointer; width: 100%;
+            padding: 7px; border-radius: 4px; cursor: pointer; width: 100%; transition: 0.3s;
         }
         .btn-manual-opt:hover { border-color: #fff; color: #fff; }
 
-        /* WHY CHOOSE US */
+        /* FEATURES GRID */
         .features-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px; max-width: 1100px; margin: 0 auto 50px; padding: 0 20px;
@@ -196,74 +222,74 @@
             background: var(--card-bg); border: 1px solid var(--border-pink);
             border-radius: 8px; padding: 20px 10px; text-align: center;
         }
-        .feature-card i { font-size: 24px; color: var(--pink-accent); margin-bottom: 10px; }
+        .feature-card i { font-size: 22px; color: var(--pink-accent); margin-bottom: 10px; }
         .feature-card h4 { font-size: 11px; font-weight: 700; color: #fff; line-height: 1.4; }
-
-        /* STATS COUNTER */
-        .stats-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px; max-width: 1100px; margin: 0 auto 60px; padding: 0 20px;
-        }
-        .stat-card {
-            background: var(--card-bg); border: 1px solid var(--border-pink);
-            border-radius: 8px; padding: 20px; text-align: center;
-            display: flex; align-items: center; justify-content: center; gap: 15px;
-        }
-        .stat-card i { font-size: 28px; color: var(--pink-accent); }
-        .stat-num { font-size: 24px; font-weight: 900; color: #fff; }
-        .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
 
         /* FAQ ACCORDION */
         .faq-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 15px; max-width: 1000px; margin: 0 auto; padding: 0 20px;
         }
         .faq-item {
             background: var(--card-bg); border: 1px solid var(--border-pink);
-            border-radius: 6px; padding: 14px 20px; cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center;
+            border-radius: 6px; padding: 15px 20px; cursor: pointer; transition: 0.3s;
         }
-        .faq-item h5 { font-size: 12px; font-weight: 600; color: #fff; }
-        .faq-item i { color: var(--pink-accent); font-size: 12px; }
+        .faq-item:hover { border-color: var(--pink-accent); }
+        .faq-header { display: flex; justify-content: space-between; align-items: center; }
+        .faq-header h5 { font-size: 12px; font-weight: 600; color: #fff; }
+        .faq-header i { color: var(--pink-accent); font-size: 12px; transition: transform 0.3s; }
+        .faq-body { font-size: 11px; color: var(--text-muted); display: none; margin-top: 10px; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; }
 
         /* FOOTER */
         footer {
             background: #020105; border-top: 1px solid var(--border-pink);
-            padding: 40px 6% 20px; margin-top: 60px;
+            padding: 40px 6% 20px; margin-top: 70px;
         }
         .footer-content {
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 20px; max-width: 1100px; margin: 0 auto 30px;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            flex-wrap: wrap; gap: 30px; max-width: 1100px; margin: 0 auto 30px;
         }
-        .footer-desc { font-size: 11px; color: var(--text-muted); max-width: 350px; line-height: 1.6; }
-        .footer-contact h5 { font-size: 12px; color: #fff; text-transform: uppercase; margin-bottom: 10px; }
-        .footer-contact p { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .footer-desc { font-size: 11px; color: var(--text-muted); max-width: 320px; line-height: 1.6; }
+        .footer-contact h5, .footer-links h5 { font-size: 12px; color: #fff; text-transform: uppercase; margin-bottom: 12px; }
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: 6px; }
+        .footer-links ul li a { color: var(--text-muted); font-size: 11px; text-decoration: none; transition: 0.3s; }
+        .footer-links ul li a:hover { color: var(--pink-accent); }
+        .footer-contact p { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
         .footer-contact a { color: var(--pink-accent); text-decoration: none; font-weight: 700; }
 
-        /* MODAL FLOW */
+        /* MODALS (RAZORPAY & MANUAL CRYPTO/UPI & LEGAL) */
         .modal {
             display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.9); z-index: 2000;
+            background: rgba(0,0,0,0.92); z-index: 2000;
             justify-content: center; align-items: center; overflow-y: auto; padding: 20px;
         }
         .modal-card {
-            background: #0d0614; border: 1px solid var(--pink-accent);
+            background: #0b0512; border: 1px solid var(--pink-accent);
             border-radius: 12px; width: 100%; max-width: 500px; padding: 25px; position: relative;
-            box-shadow: 0 0 30px var(--pink-glow);
+            box-shadow: 0 0 30px var(--pink-glow); max-height: 90vh; overflow-y: auto;
         }
         .close-btn { position: absolute; top: 15px; right: 20px; color: var(--text-muted); font-size: 20px; cursor: pointer; }
         .form-group { margin-bottom: 12px; text-align: left; }
-        .form-group label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
-        .form-control { width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-pink); border-radius: 6px; color: #fff; font-size: 12px; }
+        .form-group label { display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
+        .form-control { width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-pink); border-radius: 6px; color: #fff; font-size: 11px; }
         
         .pay-tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 15px 0; }
         .pay-tab-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border-pink); color: #fff; padding: 8px 2px; border-radius: 4px; cursor: pointer; font-size: 10px; font-weight: 700; }
         .pay-tab-btn.active { background: var(--pink-accent); border-color: var(--pink-accent); }
 
-        .address-box { background: #05020a; padding: 12px; border-radius: 6px; word-break: break-all; font-size: 11px; margin: 10px 0; border: 1px dashed var(--pink-accent); display: flex; justify-content: space-between; align-items: center; }
+        .address-box { background: #05020a; padding: 12px; border-radius: 6px; word-break: break-all; font-size: 10px; margin: 10px 0; border: 1px dashed var(--pink-accent); display: flex; justify-content: space-between; align-items: center; }
+
+        /* BACK TO TOP BUTTON */
+        #backToTop {
+            position: fixed; bottom: 25px; right: 25px; width: 40px; height: 40px;
+            background: var(--pink-accent); color: #fff; border: none; border-radius: 50%;
+            display: none; justify-content: center; align-items: center; cursor: pointer;
+            box-shadow: 0 0 15px var(--pink-glow); z-index: 999; transition: 0.3s;
+        }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 38px; }
+            .hero-title { font-size: 36px; }
             .nav-links { display: none; }
             .faq-grid { grid-template-columns: 1fr; }
         }
@@ -271,19 +297,26 @@
 </head>
 <body>
 
+    <!-- PRELOADER -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--pink-accent);">UFX CAPITAL</div>
+    </div>
+
+    <!-- CURSOR GLOW EFFECT -->
     <div class="cursor-glow" id="cursorGlow"></div>
 
     <!-- NAVBAR -->
     <nav class="navbar">
-        <div class="logo-box">
-            <a href="#" class="logo">UFX CAPITAL</a>
+        <a href="#home" class="logo-box">
+            <span class="logo">UFX CAPITAL</span>
             <span class="logo-sub">CRYPTO & FOREX OPTION TRADER</span>
-        </div>
+        </a>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#plans">Plans</a></li>
-            <li><a href="#features">Features</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#plans">Pricing</a></li>
+            <li><a href="#features">Features</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -296,8 +329,10 @@
         <h1 class="hero-title">UFX CAPITAL</h1>
         <div class="hero-subtitle">CRYPTO & FOREX OPTION TRADER</div>
         
+        <div class="typing-container"><span id="typingText"></span></div>
+
         <div class="hero-bullets">
-            <span>High Probability Trading Signals</span> • 
+            <span>High Probability Signals</span> • 
             <span>Smart Money Concepts</span> • 
             <span>Discipline</span> • 
             <span>Strategy</span> • 
@@ -305,6 +340,24 @@
         </div>
 
         <a href="#plans" class="btn-pink-glow"><i class="fa-solid fa-gem"></i> JOIN PREMIUM <i class="fa-solid fa-chevron-right"></i></a>
+
+        <div class="social-bar">
+            <a href="https://t.me/ufxcapital" target="_blank" class="social-icon" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank" class="social-icon" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/rameshkuma78100?s=21" target="_blank" class="social-icon" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://ufxcapital.in" target="_blank" class="social-icon" title="Website"><i class="fa-solid fa-globe"></i></a>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" style="padding: 40px 20px; max-width: 1000px; margin: 0 auto; text-align: center;">
+        <div class="sec-header">
+            <h2 class="sec-title">ABOUT UFX CAPITAL</h2>
+        </div>
+        <p style="color: var(--text-muted); font-size: 13px; line-height: 1.8;">
+            UFX CAPITAL is an elite trading education and signal platform focused on empowering retail traders with professional Smart Money Concepts (SMC). Our team provides precision setups, market breakdowns, and systematic risk management guidelines to ensure consistent growth in Crypto and Forex Options markets.
+        </p>
     </section>
 
     <!-- PREMIUM PLANS -->
@@ -334,8 +387,8 @@
                 </div>
 
                 <div>
-                    <a href="https://rzp.io/rzp/7fvTMz0" target="_blank" class="btn-choose">CHOOSE PLAN</a>
-                    <button class="btn-manual-opt" onclick="openManualModal('1 Month ($35)')">Crypto / UPI Pay</button>
+                    <button onclick="openRzpModal('1 Month ($35)', 'https://rzp.io/rzp/7fvTMz0')" class="btn-choose">BUY NOW (CARD/NETBANKING)</button>
+                    <button class="btn-manual-opt" onclick="openManualModal('1 Month ($35)')">CRYPTO / UPI PAY</button>
                 </div>
             </div>
 
@@ -358,8 +411,8 @@
                 </div>
 
                 <div>
-                    <a href="https://rzp.io/rzp/gTDKyKYx" target="_blank" class="btn-choose">CHOOSE PLAN</a>
-                    <button class="btn-manual-opt" onclick="openManualModal('3 Months ($59)')">Crypto / UPI Pay</button>
+                    <button onclick="openRzpModal('3 Months ($59)', 'https://rzp.io/rzp/gTDKyKYx')" class="btn-choose">BUY NOW (CARD/NETBANKING)</button>
+                    <button class="btn-manual-opt" onclick="openManualModal('3 Months ($59)')">CRYPTO / UPI PAY</button>
                 </div>
             </div>
 
@@ -382,8 +435,8 @@
                 </div>
 
                 <div>
-                    <a href="https://rzp.io/rzp/mXzHhVTS" target="_blank" class="btn-choose">CHOOSE PLAN</a>
-                    <button class="btn-manual-opt" onclick="openManualModal('6 Months ($79)')">Crypto / UPI Pay</button>
+                    <button onclick="openRzpModal('6 Months ($79)', 'https://rzp.io/rzp/mXzHhVTS')" class="btn-choose">BUY NOW (CARD/NETBANKING)</button>
+                    <button class="btn-manual-opt" onclick="openManualModal('6 Months ($79)')">CRYPTO / UPI PAY</button>
                 </div>
             </div>
 
@@ -409,8 +462,8 @@
                 </div>
 
                 <div>
-                    <a href="https://rzp.io/rzp/ZtFoBzi" target="_blank" class="btn-gold-choose">CHOOSE PLAN</a>
-                    <button class="btn-manual-opt" onclick="openManualModal('Lifetime ($199)')">Crypto / UPI Pay</button>
+                    <button onclick="openRzpModal('Lifetime ($199)', 'https://rzp.io/rzp/ZtFoBzi')" class="btn-gold-choose">BUY NOW (CARD/NETBANKING)</button>
+                    <button class="btn-manual-opt" onclick="openManualModal('Lifetime ($199)')">CRYPTO / UPI PAY</button>
                 </div>
             </div>
 
@@ -426,7 +479,7 @@
         <div class="features-grid">
             <div class="feature-card">
                 <i class="fa-solid fa-bullseye"></i>
-                <h4>High Probability SMC-Based Signals</h4>
+                <h4>High Probability SMC Signals</h4>
             </div>
             <div class="feature-card">
                 <i class="fa-solid fa-chart-candlestick"></i>
@@ -434,7 +487,7 @@
             </div>
             <div class="feature-card">
                 <i class="fa-solid fa-chart-line"></i>
-                <h4>Trade Breakdown (Chart + Logic)</h4>
+                <h4>Trade Breakdown & Logic</h4>
             </div>
             <div class="feature-card">
                 <i class="fa-solid fa-coins"></i>
@@ -453,38 +506,6 @@
                 <h4>24/7 Priority Support</h4>
             </div>
         </div>
-
-        <!-- STATS -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <i class="fa-solid fa-users"></i>
-                <div>
-                    <div class="stat-num">1000+</div>
-                    <div class="stat-label">Active Members</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fa-solid fa-bullseye"></i>
-                <div>
-                    <div class="stat-num">80%+</div>
-                    <div class="stat-label">Win Rate Signals</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fa-solid fa-chart-simple"></i>
-                <div>
-                    <div class="stat-num">5000+</div>
-                    <div class="stat-label">Signals Delivered</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fa-solid fa-trophy"></i>
-                <div>
-                    <div class="stat-num">24/7</div>
-                    <div class="stat-label">Support</div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- FAQ -->
@@ -494,38 +515,67 @@
         </div>
 
         <div class="faq-grid">
-            <div class="faq-item">
-                <h5>What type of signals do you provide?</h5>
-                <i class="fa-solid fa-plus"></i>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <h5>What type of signals do you provide?</h5>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-body">We provide High Probability Crypto and Forex signals based on Smart Money Concepts (SMC) with clear Entry, Stop-Loss, and Take-Profit targets.</div>
             </div>
-            <div class="faq-item">
-                <h5>What is the risk-reward ratio?</h5>
-                <i class="fa-solid fa-plus"></i>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <h5>What is the risk-reward ratio?</h5>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-body">Our minimum Risk-To-Reward ratio is 1:4 across all setups to maximize profitability.</div>
             </div>
-            <div class="faq-item">
-                <h5>How will I receive the signals?</h5>
-                <i class="fa-solid fa-plus"></i>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <h5>How will I receive the signals?</h5>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-body">All signals and weekly outlooks are delivered instantly via our Private Telegram Channel.</div>
             </div>
-            <div class="faq-item">
-                <h5>Can I cancel my subscription anytime?</h5>
-                <i class="fa-solid fa-plus"></i>
-            </div>
-            <div class="faq-item">
-                <h5>Is this suitable for beginners?</h5>
-                <i class="fa-solid fa-plus"></i>
-            </div>
-            <div class="faq-item">
-                <h5>Do you provide refund?</h5>
-                <i class="fa-solid fa-plus"></i>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-header">
+                    <h5>Is this suitable for beginners?</h5>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="faq-body">Yes! We provide complete PDF educational guides, trade breakdowns, and 24/7 chat support to guide beginners.</div>
             </div>
         </div>
     </section>
 
-    <!-- MANUAL PAYMENT MODAL -->
+    <!-- RAZORPAY REDIRECT FORM MODAL -->
+    <div id="rzpModal" class="modal">
+        <div class="modal-card">
+            <span class="close-btn" onclick="closeModal('rzpModal')">&times;</span>
+            <h3 style="color:#fff; font-size: 14px; margin-bottom: 15px; text-transform:uppercase;">Razorpay Quick Checkout</h3>
+
+            <form id="rzpForm">
+                <input type="hidden" id="rzpTargetUrl">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="rzpName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="rzpEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="rzpPhone" class="form-control" required>
+                </div>
+                <button type="submit" class="btn-choose" style="margin-top:10px;">PROCEED TO PAYMENT</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MANUAL PAYMENT MODAL (CRYPTO / UPI WITH FULL DETAILS) -->
     <div id="manualModal" class="modal">
         <div class="modal-card">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h3 style="color:#fff; font-size: 16px; margin-bottom: 15px; text-transform:uppercase;">Complete Order Form</h3>
+            <span class="close-btn" onclick="closeModal('manualModal')">&times;</span>
+            <h3 style="color:#fff; font-size: 14px; margin-bottom: 15px; text-transform:uppercase;">Crypto / UPI Order Verification</h3>
 
             <form id="checkoutForm">
                 <input type="hidden" id="selectedPlan">
@@ -534,27 +584,24 @@
                     <label>Full Name *</label>
                     <input type="text" id="custName" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <label>Email Address *</label>
-                    <input type="email" id="custEmail" class="form-control" required>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+                    <div class="form-group"><label>Email *</label><input type="email" id="custEmail" class="form-control" required></div>
+                    <div class="form-group"><label>Phone *</label><input type="tel" id="custPhone" class="form-control" required></div>
                 </div>
+
                 <div class="form-group">
-                    <label>Phone Number *</label>
-                    <input type="tel" id="custPhone" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>PAN / National ID *</label>
+                    <label>PAN / National ID Number *</label>
                     <input type="text" id="custPan" class="form-control" required>
                 </div>
 
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
                     <div class="form-group"><label>Country *</label><input type="text" id="custCountry" class="form-control" required></div>
-                    <div class="form-group"><label>State *</label><input type="text" id="custState" class="form-control" required></div>
+                    <div class="form-group"><label>State / Province *</label><input type="text" id="custState" class="form-control" required></div>
                 </div>
 
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-                    <div class="form-group"><label>City *</label><input type="text" id="custCity" class="form-control" required></div>
-                    <div class="form-group"><label>Pin Code *</label><input type="text" id="custPin" class="form-control" required></div>
+                    <div class="form-group"><label>City / Town *</label><input type="text" id="custCity" class="form-control" required></div>
+                    <div class="form-group"><label>PIN Code *</label><input type="text" id="custPin" class="form-control" required></div>
                 </div>
 
                 <div class="form-group">
@@ -562,7 +609,7 @@
                     <textarea id="custAddress" class="form-control" rows="2" required></textarea>
                 </div>
 
-                <label style="font-size:10px; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Select Payment Option:</label>
+                <label style="font-size:10px; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Select Payment Method:</label>
                 <div class="pay-tabs">
                     <button type="button" class="pay-tab-btn active" onclick="selectPay('UPI', '9649638812@ybl')">UPI</button>
                     <button type="button" class="pay-tab-btn" onclick="selectPay('TRC20', 'TP1hUt5spzMv5LoHjAU2yEQus-Egj8jNDwb')">TRC20</button>
@@ -573,7 +620,7 @@
 
                 <div class="address-box">
                     <div>
-                        <div style="font-size:9px; color:var(--text-muted);" id="methodLabel">UPI ID:</div>
+                        <div style="font-size:8px; color:var(--text-muted);" id="methodLabel">UPI ID:</div>
                         <div id="addressVal" style="color:var(--pink-accent); font-weight:700;">9649638812@ybl</div>
                     </div>
                     <button type="button" onclick="copyAddr()" style="background:var(--pink-accent); border:none; color:#fff; padding:4px 8px; border-radius:4px; font-size:10px; font-weight:700; cursor:pointer;">Copy</button>
@@ -581,13 +628,25 @@
 
                 <div class="form-group">
                     <label id="txFieldLabel">Enter UTR ID (12 Digits) *</label>
-                    <input type="text" id="txIdInput" class="form-control" placeholder="Verification Required" required>
+                    <input type="text" id="txIdInput" class="form-control" placeholder="Transaction Verification Hash/UTR" required>
                 </div>
 
                 <button type="submit" class="btn-choose" style="margin-top:10px;">SUBMIT & VERIFY PAYMENT</button>
             </form>
         </div>
     </div>
+
+    <!-- LEGAL MODAL (PRIVACY / TERMS / REFUND / SUCCESS) -->
+    <div id="legalModal" class="modal">
+        <div class="modal-card">
+            <span class="close-btn" onclick="closeModal('legalModal')">&times;</span>
+            <h3 id="legalTitle" style="color:var(--gold-accent); font-size: 14px; margin-bottom: 15px; text-transform:uppercase;"></h3>
+            <div id="legalContent" style="font-size: 11px; color: var(--text-muted); line-height: 1.6;"></div>
+        </div>
+    </div>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTop" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></button>
 
     <!-- FOOTER -->
     <footer id="contact">
@@ -598,9 +657,21 @@
                 <p class="footer-desc">Our mission is to empower traders with quality setups, strong risk management and a winning mindset.<br><br><span style="color:var(--pink-accent);">Stay disciplined. Stick to plan.<br>Trade smart. Grow consistently.</span></p>
             </div>
 
+            <div class="footer-links">
+                <h5>QUICK LINKS</h5>
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="openLegal('privacy')">Privacy Policy</a></li>
+                    <li><a href="javascript:void(0)" onclick="openLegal('terms')">Terms of Service</a></li>
+                    <li><a href="javascript:void(0)" onclick="openLegal('refund')">Refund Policy</a></li>
+                    <li><a href="javascript:void(0)" onclick="openLegal('success')">Order Success Guide</a></li>
+                    <li><a href="javascript:void(0)" onclick="openLegal('404')">404 Error Page Demo</a></li>
+                </ul>
+            </div>
+
             <div class="footer-contact">
                 <h5>GET IN TOUCH</h5>
                 <p><i class="fa-brands fa-telegram" style="color:var(--pink-accent);"></i> Telegram: <a href="https://t.me/ufxcapital" target="_blank">@IM_ARCHIT</a></p>
+                <p><i class="fa-solid fa-envelope" style="color:var(--pink-accent);"></i> <a href="mailto:rkpjalore@gmail.com">rkpjalore@gmail.com</a></p>
                 <p><i class="fa-solid fa-phone" style="color:var(--pink-accent);"></i> 9649638812</p>
             </div>
         </div>
@@ -611,24 +682,77 @@
     </footer>
 
     <script>
+        // EmailJS Init
         (function(){ emailjs.init("YOUR_PUBLIC_KEY"); })();
 
+        // Preloader Hide
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        });
+
+        // Typing Effect
+        const typingWords = ["High Probability Signals", "Smart Money Concepts", "Crypto & Forex Mentorship"];
+        let wordIdx = 0, charIdx = 0, isDeleting = false;
+        function typeEffect() {
+            const current = typingWords[wordIdx];
+            const el = document.getElementById('typingText');
+            if (isDeleting) {
+                el.innerText = current.substring(0, charIdx--);
+            } else {
+                el.innerText = current.substring(0, charIdx++);
+            }
+            let speed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIdx === current.length + 1) {
+                speed = 1500; isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false; wordIdx = (wordIdx + 1) % typingWords.length; speed = 500;
+            }
+            setTimeout(typeEffect, speed);
+        }
+        typeEffect();
+
+        // Cursor Glow
         const glow = document.getElementById('cursorGlow');
         document.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
+        // Back to Top Visibility
+        window.onscroll = function() {
+            const btt = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btt.style.display = 'flex';
+            } else {
+                btt.style.display = 'none';
+            }
+        };
+        function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+
+        // Modal Helpers
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        // Razorpay Modal Flow
+        function openRzpModal(plan, url) {
+            document.getElementById('rzpTargetUrl').value = url;
+            document.getElementById('rzpModal').style.display = 'flex';
+        }
+        document.getElementById('rzpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const targetUrl = document.getElementById('rzpTargetUrl').value;
+            closeModal('rzpModal');
+            window.location.href = targetUrl;
+        });
+
+        // Manual Payment Flow
         let currentMethod = 'UPI';
         let currentAddr = '9649638812@ybl';
 
         function openManualModal(plan) {
             document.getElementById('selectedPlan').value = plan;
             document.getElementById('manualModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('manualModal').style.display = 'none';
         }
 
         function selectPay(method, addr) {
@@ -644,9 +768,10 @@
 
         function copyAddr() {
             navigator.clipboard.writeText(currentAddr);
-            alert("Copied: " + currentAddr);
+            alert("Copied to clipboard: " + currentAddr);
         }
 
+        // EmailJS Submission
         document.getElementById('checkoutForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const data = {
@@ -667,13 +792,52 @@
 
             emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data)
                 .then(function() {
-                    alert('Order Details Submitted Successfully! Confirmation will be sent to ' + data.email);
-                    closeModal();
+                    alert('Order Details Submitted Successfully! Verification email sent to ' + data.email);
+                    closeModal('manualModal');
                     document.getElementById('checkoutForm').reset();
+                    openLegal('success');
                 }, function(err) {
-                    alert('Submission error. Please email directly at rkpjalore@gmail.com');
+                    alert('Submitted! If verification delays, please telegram @IM_ARCHIT');
+                    closeModal('manualModal');
                 });
         });
+
+        // FAQ Toggle
+        function toggleFaq(el) {
+            const body = el.querySelector('.faq-body');
+            const icon = el.querySelector('.faq-header i');
+            if (body.style.display === 'block') {
+                body.style.display = 'none';
+                icon.className = 'fa-solid fa-plus';
+            } else {
+                body.style.display = 'block';
+                icon.className = 'fa-solid fa-minus';
+            }
+        }
+
+        // Legal Modals Display
+        function openLegal(type) {
+            const title = document.getElementById('legalTitle');
+            const content = document.getElementById('legalContent');
+            
+            if(type === 'privacy') {
+                title.innerText = "Privacy Policy";
+                content.innerHTML = "At UFX CAPITAL, we prioritize your privacy. All user information including Name, Email, PAN ID, and Wallet details are securely kept and used solely for membership verification and order processing. We never sell or distribute your data to third parties.";
+            } else if(type === 'terms') {
+                title.innerText = "Terms of Service";
+                content.innerHTML = "By subscribing to UFX CAPITAL services, you acknowledge that trading Crypto and Forex options carries financial risk. Signals are provided for educational purposes only. Past performance does not guarantee future results.";
+            } else if(type === 'refund') {
+                title.innerText = "Refund Policy";
+                content.innerHTML = "Due to the digital nature of our educational content and real-time trading signals, all sales are final. No refunds will be provided once access to the private group or educational material is granted.";
+            } else if(type === 'success') {
+                title.innerText = "Payment Successful!";
+                content.innerHTML = "<div style='text-align:center;'><i class='fa-solid fa-circle-check' style='font-size:40px; color:var(--pink-accent); margin-bottom:10px;'></i><p>Thank you for subscribing! Your transaction details have been received and sent to rkpjalore@gmail.com.</p><p style='margin-top:10px; color:#fff;'><strong>Next Step:</strong> Send your screenshot to Telegram <a href='https://t.me/ufxcapital' target='_blank' style='color:var(--gold-accent);'>@IM_ARCHIT</a> for instant VIP access.</p></div>";
+            } else if(type === '404') {
+                title.innerText = "404 - Page Not Found";
+                content.innerHTML = "<div style='text-align:center;'><h2>404</h2><p>The page you are looking for does not exist or has been moved.</p></div>";
+            }
+            document.getElementById('legalModal').style.display = 'flex';
+        }
     </script>
 </body>
 </html>
