@@ -1,842 +1,672 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UFX CAPITAL - Premium Trading Education & Signals</title>
-    <meta name="description" content="UFX CAPITAL - Premium Crypto & Forex Option Trading Education, Signals, and Mentorship.">
-    
-    <!-- FontAwesome & Google Fonts -->
+    <title>UFX CAPITAL - Premium Signal & Mentorship</title>
+    <!-- Premium Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
     <style>
         :root {
-            --bg-dark: #040208;
-            --card-bg: rgba(18, 12, 28, 0.7);
-            --pink-accent: #ff007f;
-            --pink-glow: rgba(255, 0, 127, 0.4);
-            --gold-accent: #ffd700;
-            --gold-glow: rgba(255, 215, 0, 0.4);
-            --text-main: #ffffff;
-            --text-muted: #b3a9c4;
-            --border-pink: rgba(255, 0, 127, 0.25);
-            --border-gold: rgba(255, 215, 0, 0.4);
+            --bg-dark: #0a0a0c;
+            --card-bg: #121218;
+            --gold-primary: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7);
+            --pink-accent: #ff0055;
+            --pink-glow: rgba(255, 0, 85, 0.4);
+            --text-light: #f0f0f0;
+            --text-dim: #a0a0a0;
         }
 
         * {
-            margin: 0; padding: 0;
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
             font-family: 'Montserrat', sans-serif;
         }
 
         body {
             background-color: var(--bg-dark);
-            color: var(--text-main);
+            color: var(--text-light);
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 0, 127, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 40%);
+            position: relative;
         }
 
-        /* LOADER */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #040208; z-index: 10000; display: flex;
-            flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.5s ease;
-        }
-        .spinner {
-            width: 60px; height: 60px; border: 3px solid rgba(255, 0, 127, 0.1);
-            border-top: 3px solid var(--pink-accent); border-radius: 50%;
-            animation: spin 1s linear infinite; margin-bottom: 15px;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* CURSOR GLOW */
-        .cursor-glow {
-            width: 350px; height: 350px;
-            background: radial-gradient(circle, rgba(255, 0, 127, 0.12) 0%, rgba(0,0,0,0) 70%);
-            position: fixed; pointer-events: none;
-            transform: translate(-50%, -50%); z-index: 9999;
+        /* Animated Particles Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #1a001a 0%, #0a0a0c 100%);
         }
 
-        /* NAVBAR */
-        .navbar {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 16px 6%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(4, 2, 8, 0.85); backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 0, 127, 0.15);
+        .glow-orb {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: float 10s infinite alternate;
         }
 
-        .logo-box { display: flex; flex-direction: column; text-decoration: none; }
-        .logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; color: #fff; }
-        .logo-sub { font-size: 8px; color: var(--pink-accent); letter-spacing: 1.5px; font-weight: 700; }
+        .orb-1 { background: var(--pink-accent); top: 10%; left: 10%; }
+        .orb-2 { background: var(--gold-primary); bottom: 10%; right: 10%; animation-delay: -5s; }
 
-        .nav-links { display: flex; gap: 22px; list-style: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
-        .nav-links a:hover { color: var(--pink-accent); }
-
-        .btn-join-header {
-            border: 1px solid var(--pink-accent); color: var(--pink-accent);
-            padding: 8px 18px; border-radius: 6px; font-size: 11px; font-weight: 800;
-            text-decoration: none; display: flex; align-items: center; gap: 6px;
-            box-shadow: 0 0 10px var(--pink-glow); transition: 0.3s;
-        }
-        .btn-join-header:hover { background: var(--pink-accent); color: #fff; }
-
-        /* HERO SECTION */
-        .hero {
-            padding: 150px 5% 70px; text-align: center;
-            position: relative; display: flex; flex-direction: column; align-items: center;
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.2); }
         }
 
-        .welcome-badge {
-            font-size: 11px; letter-spacing: 3px; color: var(--pink-accent);
-            text-transform: uppercase; font-weight: 700; margin-bottom: 12px;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .welcome-badge::before, .welcome-badge::after { content: ''; width: 25px; height: 1px; background: var(--pink-accent); }
-
-        .hero-title {
-            font-size: 56px; font-weight: 900; letter-spacing: 2px;
-            text-shadow: 0 0 25px rgba(255, 255, 255, 0.2); margin-bottom: 8px;
-        }
-
-        .hero-subtitle {
-            font-size: 13px; font-weight: 700; color: var(--text-muted);
-            letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase;
+        /* Header / Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .typing-container { font-size: 18px; color: var(--gold-accent); font-weight: 700; min-height: 28px; margin-bottom: 20px; }
-
-        .hero-bullets {
-            font-size: 12px; color: var(--text-muted); font-weight: 500;
-            margin-bottom: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
         }
 
-        .btn-pink-glow {
-            background: var(--pink-accent); color: #fff; font-weight: 800;
-            padding: 12px 32px; border-radius: 6px; text-decoration: none;
-            font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
-            box-shadow: 0 0 20px var(--pink-glow); transition: 0.3s;
-            display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;
-        }
-        .btn-pink-glow:hover { transform: translateY(-2px); box-shadow: 0 0 30px var(--pink-accent); }
-
-        /* SOCIAL BAR */
-        .social-bar { display: flex; gap: 15px; margin-top: 25px; }
-        .social-icon {
-            width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border-pink); display: flex; align-items: center; justify-content: center;
-            color: #fff; text-decoration: none; transition: 0.3s; font-size: 14px;
-        }
-        .social-icon:hover { background: var(--pink-accent); border-color: var(--pink-accent); box-shadow: 0 0 15px var(--pink-glow); }
-
-        /* SECTION TITLES */
-        .sec-header { text-align: center; margin: 70px 0 40px; }
-        .sec-title {
-            font-size: 24px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
-            color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px;
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+            transition: 0.3s;
         }
 
-        /* PRICING GRID */
+        nav a:hover {
+            color: var(--gold-primary);
+        }
+
+        /* Pricing Section */
         .pricing-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            color: var(--pink-accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-shadow: 0 0 15px var(--pink-glow);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            align-items: center;
         }
 
         .plan-card {
-            background: var(--card-bg); border: 1px solid var(--border-pink);
-            border-radius: 12px; padding: 30px 20px; text-align: center;
-            position: relative; backdrop-filter: blur(10px);
-            display: flex; flex-direction: column; justify-content: space-between;
-            transition: 0.3s;
-        }
-        .plan-card:hover { transform: translateY(-5px); border-color: var(--pink-accent); box-shadow: 0 0 20px var(--pink-glow); }
-
-        .plan-card.gold-card {
-            border: 2px solid var(--gold-accent);
-            box-shadow: 0 0 20px var(--gold-glow);
-        }
-        .plan-card.gold-card:hover { box-shadow: 0 0 35px var(--gold-accent); }
-
-        .badge-best {
-            position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-            background: var(--gold-accent); color: #000; font-size: 9px; font-weight: 900;
-            padding: 4px 14px; border-radius: 4px; letter-spacing: 1px; text-transform: uppercase;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            border-radius: 12px;
+            padding: 30px 20px;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .plan-name { font-size: 18px; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
-        .plan-price { font-size: 42px; font-weight: 900; color: var(--pink-accent); line-height: 1; }
-        .gold-card .plan-price { color: var(--gold-accent); }
-
-        .plan-period { font-size: 10px; color: var(--pink-accent); font-weight: 700; text-transform: uppercase; margin-top: 5px; margin-bottom: 15px; letter-spacing: 1px; }
-        .gold-card .plan-period { color: var(--gold-accent); }
-
-        .diamond-icon { color: var(--pink-accent); font-size: 18px; margin-bottom: 20px; }
-        .gold-card .diamond-icon { color: var(--gold-accent); }
-
-        .feature-list { list-style: none; text-align: left; margin-bottom: 25px; }
-        .feature-list li {
-            font-size: 12px; color: var(--text-muted); margin-bottom: 12px;
-            display: flex; align-items: flex-start; gap: 8px; font-weight: 500;
+        .plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px var(--pink-glow);
         }
-        .feature-list li i { color: var(--pink-accent); font-size: 12px; margin-top: 2px; }
-        .gold-card .feature-list li i { color: var(--gold-accent); }
-        .gold-card .feature-list li.highlight-gold { color: var(--gold-accent); font-weight: 800; }
+
+        .plan-card.lifetime {
+            border: 2px solid var(--gold-primary);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-gradient);
+            color: #000;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 15px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .plan-title {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--pink-accent);
+            margin-bottom: 5px;
+        }
+
+        .lifetime .price {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-text {
+            color: var(--text-dim);
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+
+        .features li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li i {
+            color: var(--pink-accent);
+            margin-right: 10px;
+        }
+
+        .lifetime .features li i {
+            color: var(--gold-primary);
+        }
 
         .btn-choose {
-            background: var(--pink-accent); color: #fff; font-size: 11px; font-weight: 800;
-            padding: 12px; border-radius: 6px; text-decoration: none; text-transform: uppercase;
-            letter-spacing: 1px; border: none; cursor: pointer; width: 100%; transition: 0.3s;
-            display: block; text-align: center; margin-bottom: 8px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #ff0055, #ff5500);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
-        .btn-choose:hover { opacity: 0.9; box-shadow: 0 0 15px var(--pink-glow); }
 
-        .btn-gold-choose {
-            background: var(--gold-accent); color: #000; font-size: 11px; font-weight: 900;
-            padding: 12px; border-radius: 6px; text-decoration: none; text-transform: uppercase;
-            letter-spacing: 1px; border: none; cursor: pointer; width: 100%; transition: 0.3s;
-            display: block; text-align: center; margin-bottom: 8px;
+        .lifetime .btn-choose {
+            background: var(--gold-gradient);
+            color: #000;
         }
-        .btn-gold-choose:hover { box-shadow: 0 0 20px var(--gold-accent); }
 
-        .btn-manual-opt {
-            background: transparent; border: 1px solid rgba(255,255,255,0.2);
-            color: var(--text-muted); font-size: 10px; font-weight: 600;
-            padding: 7px; border-radius: 4px; cursor: pointer; width: 100%; transition: 0.3s;
+        .btn-choose:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
         }
-        .btn-manual-opt:hover { border-color: #fff; color: #fff; }
 
-        /* FEATURES GRID */
-        .features-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px; max-width: 1100px; margin: 0 auto 50px; padding: 0 20px;
-        }
-        .feature-card {
-            background: var(--card-bg); border: 1px solid var(--border-pink);
-            border-radius: 8px; padding: 20px 10px; text-align: center;
-        }
-        .feature-card i { font-size: 22px; color: var(--pink-accent); margin-bottom: 10px; }
-        .feature-card h4 { font-size: 11px; font-weight: 700; color: #fff; line-height: 1.4; }
-
-        /* FAQ ACCORDION */
-        .faq-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 15px; max-width: 1000px; margin: 0 auto; padding: 0 20px;
-        }
-        .faq-item {
-            background: var(--card-bg); border: 1px solid var(--border-pink);
-            border-radius: 6px; padding: 15px 20px; cursor: pointer; transition: 0.3s;
-        }
-        .faq-item:hover { border-color: var(--pink-accent); }
-        .faq-header { display: flex; justify-content: space-between; align-items: center; }
-        .faq-header h5 { font-size: 12px; font-weight: 600; color: #fff; }
-        .faq-header i { color: var(--pink-accent); font-size: 12px; transition: transform 0.3s; }
-        .faq-body { font-size: 11px; color: var(--text-muted); display: none; margin-top: 10px; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; }
-
-        /* FOOTER */
-        footer {
-            background: #020105; border-top: 1px solid var(--border-pink);
-            padding: 40px 6% 20px; margin-top: 70px;
-        }
-        .footer-content {
-            display: flex; justify-content: space-between; align-items: flex-start;
-            flex-wrap: wrap; gap: 30px; max-width: 1100px; margin: 0 auto 30px;
-        }
-        .footer-desc { font-size: 11px; color: var(--text-muted); max-width: 320px; line-height: 1.6; }
-        .footer-contact h5, .footer-links h5 { font-size: 12px; color: #fff; text-transform: uppercase; margin-bottom: 12px; }
-        .footer-links ul { list-style: none; }
-        .footer-links ul li { margin-bottom: 6px; }
-        .footer-links ul li a { color: var(--text-muted); font-size: 11px; text-decoration: none; transition: 0.3s; }
-        .footer-links ul li a:hover { color: var(--pink-accent); }
-        .footer-contact p { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-        .footer-contact a { color: var(--pink-accent); text-decoration: none; font-weight: 700; }
-
-        /* MODALS (RAZORPAY & MANUAL CRYPTO/UPI & LEGAL) */
+        /* Modal / Payment Form */
         .modal {
-            display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.92); z-index: 2000;
-            justify-content: center; align-items: center; overflow-y: auto; padding: 20px;
-        }
-        .modal-card {
-            background: #0b0512; border: 1px solid var(--pink-accent);
-            border-radius: 12px; width: 100%; max-width: 500px; padding: 25px; position: relative;
-            box-shadow: 0 0 30px var(--pink-glow); max-height: 90vh; overflow-y: auto;
-        }
-        .close-btn { position: absolute; top: 15px; right: 20px; color: var(--text-muted); font-size: 20px; cursor: pointer; }
-        .form-group { margin-bottom: 12px; text-align: left; }
-        .form-group label { display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
-        .form-control { width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-pink); border-radius: 6px; color: #fff; font-size: 11px; }
-        
-        .pay-tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 15px 0; }
-        .pay-tab-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border-pink); color: #fff; padding: 8px 2px; border-radius: 4px; cursor: pointer; font-size: 10px; font-weight: 700; }
-        .pay-tab-btn.active { background: var(--pink-accent); border-color: var(--pink-accent); }
-
-        .address-box { background: #05020a; padding: 12px; border-radius: 6px; word-break: break-all; font-size: 10px; margin: 10px 0; border: 1px dashed var(--pink-accent); display: flex; justify-content: space-between; align-items: center; }
-
-        /* BACK TO TOP BUTTON */
-        #backToTop {
-            position: fixed; bottom: 25px; right: 25px; width: 40px; height: 40px;
-            background: var(--pink-accent); color: #fff; border: none; border-radius: 50%;
-            display: none; justify-content: center; align-items: center; cursor: pointer;
-            box-shadow: 0 0 15px var(--pink-glow); z-index: 999; transition: 0.3s;
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        @media (max-width: 768px) {
-            .hero-title { font-size: 36px; }
-            .nav-links { display: none; }
-            .faq-grid { grid-template-columns: 1fr; }
+        .modal-content {
+            background: #111116;
+            border: 1px solid var(--gold-primary);
+            width: 100%;
+            max-width: 550px;
+            border-radius: 12px;
+            padding: 25px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            color: var(--text-dim);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-primary);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a22;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #fff;
+            outline: none;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: #1a1a22;
+            border: 1px solid #333;
+            color: var(--text-light);
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .tab-btn.active {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+        }
+
+        .payment-details-box {
+            background: #16161e;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px dashed var(--gold-primary);
+            margin-bottom: 15px;
+        }
+
+        .copy-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0a0a0c;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+            margin-top: 5px;
+        }
+
+        .copy-btn {
+            background: var(--gold-primary);
+            color: #000;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        /* Footer & Contact Section */
+        footer {
+            background: #050507;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 8% 20px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-primary);
+            margin-bottom: 15px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--text-dim);
+            font-size: 13px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: #121218;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--gold-primary);
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--gold-primary);
+            color: #000;
+            box-shadow: 0 0 10px var(--gold-primary);
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-dim);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- PRELOADER -->
-    <div id="loader">
-        <div class="spinner"></div>
-        <div style="font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--pink-accent);">UFX CAPITAL</div>
+    <div class="animated-bg">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
     </div>
 
-    <!-- CURSOR GLOW EFFECT -->
-    <div class="cursor-glow" id="cursorGlow"></div>
+    <!-- Header -->
+    <header>
+        <div class="logo">UFX CAPITAL</div>
+        <nav>
+            <a href="#plans">Pricing</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <a href="#home" class="logo-box">
-            <span class="logo">UFX CAPITAL</span>
-            <span class="logo-sub">CRYPTO & FOREX OPTION TRADER</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#plans">Pricing</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="#plans" class="btn-join-header"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</a>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <section id="home" class="hero">
-        <div class="welcome-badge">WELCOME TO</div>
-        <h1 class="hero-title">UFX CAPITAL</h1>
-        <div class="hero-subtitle">CRYPTO & FOREX OPTION TRADER</div>
+    <!-- Pricing Section -->
+    <section class="pricing-container" id="plans">
+        <h2 class="section-title">PREMIUM PLANS</h2>
         
-        <div class="typing-container"><span id="typingText"></span></div>
+        <div class="plans-grid">
+            <!-- 1 Month -->
+            <div class="plan-card">
+                <div class="plan-title">1 MONTH</div>
+                <div class="price">$35</div>
+                <div class="sub-text">Per Month</div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-check"></i> Weekly 2-5 Signals</li>
+                    <li><i class="fa-solid fa-check"></i> PDF of UFX Strategy</li>
+                    <li><i class="fa-solid fa-check"></i> Weekly Outlook</li>
+                    <li><i class="fa-solid fa-check"></i> Min 1:4 RR Signals</li>
+                    <li><i class="fa-solid fa-check"></i> Signals with Trading Chart</li>
+                    <li><i class="fa-solid fa-check"></i> 24/7 Chat Support</li>
+                </ul>
+                <button class="btn-choose" onclick="openPaymentModal('$35 - 1 Month')">CHOOSE PLAN</button>
+            </div>
 
-        <div class="hero-bullets">
-            <span>High Probability Signals</span> • 
-            <span>Smart Money Concepts</span> • 
-            <span>Discipline</span> • 
-            <span>Strategy</span> • 
-            <span>Consistency</span>
-        </div>
+            <!-- 3 Months -->
+            <div class="plan-card">
+                <div class="plan-title">3 MONTHS</div>
+                <div class="price">$59</div>
+                <div class="sub-text">Every 3 Months</div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-check"></i> Weekly 2-5 Signals</li>
+                    <li><i class="fa-solid fa-check"></i> PDF of UFX Strategy</li>
+                    <li><i class="fa-solid fa-check"></i> Weekly Outlook</li>
+                    <li><i class="fa-solid fa-check"></i> Min 1:4 RR Signals</li>
+                    <li><i class="fa-solid fa-check"></i> Signals with Trading Chart</li>
+                    <li><i class="fa-solid fa-check"></i> 24/7 Chat Support</li>
+                </ul>
+                <button class="btn-choose" onclick="openPaymentModal('$59 - 3 Months')">CHOOSE PLAN</button>
+            </div>
 
-        <a href="#plans" class="btn-pink-glow"><i class="fa-solid fa-gem"></i> JOIN PREMIUM <i class="fa-solid fa-chevron-right"></i></a>
+            <!-- 6 Months -->
+            <div class="plan-card">
+                <div class="plan-title">6 MONTHS</div>
+                <div class="price">$79</div>
+                <div class="sub-text">Every 6 Months</div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-check"></i> Weekly 2-5 Signals</li>
+                    <li><i class="fa-solid fa-check"></i> PDF of UFX Strategy</li>
+                    <li><i class="fa-solid fa-check"></i> Weekly Outlook</li>
+                    <li><i class="fa-solid fa-check"></i> Min 1:4 RR Signals</li>
+                    <li><i class="fa-solid fa-check"></i> Signals with Trading Chart</li>
+                    <li><i class="fa-solid fa-check"></i> 24/7 Chat Support</li>
+                </ul>
+                <button class="btn-choose" onclick="openPaymentModal('$79 - 6 Months')">CHOOSE PLAN</button>
+            </div>
 
-        <div class="social-bar">
-            <a href="https://t.me/ufxcapital" target="_blank" class="social-icon" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-            <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank" class="social-icon" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://x.com/rameshkuma78100?s=21" target="_blank" class="social-icon" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://ufxcapital.in" target="_blank" class="social-icon" title="Website"><i class="fa-solid fa-globe"></i></a>
+            <!-- Lifetime -->
+            <div class="plan-card lifetime">
+                <div class="badge">BEST VALUE</div>
+                <div class="plan-title">LIFETIME</div>
+                <div class="price">$199</div>
+                <div class="sub-text">One Time Payment</div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-check"></i> Weekly 2-5 Signals</li>
+                    <li><i class="fa-solid fa-check"></i> PDF of UFX Strategy</li>
+                    <li><i class="fa-solid fa-check"></i> Weekly Outlook</li>
+                    <li><i class="fa-solid fa-check"></i> Min 1:4 RR Signals</li>
+                    <li><i class="fa-solid fa-check"></i> Signals with Trading Chart</li>
+                    <li><i class="fa-solid fa-check"></i> 24/7 Chat Support</li>
+                    <li><i class="fa-solid fa-check"></i> ONE-ON-ONE MENTORSHIP</li>
+                    <li><i class="fa-solid fa-check"></i> LIFETIME MEMBERSHIP</li>
+                </ul>
+                <button class="btn-choose" onclick="openPaymentModal('$199 - Lifetime')">CHOOSE PLAN</button>
+            </div>
         </div>
     </section>
 
-    <!-- ABOUT US SECTION -->
-    <section id="about" style="padding: 40px 20px; max-width: 1000px; margin: 0 auto; text-align: center;">
-        <div class="sec-header">
-            <h2 class="sec-title">ABOUT UFX CAPITAL</h2>
-        </div>
-        <p style="color: var(--text-muted); font-size: 13px; line-height: 1.8;">
-            UFX CAPITAL is an elite trading education and signal platform focused on empowering retail traders with professional Smart Money Concepts (SMC). Our team provides precision setups, market breakdowns, and systematic risk management guidelines to ensure consistent growth in Crypto and Forex Options markets.
-        </p>
-    </section>
-
-    <!-- PREMIUM PLANS -->
-    <section id="plans">
-        <div class="sec-header">
-            <h2 class="sec-title"><i class="fa-solid fa-gem" style="color:var(--pink-accent);"></i> PREMIUM PLANS <i class="fa-solid fa-gem" style="color:var(--pink-accent);"></i></h2>
-        </div>
-
-        <div class="pricing-container">
+    <!-- Payment Flow Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePaymentModal()">&times;</span>
+            <h3 class="modal-title">MANUAL PAYMENT FLOW</h3>
             
-            <!-- 1 MONTH -->
-            <div class="plan-card">
-                <div>
-                    <div class="plan-name">1 MONTH</div>
-                    <div class="plan-price">$35</div>
-                    <div class="plan-period">PER MONTH</div>
-                    <div class="diamond-icon"><i class="fa-solid fa-gem"></i></div>
-                    
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <button onclick="openRzpModal('1 Month ($35)', 'https://rzp.io/rzp/7fvTMz0')" class="btn-choose">BUY NOW (CARD/NETBANKING)</button>
-                    <button class="btn-manual-opt" onclick="openManualModal('1 Month ($35)')">CRYPTO / UPI PAY</button>
-                </div>
-            </div>
-
-            <!-- 3 MONTHS -->
-            <div class="plan-card">
-                <div>
-                    <div class="plan-name">3 MONTHS</div>
-                    <div class="plan-price">$59</div>
-                    <div class="plan-period">EVERY 3 MONTHS</div>
-                    <div class="diamond-icon"><i class="fa-solid fa-gem"></i></div>
-                    
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <button onclick="openRzpModal('3 Months ($59)', 'https://rzp.io/rzp/gTDKyKYx')" class="btn-choose">BUY NOW (CARD/NETBANKING)</button>
-                    <button class="btn-manual-opt" onclick="openManualModal('3 Months ($59)')">CRYPTO / UPI PAY</button>
-                </div>
-            </div>
-
-            <!-- 6 MONTHS -->
-            <div class="plan-card">
-                <div>
-                    <div class="plan-name">6 MONTHS</div>
-                    <div class="plan-price">$79</div>
-                    <div class="plan-period">EVERY 6 MONTHS</div>
-                    <div class="diamond-icon"><i class="fa-solid fa-gem"></i></div>
-                    
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <button onclick="openRzpModal('6 Months ($79)', 'https://rzp.io/rzp/mXzHhVTS')" class="btn-choose">BUY NOW (CARD/NETBANKING)</button>
-                    <button class="btn-manual-opt" onclick="openManualModal('6 Months ($79)')">CRYPTO / UPI PAY</button>
-                </div>
-            </div>
-
-            <!-- LIFETIME -->
-            <div class="plan-card gold-card">
-                <div class="badge-best">BEST VALUE</div>
-                <div>
-                    <div class="plan-name" style="color:var(--gold-accent);">LIFETIME</div>
-                    <div class="plan-price">$199</div>
-                    <div class="plan-period">ONE TIME PAYMENT</div>
-                    <div class="diamond-icon"><i class="fa-solid fa-gem"></i></div>
-                    
-                    <ul class="feature-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly 5–20 Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> PDF of UFX Strategy</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Weekly Outlook</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Minimum 1:4 RR Signals</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Signals with Trading Chart</li>
-                        <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
-                        <li class="highlight-gold"><i class="fa-solid fa-circle-check"></i> ONE-ON-ONE MENTORSHIP</li>
-                        <li class="highlight-gold"><i class="fa-solid fa-circle-check"></i> LIFETIME MEMBERSHIP</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <button onclick="openRzpModal('Lifetime ($199)', 'https://rzp.io/rzp/ZtFoBzi')" class="btn-gold-choose">BUY NOW (CARD/NETBANKING)</button>
-                    <button class="btn-manual-opt" onclick="openManualModal('Lifetime ($199)')">CRYPTO / UPI PAY</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- WHY CHOOSE US -->
-    <section id="features">
-        <div class="sec-header">
-            <h2 class="sec-title">WHY CHOOSE UFX CAPITAL?</h2>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fa-solid fa-bullseye"></i>
-                <h4>High Probability SMC Signals</h4>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-chart-candlestick"></i>
-                <h4>Live Entry, SL & TP Updates</h4>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-chart-line"></i>
-                <h4>Trade Breakdown & Logic</h4>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-coins"></i>
-                <h4>Weekly Gold (XAUUSD) Outlook</h4>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-brain"></i>
-                <h4>Mindset & Risk Management</h4>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-users"></i>
-                <h4>Premium Community Access</h4>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-headset"></i>
-                <h4>24/7 Priority Support</h4>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-        <div class="sec-header">
-            <h2 class="sec-title">FREQUENTLY ASKED QUESTIONS</h2>
-        </div>
-
-        <div class="faq-grid">
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-header">
-                    <h5>What type of signals do you provide?</h5>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-body">We provide High Probability Crypto and Forex signals based on Smart Money Concepts (SMC) with clear Entry, Stop-Loss, and Take-Profit targets.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-header">
-                    <h5>What is the risk-reward ratio?</h5>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-body">Our minimum Risk-To-Reward ratio is 1:4 across all setups to maximize profitability.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-header">
-                    <h5>How will I receive the signals?</h5>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-body">All signals and weekly outlooks are delivered instantly via our Private Telegram Channel.</div>
-            </div>
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-header">
-                    <h5>Is this suitable for beginners?</h5>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-                <div class="faq-body">Yes! We provide complete PDF educational guides, trade breakdowns, and 24/7 chat support to guide beginners.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- RAZORPAY REDIRECT FORM MODAL -->
-    <div id="rzpModal" class="modal">
-        <div class="modal-card">
-            <span class="close-btn" onclick="closeModal('rzpModal')">&times;</span>
-            <h3 style="color:#fff; font-size: 14px; margin-bottom: 15px; text-transform:uppercase;">Razorpay Quick Checkout</h3>
-
-            <form id="rzpForm">
-                <input type="hidden" id="rzpTargetUrl">
+            <form onsubmit="handleFormSubmit(event)">
                 <div class="form-group">
-                    <label>Full Name *</label>
-                    <input type="text" id="rzpName" class="form-control" required>
+                    <label>Selected Plan</label>
+                    <input type="text" id="selectedPlan" readonly style="color: var(--gold-primary); font-weight: bold;">
                 </div>
-                <div class="form-group">
-                    <label>Email Address *</label>
-                    <input type="email" id="rzpEmail" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Phone Number *</label>
-                    <input type="tel" id="rzpPhone" class="form-control" required>
-                </div>
-                <button type="submit" class="btn-choose" style="margin-top:10px;">PROCEED TO PAYMENT</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MANUAL PAYMENT MODAL (CRYPTO / UPI WITH FULL DETAILS) -->
-    <div id="manualModal" class="modal">
-        <div class="modal-card">
-            <span class="close-btn" onclick="closeModal('manualModal')">&times;</span>
-            <h3 style="color:#fff; font-size: 14px; margin-bottom: 15px; text-transform:uppercase;">Crypto / UPI Order Verification</h3>
-
-            <form id="checkoutForm">
-                <input type="hidden" id="selectedPlan">
-
-                <div class="form-group">
-                    <label>Full Name *</label>
-                    <input type="text" id="custName" class="form-control" required>
-                </div>
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-                    <div class="form-group"><label>Email *</label><input type="email" id="custEmail" class="form-control" required></div>
-                    <div class="form-group"><label>Phone *</label><input type="tel" id="custPhone" class="form-control" required></div>
+                
+                <div class="form-group"><label>Full Name *</label><input type="text" required></div>
+                <div class="form-group"><label>Email Address *</label><input type="email" required></div>
+                <div class="form-group"><label>Phone Number *</label><input type="tel" required></div>
+                <div class="form-group"><label>PAN / National ID Number *</label><input type="text" required></div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <div class="form-group" style="flex:1;"><label>Country *</label><input type="text" required></div>
+                    <div class="form-group" style="flex:1;"><label>State *</label><input type="text" required></div>
                 </div>
 
-                <div class="form-group">
-                    <label>PAN / National ID Number *</label>
-                    <input type="text" id="custPan" class="form-control" required>
+                <div style="display: flex; gap: 10px;">
+                    <div class="form-group" style="flex:1;"><label>City *</label><input type="text" required></div>
+                    <div class="form-group" style="flex:1;"><label>Pin Code *</label><input type="text" required></div>
                 </div>
 
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-                    <div class="form-group"><label>Country *</label><input type="text" id="custCountry" class="form-control" required></div>
-                    <div class="form-group"><label>State / Province *</label><input type="text" id="custState" class="form-control" required></div>
+                <div class="form-group"><label>Full Address *</label><input type="text" required></div>
+
+                <label style="font-size:12px; color:var(--text-dim);">Select Payment Option:</label>
+                <div class="tab-buttons">
+                    <button type="button" class="tab-btn active" id="upiTabBtn" onclick="switchTab('upi')">UPI Payment</button>
+                    <button type="button" class="tab-btn" id="cryptoTabBtn" onclick="switchTab('crypto')">Crypto Payment</button>
                 </div>
 
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-                    <div class="form-group"><label>City / Town *</label><input type="text" id="custCity" class="form-control" required></div>
-                    <div class="form-group"><label>PIN Code *</label><input type="text" id="custPin" class="form-control" required></div>
-                </div>
-
-                <div class="form-group">
-                    <label>Full Address *</label>
-                    <textarea id="custAddress" class="form-control" rows="2" required></textarea>
-                </div>
-
-                <label style="font-size:10px; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Select Payment Method:</label>
-                <div class="pay-tabs">
-                    <button type="button" class="pay-tab-btn active" onclick="selectPay('UPI', '9649638812@ybl')">UPI</button>
-                    <button type="button" class="pay-tab-btn" onclick="selectPay('TRC20', 'TP1hUt5spzMv5LoHjAU2yEQus-Egj8jNDwb')">TRC20</button>
-                    <button type="button" class="pay-tab-btn" onclick="selectPay('ERC20', '0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab')">ERC20</button>
-                    <button type="button" class="pay-tab-btn" onclick="selectPay('BEP20', '0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab')">BEP20</button>
-                    <button type="button" class="pay-tab-btn" onclick="selectPay('Bitcoin', '143odbY9gkjo8de7NizwFuz-WD11Muw9QW4')">BTC</button>
-                </div>
-
-                <div class="address-box">
-                    <div>
-                        <div style="font-size:8px; color:var(--text-muted);" id="methodLabel">UPI ID:</div>
-                        <div id="addressVal" style="color:var(--pink-accent); font-weight:700;">9649638812@ybl</div>
+                <!-- UPI Container -->
+                <div id="upiBox" class="payment-details-box">
+                    <p style="font-size: 12px; color: var(--gold-primary);">UPI ID for Payment:</p>
+                    <div class="copy-row">
+                        <span>9649638812@ybl</span>
+                        <button type="button" class="copy-btn" onclick="copyText('9649638812@ybl')">Copy</button>
                     </div>
-                    <button type="button" onclick="copyAddr()" style="background:var(--pink-accent); border:none; color:#fff; padding:4px 8px; border-radius:4px; font-size:10px; font-weight:700; cursor:pointer;">Copy</button>
+                </div>
+
+                <!-- Crypto Container -->
+                <div id="cryptoBox" class="payment-details-box" style="display: none;">
+                    <div class="form-group">
+                        <label>Select Crypto Network</label>
+                        <select id="cryptoNetworkSelect" onchange="updateCryptoAddress()">
+                            <option value="trc20">USDT (TRC20)</option>
+                            <option value="erc20">USDT / ETH (ERC20)</option>
+                            <option value="bep20">BNB / USDT (BEP20)</option>
+                            <option value="btc">BITCOIN (BTC)</option>
+                        </select>
+                    </div>
+
+                    <p style="font-size: 12px; color: var(--gold-primary);">Deposit Address:</p>
+                    <div class="copy-row">
+                        <span id="cryptoAddressText">TP1hUt5spzMv5LoHjAU2yEQus-Egj8jNDwb</span>
+                        <button type="button" class="copy-btn" onclick="copyCryptoAddress()">Copy</button>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label id="txFieldLabel">Enter UTR ID (12 Digits) *</label>
-                    <input type="text" id="txIdInput" class="form-control" placeholder="Transaction Verification Hash/UTR" required>
+                    <label>Enter Transaction Hash / UTR / TXID *</label>
+                    <input type="text" placeholder="Required for verification" required>
                 </div>
 
-                <button type="submit" class="btn-choose" style="margin-top:10px;">SUBMIT & VERIFY PAYMENT</button>
+                <button type="submit" class="btn-choose" style="margin-top: 15px;">SUBMIT ORDER CONFIRMATION</button>
             </form>
         </div>
     </div>
 
-    <!-- LEGAL MODAL (PRIVACY / TERMS / REFUND / SUCCESS) -->
-    <div id="legalModal" class="modal">
-        <div class="modal-card">
-            <span class="close-btn" onclick="closeModal('legalModal')">&times;</span>
-            <h3 id="legalTitle" style="color:var(--gold-accent); font-size: 14px; margin-bottom: 15px; text-transform:uppercase;"></h3>
-            <div id="legalContent" style="font-size: 11px; color: var(--text-muted); line-height: 1.6;"></div>
-        </div>
-    </div>
-
-    <!-- BACK TO TOP BUTTON -->
-    <button id="backToTop" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></button>
-
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer id="contact">
         <div class="footer-content">
-            <div>
-                <div class="logo">UFX CAPITAL</div>
-                <div class="logo-sub" style="margin-bottom:15px;">CRYPTO & FOREX OPTION TRADER</div>
-                <p class="footer-desc">Our mission is to empower traders with quality setups, strong risk management and a winning mindset.<br><br><span style="color:var(--pink-accent);">Stay disciplined. Stick to plan.<br>Trade smart. Grow consistently.</span></p>
+            <div class="footer-section">
+                <h4>UFX CAPITAL</h4>
+                <p>Providing market accuracy & professional mentorship.</p>
+                <div class="social-icons">
+                    <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://x.com/rameshkuma78100?s=21" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://t.me/ufxcapital" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                </div>
             </div>
 
-            <div class="footer-links">
-                <h5>QUICK LINKS</h5>
-                <ul>
-                    <li><a href="javascript:void(0)" onclick="openLegal('privacy')">Privacy Policy</a></li>
-                    <li><a href="javascript:void(0)" onclick="openLegal('terms')">Terms of Service</a></li>
-                    <li><a href="javascript:void(0)" onclick="openLegal('refund')">Refund Policy</a></li>
-                    <li><a href="javascript:void(0)" onclick="openLegal('success')">Order Success Guide</a></li>
-                    <li><a href="javascript:void(0)" onclick="openLegal('404')">404 Error Page Demo</a></li>
-                </ul>
+            <div class="footer-section">
+                <h4>COMPANY</h4>
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Refund Policy</a>
             </div>
 
-            <div class="footer-contact">
-                <h5>GET IN TOUCH</h5>
-                <p><i class="fa-brands fa-telegram" style="color:var(--pink-accent);"></i> Telegram: <a href="https://t.me/ufxcapital" target="_blank">@IM_ARCHIT</a></p>
-                <p><i class="fa-solid fa-envelope" style="color:var(--pink-accent);"></i> <a href="mailto:rkpjalore@gmail.com">rkpjalore@gmail.com</a></p>
-                <p><i class="fa-solid fa-phone" style="color:var(--pink-accent);"></i> 9649638812</p>
+            <div class="footer-section">
+                <h4>HELP & SUPPORT</h4>
+                <p><i class="fa-solid fa-envelope"></i> rkpjalore@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 9649638812</p>
             </div>
         </div>
 
-        <div style="text-align:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:15px; font-size:10px; color:var(--text-muted);">
+        <div class="copyright">
             &copy; 2026 UFX CAPITAL. All Rights Reserved.
         </div>
     </footer>
 
+    <!-- JavaScript Logic -->
     <script>
-        // EmailJS Init
-        (function(){ emailjs.init("YOUR_PUBLIC_KEY"); })();
-
-        // Preloader Hide
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            loader.style.opacity = '0';
-            setTimeout(() => loader.style.display = 'none', 500);
-        });
-
-        // Typing Effect
-        const typingWords = ["High Probability Signals", "Smart Money Concepts", "Crypto & Forex Mentorship"];
-        let wordIdx = 0, charIdx = 0, isDeleting = false;
-        function typeEffect() {
-            const current = typingWords[wordIdx];
-            const el = document.getElementById('typingText');
-            if (isDeleting) {
-                el.innerText = current.substring(0, charIdx--);
-            } else {
-                el.innerText = current.substring(0, charIdx++);
-            }
-            let speed = isDeleting ? 50 : 100;
-            if (!isDeleting && charIdx === current.length + 1) {
-                speed = 1500; isDeleting = true;
-            } else if (isDeleting && charIdx === 0) {
-                isDeleting = false; wordIdx = (wordIdx + 1) % typingWords.length; speed = 500;
-            }
-            setTimeout(typeEffect, speed);
-        }
-        typeEffect();
-
-        // Cursor Glow
-        const glow = document.getElementById('cursorGlow');
-        document.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
-        });
-
-        // Back to Top Visibility
-        window.onscroll = function() {
-            const btt = document.getElementById('backToTop');
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                btt.style.display = 'flex';
-            } else {
-                btt.style.display = 'none';
-            }
+        const cryptoAddresses = {
+            trc20: "TP1hUt5spzMv5LoHjAU2yEQus-Egj8jNDwb",
+            erc20: "0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab",
+            bep20: "0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab",
+            btc: "143odbY9gkjo8de7NizwFuz-WD11Muw9QW4"
         };
-        function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
 
-        // Modal Helpers
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        // Razorpay Modal Flow
-        function openRzpModal(plan, url) {
-            document.getElementById('rzpTargetUrl').value = url;
-            document.getElementById('rzpModal').style.display = 'flex';
-        }
-        document.getElementById('rzpForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const targetUrl = document.getElementById('rzpTargetUrl').value;
-            closeModal('rzpModal');
-            window.location.href = targetUrl;
-        });
-
-        // Manual Payment Flow
-        let currentMethod = 'UPI';
-        let currentAddr = '9649638812@ybl';
-
-        function openManualModal(plan) {
-            document.getElementById('selectedPlan').value = plan;
-            document.getElementById('manualModal').style.display = 'flex';
+        function openPaymentModal(planName) {
+            document.getElementById('selectedPlan').value = planName;
+            document.getElementById('paymentModal').style.display = 'flex';
         }
 
-        function selectPay(method, addr) {
-            currentMethod = method;
-            currentAddr = addr;
-            document.querySelectorAll('.pay-tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            document.getElementById('methodLabel').innerText = method + " ADDRESS / ID:";
-            document.getElementById('addressVal').innerText = addr;
-            document.getElementById('txFieldLabel').innerText = method === 'UPI' ? "Enter UTR ID (12 Digits) *" : "Enter TXID / Transaction Hash *";
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
         }
 
-        function copyAddr() {
-            navigator.clipboard.writeText(currentAddr);
-            alert("Copied to clipboard: " + currentAddr);
-        }
+        function switchTab(type) {
+            const upiBox = document.getElementById('upiBox');
+            const cryptoBox = document.getElementById('cryptoBox');
+            const upiBtn = document.getElementById('upiTabBtn');
+            const cryptoBtn = document.getElementById('cryptoTabBtn');
 
-        // EmailJS Submission
-        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const data = {
-                plan: document.getElementById('selectedPlan').value,
-                name: document.getElementById('custName').value,
-                email: document.getElementById('custEmail').value,
-                phone: document.getElementById('custPhone').value,
-                pan: document.getElementById('custPan').value,
-                country: document.getElementById('custCountry').value,
-                state: document.getElementById('custState').value,
-                city: document.getElementById('custCity').value,
-                pin: document.getElementById('custPin').value,
-                address: document.getElementById('custAddress').value,
-                method: currentMethod,
-                tx_id: document.getElementById('txIdInput').value,
-                date: new Date().toLocaleString()
-            };
-
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data)
-                .then(function() {
-                    alert('Order Details Submitted Successfully! Verification email sent to ' + data.email);
-                    closeModal('manualModal');
-                    document.getElementById('checkoutForm').reset();
-                    openLegal('success');
-                }, function(err) {
-                    alert('Submitted! If verification delays, please telegram @IM_ARCHIT');
-                    closeModal('manualModal');
-                });
-        });
-
-        // FAQ Toggle
-        function toggleFaq(el) {
-            const body = el.querySelector('.faq-body');
-            const icon = el.querySelector('.faq-header i');
-            if (body.style.display === 'block') {
-                body.style.display = 'none';
-                icon.className = 'fa-solid fa-plus';
+            if (type === 'upi') {
+                upiBox.style.display = 'block';
+                cryptoBox.style.display = 'none';
+                upiBtn.classList.add('active');
+                cryptoBtn.classList.remove('active');
             } else {
-                body.style.display = 'block';
-                icon.className = 'fa-solid fa-minus';
+                upiBox.style.display = 'none';
+                cryptoBox.style.display = 'block';
+                cryptoBtn.classList.add('active');
+                upiBtn.classList.remove('active');
             }
         }
 
-        // Legal Modals Display
-        function openLegal(type) {
-            const title = document.getElementById('legalTitle');
-            const content = document.getElementById('legalContent');
-            
-            if(type === 'privacy') {
-                title.innerText = "Privacy Policy";
-                content.innerHTML = "At UFX CAPITAL, we prioritize your privacy. All user information including Name, Email, PAN ID, and Wallet details are securely kept and used solely for membership verification and order processing. We never sell or distribute your data to third parties.";
-            } else if(type === 'terms') {
-                title.innerText = "Terms of Service";
-                content.innerHTML = "By subscribing to UFX CAPITAL services, you acknowledge that trading Crypto and Forex options carries financial risk. Signals are provided for educational purposes only. Past performance does not guarantee future results.";
-            } else if(type === 'refund') {
-                title.innerText = "Refund Policy";
-                content.innerHTML = "Due to the digital nature of our educational content and real-time trading signals, all sales are final. No refunds will be provided once access to the private group or educational material is granted.";
-            } else if(type === 'success') {
-                title.innerText = "Payment Successful!";
-                content.innerHTML = "<div style='text-align:center;'><i class='fa-solid fa-circle-check' style='font-size:40px; color:var(--pink-accent); margin-bottom:10px;'></i><p>Thank you for subscribing! Your transaction details have been received and sent to rkpjalore@gmail.com.</p><p style='margin-top:10px; color:#fff;'><strong>Next Step:</strong> Send your screenshot to Telegram <a href='https://t.me/ufxcapital' target='_blank' style='color:var(--gold-accent);'>@IM_ARCHIT</a> for instant VIP access.</p></div>";
-            } else if(type === '404') {
-                title.innerText = "404 - Page Not Found";
-                content.innerHTML = "<div style='text-align:center;'><h2>404</h2><p>The page you are looking for does not exist or has been moved.</p></div>";
-            }
-            document.getElementById('legalModal').style.display = 'flex';
+        function updateCryptoAddress() {
+            const network = document.getElementById('cryptoNetworkSelect').value;
+            document.getElementById('cryptoAddressText').innerText = cryptoAddresses[network];
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert("Copied UPI ID: " + text);
+        }
+
+        function copyCryptoAddress() {
+            const addr = document.getElementById('cryptoAddressText').innerText;
+            navigator.clipboard.writeText(addr);
+            alert("Copied Wallet Address: " + addr);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert("Order Submitted Successfully! We will verify your transaction shortly.");
+            closePaymentModal();
         }
     </script>
 </body>
