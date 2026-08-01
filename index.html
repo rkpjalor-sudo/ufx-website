@@ -287,10 +287,6 @@
             font-weight: 700;
         }
 
-        .plan-features li.highlight-feature i {
-            color: #ffffff;
-        }
-
         .btn-choose-plan {
             background: #ffffff;
             color: #000000;
@@ -593,62 +589,12 @@
             border-radius: 10px;
             padding: 25px;
             width: 100%;
-            max-width: 450px;
+            max-width: 550px;
             color: #ffffff;
             box-shadow: 0 0 25px var(--primary-glow);
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
-        }
-
-        /* LEGAL POPUP STYLING */
-        .legal-popup-card {
-            max-width: 750px !important;
-            padding: 30px !important;
-        }
-
-        .legal-content {
-            max-height: 65vh;
-            overflow-y: auto;
-            padding-right: 12px;
-            font-size: 13px;
-            color: #d1d5db;
-            line-height: 1.7;
-        }
-
-        .legal-content::-webkit-scrollbar {
-            width: 5px;
-        }
-        .legal-content::-webkit-scrollbar-thumb {
-            background: #ffffff;
-            border-radius: 4px;
-        }
-
-        .legal-content h4 {
-            color: #ffffff;
-            font-size: 14px;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-        }
-
-        .legal-content ul {
-            padding-left: 20px;
-            margin-bottom: 10px;
-        }
-
-        .legal-content p {
-            margin-bottom: 10px;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 15px;
-            font-size: 22px;
-            color: #888888;
-            cursor: pointer;
         }
 
         .modal-card h3 {
@@ -680,7 +626,7 @@
             font-family: 'Rajdhani', sans-serif;
         }
 
-        .modal-field input:focus, .modal-field select:focus {
+        .modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus {
             border-color: #ffffff;
         }
 
@@ -702,6 +648,55 @@
 
         .modal-btn:hover {
             background: #e5e5e5;
+        }
+
+        /* Bank & Crypto Box Styling */
+        .info-box-display {
+            background: #000000;
+            border: 1px dashed #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .info-box-display h4 {
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .info-row span { color: #888888; }
+        .info-row strong { color: #ffffff; word-break: break-all; }
+
+        .btn-copy-small {
+            background: #1f1f1f;
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            padding: 2px 8px;
+            font-size: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .btn-copy-small:hover { background: #ffffff; color: #000000; }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 22px;
+            color: #888888;
+            cursor: pointer;
         }
 
         @media (max-width: 768px) {
@@ -729,7 +724,7 @@
             <a href="#faq">FAQ</a>
             <a href="#contact">CONTACT</a>
         </nav>
-        <button onclick="openPaymentModal()" class="btn-join"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
+        <button onclick="openVerificationModal('35')" class="btn-join"><i class="fa-solid fa-gem"></i> JOIN PREMIUM</button>
     </header>
 
     <!-- HERO SECTION -->
@@ -744,7 +739,7 @@
         <div><span class="hero-subtext">CRYPTO & FOREX OPTION TRADER</span></div>
         <p class="hero-bullets">High Probability Trading Signals • Smart Money Concepts<br>Discipline • Consistency • Patience</p>
         
-        <button onclick="openPaymentModal()" class="hero-btn">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
+        <button onclick="openVerificationModal('35')" class="hero-btn">JOIN PREMIUM <i class="fa-solid fa-play"></i></button>
     </section>
 
     <!-- PREMIUM PLANS SECTION -->
@@ -771,7 +766,7 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('35')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
+                <button onclick="openVerificationModal('35')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
             </div>
 
             <!-- 3 MONTHS -->
@@ -789,7 +784,7 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('59')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
+                <button onclick="openVerificationModal('59')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
             </div>
 
             <!-- 6 MONTHS -->
@@ -807,7 +802,7 @@
                         <li><i class="fa-solid fa-circle-check"></i> 24/7 Chat Support</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('79')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
+                <button onclick="openVerificationModal('79')" class="btn-choose-plan" style="width:100%;">CHOOSE PLAN</button>
             </div>
 
             <!-- LIFETIME -->
@@ -828,7 +823,7 @@
                         <li class="highlight-feature"><i class="fa-solid fa-crown"></i> LIFETIME MEMBERSHIP</li>
                     </ul>
                 </div>
-                <button onclick="openPaymentModal('199')" class="btn-choose-plan btn-gold" style="width:100%;">CHOOSE PLAN</button>
+                <button onclick="openVerificationModal('199')" class="btn-choose-plan btn-gold" style="width:100%;">CHOOSE PLAN</button>
             </div>
         </div>
     </section>
@@ -911,7 +906,6 @@
             <div class="section-title"><i class="fa-solid fa-circle-question"></i> FREQUENTLY ASKED QUESTIONS</div>
         </div>
         <div class="faq-grid">
-            <!-- Question 1 -->
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-header">
                     <span>1. How do I receive trading signals?</span>
@@ -922,7 +916,6 @@
                 </div>
             </div>
 
-            <!-- Question 2 -->
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-header">
                     <span>2. What financial markets do you trade?</span>
@@ -933,7 +926,6 @@
                 </div>
             </div>
 
-            <!-- Question 3 -->
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-header">
                     <span>3. Is this VIP group suitable for beginners?</span>
@@ -944,7 +936,6 @@
                 </div>
             </div>
 
-            <!-- Question 4 -->
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-header">
                     <span>4. What is the average Risk-to-Reward ratio?</span>
@@ -955,7 +946,6 @@
                 </div>
             </div>
 
-            <!-- Question 5 -->
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-header">
                     <span>5. How many signals can I expect every week?</span>
@@ -966,7 +956,6 @@
                 </div>
             </div>
 
-            <!-- Question 6 -->
             <div class="faq-item" onclick="toggleFaq(this)">
                 <div class="faq-header">
                     <span>6. How do I get access after completing payment?</span>
@@ -992,26 +981,18 @@
                 <h5>GET IN TOUCH</h5>
                 <p><i class="fa-solid fa-envelope"></i> rkpjalore@gmail.com</p>
                 <p><i class="fa-solid fa-phone"></i> +91 9649638812</p>
-                <p><i class="fa-brands fa-telegram"></i> @ufxcapital</p>
                 
                 <!-- SOCIAL LINKS -->
                 <div class="social-icons-wrapper">
-                    <!-- Telegram -->
                     <a href="https://t.me/ufxcapital" target="_blank" class="social-btn" title="Telegram">
                         <i class="fa-brands fa-telegram"></i>
                     </a>
-                    
-                    <!-- Instagram -->
                     <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank" class="social-btn" title="Instagram">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
-                    
-                    <!-- YouTube -->
                     <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank" class="social-btn" title="YouTube">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
-                    
-                    <!-- X (Twitter) -->
                     <a href="https://x.com/rameshkuma78100?s=21" target="_blank" class="social-btn" title="Twitter / X">
                         <i class="fa-brands fa-x-twitter"></i>
                     </a>
@@ -1029,53 +1010,218 @@
         </div>
     </footer>
 
-    <!-- STANDARD PAYMENT MODAL -->
-    <div id="paymentModal" class="modal-overlay">
+    <!-- STEP 1: USER VERIFICATION DETAILS MODAL -->
+    <div id="userVerificationModal" class="modal-overlay">
         <div class="modal-card">
-            <span class="modal-close" onclick="closeModal('paymentModal')">&times;</span>
-            <h3>JOIN UFX VIP</h3>
-            <form onsubmit="handlePaymentSubmit(event)">
+            <span class="modal-close" onclick="closeModal('userVerificationModal')">&times;</span>
+            <h3>VIP SUBSCRIPTION VERIFICATION</h3>
+            <form onsubmit="proceedToPaymentSelection(event)">
+                <input type="hidden" id="selectedPlanPrice" value="35">
+                
                 <div class="modal-field">
-                    <label>Selected Plan ($)</label>
-                    <input type="text" id="planPriceInput" value="35" readonly>
+                    <label>1. Full Name</label>
+                    <input type="text" id="v_fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="modal-field" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>Email Address</label>
+                        <input type="email" id="v_email" placeholder="john@gmail.com" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Telegram Username</label>
+                        <input type="text" id="v_telegram" placeholder="@username" required>
+                    </div>
                 </div>
                 <div class="modal-field">
-                    <label>Full Name</label>
-                    <input type="text" placeholder="John Doe" required>
+                    <label>2. PAN / National ID Number</label>
+                    <input type="text" id="v_pan" placeholder="ABCDE1234F / ID Number" required>
+                </div>
+                <div class="modal-field" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>3. Country of Residence</label>
+                        <input type="text" id="v_country" placeholder="India" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>4. State / Province</label>
+                        <input type="text" id="v_state" placeholder="Rajasthan" required>
+                    </div>
+                </div>
+                <div class="modal-field" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>5. City / Village / Town</label>
+                        <input type="text" id="v_city" placeholder="Nandiya" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>6. Pin Code</label>
+                        <input type="text" id="v_pincode" placeholder="343032" required>
+                    </div>
                 </div>
                 <div class="modal-field">
-                    <label>Email Address</label>
-                    <input type="email" placeholder="john@example.com" required>
+                    <label>7. Full Address</label>
+                    <textarea id="v_address" rows="2" placeholder="Street, House No, Village/Area" required></textarea>
                 </div>
+                
+                <button type="submit" class="modal-btn">NEXT: CHOOSE PAYMENT METHOD</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- STEP 2: PAYMENT METHOD & DETAILS SUBMISSION MODAL -->
+    <div id="paymentSelectionModal" class="modal-overlay">
+        <div class="modal-card">
+            <span class="modal-close" onclick="closeModal('paymentSelectionModal')">&times;</span>
+            <h3>SELECT PAYMENT METHOD</h3>
+            
+            <div class="modal-field">
+                <label>Choose Method:</label>
+                <select id="paymentMethodSelect" onchange="switchPaymentMethodView()">
+                    <option value="CRYPTO">Crypto (USDT / BTC)</option>
+                    <option value="UPI">UPI Transfer (India)</option>
+                    <option value="BANK">Bank Account Transfer (SBI)</option>
+                </select>
+            </div>
+
+            <!-- CRYPTO DISPLAY -->
+            <div id="payViewCrypto" class="info-box-display">
+                <h4>CRYPTO WALLET ADDRESSES</h4>
+                <div class="info-row">
+                    <span>TRC20 (USDT):</span>
+                    <strong>TP1hUt5spzMv5LoHjAU2yEQusEgj8NDwb <button class="btn-copy-small" onclick="copyText('TP1hUt5spzMv5LoHjAU2yEQusEgj8NDwb')">Copy</button></strong>
+                </div>
+                <div class="info-row">
+                    <span>ERC20 (USDT):</span>
+                    <strong>0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab <button class="btn-copy-small" onclick="copyText('0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab')">Copy</button></strong>
+                </div>
+                <div class="info-row">
+                    <span>BEP20 (USDT):</span>
+                    <strong>0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab <button class="btn-copy-small" onclick="copyText('0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab')">Copy</button></strong>
+                </div>
+                <div class="info-row">
+                    <span>BITCOIN (BTC):</span>
+                    <strong>143odbY9gkjo8de7NizwFuzWD11Muw9QW4 <button class="btn-copy-small" onclick="copyText('143odbY9gkjo8de7NizwFuzWD11Muw9QW4')">Copy</button></strong>
+                </div>
+            </div>
+
+            <!-- UPI DISPLAY -->
+            <div id="payViewUPI" class="info-box-display" style="display: none;">
+                <h4>UPI PAYMENT DETAILS</h4>
+                <div class="info-row">
+                    <span>UPI ID:</span>
+                    <strong>9649638812@ybl <button class="btn-copy-small" onclick="copyText('9649638812@ybl')">Copy</button></strong>
+                </div>
+                <div class="info-row">
+                    <span>Mobile:</span>
+                    <strong>9649638812</strong>
+                </div>
+            </div>
+
+            <!-- BANK TRANSFER DISPLAY -->
+            <div id="payViewBank" class="info-box-display" style="display: none;">
+                <h4>BANK TRANSFER DETAILS</h4>
+                <div class="info-row"><span>Bank Name:</span> <strong>SBI (State Bank of India)</strong></div>
+                <div class="info-row"><span>Account Name:</span> <strong>Ramesh Kumar</strong></div>
+                <div class="info-row"><span>Account No:</span> <strong>61294543865 <button class="btn-copy-small" onclick="copyText('61294543865')">Copy</button></strong></div>
+                <div class="info-row"><span>IFS Code:</span> <strong>SBIN0032056</strong></div>
+                <div class="info-row"><span>SWIFT Code:</span> <strong>SBININBBJ27</strong></div>
+                <div class="info-row"><span>Residence:</span> <strong>NANDIYA BAGOD JALORE (PIN: 343032)</strong></div>
+            </div>
+
+            <form onsubmit="submitVerificationAndPay(event)">
                 <div class="modal-field">
-                    <label>Telegram Username</label>
-                    <input type="text" placeholder="@yourusername" required>
+                    <label>Transaction ID / UTR / Hash Reference</label>
+                    <input type="text" id="txIdInput" placeholder="Enter Transaction Reference ID" required>
                 </div>
-                <button type="submit" class="modal-btn">PROCEED TO PAY</button>
+                <button type="submit" class="modal-btn">SUBMIT VERIFICATION & FINISH</button>
             </form>
         </div>
     </div>
 
     <!-- LEGAL MODAL -->
     <div id="legalModal" class="modal-overlay">
-        <div class="modal-card legal-popup-card">
+        <div class="modal-card">
             <span class="modal-close" onclick="closeModal('legalModal')">&times;</span>
             <h3 id="legalModalTitle">LEGAL INFORMATION</h3>
-            <div class="legal-content" id="legalModalContent">
-                <!-- Injected content via JavaScript -->
-            </div>
+            <div class="legal-content" id="legalModalContent"></div>
         </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        // Form Temp Data Storage
+        let userFormData = {};
+
         function toggleFaq(element) {
             element.classList.toggle('active');
         }
 
-        function openPaymentModal(price = '35') {
-            document.getElementById('planPriceInput').value = price;
-            document.getElementById('paymentModal').style.display = 'flex';
+        function openVerificationModal(price = '35') {
+            document.getElementById('selectedPlanPrice').value = price;
+            document.getElementById('userVerificationModal').style.display = 'flex';
+        }
+
+        function proceedToPaymentSelection(e) {
+            e.preventDefault();
+            
+            // Save form values
+            userFormData = {
+                planPrice: document.getElementById('selectedPlanPrice').value,
+                fullName: document.getElementById('v_fullName').value,
+                email: document.getElementById('v_email').value,
+                telegram: document.getElementById('v_telegram').value,
+                pan: document.getElementById('v_pan').value,
+                country: document.getElementById('v_country').value,
+                state: document.getElementById('v_state').value,
+                city: document.getElementById('v_city').value,
+                pincode: document.getElementById('v_pincode').value,
+                address: document.getElementById('v_address').value
+            };
+
+            closeModal('userVerificationModal');
+            document.getElementById('paymentSelectionModal').style.display = 'flex';
+        }
+
+        function switchPaymentMethodView() {
+            const method = document.getElementById('paymentMethodSelect').value;
+            document.getElementById('payViewCrypto').style.display = (method === 'CRYPTO') ? 'block' : 'none';
+            document.getElementById('payViewUPI').style.display = (method === 'UPI') ? 'block' : 'none';
+            document.getElementById('payViewBank').style.display = (method === 'BANK') ? 'block' : 'none';
+        }
+
+        function submitVerificationAndPay(e) {
+            e.preventDefault();
+            const txId = document.getElementById('txIdInput').value;
+            const selectedMethod = document.getElementById('paymentMethodSelect').value;
+
+            // Construct email body with auto-submit
+            const subject = encodeURIComponent(`UFX VIP Subscription Verification - ${userFormData.fullName}`);
+            const bodyText = encodeURIComponent(
+                `UFX CAPITAL VIP SUBSCRIPTION DETAILS\n` +
+                `------------------------------------\n` +
+                `Selected Plan Price: $${userFormData.planPrice}\n` +
+                `Payment Method Used: ${selectedMethod}\n` +
+                `Transaction ID / UTR: ${txId}\n\n` +
+                `USER VERIFICATION DETAILS:\n` +
+                `1. Full Name: ${userFormData.fullName}\n` +
+                `2. Email: ${userFormData.email}\n` +
+                `3. Telegram Username: ${userFormData.telegram}\n` +
+                `4. PAN / ID: ${userFormData.pan}\n` +
+                `5. Country: ${userFormData.country}\n` +
+                `6. State: ${userFormData.state}\n` +
+                `7. City/Village: ${userFormData.city}\n` +
+                `8. Pin Code: ${userFormData.pincode}\n` +
+                `9. Full Address: ${userFormData.address}\n`
+            );
+
+            // Trigger mailto link directly to rkpjalore@gmail.com
+            window.location.href = `mailto:rkpjalore@gmail.com?subject=${subject}&body=${bodyText}`;
+
+            alert('Thank you! Details compiled. Click Send in your Email client to complete verification.');
+            closeModal('paymentSelectionModal');
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert('Copied to clipboard: ' + text);
         }
 
         function openLegalModal(type) {
@@ -1107,12 +1253,6 @@
 
         function closeModal(id) {
             document.getElementById(id).style.display = 'none';
-        }
-
-        function handlePaymentSubmit(e) {
-            e.preventDefault();
-            alert('Redirecting to payment Gateway...');
-            closeModal('paymentModal');
         }
 
         window.onclick = function(event) {
