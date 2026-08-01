@@ -7,227 +7,319 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
     
     body {
-      background-color: #060608;
+      background-color: #030305;
       color: #e2e8f0;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
     }
 
-    /* Gold Typography Gradient */
-    .font-serif-gold {
-      font-family: 'Cinzel', serif;
-      background: linear-gradient(135deg, #FFF0C9 0%, #F3E5AB 25%, #C5A059 60%, #8A6D29 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 12px rgba(197, 160, 89, 0.25));
+    /* Neon Pink & Gold Accents */
+    .pink-glow-text {
+      color: #ff1266;
+      text-shadow: 0 0 15px rgba(255, 18, 102, 0.6);
     }
 
-    /* Glow Card Styling */
-    .gold-glow-card {
-      background: rgba(14, 14, 18, 0.85);
-      border: 1px solid rgba(197, 160, 89, 0.25);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(197, 160, 89, 0.05);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .gold-glow-card:hover {
-      border-color: rgba(229, 192, 115, 0.7);
-      box-shadow: 0 0 30px rgba(197, 160, 89, 0.25), inset 0 0 20px rgba(197, 160, 89, 0.1);
-      transform: translateY(-4px);
-    }
-
-    /* Dotted Box in Modal */
-    .gold-dotted-box {
-      border: 1.5px dashed #c5a059;
-      background: rgba(18, 18, 22, 0.9);
-      box-shadow: 0 0 15px rgba(197, 160, 89, 0.1);
-    }
-
-    /* Animated Gold Button */
-    .gold-btn {
-      background: linear-gradient(135deg, #fceabb 0%, #f8b500 30%, #c5a059 70%, #8a6d29 100%);
-      background-size: 200% auto;
-      color: #0d0d11;
-      font-weight: 800;
+    .pink-border-box {
+      background: rgba(12, 10, 16, 0.9);
+      border: 1px solid rgba(255, 18, 102, 0.35);
+      box-shadow: 0 0 25px rgba(255, 18, 102, 0.1);
       transition: all 0.3s ease;
-      animation: shine 4s infinite linear;
-      box-shadow: 0 0 15px rgba(197, 160, 89, 0.2);
+    }
+
+    .pink-border-box:hover {
+      border-color: rgba(255, 18, 102, 0.7);
+      box-shadow: 0 0 35px rgba(255, 18, 102, 0.25);
+      transform: translateY(-3px);
+    }
+
+    /* Pink Gradient Button */
+    .pink-btn {
+      background: linear-gradient(135deg, #e6005c 0%, #ff1266 50%, #99003d 100%);
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 0 15px rgba(255, 18, 102, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .pink-btn:hover {
+      box-shadow: 0 0 25px rgba(255, 18, 102, 0.8);
+      transform: scale(1.02);
+    }
+
+    /* Gold Glowing Card for Lifetime Plan */
+    .gold-glow-card {
+      background: rgba(16, 12, 8, 0.9);
+      border: 1px solid rgba(245, 158, 11, 0.6);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+    }
+
+    .gold-btn {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
     }
 
     .gold-btn:hover {
-      box-shadow: 0 0 25px rgba(248, 181, 0, 0.5);
-      transform: scale(1.01);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.8);
     }
 
-    @keyframes shine {
-      0% { background-position: 0% center; }
-      50% { background-position: 100% center; }
-      100% { background-position: 0% center; }
-    }
-
-    /* Tab Active State */
-    .gold-tab-active {
-      background: linear-gradient(135deg, #fceabb 0%, #c5a059 100%) !important;
-      color: #0d0d11 !important;
-      font-weight: 800 !important;
-      border: none !important;
-      box-shadow: 0 0 12px rgba(197, 160, 89, 0.4);
-    }
-
-    /* Dark Input Fields */
     .dark-input {
-      background-color: #121216;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: #0f0d14;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #ffffff;
-      transition: all 0.2s ease;
     }
 
     .dark-input:focus {
-      border-color: #c5a059;
-      box-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
+      border-color: #ff1266;
       outline: none;
     }
 
-    /* Background Glow Ambient Blur */
-    .ambient-glow {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(197, 160, 89, 0.15) 0%, rgba(0,0,0,0) 70%);
-      pointer-events: none;
-      z-index: 0;
+    /* Dotted Box */
+    .gold-dotted-box {
+      border: 1.5px dashed #f59e0b;
+      background: rgba(20, 15, 10, 0.9);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between relative">
+<body class="min-h-screen flex flex-col justify-between">
 
-  <!-- Ambient Glow Background Effects -->
-  <div class="ambient-glow top-0 left-1/2 -translate-x-1/2"></div>
-  <div class="ambient-glow bottom-10 left-10"></div>
-  <div class="ambient-glow bottom-10 right-10"></div>
+  <!-- NAVBAR -->
+  <header class="max-w-7xl mx-auto w-full px-6 py-6 flex items-center justify-between border-b border-white/5">
+    <div>
+      <h1 class="text-xl md:text-2xl font-black tracking-widest text-white">UFX CAPITAL</h1>
+      <p class="text-[9px] tracking-widest text-slate-400 font-semibold uppercase">CRYPTO & FOREX OPTION TRADER</p>
+    </div>
 
-  <!-- Header Section -->
-  <header class="text-center py-12 px-4 relative z-10">
-    <h1 class="text-3xl md:text-5xl font-extrabold tracking-widest font-serif-gold uppercase mb-3">PREMIUM PLANS</h1>
-    <div class="h-0.5 w-32 bg-gradient-to-r from-transparent via-[#c5a059] to-transparent mx-auto"></div>
+    <nav class="hidden md:flex items-center gap-8 text-xs font-semibold text-slate-300">
+      <a href="#home" class="text-pink-500">HOME</a>
+      <a href="#plans" class="hover:text-pink-500 transition-colors">PLANS</a>
+      <a href="#features" class="hover:text-pink-500 transition-colors">FEATURES</a>
+      <a href="#about" class="hover:text-pink-500 transition-colors">ABOUT</a>
+      <a href="#faq" class="hover:text-pink-500 transition-colors">FAQ</a>
+      <a href="#contact" class="hover:text-pink-500 transition-colors">CONTACT</a>
+    </nav>
+
+    <button onclick="scrollToPlans()" class="pink-btn text-xs px-5 py-2.5 rounded-full flex items-center gap-2">
+      <i class="fa-solid fa-diamond text-[10px]"></i> JOIN PREMIUM
+    </button>
   </header>
 
-  <!-- Pricing Cards Section -->
-  <main class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 relative z-10">
+  <!-- HERO SECTION -->
+  <section id="home" class="text-center py-16 px-4 relative max-w-5xl mx-auto">
+    <div class="inline-block border border-pink-500/30 bg-pink-950/20 px-4 py-1.5 rounded-full text-[11px] font-semibold text-pink-400 mb-6 uppercase tracking-wider">
+      WELCOME TO
+    </div>
     
-    <!-- 1 MONTH PLAN -->
-    <div class="rounded-2xl p-6 gold-glow-card flex flex-col justify-between text-center relative overflow-hidden">
-      <div>
-        <h3 class="text-lg font-bold tracking-wider mb-2 text-slate-200">1 MONTH</h3>
-        <div class="text-4xl font-extrabold font-serif-gold mb-1">$35</div>
-        <p class="text-[10px] text-[#c5a059] uppercase tracking-widest mb-6 font-semibold">PER MONTH</p>
-        
-        <div class="text-[#c5a059] text-3xl mb-6 drop-shadow-[0_0_10px_rgba(197,160,89,0.5)]"><i class="fa-solid fa-gem"></i></div>
-
-        <ul class="text-left text-xs space-y-3 mb-8 text-slate-300">
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> <span class="font-bold text-slate-100">Weekly 5-20 Signals</span></li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> PDF of UFX Strategy</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Weekly Outlook</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Min 1:4 RR Signals</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Signals with Trading Chart</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> 24/7 Chat Support</li>
-        </ul>
-      </div>
-
-      <button onclick="openPaymentModal('1 Month - $35')" class="w-full gold-btn py-3.5 rounded-xl uppercase text-xs tracking-wider">CHOOSE PLAN</button>
-    </div>
-
-    <!-- 3 MONTHS PLAN -->
-    <div class="rounded-2xl p-6 gold-glow-card flex flex-col justify-between text-center relative overflow-hidden">
-      <div>
-        <h3 class="text-lg font-bold tracking-wider mb-2 text-slate-200">3 MONTHS</h3>
-        <div class="text-4xl font-extrabold font-serif-gold mb-1">$59</div>
-        <p class="text-[10px] text-[#c5a059] uppercase tracking-widest mb-6 font-semibold">EVERY 3 MONTHS</p>
-        
-        <div class="text-[#c5a059] text-3xl mb-6 drop-shadow-[0_0_10px_rgba(197,160,89,0.5)]"><i class="fa-solid fa-gem"></i></div>
-
-        <ul class="text-left text-xs space-y-3 mb-8 text-slate-300">
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> <span class="font-bold text-slate-100">Weekly 5-20 Signals</span></li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> PDF of UFX Strategy</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Weekly Outlook</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Min 1:4 RR Signals</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Signals with Trading Chart</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> 24/7 Chat Support</li>
-        </ul>
-      </div>
-
-      <button onclick="openPaymentModal('3 Months - $59')" class="w-full gold-btn py-3.5 rounded-xl uppercase text-xs tracking-wider">CHOOSE PLAN</button>
-    </div>
-
-    <!-- 6 MONTHS PLAN -->
-    <div class="rounded-2xl p-6 gold-glow-card flex flex-col justify-between text-center relative overflow-hidden">
-      <div>
-        <h3 class="text-lg font-bold tracking-wider mb-2 text-slate-200">6 MONTHS</h3>
-        <div class="text-4xl font-extrabold font-serif-gold mb-1">$79</div>
-        <p class="text-[10px] text-[#c5a059] uppercase tracking-widest mb-6 font-semibold">EVERY 6 MONTHS</p>
-        
-        <div class="text-[#c5a059] text-3xl mb-6 drop-shadow-[0_0_10px_rgba(197,160,89,0.5)]"><i class="fa-solid fa-gem"></i></div>
-
-        <ul class="text-left text-xs space-y-3 mb-8 text-slate-300">
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> <span class="font-bold text-slate-100">Weekly 5-20 Signals</span></li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> PDF of UFX Strategy</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Weekly Outlook</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Min 1:4 RR Signals</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Signals with Trading Chart</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> 24/7 Chat Support</li>
-        </ul>
-      </div>
-
-      <button onclick="openPaymentModal('6 Months - $79')" class="w-full gold-btn py-3.5 rounded-xl uppercase text-xs tracking-wider">CHOOSE PLAN</button>
-    </div>
-
-    <!-- LIFETIME PLAN (BEST VALUE) -->
-    <div class="rounded-2xl p-6 gold-glow-card flex flex-col justify-between text-center relative overflow-hidden border-2 border-[#c5a059] shadow-[0_0_30px_rgba(197,160,89,0.25)]">
-      <div class="absolute top-0 right-0 left-0 gold-btn text-[10px] py-1 uppercase tracking-widest font-black">
-        BEST VALUE
-      </div>
-      <div class="mt-4">
-        <h3 class="text-lg font-bold tracking-wider mb-2 text-amber-200">LIFETIME</h3>
-        <div class="text-4xl font-black font-serif-gold mb-1">$199</div>
-        <p class="text-[10px] text-[#c5a059] uppercase tracking-widest mb-6 font-semibold">ONE TIME PAYMENT</p>
-        
-        <div class="text-[#c5a059] text-3xl mb-6 drop-shadow-[0_0_15px_rgba(197,160,89,0.8)]"><i class="fa-solid fa-gem"></i></div>
-
-        <ul class="text-left text-xs space-y-2.5 mb-8 text-slate-200">
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> <span class="font-bold text-slate-100">Weekly 5-20 Signals</span></li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> PDF of UFX Strategy</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Weekly Outlook</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Min 1:4 RR Signals</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> Signals with Trading Chart</li>
-          <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-[#c5a059]"></i> 24/7 Chat Support</li>
-          <li class="flex items-center gap-2.5 font-bold text-[#c5a059] uppercase"><i class="fa-solid fa-star text-amber-400"></i> ONE-ON-ONE MENTORSHIP</li>
-          <li class="flex items-center gap-2.5 font-bold text-[#c5a059] uppercase"><i class="fa-solid fa-star text-amber-400"></i> LIFETIME MEMBERSHIP</li>
-        </ul>
-      </div>
-
-      <button onclick="openPaymentModal('Lifetime - $199')" class="w-full gold-btn py-3.5 rounded-xl uppercase text-xs tracking-wider">CHOOSE PLAN</button>
-    </div>
-
-  </main>
-
-  <!-- MANUAL PAYMENT FLOW POPUP MODAL -->
-  <div id="paymentModal" class="fixed inset-0 bg-black/90 backdrop-blur-lg hidden z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <h1 class="text-5xl md:text-7xl font-black text-white tracking-wide uppercase mb-2">UFX CAPITAL</h1>
+    <p class="text-xs md:text-sm tracking-widest text-slate-300 uppercase font-semibold mb-6">CRYPTO & FOREX OPTION TRADER</p>
     
-    <div class="bg-[#0e0e12] rounded-2xl gold-glow-card max-w-xl w-full p-6 md:p-8 relative my-8 text-left max-h-[90vh] overflow-y-auto border border-[#c5a059]/40">
+    <p class="text-xs md:text-sm text-slate-400 max-w-xl mx-auto mb-8 leading-relaxed">
+      High Probability Trading Signals • Smart Money Concepts<br>Discipline • Strategy • Consistency
+    </p>
+
+    <button onclick="scrollToPlans()" class="pink-btn px-8 py-3.5 rounded-full text-xs uppercase tracking-wider font-bold inline-flex items-center gap-2">
+      JOIN PREMIUM <i class="fa-solid fa-circle-play text-sm"></i>
+    </button>
+  </section>
+
+  <!-- PREMIUM PLANS SECTION -->
+  <section id="plans" class="max-w-7xl mx-auto px-4 py-12">
+    <div class="text-center mb-12">
+      <h2 class="text-2xl md:text-3xl font-black text-white tracking-widest uppercase flex items-center justify-center gap-3">
+        <i class="fa-solid fa-diamond text-pink-500 text-sm"></i> PREMIUM PLANS <i class="fa-solid fa-diamond text-pink-500 text-sm"></i>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       
-      <!-- Close Button -->
-      <button onclick="closePaymentModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl transition-colors">
+      <!-- 1 MONTH PLAN -->
+      <div class="pink-border-box rounded-2xl p-6 flex flex-col justify-between text-center">
+        <div>
+          <h3 class="text-base font-bold tracking-wider mb-2 text-white">1 MONTH</h3>
+          <div class="text-4xl font-black pink-glow-text mb-1">$35</div>
+          <p class="text-[10px] text-pink-400 uppercase tracking-widest mb-6 font-semibold">PER MONTH</p>
+          <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-diamond"></i></div>
+
+          <ul class="text-left text-xs space-y-3 mb-8 text-slate-300">
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Weekly 5–20 Signals</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> PDF of UFX Strategy</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Weekly Outlook</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Minimum 1:4 RR Signals</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Signals with Trading Chart</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> 24/7 Chat Support</li>
+          </ul>
+        </div>
+        <button onclick="openPaymentModal('1 Month - $35')" class="w-full pink-btn py-3 rounded-xl uppercase text-xs">CHOOSE PLAN</button>
+      </div>
+
+      <!-- 3 MONTHS PLAN -->
+      <div class="pink-border-box rounded-2xl p-6 flex flex-col justify-between text-center">
+        <div>
+          <h3 class="text-base font-bold tracking-wider mb-2 text-white">3 MONTHS</h3>
+          <div class="text-4xl font-black pink-glow-text mb-1">$59</div>
+          <p class="text-[10px] text-pink-400 uppercase tracking-widest mb-6 font-semibold">EVERY 3 MONTHS</p>
+          <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-diamond"></i></div>
+
+          <ul class="text-left text-xs space-y-3 mb-8 text-slate-300">
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Weekly 5–20 Signals</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> PDF of UFX Strategy</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Weekly Outlook</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Minimum 1:4 RR Signals</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Signals with Trading Chart</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> 24/7 Chat Support</li>
+          </ul>
+        </div>
+        <button onclick="openPaymentModal('3 Months - $59')" class="w-full pink-btn py-3 rounded-xl uppercase text-xs">CHOOSE PLAN</button>
+      </div>
+
+      <!-- 6 MONTHS PLAN -->
+      <div class="pink-border-box rounded-2xl p-6 flex flex-col justify-between text-center">
+        <div>
+          <h3 class="text-base font-bold tracking-wider mb-2 text-white">6 MONTHS</h3>
+          <div class="text-4xl font-black pink-glow-text mb-1">$79</div>
+          <p class="text-[10px] text-pink-400 uppercase tracking-widest mb-6 font-semibold">EVERY 6 MONTHS</p>
+          <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-diamond"></i></div>
+
+          <ul class="text-left text-xs space-y-3 mb-8 text-slate-300">
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Weekly 5–20 Signals</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> PDF of UFX Strategy</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Weekly Outlook</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Minimum 1:4 RR Signals</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> Signals with Trading Chart</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-pink-500"></i> 24/7 Chat Support</li>
+          </ul>
+        </div>
+        <button onclick="openPaymentModal('6 Months - $79')" class="w-full pink-btn py-3 rounded-xl uppercase text-xs">CHOOSE PLAN</button>
+      </div>
+
+      <!-- LIFETIME PLAN (BEST VALUE) -->
+      <div class="gold-glow-card rounded-2xl p-6 flex flex-col justify-between text-center relative overflow-hidden">
+        <div class="absolute top-0 right-0 left-0 bg-amber-500 text-black text-[10px] py-1 uppercase tracking-widest font-black">
+          BEST VALUE
+        </div>
+        <div class="mt-4">
+          <h3 class="text-base font-bold tracking-wider mb-2 text-amber-200">LIFETIME</h3>
+          <div class="text-4xl font-black text-amber-400 mb-1">$199</div>
+          <p class="text-[10px] text-amber-300 uppercase tracking-widest mb-6 font-semibold">ONE TIME PAYMENT</p>
+          <div class="text-amber-400 text-3xl mb-6"><i class="fa-solid fa-diamond"></i></div>
+
+          <ul class="text-left text-xs space-y-2.5 mb-8 text-amber-100">
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-amber-400"></i> Weekly 5–20 Signals</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-amber-400"></i> PDF of UFX Strategy</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-amber-400"></i> Weekly Outlook</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-amber-400"></i> Minimum 1:4 RR Signals</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-amber-400"></i> Signals with Trading Chart</li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-amber-400"></i> 24/7 Chat Support</li>
+            <li class="flex items-center gap-2.5 font-bold text-amber-400 uppercase"><i class="fa-solid fa-star text-amber-300"></i> ONE-ON-ONE MENTORSHIP</li>
+            <li class="flex items-center gap-2.5 font-bold text-amber-400 uppercase"><i class="fa-solid fa-star text-amber-300"></i> LIFETIME MEMBERSHIP</li>
+          </ul>
+        </div>
+        <button onclick="openPaymentModal('Lifetime - $199')" class="w-full gold-btn py-3 rounded-xl uppercase text-xs">CHOOSE PLAN</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE UFX CAPITAL? -->
+  <section id="features" class="max-w-7xl mx-auto px-4 py-12">
+    <h2 class="text-xl md:text-2xl font-bold text-center text-white mb-10 tracking-wider">WHY CHOOSE UFX CAPITAL?</h2>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 text-center">
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-bullseye text-pink-500 text-2xl"></i>
+        <p class="text-[11px] text-slate-300 font-medium">High Probability SMC-Based Signals</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-[#c5a059] fa-chart-line text-pink-500 text-2xl"></i>
+        <p class="text-[11px] text-slate-300 font-medium">Live Entry, SL & TP Updates</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-desktop text-pink-500 text-2xl"></i>
+        <p class="text-[11px] text-slate-300 font-medium">Trade Breakdown (Chart + Logic)</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-scale-balanced text-pink-500 text-2xl"></i>
+        <p class="text-[11px] text-slate-300 font-medium">Weekly Gold (XAUUSD) Outlook</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-brain text-pink-500 text-2xl"></i>
+        <p class="text-[11px] text-slate-300 font-medium">Mindset & Risk Management</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-users text-pink-500 text-2xl"></i>
+        <p class="text-[11px] text-slate-300 font-medium">Premium Community Access</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-headset text-pink-500 text-2xl"></i>
+        <p class="text-[11px] text-slate-300 font-medium">24/7 Priority Support</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+      <div>
+        <div class="text-3xl font-black text-pink-500">1000+</div>
+        <p class="text-xs text-slate-400 mt-1">Active Members</p>
+      </div>
+      <div>
+        <div class="text-3xl font-black text-pink-500">80%+</div>
+        <p class="text-xs text-slate-400 mt-1">Win Rate Signals</p>
+      </div>
+      <div>
+        <div class="text-3xl font-black text-pink-500">5000+</div>
+        <p class="text-xs text-slate-400 mt-1">Signals Delivered</p>
+      </div>
+      <div>
+        <div class="text-3xl font-black text-pink-500">24/7</div>
+        <p class="text-xs text-slate-400 mt-1">Support</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="max-w-4xl mx-auto px-4 py-12">
+    <h2 class="text-xl font-bold text-center text-white mb-8">FREQUENTLY ASKED QUESTIONS</h2>
+    <div class="space-y-3 text-xs">
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
+        <span>What type of signals do you provide?</span>
+        <i class="fa-solid fa-plus text-pink-500"></i>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
+        <span>What is the risk-reward ratio?</span>
+        <i class="fa-solid fa-plus text-pink-500"></i>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
+        <span>How will I receive the signals?</span>
+        <i class="fa-solid fa-plus text-pink-500"></i>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
+        <span>Can I cancel my subscription anytime?</span>
+        <i class="fa-solid fa-plus text-pink-500"></i>
+      </div>
+      <div class="bg-white/5 border border-white/10 p-4 rounded-xl flex justify-between items-center cursor-pointer">
+        <span>Is this suitable for beginners?</span>
+        <i class="fa-solid fa-plus text-pink-500"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPUP MANUAL PAYMENT FLOW MODAL -->
+  <div id="paymentModal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-[#0b090e] rounded-2xl pink-border-box max-w-lg w-full p-6 relative my-8 text-left max-h-[90vh] overflow-y-auto">
+      
+      <button onclick="closePaymentModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
-      <h2 class="text-xl md:text-2xl font-bold font-serif-gold text-center mb-6 uppercase tracking-wider">MANUAL PAYMENT FLOW</h2>
+      <h2 class="text-xl font-bold text-white text-center mb-6">MANUAL PAYMENT FLOW</h2>
 
-      <form id="manualFlowForm" onsubmit="submitOrder(event)" class="space-y-4 text-xs">
-        
+      <form id="manualFlowForm" onsubmit="submitOrder(event)" class="space-y-3 text-xs">
         <div>
           <label class="block text-slate-300 mb-1">Full Name *</label>
           <input type="text" id="fullName" required class="w-full dark-input rounded-lg p-2.5">
@@ -278,18 +370,17 @@
         <!-- Payment Method Tabs -->
         <div class="pt-2">
           <label class="block text-slate-300 mb-2 font-semibold">Select Payment Method:</label>
-          <div class="grid grid-cols-3 gap-2 mb-4">
-            <button type="button" onclick="setPayMethod('upi')" id="tab-upi" class="pay-method-btn border border-slate-700 bg-[#121216] text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px] transition-all">UPI</button>
-            <button type="button" onclick="setPayMethod('trc20')" id="tab-trc20" class="pay-method-btn border border-slate-700 bg-[#121216] text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px] transition-all">TRC20</button>
-            <button type="button" onclick="setPayMethod('erc20')" id="tab-erc20" class="pay-method-btn border border-slate-700 bg-[#121216] text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px] transition-all">ERC20</button>
-            <button type="button" onclick="setPayMethod('bep20')" id="tab-bep20" class="pay-method-btn border border-slate-700 bg-[#121216] text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px] transition-all">BEP20</button>
-            <button type="button" onclick="setPayMethod('btc')" id="tab-btc" class="pay-method-btn border border-slate-700 bg-[#121216] text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px] transition-all">Bitcoin</button>
-            <button type="button" onclick="setPayMethod('bank')" id="tab-bank" class="pay-method-btn border border-slate-700 bg-[#121216] text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px] transition-all">Bank Transfer</button>
+          <div class="grid grid-cols-3 gap-2 mb-3">
+            <button type="button" onclick="setPayMethod('upi')" id="tab-upi" class="pay-method-btn border border-slate-700 bg-black/40 text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px]">UPI</button>
+            <button type="button" onclick="setPayMethod('trc20')" id="tab-trc20" class="pay-method-btn border border-slate-700 bg-black/40 text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px]">TRC20</button>
+            <button type="button" onclick="setPayMethod('erc20')" id="tab-erc20" class="pay-method-btn border border-slate-700 bg-black/40 text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px]">ERC20</button>
+            <button type="button" onclick="setPayMethod('bep20')" id="tab-bep20" class="pay-method-btn border border-slate-700 bg-black/40 text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px]">BEP20</button>
+            <button type="button" onclick="setPayMethod('btc')" id="tab-btc" class="pay-method-btn border border-slate-700 bg-black/40 text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px]">Bitcoin</button>
+            <button type="button" onclick="setPayMethod('bank')" id="tab-bank" class="pay-method-btn border border-slate-700 bg-black/40 text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px]">Bank Transfer</button>
           </div>
 
-          <!-- Dynamic Details Display Box -->
-          <div id="method-details-box" class="gold-dotted-box p-3.5 rounded-xl mb-4 space-y-2">
-            <!-- Dynamic Content -->
+          <div id="method-details-box" class="gold-dotted-box p-3 rounded-xl mb-3 space-y-2">
+            <!-- Dynamic Data Inserted Here -->
           </div>
         </div>
 
@@ -298,37 +389,33 @@
           <input type="text" id="txid" required placeholder="Required for verification" class="w-full dark-input rounded-lg p-2.5">
         </div>
 
-        <button type="submit" class="w-full gold-btn py-3.5 rounded-xl uppercase tracking-wider text-xs font-bold mt-4">
+        <button type="submit" class="w-full pink-btn py-3.5 rounded-xl uppercase tracking-wider text-xs font-bold mt-3">
           SUBMIT ORDER CONFIRMATION
         </button>
-
       </form>
 
-      <!-- Confirmation Message Box -->
-      <div id="successMessage" class="hidden text-center py-10 space-y-4">
-        <div class="text-5xl text-[#c5a059] drop-shadow-[0_0_15px_rgba(197,160,89,0.8)]"><i class="fa-solid fa-circle-check"></i></div>
-        <h3 class="text-xl font-bold text-white tracking-wide">Payment Details Submitted!</h3>
-        <p class="text-sm text-amber-200 font-semibold bg-[#1a1710] py-2 px-4 rounded-lg inline-block border border-amber-500/30">
+      <!-- Confirmation Screen -->
+      <div id="successMessage" class="hidden text-center py-8 space-y-3">
+        <div class="text-4xl text-pink-500"><i class="fa-solid fa-circle-check"></i></div>
+        <h3 class="text-lg font-bold text-white">Payment Details Submitted!</h3>
+        <p class="text-xs text-amber-300 font-semibold bg-amber-950/40 border border-amber-500/30 py-2 px-3 rounded-lg">
           Manually 24 hr me add Kr Diya jayega
         </p>
-        <p class="text-xs text-slate-400 block pt-2">Confirmation request sent to <span class="text-slate-200 underline">rkpjalore@gmail.com</span></p>
+        <p class="text-[11px] text-slate-400">Details sent to rkpjalore@gmail.com</p>
       </div>
 
     </div>
   </div>
 
-  <!-- Footer Section -->
-  <footer class="py-8 text-center border-t border-slate-800/60 space-y-4 relative z-10 bg-[#060608]/80">
-    <div class="inline-flex items-center gap-2 text-[#c5a059] text-xs font-bold uppercase tracking-widest drop-shadow-[0_0_8px_rgba(197,160,89,0.3)]">
-      <i class="fa-solid fa-headset text-sm"></i> Premium Support Available
-    </div>
-    
+  <!-- FOOTER -->
+  <footer id="contact" class="py-8 text-center border-t border-white/5 space-y-4">
     <div class="flex justify-center items-center gap-6 text-xl">
-      <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank" class="text-slate-400 hover:text-red-500 hover:scale-110 transition-all"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank" class="text-slate-400 hover:text-pink-500 hover:scale-110 transition-all"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://x.com/rameshkuma78100?s=21" target="_blank" class="text-slate-400 hover:text-sky-400 hover:scale-110 transition-all"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://t.me/ufxcapital" target="_blank" class="text-slate-400 hover:text-blue-400 hover:scale-110 transition-all"><i class="fa-brands fa-telegram"></i></a>
+      <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank" class="text-slate-400 hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank" class="text-slate-400 hover:text-pink-500 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://x.com/rameshkuma78100?s=21" target="_blank" class="text-slate-400 hover:text-sky-400 transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://t.me/ufxcapital" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i class="fa-brands fa-telegram"></i></a>
     </div>
+    <p class="text-[11px] text-slate-500">© 2026 UFX CAPITAL. All Rights Reserved.</p>
   </footer>
 
   <script>
@@ -353,6 +440,10 @@
       }
     };
 
+    function scrollToPlans() {
+      document.getElementById('plans').scrollIntoView({ behavior: 'smooth' });
+    }
+
     function openPaymentModal(plan) {
       currentPlan = plan;
       document.getElementById('manualFlowForm').classList.remove('hidden');
@@ -367,24 +458,24 @@
 
     function setPayMethod(method) {
       document.querySelectorAll('.pay-method-btn').forEach(btn => {
-        btn.className = "pay-method-btn border border-slate-700 bg-[#121216] text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px] transition-all";
+        btn.className = "pay-method-btn border border-slate-700 bg-black/40 text-slate-300 p-2 rounded-lg text-center font-semibold text-[11px]";
       });
-      document.getElementById('tab-' + method).className = "pay-method-btn gold-tab-active p-2 rounded-lg text-center font-semibold text-[11px] transition-all";
+      document.getElementById('tab-' + method).className = "pay-method-btn gold-btn p-2 rounded-lg text-center font-semibold text-[11px]";
 
       const box = document.getElementById('method-details-box');
       const data = paymentDetails[method];
 
       if(data.isBank) {
         box.innerHTML = `
-          <div class="space-y-1.5 text-slate-300 text-xs">
-            <div><span class="text-slate-400">Account Number:</span> <strong class="text-amber-200 font-mono">${data.acc}</strong></div>
+          <div class="space-y-1 text-slate-300 text-xs">
+            <div><span class="text-slate-400">Account Number:</span> <strong class="text-amber-300">${data.acc}</strong></div>
             <div><span class="text-slate-400">Bank Name:</span> <strong class="text-white">${data.bankName}</strong></div>
-            <div><span class="text-slate-400">IFS Code:</span> <strong class="text-white font-mono">${data.ifsc}</strong></div>
+            <div><span class="text-slate-400">IFS Code:</span> <strong class="text-white">${data.ifsc}</strong></div>
             <div><span class="text-slate-400">Account Name:</span> <strong class="text-white">${data.name}</strong></div>
             <div><span class="text-slate-400">Mobile:</span> <strong class="text-white">${data.mobile}</strong></div>
             <div><span class="text-slate-400">Residence:</span> <strong class="text-white">${data.residence}</strong></div>
-            <div><span class="text-slate-400">PIN CODE:</span> <strong class="text-white">${data.pincode}</strong></div>
-            <div><span class="text-slate-400">SWIFT/BUC CODE:</span> <strong class="text-white font-mono">${data.swift}</strong></div>
+            <div><span class="text-slate-400">Pin Code:</span> <strong class="text-white">${data.pincode}</strong></div>
+            <div><span class="text-slate-400">SWIFT Code:</span> <strong class="text-white">${data.swift}</strong></div>
           </div>
         `;
       } else {
@@ -392,7 +483,7 @@
           <p class="text-slate-400 text-xs">${data.label}:</p>
           <div class="flex items-center justify-between gap-2 pt-1">
             <span id="copy-val" class="font-mono text-white text-[11px] break-all">${data.val}</span>
-            <button type="button" onclick="copyText('${data.val}')" class="gold-btn text-[10px] px-3 py-1 rounded-md">Copy</button>
+            <button type="button" onclick="copyText('${data.val}')" class="gold-btn text-[10px] px-3 py-1 rounded">Copy</button>
           </div>
         `;
       }
@@ -400,7 +491,7 @@
 
     function copyText(val) {
       navigator.clipboard.writeText(val);
-      alert('Copied to Clipboard: ' + val);
+      alert('Copied: ' + val);
     }
 
     function submitOrder(e) {
@@ -420,9 +511,9 @@
         txid: document.getElementById('txid').value
       };
 
-      const mailBody = `Plan Selected: ${formData.plan}%0D%0AName: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0APhone: ${formData.phone}%0D%0ANational ID: ${formData.nationalId}%0D%0ACountry: ${formData.country}%0D%0AState: ${formData.state}%0D%0ACity: ${formData.city}%0D%0APincode: ${formData.pincode}%0D%0AAddress: ${formData.address}%0D%0ATXID / UTR / Hash: ${formData.txid}`;
+      const mailBody = `Plan Selected: ${formData.plan}%0D%0AName: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0APhone: ${formData.phone}%0D%0ANational ID: ${formData.nationalId}%0D%0ACountry: ${formData.country}%0D%0AState: ${formData.state}%0D%0ACity: ${formData.city}%0D%0APincode: ${formData.pincode}%0D%0AAddress: ${formData.address}%0D%0ATXID / UTR: ${formData.txid}`;
 
-      window.location.href = `mailto:rkpjalore@gmail.com?subject=New Verification Request - ${formData.name}&body=${mailBody}`;
+      window.location.href = `mailto:rkpjalore@gmail.com?subject=New Order Request - ${formData.name}&body=${mailBody}`;
 
       document.getElementById('manualFlowForm').classList.add('hidden');
       document.getElementById('successMessage').classList.remove('hidden');
