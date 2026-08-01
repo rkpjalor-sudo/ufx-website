@@ -1,673 +1,372 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UFX CAPITAL - Premium Signal & Mentorship</title>
-    <!-- Premium Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-dark: #0a0a0c;
-            --card-bg: #121218;
-            --gold-primary: #d4af37;
-            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7);
-            --pink-accent: #ff0055;
-            --pink-glow: rgba(255, 0, 85, 0.4);
-            --text-light: #f0f0f0;
-            --text-dim: #a0a0a0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Animated Particles Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #1a001a 0%, #0a0a0c 100%);
-        }
-
-        .glow-orb {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.15;
-            animation: float 10s infinite alternate;
-        }
-
-        .orb-1 { background: var(--pink-accent); top: 10%; left: 10%; }
-        .orb-2 { background: var(--gold-primary); bottom: 10%; right: 10%; animation-delay: -5s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, 50px) scale(1.2); }
-        }
-
-        /* Header / Navbar */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background: rgba(10, 10, 12, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 24px;
-            font-weight: 800;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            margin-left: 25px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--gold-primary);
-        }
-
-        /* Pricing Section */
-        .pricing-container {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 36px;
-            color: var(--pink-accent);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 40px;
-            text-shadow: 0 0 15px var(--pink-glow);
-        }
-
-        .plans-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            align-items: center;
-        }
-
-        .plan-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 0, 85, 0.3);
-            border-radius: 12px;
-            padding: 30px 20px;
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .plan-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px var(--pink-glow);
-        }
-
-        .plan-card.lifetime {
-            border: 2px solid var(--gold-primary);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gold-gradient);
-            color: #000;
-            font-weight: 700;
-            font-size: 12px;
-            padding: 4px 15px;
-            border-radius: 20px;
-            text-transform: uppercase;
-        }
-
-        .plan-title {
-            font-family: 'Cinzel', serif;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .price {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--pink-accent);
-            margin-bottom: 5px;
-        }
-
-        .lifetime .price {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .sub-text {
-            color: var(--text-dim);
-            font-size: 12px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 30px;
-            font-size: 13px;
-        }
-
-        .features li {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .features li i {
-            color: var(--pink-accent);
-            margin-right: 10px;
-        }
-
-        .lifetime .features li i {
-            color: var(--gold-primary);
-        }
-
-        .btn-choose {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            background: linear-gradient(90deg, #ff0055, #ff5500);
-            color: #fff;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .lifetime .btn-choose {
-            background: var(--gold-gradient);
-            color: #000;
-        }
-
-        .btn-choose:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
-        }
-
-        /* Modal / Payment Form */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: #111116;
-            border: 1px solid var(--gold-primary);
-            width: 100%;
-            max-width: 550px;
-            border-radius: 12px;
-            padding: 25px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            color: var(--text-dim);
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .modal-title {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-primary);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            color: var(--text-dim);
-            margin-bottom: 5px;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px;
-            background: #1a1a22;
-            border: 1px solid #333;
-            border-radius: 5px;
-            color: #fff;
-            outline: none;
-        }
-
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 10px;
-            background: #1a1a22;
-            border: 1px solid #333;
-            color: var(--text-light);
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: 600;
-        }
-
-        .tab-btn.active {
-            background: var(--gold-gradient);
-            color: #000;
-            border: none;
-        }
-
-        .payment-details-box {
-            background: #16161e;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px dashed var(--gold-primary);
-            margin-bottom: 15px;
-        }
-
-        .copy-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #0a0a0c;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 12px;
-            word-break: break-all;
-            margin-top: 5px;
-        }
-
-        .copy-btn {
-            background: var(--gold-primary);
-            color: #000;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-left: 10px;
-            white-space: nowrap;
-        }
-
-        /* Footer & Contact Section */
-        footer {
-            background: #050507;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px 8% 20px;
-            margin-top: 80px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .footer-section h4 {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-primary);
-            margin-bottom: 15px;
-        }
-
-        .footer-section p, .footer-section a {
-            color: var(--text-dim);
-            font-size: 13px;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-icons a {
-            width: 40px;
-            height: 40px;
-            background: #121218;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--gold-primary);
-            font-size: 18px;
-            transition: 0.3s;
-        }
-
-        .social-icons a:hover {
-            background: var(--gold-primary);
-            color: #000;
-            box-shadow: 0 0 10px var(--gold-primary);
-        }
-
-        .copyright {
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-dim);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Plans - Trading Signals</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background-color: #080307;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .pink-glow {
+      box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+    }
+    .pink-border {
+      border: 1px solid rgba(236, 72, 153, 0.4);
+    }
+    .pink-gradient-text {
+      background: linear-gradient(135deg, #ff2a85 0%, #ff73a1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-border {
+      border: 2px solid #f59e0b;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+    }
+    .gold-gradient-btn {
+      background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+      color: #000;
+    }
+    .pink-gradient-btn {
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+      color: #fff;
+    }
+  </style>
 </head>
-<body>
+<body class="min-h-screen pb-12">
 
-    <div class="animated-bg">
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
+  <!-- Header Section -->
+  <header class="text-center py-10 px-4">
+    <div class="inline-block border-y-2 border-pink-500/50 py-1 px-8 mb-2">
+      <h1 class="text-3xl md:text-5xl font-black tracking-widest text-pink-500 uppercase">PREMIUM PLANS</h1>
     </div>
+  </header>
 
-    <!-- Header -->
-    <header>
-        <div class="logo">UFX CAPITAL</div>
-        <nav>
-            <a href="#plans">Pricing</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-
-    <!-- Pricing Section -->
-    <section class="pricing-container" id="plans">
-        <h2 class="section-title">PREMIUM PLANS</h2>
+  <!-- Pricing Cards Section -->
+  <section class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+    
+    <!-- 1 MONTH PLAN -->
+    <div class="bg-slate-950/80 rounded-2xl p-6 pink-border pink-glow flex flex-col justify-between text-center relative overflow-hidden">
+      <div>
+        <h3 class="text-xl font-bold tracking-wider mb-2">1 MONTH</h3>
+        <div class="text-4xl font-extrabold text-pink-500 mb-1">$35</div>
+        <p class="text-xs text-pink-400/80 uppercase tracking-widest mb-6">PER MONTH</p>
         
-        <div class="plans-grid">
-            <!-- 1 Month -->
-            <div class="plan-card">
-                <div class="plan-title">1 MONTH</div>
-                <div class="price">$35</div>
-                <div class="sub-text">Per Month</div>
-                <ul class="features">
-                    <li><i class="fa-solid fa-check"></i> Weekly 2-5 Signals</li>
-                    <li><i class="fa-solid fa-check"></i> PDF of UFX Strategy</li>
-                    <li><i class="fa-solid fa-check"></i> Weekly Outlook</li>
-                    <li><i class="fa-solid fa-check"></i> Min 1:4 RR Signals</li>
-                    <li><i class="fa-solid fa-check"></i> Signals with Trading Chart</li>
-                    <li><i class="fa-solid fa-check"></i> 24/7 Chat Support</li>
-                </ul>
-                <button class="btn-choose" onclick="openPaymentModal('$35 - 1 Month')">CHOOSE PLAN</button>
-            </div>
+        <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-gem"></i></div>
 
-            <!-- 3 Months -->
-            <div class="plan-card">
-                <div class="plan-title">3 MONTHS</div>
-                <div class="price">$59</div>
-                <div class="sub-text">Every 3 Months</div>
-                <ul class="features">
-                    <li><i class="fa-solid fa-check"></i> Weekly 2-5 Signals</li>
-                    <li><i class="fa-solid fa-check"></i> PDF of UFX Strategy</li>
-                    <li><i class="fa-solid fa-check"></i> Weekly Outlook</li>
-                    <li><i class="fa-solid fa-check"></i> Min 1:4 RR Signals</li>
-                    <li><i class="fa-solid fa-check"></i> Signals with Trading Chart</li>
-                    <li><i class="fa-solid fa-check"></i> 24/7 Chat Support</li>
-                </ul>
-                <button class="btn-choose" onclick="openPaymentModal('$59 - 3 Months')">CHOOSE PLAN</button>
-            </div>
+        <ul class="text-left text-sm space-y-3 mb-8 text-slate-200">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> <span class="font-semibold text-pink-300">Weekly 5-20 Signals</span></li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> PDF of UFX Strategy</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Weekly Outlook</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Min 1:4 RR Signals</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Signals with Trading Chart</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> 24/7 Chat Support</li>
+        </ul>
+      </div>
 
-            <!-- 6 Months -->
-            <div class="plan-card">
-                <div class="plan-title">6 MONTHS</div>
-                <div class="price">$79</div>
-                <div class="sub-text">Every 6 Months</div>
-                <ul class="features">
-                    <li><i class="fa-solid fa-check"></i> Weekly 2-5 Signals</li>
-                    <li><i class="fa-solid fa-check"></i> PDF of UFX Strategy</li>
-                    <li><i class="fa-solid fa-check"></i> Weekly Outlook</li>
-                    <li><i class="fa-solid fa-check"></i> Min 1:4 RR Signals</li>
-                    <li><i class="fa-solid fa-check"></i> Signals with Trading Chart</li>
-                    <li><i class="fa-solid fa-check"></i> 24/7 Chat Support</li>
-                </ul>
-                <button class="btn-choose" onclick="openPaymentModal('$79 - 6 Months')">CHOOSE PLAN</button>
-            </div>
-
-            <!-- Lifetime -->
-            <div class="plan-card lifetime">
-                <div class="badge">BEST VALUE</div>
-                <div class="plan-title">LIFETIME</div>
-                <div class="price">$199</div>
-                <div class="sub-text">One Time Payment</div>
-                <ul class="features">
-                    <li><i class="fa-solid fa-check"></i> Weekly 2-5 Signals</li>
-                    <li><i class="fa-solid fa-check"></i> PDF of UFX Strategy</li>
-                    <li><i class="fa-solid fa-check"></i> Weekly Outlook</li>
-                    <li><i class="fa-solid fa-check"></i> Min 1:4 RR Signals</li>
-                    <li><i class="fa-solid fa-check"></i> Signals with Trading Chart</li>
-                    <li><i class="fa-solid fa-check"></i> 24/7 Chat Support</li>
-                    <li><i class="fa-solid fa-check"></i> ONE-ON-ONE MENTORSHIP</li>
-                    <li><i class="fa-solid fa-check"></i> LIFETIME MEMBERSHIP</li>
-                </ul>
-                <button class="btn-choose" onclick="openPaymentModal('$199 - Lifetime')">CHOOSE PLAN</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Payment Flow Modal -->
-    <div class="modal" id="paymentModal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closePaymentModal()">&times;</span>
-            <h3 class="modal-title">MANUAL PAYMENT FLOW</h3>
-            
-            <form onsubmit="handleFormSubmit(event)">
-                <div class="form-group">
-                    <label>Selected Plan</label>
-                    <input type="text" id="selectedPlan" readonly style="color: var(--gold-primary); font-weight: bold;">
-                </div>
-                
-                <div class="form-group"><label>Full Name *</label><input type="text" required></div>
-                <div class="form-group"><label>Email Address *</label><input type="email" required></div>
-                <div class="form-group"><label>Phone Number *</label><input type="tel" required></div>
-                <div class="form-group"><label>PAN / National ID Number *</label><input type="text" required></div>
-                
-                <div style="display: flex; gap: 10px;">
-                    <div class="form-group" style="flex:1;"><label>Country *</label><input type="text" required></div>
-                    <div class="form-group" style="flex:1;"><label>State *</label><input type="text" required></div>
-                </div>
-
-                <div style="display: flex; gap: 10px;">
-                    <div class="form-group" style="flex:1;"><label>City *</label><input type="text" required></div>
-                    <div class="form-group" style="flex:1;"><label>Pin Code *</label><input type="text" required></div>
-                </div>
-
-                <div class="form-group"><label>Full Address *</label><input type="text" required></div>
-
-                <label style="font-size:12px; color:var(--text-dim);">Select Payment Option:</label>
-                <div class="tab-buttons">
-                    <button type="button" class="tab-btn active" id="upiTabBtn" onclick="switchTab('upi')">UPI Payment</button>
-                    <button type="button" class="tab-btn" id="cryptoTabBtn" onclick="switchTab('crypto')">Crypto Payment</button>
-                </div>
-
-                <!-- UPI Container -->
-                <div id="upiBox" class="payment-details-box">
-                    <p style="font-size: 12px; color: var(--gold-primary);">UPI ID for Payment:</p>
-                    <div class="copy-row">
-                        <span>9649638812@ybl</span>
-                        <button type="button" class="copy-btn" onclick="copyText('9649638812@ybl')">Copy</button>
-                    </div>
-                </div>
-
-                <!-- Crypto Container -->
-                <div id="cryptoBox" class="payment-details-box" style="display: none;">
-                    <div class="form-group">
-                        <label>Select Crypto Network</label>
-                        <select id="cryptoNetworkSelect" onchange="updateCryptoAddress()">
-                            <option value="trc20">USDT (TRC20)</option>
-                            <option value="erc20">USDT / ETH (ERC20)</option>
-                            <option value="bep20">BNB / USDT (BEP20)</option>
-                            <option value="btc">BITCOIN (BTC)</option>
-                        </select>
-                    </div>
-
-                    <p style="font-size: 12px; color: var(--gold-primary);">Deposit Address:</p>
-                    <div class="copy-row">
-                        <span id="cryptoAddressText">TP1hUt5spzMv5LoHjAU2yEQus-Egj8jNDwb</span>
-                        <button type="button" class="copy-btn" onclick="copyCryptoAddress()">Copy</button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Enter Transaction Hash / UTR / TXID *</label>
-                    <input type="text" placeholder="Required for verification" required>
-                </div>
-
-                <button type="submit" class="btn-choose" style="margin-top: 15px;">SUBMIT ORDER CONFIRMATION</button>
-            </form>
-        </div>
+      <button onclick="selectPlan('1 Month - $35')" class="w-full pink-gradient-btn font-bold py-3 rounded-xl uppercase tracking-wider hover:opacity-90 transition-all shadow-lg">CHOOSE PLAN</button>
     </div>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>UFX CAPITAL</h4>
-                <p>Providing market accuracy & professional mentorship.</p>
-                <div class="social-icons">
-                    <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://x.com/rameshkuma78100?s=21" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="https://t.me/ufxcapital" target="_blank"><i class="fa-brands fa-telegram"></i></a>
-                </div>
+    <!-- 3 MONTHS PLAN -->
+    <div class="bg-slate-950/80 rounded-2xl p-6 pink-border pink-glow flex flex-col justify-between text-center relative overflow-hidden">
+      <div>
+        <h3 class="text-xl font-bold tracking-wider mb-2">3 MONTHS</h3>
+        <div class="text-4xl font-extrabold text-pink-500 mb-1">$59</div>
+        <p class="text-xs text-pink-400/80 uppercase tracking-widest mb-6">EVERY 3 MONTHS</p>
+        
+        <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-gem"></i></div>
+
+        <ul class="text-left text-sm space-y-3 mb-8 text-slate-200">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> <span class="font-semibold text-pink-300">Weekly 5-20 Signals</span></li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> PDF of UFX Strategy</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Weekly Outlook</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Min 1:4 RR Signals</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Signals with Trading Chart</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> 24/7 Chat Support</li>
+        </ul>
+      </div>
+
+      <button onclick="selectPlan('3 Months - $59')" class="w-full pink-gradient-btn font-bold py-3 rounded-xl uppercase tracking-wider hover:opacity-90 transition-all shadow-lg">CHOOSE PLAN</button>
+    </div>
+
+    <!-- 6 MONTHS PLAN -->
+    <div class="bg-slate-950/80 rounded-2xl p-6 pink-border pink-glow flex flex-col justify-between text-center relative overflow-hidden">
+      <div>
+        <h3 class="text-xl font-bold tracking-wider mb-2">6 MONTHS</h3>
+        <div class="text-4xl font-extrabold text-pink-500 mb-1">$79</div>
+        <p class="text-xs text-pink-400/80 uppercase tracking-widest mb-6">EVERY 6 MONTHS</p>
+        
+        <div class="text-pink-500 text-3xl mb-6"><i class="fa-solid fa-gem"></i></div>
+
+        <ul class="text-left text-sm space-y-3 mb-8 text-slate-200">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> <span class="font-semibold text-pink-300">Weekly 5-20 Signals</span></li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> PDF of UFX Strategy</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Weekly Outlook</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Min 1:4 RR Signals</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Signals with Trading Chart</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> 24/7 Chat Support</li>
+        </ul>
+      </div>
+
+      <button onclick="selectPlan('6 Months - $79')" class="w-full pink-gradient-btn font-bold py-3 rounded-xl uppercase tracking-wider hover:opacity-90 transition-all shadow-lg">CHOOSE PLAN</button>
+    </div>
+
+    <!-- LIFETIME PLAN (BEST VALUE) -->
+    <div class="bg-slate-950/90 rounded-2xl p-6 gold-border gold-glow flex flex-col justify-between text-center relative overflow-hidden transform md:-translate-y-2">
+      <div class="absolute top-0 right-0 left-0 bg-amber-500 text-black text-xs font-bold py-1 uppercase tracking-widest">
+        BEST VALUE
+      </div>
+      <div class="mt-4">
+        <h3 class="text-xl font-bold tracking-wider mb-2 text-amber-400">LIFETIME</h3>
+        <div class="text-5xl font-black text-amber-400 mb-1">$199</div>
+        <p class="text-xs text-amber-300/80 uppercase tracking-widest mb-6">ONE TIME PAYMENT</p>
+        
+        <div class="text-amber-400 text-3xl mb-6"><i class="fa-solid fa-gem"></i></div>
+
+        <ul class="text-left text-sm space-y-2.5 mb-8 text-slate-200">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> <span class="font-semibold text-amber-300">Weekly 5-20 Signals</span></li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> PDF of UFX Strategy</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Weekly Outlook</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Min 1:4 RR Signals</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Signals with Trading Chart</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 24/7 Chat Support</li>
+          <li class="flex items-center gap-2 font-bold text-amber-300 uppercase text-xs"><i class="fa-solid fa-star text-amber-400"></i> ONE-ON-ONE MENTORSHIP</li>
+          <li class="flex items-center gap-2 font-bold text-amber-300 uppercase text-xs"><i class="fa-solid fa-star text-amber-400"></i> LIFETIME MEMBERSHIP</li>
+        </ul>
+      </div>
+
+      <button onclick="selectPlan('Lifetime - $199')" class="w-full gold-gradient-btn font-bold py-3 rounded-xl uppercase tracking-wider hover:opacity-90 transition-all shadow-lg">CHOOSE PLAN</button>
+    </div>
+
+  </section>
+
+  <!-- FORM & PAYMENT SECTION -->
+  <section id="checkout-section" class="max-w-4xl mx-auto px-4 scroll-mt-10">
+    <div class="bg-slate-900/90 rounded-2xl border border-pink-500/40 p-6 md:p-10 shadow-2xl">
+      
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-pink-500 mb-2">COMPLETE YOUR REGISTRATION</h2>
+      <p class="text-center text-slate-400 text-sm mb-8">Selected Plan: <span id="selected-plan-display" class="font-bold text-amber-400">Lifetime - $199</span></p>
+
+      <form id="payment-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+        
+        <!-- 1. Personal & Verification Details -->
+        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+          <h3 class="text-lg font-bold text-pink-400 mb-2 border-b border-slate-800 pb-2"><i class="fa-solid fa-user-shield mr-2"></i> User Verification Details</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">1. Full Name *</label>
+              <input type="text" id="fullName" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-pink-500">
             </div>
 
-            <div class="footer-section">
-                <h4>COMPANY</h4>
-                <a href="#">About Us</a>
-                <a href="#">Contact</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Refund Policy</a>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">2. PAN / National ID Number *</label>
+              <input type="text" id="nationalId" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-pink-500">
             </div>
 
-            <div class="footer-section">
-                <h4>HELP & SUPPORT</h4>
-                <p><i class="fa-solid fa-envelope"></i> rkpjalore@gmail.com</p>
-                <p><i class="fa-solid fa-phone"></i> +91 9649638812</p>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Email Address *</label>
+              <input type="email" id="userEmail" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-pink-500">
             </div>
+
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">Mobile Number *</label>
+              <input type="tel" id="userMobile" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-pink-500">
+            </div>
+
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">3. Country of Residence *</label>
+              <input type="text" id="country" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-pink-500">
+            </div>
+
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">4. State / Province *</label>
+              <input type="text" id="state" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-pink-500">
+            </div>
+
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">5. City / Village / Town *</label>
+              <input type="text" id="city" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-pink-500">
+            </div>
+
+            <div>
+              <label class="block text-xs text-slate-400 mb-1">6. Pin Code *</label>
+              <input type="text" id="pincode" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-pink-500">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">7. Full Address *</label>
+            <textarea id="fullAddress" rows="2" required class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-pink-500"></textarea>
+          </div>
         </div>
 
-        <div class="copyright">
-            &copy; 2026 UFX CAPITAL. All Rights Reserved.
+        <!-- 2. Payment Method Options -->
+        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+          <h3 class="text-lg font-bold text-pink-400 mb-2 border-b border-slate-800 pb-2"><i class="fa-solid fa-credit-card mr-2"></i> Select Payment Method</h3>
+
+          <!-- Payment Tabs -->
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-4">
+            <button type="button" onclick="switchPayTab('trc20')" id="tab-trc20" class="pay-tab border border-pink-500 bg-pink-500/10 text-pink-400 p-2.5 rounded-lg text-xs font-bold text-center">TRC20</button>
+            <button type="button" onclick="switchPayTab('erc20')" id="tab-erc20" class="pay-tab border border-slate-800 bg-slate-900 text-slate-400 p-2.5 rounded-lg text-xs font-bold text-center">ERC20</button>
+            <button type="button" onclick="switchPayTab('bep20')" id="tab-bep20" class="pay-tab border border-slate-800 bg-slate-900 text-slate-400 p-2.5 rounded-lg text-xs font-bold text-center">BEP20</button>
+            <button type="button" onclick="switchPayTab('upi')" id="tab-upi" class="pay-tab border border-slate-800 bg-slate-900 text-slate-400 p-2.5 rounded-lg text-xs font-bold text-center">UPI</button>
+            <button type="button" onclick="switchPayTab('bank')" id="tab-bank" class="pay-tab border border-slate-800 bg-slate-900 text-slate-400 p-2.5 rounded-lg text-xs font-bold text-center">BANK TRANSFER</button>
+          </div>
+
+          <!-- TAB CONTENTS -->
+          <!-- TRC20 -->
+          <div id="pay-trc20" class="pay-content block bg-slate-900 p-4 rounded-lg space-y-2">
+            <p class="text-xs text-slate-400">Send USDT to TRC20 Address:</p>
+            <div class="flex gap-2">
+              <input type="text" id="trc20-addr" readonly value="TP1hUt5spzMv5LoHjAU2yEQus-Egj8jNDwb" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs font-mono text-pink-400">
+              <button type="button" onclick="copyText('trc20-addr')" class="bg-pink-600 text-white text-xs px-3 py-2 rounded font-bold">Copy</button>
+            </div>
+          </div>
+
+          <!-- ERC20 -->
+          <div id="pay-erc20" class="pay-content hidden bg-slate-900 p-4 rounded-lg space-y-2">
+            <p class="text-xs text-slate-400">Send USDT/ETH to ERC20 Address:</p>
+            <div class="flex gap-2">
+              <input type="text" id="erc20-addr" readonly value="0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs font-mono text-pink-400">
+              <button type="button" onclick="copyText('erc20-addr')" class="bg-pink-600 text-white text-xs px-3 py-2 rounded font-bold">Copy</button>
+            </div>
+          </div>
+
+          <!-- BEP20 -->
+          <div id="pay-bep20" class="pay-content hidden bg-slate-900 p-4 rounded-lg space-y-2">
+            <p class="text-xs text-slate-400">Send USDT/BNB to BEP20 Address:</p>
+            <div class="flex gap-2">
+              <input type="text" id="bep20-addr" readonly value="0x4aea8cb300ccca979c1be6ff1b7727e2c57cc5ab" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs font-mono text-pink-400">
+              <button type="button" onclick="copyText('bep20-addr')" class="bg-pink-600 text-white text-xs px-3 py-2 rounded font-bold">Copy</button>
+            </div>
+          </div>
+
+          <!-- UPI -->
+          <div id="pay-upi" class="pay-content hidden bg-slate-900 p-4 rounded-lg text-center space-y-3">
+            <p class="text-xs text-slate-400">UPI Number / PhonePe / GPay:</p>
+            <div class="flex justify-center">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9649638812@upi&pn=Ramesh%20Kumar" class="w-36 h-36 bg-white p-2 rounded-lg" alt="UPI QR">
+            </div>
+            <div class="flex gap-2">
+              <input type="text" id="upi-num" readonly value="9649638812" class="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-xs font-mono text-pink-400 text-center">
+              <button type="button" onclick="copyText('upi-num')" class="bg-pink-600 text-white text-xs px-3 py-2 rounded font-bold">Copy</button>
+            </div>
+          </div>
+
+          <!-- Bank Transfer -->
+          <div id="pay-bank" class="pay-content hidden bg-slate-900 p-4 rounded-lg space-y-2 text-xs">
+            <div class="flex justify-between border-b border-slate-800 py-1"><span class="text-slate-400">Account Number:</span><span class="font-mono font-bold text-pink-400">61294543865</span></div>
+            <div class="flex justify-between border-b border-slate-800 py-1"><span class="text-slate-400">BANK NAME:</span><span class="font-bold text-white">SBI { STATE BANK OF INDIA }</span></div>
+            <div class="flex justify-between border-b border-slate-800 py-1"><span class="text-slate-400">IFS Code:</span><span class="font-mono font-bold text-pink-400">SBIN0032056</span></div>
+            <div class="flex justify-between border-b border-slate-800 py-1"><span class="text-slate-400">Account Name:</span><span class="font-bold text-white">Ramesh Kumar</span></div>
+            <div class="flex justify-between border-b border-slate-800 py-1"><span class="text-slate-400">Mobile:</span><span class="font-bold text-white">9649638812</span></div>
+            <div class="flex justify-between border-b border-slate-800 py-1"><span class="text-slate-400">Residence:</span><span class="font-bold text-white">NANDIYA BAGOD JALORE</span></div>
+            <div class="flex justify-between border-b border-slate-800 py-1"><span class="text-slate-400">PIN CODE:</span><span class="font-bold text-white">343032</span></div>
+            <div class="flex justify-between py-1"><span class="text-slate-400">SWIFT/BIC CODE:</span><span class="font-mono font-bold text-pink-400">SBININBBJ27</span></div>
+          </div>
+
+          <!-- TXID / UTR Input -->
+          <div class="pt-4 border-t border-slate-800">
+            <label class="block text-xs text-amber-400 mb-1 font-bold">Transaction ID / TXID / UTR Number (Payment Proof) *</label>
+            <input type="text" id="txid" required placeholder="Paste your TXID or UTR Number here after payment" class="w-full bg-slate-900 border border-amber-500/50 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+          </div>
+
         </div>
-    </footer>
 
-    <!-- JavaScript Logic -->
-    <script>
-        const cryptoAddresses = {
-            trc20: "TP1hUt5spzMv5LoHjAU2yEQus-Egj8jNDwb",
-            erc20: "0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab",
-            bep20: "0x4aea8cb300c-cca979c1be6ff1b7727e2c57cc5ab",
-            btc: "143odbY9gkjo8de7NizwFuz-WD11Muw9QW4"
-        };
+        <!-- Submit Button -->
+        <button type="submit" class="w-full pink-gradient-btn font-extrabold py-4 rounded-xl text-lg uppercase tracking-wider shadow-xl hover:opacity-95 transition-all">
+          VERIFY & SUBMIT PAYMENT
+        </button>
 
-        function openPaymentModal(planName) {
-            document.getElementById('selectedPlan').value = planName;
-            document.getElementById('paymentModal').style.display = 'flex';
-        }
+      </form>
 
-        function closePaymentModal() {
-            document.getElementById('paymentModal').style.display = 'none';
-        }
+      <!-- Confirmation Message Alert -->
+      <div id="confirmation-msg" class="hidden mt-6 bg-emerald-500/10 border border-emerald-500/40 p-6 rounded-xl text-center space-y-2">
+        <div class="text-emerald-400 text-4xl mb-2"><i class="fa-solid fa-circle-check"></i></div>
+        <h3 class="text-xl font-bold text-emerald-400">Payment Details Submitted Successfully!</h3>
+        <p class="text-sm text-slate-200">Manually 24 hr me add Kr Diya jayega.</p>
+        <p class="text-xs text-slate-400">Confirmation email sent to rkpjalore@gmail.com</p>
+      </div>
 
-        function switchTab(type) {
-            const upiBox = document.getElementById('upiBox');
-            const cryptoBox = document.getElementById('cryptoBox');
-            const upiBtn = document.getElementById('upiTabBtn');
-            const cryptoBtn = document.getElementById('cryptoTabBtn');
+    </div>
+  </section>
 
-            if (type === 'upi') {
-                upiBox.style.display = 'block';
-                cryptoBox.style.display = 'none';
-                upiBtn.classList.add('active');
-                cryptoBtn.classList.remove('active');
-            } else {
-                upiBox.style.display = 'none';
-                cryptoBox.style.display = 'block';
-                cryptoBtn.classList.add('active');
-                upiBtn.classList.remove('active');
-            }
-        }
+  <!-- Premium Support & Direct Social Media Links -->
+  <footer class="mt-16 text-center space-y-6">
+    <div class="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/30 px-6 py-2 rounded-full text-pink-400 font-bold text-sm">
+      <i class="fa-solid fa-headset text-lg"></i>
+      <span>PREMIUM SUPPORT AVAILABLE</span>
+    </div>
 
-        function updateCryptoAddress() {
-            const network = document.getElementById('cryptoNetworkSelect').value;
-            document.getElementById('cryptoAddressText').innerText = cryptoAddresses[network];
-        }
+    <!-- Direct Platform Links -->
+    <div class="flex justify-center items-center gap-6 text-2xl">
+      <a href="https://youtube.com/@ufxcapital01?si=Jfg5QkL-AufZT_qh" target="_blank" class="text-slate-400 hover:text-red-500 transition-colors" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://www.instagram.com/_ig.archit?igsh=MWU2NW56aGwzZGNqcQ==" target="_blank" class="text-slate-400 hover:text-pink-500 transition-colors" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://x.com/rameshkuma78100?s=21" target="_blank" class="text-slate-400 hover:text-sky-400 transition-colors" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://t.me/ufxcapital" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+    </div>
+  </footer>
 
-        function copyText(text) {
-            navigator.clipboard.writeText(text);
-            alert("Copied UPI ID: " + text);
-        }
+  <script>
+    let selectedPlanName = "Lifetime - $199";
 
-        function copyCryptoAddress() {
-            const addr = document.getElementById('cryptoAddressText').innerText;
-            navigator.clipboard.writeText(addr);
-            alert("Copied Wallet Address: " + addr);
-        }
+    function selectPlan(plan) {
+      selectedPlanName = plan;
+      document.getElementById('selected-plan-display').innerText = plan;
+      document.getElementById('checkout-section').scrollIntoView({ behavior: 'smooth' });
+    }
 
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            alert("Order Submitted Successfully! We will verify your transaction shortly.");
-            closePaymentModal();
-        }
-    </script>
+    function switchPayTab(tab) {
+      document.querySelectorAll('.pay-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.pay-tab').forEach(btn => {
+        btn.className = "pay-tab border border-slate-800 bg-slate-900 text-slate-400 p-2.5 rounded-lg text-xs font-bold text-center";
+      });
+
+      document.getElementById('pay-' + tab).classList.remove('hidden');
+      document.getElementById('tab-' + tab).className = "pay-tab border border-pink-500 bg-pink-500/10 text-pink-400 p-2.5 rounded-lg text-xs font-bold text-center";
+    }
+
+    function copyText(id) {
+      const input = document.getElementById(id);
+      navigator.clipboard.writeText(input.value);
+      alert("Copied to clipboard: " + input.value);
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      const emailData = {
+        plan: selectedPlanName,
+        fullName: document.getElementById('fullName').value,
+        nationalId: document.getElementById('nationalId').value,
+        email: document.getElementById('userEmail').value,
+        mobile: document.getElementById('userMobile').value,
+        country: document.getElementById('country').value,
+        state: document.getElementById('state').value,
+        city: document.getElementById('city').value,
+        pincode: document.getElementById('pincode').value,
+        fullAddress: document.getElementById('fullAddress').value,
+        txid: document.getElementById('txid').value
+      };
+
+      // Direct mailto backup trigger
+      const mailBody = `Plan: ${emailData.plan}%0D%0AName: ${emailData.fullName}%0D%0ANational ID: ${emailData.nationalId}%0D%0AEmail: ${emailData.email}%0D%0AMobile: ${emailData.mobile}%0D%0ACountry: ${emailData.country}%0D%0AState: ${emailData.state}%0D%0ACity: ${emailData.city}%0D%0APincode: ${emailData.pincode}%0D%0AAddress: ${emailData.fullAddress}%0D%0ATXID/UTR: ${emailData.txid}`;
+      
+      // Send mail to rkpjalore@gmail.com
+      window.location.href = `mailto:rkpjalore@gmail.com?subject=New Premium Plan Subscription - ${emailData.fullName}&body=${mailBody}`;
+
+      // Display Screen Success Alert
+      document.getElementById('payment-form').reset();
+      document.getElementById('confirmation-msg').classList.remove('hidden');
+      document.getElementById('confirmation-msg').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
