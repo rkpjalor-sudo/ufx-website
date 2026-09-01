@@ -1107,7 +1107,7 @@
                 container.innerHTML = `
                     <div class="address-title">UPI ID:</div>
                     <div class="address-value-row">
-                        <span>9649638812-2@ybl</span>
+                        <span>9649638812@ybl</span>
                         <button type="button" class="btn-copy" onclick="copyText('9649638812@ybl')">Copy</button>
                     </div>
                 `;
@@ -1148,7 +1148,24 @@
                     </div>
                 `;
             } 
-}
+            else if (method === 'BankTransfer') {
+                container.innerHTML = `
+                    <div class="address-title" style="margin-bottom:10px; text-transform:uppercase;">Bank Account Details:</div>
+                    <div class="bank-details-list">
+                        <div><span>Account Number:</span> <strong>61294543865 <button type="button" class="btn-copy" style="padding:2px 6px; font-size:9px;" onclick="copyText('61294543865')">Copy</button></strong></div>
+                        <div><span>BANK NAME:</span> <strong>SBI { STATE BANK OF INDIA }</strong></div>
+                        <div><span>IFS Code:</span> <strong>SBIN0032056</strong></div>
+                        <div><span>Account Name:</span> <strong>Ramesh Kumar</strong></div>
+                        <div><span>Mobile:</span> <strong>9649638812</strong></div>
+                        <div><span>Residence:</span> <strong>NANDIYA BAGOD JALORE</strong></div>
+                        <div><span>District:</span> <strong>JALORE</strong></div>
+                        <div><span>State:</span> <strong>RAJASTHAN</strong></div>
+                        <div><span>Country:</span> <strong>INDIA</strong></div>
+                        <div><span>PIN CODE:</span> <strong>343032</strong></div>
+                        <div><span>SWIFT/BIC CODE:</span> <strong>SBININBBJ27</strong></div>
+                    </div>
+                `;
+            }
         }
 
         function copyText(text) {
